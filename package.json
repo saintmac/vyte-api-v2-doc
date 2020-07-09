@@ -1,0 +1,27 @@
+{
+  "name": "vyte-api-v2-doc",
+  "version": "0.0.1",
+  "description": "Vyte API Documentation.",
+  "main": "index.js",
+  "authors": {
+    "name": "Ladislas Dellinger",
+    "email": "ladislas@vytein.com"
+  },
+  "repository": "https://github.com/ladislas14/vyte-api-v2-doc.git/vyte-api-v2-doc",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.3.1",
+    "@vuepress/plugin-medium-zoom": "^1.3.1",
+    "vuepress": "^1.3.1",
+    "vuepress-plugin-container": "^2.1.4"
+  },
+  "dependencies": {
+    "vue-tabs-component": "^1.5.0",
+    "vuepress-plugin-element-tabs": "^0.2.8",
+    "vuepress-plugin-tabs": "^0.3.0"
+  }
+}
