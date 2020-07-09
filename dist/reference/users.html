@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Users | Vyte API</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="Vyte API Documentation.">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="preload" href="/assets/css/0.styles.20b637d0.css" as="style"><link rel="preload" href="/assets/js/app.37e33399.js" as="script"><link rel="preload" href="/assets/js/2.fa883345.js" as="script"><link rel="preload" href="/assets/js/15.dbb15bc6.js" as="script"><link rel="prefetch" href="/assets/js/10.9ec4e7cd.js"><link rel="prefetch" href="/assets/js/11.539223b2.js"><link rel="prefetch" href="/assets/js/12.5ddc3dfb.js"><link rel="prefetch" href="/assets/js/13.0d412821.js"><link rel="prefetch" href="/assets/js/14.e7852888.js"><link rel="prefetch" href="/assets/js/16.d72e8498.js"><link rel="prefetch" href="/assets/js/3.629b9b9f.js"><link rel="prefetch" href="/assets/js/4.722f0f2c.js"><link rel="prefetch" href="/assets/js/5.033a0f5e.js"><link rel="prefetch" href="/assets/js/6.4f9c6eac.js"><link rel="prefetch" href="/assets/js/7.cdbee473.js"><link rel="prefetch" href="/assets/js/8.0910d9c6.js"><link rel="prefetch" href="/assets/js/9.8d3d9861.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.20b637d0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Vyte API</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/reference/" class="nav-link router-link-active">
+  Api Reference
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/reference/" class="nav-link router-link-active">
+  Api Reference
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>API Reference</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/reference/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/reference/events.html" class="sidebar-link">Events</a></li><li><a href="/reference/locators.html" class="sidebar-link">Locators</a></li><li><a href="/reference/teams.html" class="sidebar-link">Teams</a></li><li><a href="/reference/thirdParties.html" class="sidebar-link">Third-parties</a></li><li><a href="/reference/users.html" aria-current="page" class="active sidebar-link">Users</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/reference/users.html#get-all-users-linked-to-you-organization" class="sidebar-link">Get all users linked to you organization</a></li><li class="sidebar-sub-header"><a href="/reference/users.html#create-a-user" class="sidebar-link">Create a user</a></li><li class="sidebar-sub-header"><a href="/reference/users.html#update-a-user" class="sidebar-link">Update a user</a></li><li class="sidebar-sub-header"><a href="/reference/users.html#create-multiple-users-at-once" class="sidebar-link">Create multiple users at once</a></li><li class="sidebar-sub-header"><a href="/reference/users.html#update-multiple-users-at-once" class="sidebar-link">Update multiple users at once</a></li></ul></li><li><a href="/reference/webhooks.html" class="sidebar-link">Webhooks</a></li><li><a href="/reference/errors.html" class="sidebar-link">Errors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="users"><a href="#users" class="header-anchor">#</a> Users</h1> <div class="parent"><div class="left"><p>You can use the <code>/v2/users</code> endpoints to manage the users for your organization.
+With the User REST API, you will be able to automate the user creation task, and then to retrieve all the users linked to your organization. This API become really useful when it's used with the Team API, providing a full workflow to manage your users and to group them in teams.
+Moreover, we provide a endpoint to batch create users to optimize the workflow in case you have a lot of users to create.</p> <div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>There is no DELETE endpoint provided for the User API. You can only unlink a user from your company, so that you are no longer billed for him.</p></div></div><div class="right"><details class="custom-block details"><summary>THE USER OBJECT</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;organization&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yourVyteOrganizationId&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;finish_signup_with&quot;</span><span class="token operator">:</span> <span class="token string">&quot;email&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;user&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;jean.dupont@acme.fr&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;first_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Jean&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;last_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Dupont&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;language&quot;</span><span class="token operator">:</span> <span class="token string">&quot;fr&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;timezone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Europe/Paris&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;picture_url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://www.example.com/picture/jean&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;account&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;organization&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;extid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;userIdInThirdPartyAppDatabase&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;teams&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;admin&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Management team&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;extid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;teamIdInThirdPartyAppDatabase&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;availability&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;timezone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Europe/Paris&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;today_as_busy&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;past_as_busy&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;days_after_as_busy&quot;</span><span class="token operator">:</span> <span class="token number">60</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;buffer_before&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;buffer_after&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;all_day_busy&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;days&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;monday&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;enabled&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;slots&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T10:00&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;end_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T12:30&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T14:00&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;end_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T18:30&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;tuesday&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;enabled&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;slots&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T10:00&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;end_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T12:30&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T14:00&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;end_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T18:30&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;wednesday&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;enabled&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;slots&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T10:00&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;end_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T17:30&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;thursday&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;enabled&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;friday&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;enabled&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;slots&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T10:00&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;end_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T17:30&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;saturday&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;enabled&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;slots&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T10:00&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;end_time&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-01-01T17:30&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;sunday&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;enabled&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;vyteme&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;nickname&quot;</span><span class="token operator">:</span> <span class="token string">&quot;appName-userIdInThidPartyAppDatabase&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Bienvenue sur ma page de RDV&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;custom&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;auto_message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Merci d'avoir pris RDV avec moi, j'ai hate de vous rencontrer.&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;auto_title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;RDV invitee / me&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ask_phone&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ask_company&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;block_new_invitee&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;duration&quot;</span><span class="token operator">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;set_lang&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;enable_api&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;fixed_lang&quot;</span><span class="token operator">:</span> <span class="token string">&quot;fr&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;set_timezone&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;fixed_timezone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Europe/Paris&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;event_hide_decline&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;hide_places&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;hide_support&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;hide_title&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;forbid_add_places&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;min_dates&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;one_slot&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;auto_confirm&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;invite_title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Book a short appointment with&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;redirect_url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://www.example.com/thanks-for-booking&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;fixed_places&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Office&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Office address&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;source&quot;</span><span class="token operator">:</span> <span class="token string">&quot;appName&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;source_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;placeIdInThirdPartyAppDatabase&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Phone&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0102030405&quot;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;calendars&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;source&quot;</span><span class="token operator">:</span> <span class="token string">&quot;exchange&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;credentials&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;server&quot;</span><span class="token operator">:</span> <span class="token string">&quot;mail.exchangeserverdomain.com&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;username&quot;</span><span class="token operator">:</span> <span class="token string">&quot;calendarUserName&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;password&quot;</span><span class="token operator">:</span> <span class="token string">&quot;calendarPassword&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;login&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;credentials&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;username&quot;</span><span class="token operator">:</span> <span class="token string">&quot;jean.dupont@example.com&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;password&quot;</span><span class="token operator">:</span> <span class="token string">&quot;youllneverguessit&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details></div></div><h2 id="get-all-users-linked-to-you-organization"><a href="#get-all-users-linked-to-you-organization" class="header-anchor">#</a> Get all users linked to you organization</h2> <div class="parent"><div class="left"><blockquote><p>ENDPOINT <small>Authorization <code>apiKey</code></small></p></blockquote> <div class="language-http extra-class"><pre class="language-http"><code><span class="token request-line"><span class="token property">GET</span> /v2/users HTTP/1.1</span>
+</code></pre></div></div><div class="right"><details class="custom-block details"><summary>CODE SAMPLE</summary> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">curl</span> --location --request GET <span class="token string">'https://api.vyte.in/v2/users'</span> <span class="token punctuation">\</span>
+--header <span class="token string">'Authorization: apiKey'</span> <span class="token punctuation">\</span>
+</code></pre></div></details> <details class="custom-block details"><summary>RESPONSE SAMPLE</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;calendars&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;google&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;office365&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;exchange&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;icloud&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;caldav&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;modules&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;brand&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;assistant&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;vyteme&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;vyteme_pro&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;availabilities&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;billing&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;group_pro&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;team&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;account&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;organization&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yourVyteOrganizationName&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yourVyteOrganizationId&quot;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;plan&quot;</span><span class="token operator">:</span> <span class="token string">&quot;pro&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;app_url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://yourVyteOrganization.vyte.in&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;consent&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;terms&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2020-06-25T13:04:30.548Z&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;emails&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token string">&quot;jean.dupont@example.com&quot;</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5ef4a0bd136440c65930a3da&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;first_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Jean&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;last_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Dupont&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;language&quot;</span><span class="token operator">:</span> <span class="token string">&quot;en&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;timezone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Europe/Paris&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;picture_url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://www.example.com/picture/jean&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;signedup_with&quot;</span><span class="token operator">:</span> <span class="token string">&quot;api&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;full_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Jean Dupont&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;updatedAt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2020-06-25T14:20:34.652Z&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;createdAt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2020-06-25T13:03:57.791Z&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;__v&quot;</span><span class="token operator">:</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div></details></div></div><h2 id="create-a-user"><a href="#create-a-user" class="header-anchor">#</a> Create a user</h2> <div class="parent"><div class="left"><blockquote><p>ENDPOINT <small>Authorization <code>apiKey</code></small></p></blockquote> <div class="language-http extra-class"><pre class="language-http"><code><span class="token request-line"><span class="token property">POST</span> /v2/users HTTP/1.1</span>
+</code></pre></div><p>To create a user perform a POST request to the <code>users</code> endpoint. With that request you can actually set up most of the settings for that user</p></div><div class="right"><details class="custom-block details"><summary>CODE SAMPLE</summary> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">curl</span> --location --request POST <span class="token string">'https://api.vyte.in/v2/users'</span> <span class="token punctuation">\</span>
+--header <span class="token string">'Authorization: apiKey'</span> <span class="token punctuation">\</span>
+</code></pre></div></details> <details class="custom-block details"><summary>RESPONSE SAMPLE</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div></details></div></div><h2 id="update-a-user"><a href="#update-a-user" class="header-anchor">#</a> Update a user</h2> <div class="parent"><div class="left"><blockquote><p>ENDPOINT <small>Authorization <code>apiKey</code></small></p></blockquote> <div class="language-http extra-class"><pre class="language-http"><code><span class="token request-line"><span class="token property">PUT</span> /v2/users/<span class="token attr-name">:user_id</span> HTTP/1.1</span>
+</code></pre></div><p>To update a user perform a PUT request to the <code>users</code> endpoint. With that request you can actually set up most of the settings for that user.</p></div><div class="right"><details class="custom-block details"><summary>CODE SAMPLE</summary> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">curl</span> --location --request PUT <span class="token string">'https://api.vyte.in/v2/users/:user_id'</span> <span class="token punctuation">\</span>
+--header <span class="token string">'Authorization: apiKey'</span> <span class="token punctuation">\</span>
+</code></pre></div></details> <details class="custom-block details"><summary>RESPONSE SAMPLE</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div></details></div></div><h2 id="create-multiple-users-at-once"><a href="#create-multiple-users-at-once" class="header-anchor">#</a> Create multiple users at once</h2> <div class="parent"><div class="left"><blockquote><p>ENDPOINT <small>Authorization <code>apiKey</code></small></p></blockquote> <div class="language-http extra-class"><pre class="language-http"><code><span class="token request-line"><span class="token property">POST</span> /v2/users/batch HTTP/1.1</span>
+</code></pre></div><p>We provide a way to batch create users. It works almost in the same way that the <code>/api/v2</code> endpoint.</p></div><div class="right"><details class="custom-block details"><summary>CODE SAMPLE</summary> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">curl</span> --location --request POST <span class="token string">'https://api.vyte.in/v2/users/batch'</span> <span class="token punctuation">\</span>
+--header <span class="token string">'Authorization: apiKey'</span> <span class="token punctuation">\</span>
+</code></pre></div></details> <details class="custom-block details"><summary>RESPONSE SAMPLE</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div></details></div></div><h2 id="update-multiple-users-at-once"><a href="#update-multiple-users-at-once" class="header-anchor">#</a> Update multiple users at once</h2> <div class="parent"><div class="left"><blockquote><p>ENDPOINT <small>Authorization <code>apiKey</code></small></p></blockquote> <div class="language-http extra-class"><pre class="language-http"><code><span class="token request-line"><span class="token property">PUT</span> /v2/users HTTP/1.1</span>
+</code></pre></div><p>We provide a way to batch create users. It works almost in the same way that the <code>/api/v2</code> endpoint.</p></div><div class="right"><details class="custom-block details"><summary>CODE SAMPLE</summary> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">curl</span> --location --request PUT <span class="token string">'https://api.vyte.in/v2/users/batch'</span> <span class="token punctuation">\</span>
+--header <span class="token string">'Authorization: apiKey'</span> <span class="token punctuation">\</span>
+</code></pre></div></details> <details class="custom-block details"><summary>RESPONSE SAMPLE</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div></details></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/9/2020, 3:49:04 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/reference/thirdParties.html" class="prev">
+        Third-parties
+      </a></span> <span class="next"><a href="/reference/webhooks.html">
+        Webhooks
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.37e33399.js" defer></script><script src="/assets/js/2.fa883345.js" defer></script><script src="/assets/js/15.dbb15bc6.js" defer></script>
+  </body>
+</html>
