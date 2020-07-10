@@ -8,6 +8,7 @@ You can use the `/v2/events` endpoints to manage the events for your organizatio
 There is no DELETE endpoint provided for the Event API.
 :::
 
+
 ::::
 
 :::: right

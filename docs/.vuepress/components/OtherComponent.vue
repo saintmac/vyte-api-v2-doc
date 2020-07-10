@@ -1,3 +1,8 @@
 <template>
-  <p class="demo">This is another component</p>
+  <div class="attributes">
+    <h5>Attributes</h5>
+    <ul>
+      
+    </ul>
+  </div>
 </template>

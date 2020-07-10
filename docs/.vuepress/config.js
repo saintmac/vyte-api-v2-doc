@@ -9,6 +9,7 @@ module.exports = {
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
   description: description,
+  base: '/vyte-api-v2-doc/',
 
   /**
    * Extra tags to be injected to the page HTML `<head>`
