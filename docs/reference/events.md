@@ -1,12 +1,15 @@
 # Events
 
-::::: panel
-:::: left
 You can use the `/v2/events` endpoints to manage the events for your organization.
 
 ::: warning
 There is no DELETE endpoint provided for the Event API.
 :::
+
+## The event object
+
+::::: panel
+:::: left
 
 <attributes title="Attributes">
 
@@ -145,7 +148,7 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
 
 :::: right
 
-::: details THE EVENT OBJECT
+> THE EVENT OBJECT
 
 ```json
 {
@@ -196,8 +199,6 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
   }
 }
 ```
-
-:::
 
 ::::
 
