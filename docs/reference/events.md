@@ -221,7 +221,8 @@ GET /v2/events HTTP/1.1
 ::: details CODE SAMPLE
 
 ```shell
-curl --location --request GET 'https://api.vyte.in/v2/events' \
+curl \
+--request GET 'https://api.vyte.in/v2/events' \
 --header 'Authorization: apiKey' \
 ```
 
@@ -230,9 +231,224 @@ curl --location --request GET 'https://api.vyte.in/v2/events' \
 ::: details RESPONSE SAMPLE
 
 ```json
-{
-
-}
+[
+    {
+        "_id": "569c3b6105dc780300951bd0",
+        "key_store": "569c3b6105dc780300951bd7",
+        "email": "reply-to-participants-to-meeting-for-project-vqdhhcxqd@vyte.in",
+        "invitees_length": 3,
+        "createdAt": "2016-01-18T01:09:53.477Z",
+        "updatedAt": "2016-01-18T01:10:05.670Z",
+        "alias": "alias_web_522984fb35eaa70200000007_1453079356811",
+        "app_url": "https://www.vyte.in",
+        "lang": "en",
+        "locale": "en",
+        "timezone": "Europe/Paris",
+        "title": "Meeting for project",
+        "__v": 3,
+        "version": 3,
+        "third_party": {
+            "app": "569c2e2fa28cc30300778c4c",
+            "group_ids": ["project_85fc5"],
+            "name": "superapp"
+        },
+        "ics_sequence": 0,
+        "confirmed": {
+            "updated_at": null,
+            "flag": false
+        },
+        "places": [
+            {
+                "createdAt": "2016-01-18T01:09:53.290Z",
+                "updatedAt": "2016-01-18T01:10:05.665Z",
+                "name": "Appear.in",
+                "address": "http://appear.in/cool-meeting",
+                "icon": "P",
+                "_id": "569c3b6105dc780300951bd3",
+                "votes": {
+                    "no": [],
+                    "yes": [
+                        {
+                            "_id": "569c3b6105dc780300951bd6",
+                            "createdAt": "2016-01-18T01:09:54.161Z",
+                            "updatedAt": "2016-01-18T01:10:05.664Z",
+                            "created_by": {
+                                "user": "522984fb35eaa70200000007"
+                            }
+                        }
+                    ]
+                },
+                "created_by": {
+                    "user": "522984fb35eaa70200000007"
+                },
+                "source": "Appear.in"
+            }
+        ],
+        "dates": [
+            {
+                "createdAt": "2016-01-18T01:10:05.665Z",
+                "updatedAt": "2016-01-18T01:10:05.665Z",
+                "date": "2016-01-22T10:00:00.000Z",
+                "end_date": "2016-01-22T11:00:00.000Z",
+                "_id": "569c3b6da28cc30300778c72",
+                "votes": {
+                    "no": [],
+                    "yes": [
+                        {
+                            "_id": "569c3b6da28cc30300778c74",
+                            "created_by": {
+                                "user": "522984fb35eaa70200000007"
+                            }
+                        }
+                    ]
+                },
+                "created_by": {
+                    "user": "522984fb35eaa70200000007"
+                },
+                "all_day": false
+            },
+            {
+                "createdAt": "2016-01-18T01:10:05.665Z",
+                "updatedAt": "2016-01-18T01:10:05.665Z",
+                "date": "2016-01-22T15:00:00.000Z",
+                "end_date": "2016-01-22T16:00:00.000Z",
+                "_id": "569c3b6da28cc30300778c73",
+                "votes": {
+                    "no": [],
+                    "yes": [
+                        {
+                            "_id": "569c3b6da28cc30300778c76",
+                            "created_by": {
+                                "user": "522984fb35eaa70200000007"
+                            }
+                        }
+                    ]
+                },
+                "created_by": {
+                    "user": "522984fb35eaa70200000007"
+                },
+                "all_day": false
+            }
+        ],
+        "declines": [],
+        "messages": [
+            {
+                "from": "martin.saintmac@gmail.com",
+                "createdAt": "2016-01-18T01:09:53.290Z",
+                "updatedAt": "2016-01-18T01:10:05.664Z",
+                "body": "Another meeting for that project",
+                "_id": "569c3b6105dc780300951bd4",
+                "created_by": {
+                    "user": "522984fb35eaa70200000007"
+                }
+            }
+        ],
+        "invitees": [],
+        "created_by": {
+            "full_name": "Martin Saint-Macary",
+            "picture_url": "https://lh3.googleusercontent.com/-PWeG6KmcyVw/AAAAAAAAAAI/AAAAAAAAJa4/kcQXhsmUmTQ/photo.jpg",
+            "user": "522984fb35eaa70200000007",
+            "email": "martin.saintmac@gmail.com"
+        }
+    },
+    {
+        "_id": "569c3afaa28cc30300778c69",
+        "key_store": "569c3afba28cc30300778c71",
+        "email": "reply-to-participants-to-meeting-martin-saint-macary-martin-saint-macary-awtdmgsnm@vyte.in",
+        "invitees_length": 2,
+        "createdAt": "2016-01-18T01:08:11.524Z",
+        "updatedAt": "2016-01-18T01:08:12.691Z",
+        "alias": "alias_web_522984fb35eaa70200000007_1453079284514",
+        "app_url": "https://www.vyte.in",
+        "lang": "en",
+        "locale": "en",
+        "timezone": "Europe/Paris",
+        "title": "Meeting Martin Saint-Macary, Martin Saint-Macary",
+        "__v": 1,
+        "version": 1,
+        "third_party": {
+            "app": "569c2e2fa28cc30300778c4c",
+            "group_ids": ["project_85fc5"],
+            "name": "superapp"
+        },
+        "ics_sequence": 0,
+        "confirmed": {
+            "updated_at": null,
+            "flag": false
+        },
+        "places": [
+            {
+                "createdAt": "2016-01-18T01:08:10.933Z",
+                "updatedAt": "2016-01-18T01:08:12.688Z",
+                "name": "Skype",
+                "address": "martin.saint-macary",
+                "_id": "569c3afaa28cc30300778c6c",
+                "votes": {
+                    "no": [],
+                    "yes": [
+                        {
+                            "_id": "569c3afba28cc30300778c6f",
+                            "createdAt": "2016-01-18T01:08:12.688Z",
+                            "updatedAt": "2016-01-18T01:08:12.688Z",
+                            "created_by": {
+                                "user": "522984fb35eaa70200000007"
+                            }
+                        }
+                    ]
+                },
+                "created_by": {
+                    "user": "522984fb35eaa70200000007"
+                },
+                "source": "app"
+            },
+            {
+                "createdAt": "2016-01-18T01:08:10.934Z",
+                "updatedAt": "2016-01-18T01:08:12.689Z",
+                "name": "Google Hangouts",
+                "address": "martin@vytein.com",
+                "_id": "569c3afaa28cc30300778c6b",
+                "votes": {
+                    "no": [],
+                    "yes": [
+                        {
+                            "_id": "569c3afba28cc30300778c70",
+                            "createdAt": "2016-01-18T01:08:12.688Z",
+                            "updatedAt": "2016-01-18T01:08:12.688Z",
+                            "created_by": {
+                                "user": "522984fb35eaa70200000007"
+                            }
+                        }
+                    ]
+                },
+                "created_by": {
+                    "user": "522984fb35eaa70200000007"
+                },
+                "source": "app"
+            }
+        ],
+        "dates": [],
+        "declines": [],
+        "messages": [
+            {
+                "from": "martin.saintmac@gmail.com",
+                "createdAt": "2016-01-18T01:08:10.934Z",
+                "updatedAt": "2016-01-18T01:08:12.688Z",
+                "body": "Hi Martin, please find my suggestions for our 15 min call setup session on vyte.in. Best",
+                "_id": "569c3afaa28cc30300778c6d",
+                "created_by": {
+                    "user": "522984fb35eaa70200000007"
+                }
+            }
+        ],
+        "invitees": [],
+        "created_by": {
+            "full_name": "Martin Saint-Macary",
+            "picture_url": "https://lh3.googleusercontent.com/-PWeG6KmcyVw/AAAAAAAAAAI/AAAAAAAAJa4/kcQXhsmUmTQ/photo.jpg",
+            "user": "522984fb35eaa70200000007",
+            "email": "martin.saintmac@gmail.com"
+        }
+    }
+]
 ```
 
 :::
@@ -251,6 +467,138 @@ curl --location --request GET 'https://api.vyte.in/v2/events' \
 POST /v2/events HTTP/1.1
 ```
 
+<attributes title="Body">
+
+<attribute name="confirmed" type="object">
+
+The id of your your Organization. Found as `_id` when requesting your Organization.
+
+<attributes isChild=true>
+  <attribute name="flag" type="boolean" :parentNames="['confirmed']" isChild=true isLast=true>
+    lorem
+  </attribute>
+</attributes>
+
+</attribute>
+
+<attribute name="created_by" type="object">
+
+The id of your your Organization. Found as `_id` when requesting your Organization.
+
+<attributes isChild=true>
+  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true isLast=true>
+    lorem
+  </attribute>
+</attributes>
+
+</attribute>
+
+<attribute name="dates" type="array">
+
+The id of your your Organization. Found as `_id` when requesting your Organization.
+
+<attributes isChild=true>
+  <attribute name="all_day" type="boolean" :parentNames="['dates']" isParentArray=true isChild=true>
+    lorem
+  </attribute>
+  <attribute name="date" type="date" :parentNames="['dates']" isParentArray=true isChild=true>
+    lorem
+  </attribute>
+  <attribute name="end_date" type="date" :parentNames="['dates']" isParentArray=true isChild=true isLast=true>
+    lorem
+  </attribute>
+</attributes>
+
+</attribute>
+
+<attribute name="invitees" type="array">
+
+The id of your your Organization. Found as `_id` when requesting your Organization.
+
+<attributes isChild=true>
+  <attribute name="full_name" type="string" :parentNames="['invitees']" isParentArray=true isChild=true>
+    lorem
+  </attribute>
+  <attribute name="email" type="string" :parentNames="['invitees']" isParentArray=true isChild=true>
+    lorem
+  </attribute>
+  <attribute name="phone" type="string" :parentNames="['invitees']" isParentArray=true isChild=true isLast=true>
+    lorem
+  </attribute>
+</attributes>
+
+</attribute>
+
+<attribute name="lang" type="string">
+The event language.
+</attribute>
+
+<attribute name="locale" type="string">
+The event locale.
+</attribute>
+
+<attribute name="messages" type="array">
+
+The id of your your Organization. Found as `_id` when requesting your Organization.
+
+<attributes isChild=true>
+  <attribute name="body" type="string" :parentNames="['messages']" isParentArray=true isChild=true isLast=true>
+    lorem
+  </attribute>
+</attributes>
+
+</attribute>
+
+<attribute name="places" type="array">
+
+The id of your your Organization. Found as `_id` when requesting your Organization.
+
+<attributes isChild=true>
+  <attribute name="name" type="string" :parentNames="['places']" isParentArray=true isChild=true>
+    lorem
+  </attribute>
+  <attribute name="address" type="string" :parentNames="['places']" isParentArray=true isChild=true isLast=true>
+    lorem
+  </attribute>
+</attributes>
+
+<attribute name="timezone" type="string">
+The event timezone.
+</attribute>
+
+<attribute name="title" type="string">
+The event title.
+</attribute>
+
+<attribute name="vyteme" type="boolean">
+True if it's a vyteme event.
+</attribute>
+
+<attribute name="third_party" type="object" isLast=true>
+
+The id of your your Organization. Found as `_id` when requesting your Organization.
+
+<attributes isChild=true>
+  <attribute name="ct" type="string" :parentNames="['third_party']" isChild=true>
+    lorem
+  </attribute>
+  <attribute name="app" type="string" :parentNames="['third_party']" isChild=true>
+    lorem
+  </attribute>
+  <attribute name="group_ids" type="array" :parentNames="['third_party']" isChild=true isLast=true>
+    <attributes isChild=true>
+      <attribute name="ids" type="string" :parentNames="['third_party', 'group_ids']" isChild=true isLast=true>
+        lorem
+      </attribute>
+    </attributes>
+  </attribute>
+</attributes>
+
+</attribute>
+
+</attribute>
+
+</attributes>
 ::::
 
 :::: right

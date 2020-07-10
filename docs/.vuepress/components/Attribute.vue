@@ -14,7 +14,12 @@
     props: ['name', 'type', 'required', 'isChild', 'isLast', 'parentNames', 'isParentArray'],
     computed: {
       parentNameFormatted() {
-        return this.parentNames.reduce((acc, cur, index) => acc + cur + ".", "") + ((this.isParentArray) ? "[0]." : "")
+        if(this.isParentArray){
+          return this.parentNames.reduce((acc, cur, index) => (index === this.parentNames.length - 1) ?  acc + cur : acc + cur + ".", "") + ((this.isParentArray) ? "[0]." : "")
+        }else{
+          return this.parentNames.reduce((acc, cur) => acc + cur + ".", "")
+        }
+        
       }
     }
   }
