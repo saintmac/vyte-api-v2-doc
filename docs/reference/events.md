@@ -8,6 +8,14 @@ You can use the `/v2/events` endpoints to manage the events for your organizatio
 There is no DELETE endpoint provided for the Event API.
 :::
 
+<attributes title="Attributes">
+  <attribute name="id" type="string">
+    The id of your your Organization. Found as _id when requesting your Organization.
+  </attribute>
+  <attribute name="user" type="object">
+    lorem
+  </attribute>
+</attributes>
 
 ::::
 
@@ -20,6 +28,7 @@ There is no DELETE endpoint provided for the Event API.
 
 }
 ```
+
 :::
 
 ::::
@@ -56,11 +65,11 @@ curl --location --request GET 'https://api.vyte.in/v2/events' \
 
 }
 ```
+
 :::
 ::::
 
 :::::
-
 
 ## Create an event
 
@@ -92,6 +101,7 @@ curl --location --request POST 'https://api.vyte.in/v2/events' \
 
 }
 ```
+
 :::
 ::::
 
@@ -108,18 +118,25 @@ curl --location --request POST 'https://api.vyte.in/v2/events' \
 PUT /v2/events/:event_id HTTP/1.1
 ```
 
-### Path parameters
+<attributes title="Path parameters">
+  <attribute name="event_id" type="string" required="true">
+Id of the event. Found as `_id` in event resources.
 
-Parameter | Type | Required | Description
---------- | ---- | -------- | -----------
-`:event_id` | string |**true** | Id of the event. Found as `_id` in event resources.
+  </attribute>
+</attributes>
 
-### Body parameters
+<attributes title="Body parameters">
+  <attribute name="dates" type="array" required="false">
 
-Parameter | Type | Required | Description
---------- | ---- | -------- | -----------
-`dates` | array |**false** | array of the dates for that event. Existing dates will be replaced. Each array element should have the following format: {date: string, end_date: string} where date and end_date are iso representation of the new dates
-`places` | array |**false** | array of places for that event. Existing places will be replaced
+array of the dates for that event. Existing dates will be replaced. Each array element should have the following format: `{date: string, end_date: string}` where date and end_date are iso representation of the new dates
+
+  </attribute>
+  <attribute name="places" type="array" required="false">
+
+array of places for that event. Existing places will be replaced
+
+  </attribute>
+</attributes>
 
 ::::
 
@@ -140,6 +157,7 @@ curl --location --request PUT 'https://api.vyte.in/v2/events/:event_id' \
 
 }
 ```
+
 :::
 ::::
 
@@ -156,18 +174,31 @@ curl --location --request PUT 'https://api.vyte.in/v2/events/:event_id' \
 POST /v2/events/:event_id/confirm HTTP/1.1
 ```
 
-### Path parameters
+<attributes title="Query parameters">
+  <attribute name="event_id" type="string" required="true">
 
-Parameter | Type | Required | Description
---------- | ---- | -------- | -----------
-`:event_id` | string |**true** | Id of the event. Found as `_id` in event resources.
+Id of the event. Found as `_id` in event resources.
 
-### Query parameters
+  </attribute>
+  <attribute name="p" type="string" required="false">
 
-Parameter | Type | Required | Description
---------- | ---- | -------- | -----------
-`d` | string |**false** | Id of the date that you want to confirm. Found as the `_id` of the relevant date object in the `dates` array property of the event. Optional if the event has only one date. If the event has more than one date and it is not provided the closest date with more votes will be used.
-`p` | string |**false** | Id of the place that you want to confirm. Found as the `_id` of the relevant date object in the `places` array property of the event. Optional if the event has only one place. If the event has more than one place and it is not provided the first place with more votes will be used.
+Id of the place that you want to confirm. Found as the `_id` of the relevant date object in the `places` array property of the event. Optional if the event has only one place. If the event has more than one place and it is not provided the first place with more votes will be used.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters">
+  <attribute name="d" type="string" required="false">
+
+Id of the date that you want to confirm. Found as the `_id` of the relevant date object in the `dates` array property of the event. Optional if the event has only one date. If the event has more than one date and it is not provided the closest date with more votes will be used.
+
+  </attribute>
+  <attribute name="p" type="string" required="false">
+
+Id of the place that you want to confirm. Found as the `_id` of the relevant date object in the `places` array property of the event. Optional if the event has only one place. If the event has more than one place and it is not provided the first place with more votes will be used.
+
+  </attribute>
+</attributes>
 
 ::::
 
@@ -188,6 +219,7 @@ curl --location --request POST 'https://api.vyte.in/v2/events/:event_id/confirm'
 
 }
 ```
+
 :::
 ::::
 
@@ -204,11 +236,13 @@ curl --location --request POST 'https://api.vyte.in/v2/events/:event_id/confirm'
 POST /v2/events/:event_id/confirm HTTP/1.1
 ```
 
-### Path parameters
+<attributes title="Path parameters">
+  <attribute name="event_id" type="string" required="true">
+  
+Id of the event. Found as `_id` in event resources.
 
-Parameter | Type | Required | Description
---------- | ---- | -------- | -----------
-`:event_id` | string |**true** | Id of the event. Found as `_id` in event resources.
+  </attribute>
+</attributes>
 
 ::::
 
@@ -229,6 +263,7 @@ curl --location --request POST 'https://api.vyte.in/v2/events/:event_id/cancel' 
 
 }
 ```
+
 :::
 ::::
 

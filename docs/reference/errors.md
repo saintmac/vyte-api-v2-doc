@@ -2,7 +2,6 @@
 
 The Vyte API uses the following error codes:
 
-
 Error Code | Meaning
 ---------- | -------
 400 | Bad Request -- Your request was somehow incorrect. Make sure you include the right parameters in the query, body or headers
