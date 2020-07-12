@@ -3,16 +3,16 @@
  *
  * ref：https://v1.vuepress.vuejs.org/config/#index-styl
  */
- @require '~vuepress-plugin-tabs/dist/themes/default.styl'
-
-.home .hero img
-  max-width 450px!important
+@require '~vuepress-plugin-tabs/dist/themes/default.styl'
 
 .sidebar
   width: 15rem;
 
 .page
   padding-left: 15rem;
+
+.home .hero img
+  max-width 450px!important
 
 div.theme-default-content:not(.custom)
     max-width: 100%;
@@ -42,3 +42,27 @@ footer.page-edit
   top: 3.6rem;
   flex-grow: 1;
   align-self: flex-start;
+
+@media (max-width: 719px){  
+  .page {
+    padding-left: 0;
+  }
+
+  .left{
+    position: relative;
+    width: 100%;
+    padding: 0;
+    top: 0;
+    flex-grow: 1;
+    align-self: flex-start;
+  }
+
+  .right{
+    position: relative;
+    width: 100%;
+    padding: 0;
+    top: 0;
+    flex-grow: 1;
+    align-self: flex-start;
+  }
+}
