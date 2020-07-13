@@ -14,6 +14,7 @@ You can use the `/v2/locators` endpoints to manage the locators for your organiz
 
 }
 ```
+
 :::
 
 ::: details THE LOCATION OBJECT
@@ -23,13 +24,14 @@ You can use the `/v2/locators` endpoints to manage the locators for your organiz
 
 }
 ```
+
 :::
 
 ::::
 
 :::::
 
-## Retrieve the locators
+## Retrieve a locator
 
 ::::: panel
 :::: left
@@ -59,14 +61,13 @@ curl --location --request GET 'https://api.vyte.in/v2/locators' \
 
 }
 ```
+
 :::
 ::::
 
 :::::
 
-## Retrieve a locator
-
-## Retrieve the locators
+## List all locators
 
 ::::: panel
 :::: left
@@ -96,15 +97,13 @@ curl --location --request GET 'https://api.vyte.in/v2/locators/:handle' \
 
 }
 ```
+
 :::
 ::::
 
 :::::
 
-
 ## Create a locator
-
-## Retrieve the locators
 
 ::::: panel
 :::: left
@@ -134,6 +133,43 @@ curl --location --request POST 'https://api.vyte.in/v2/locators' \
 
 }
 ```
+
+:::
+::::
+
+:::::
+
+## Update a locator
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+DELETE /v2/locators/:handle HTTP/1.1
+```
+
+::::
+
+:::: right
+::: details CODE SAMPLE
+
+```shell
+curl --location --request DELETE 'https://api.vyte.in/v2/locators/:hnadle' \
+--header 'Authorization: apiKey' \
+```
+
+:::
+
+::: details RESPONSE SAMPLE
+
+```json
+{
+
+}
+```
+
 :::
 ::::
 
@@ -169,48 +205,13 @@ curl --location --request DELETE 'https://api.vyte.in/v2/locators/:hnadle' \
 
 }
 ```
+
 :::
 ::::
 
 :::::
 
-## Retrieve locator's locations
-
-::::: panel
-:::: left
-
-> ENDPOINT <small>Authorization `apiKey`</small>
-
-```http
-GET /v2/locators/:locator_id/locations HTTP/1.1
-```
-
-::::
-
-:::: right
-::: details CODE SAMPLE
-
-```shell
-curl --location --request GET 'https://api.vyte.in/v2/locators/:locator_id/locations' \
---header 'Authorization: apiKey' \
-```
-
-:::
-
-::: details RESPONSE SAMPLE
-
-```json
-{
-
-}
-```
-:::
-::::
-
-:::::
-
-
-## Retrieve one locator's location
+## Retrieve a location
 
 ::::: panel
 :::: left
@@ -240,12 +241,49 @@ curl --location --request GET 'https://api.vyte.in/v2/locators/:locator_id/locat
 
 }
 ```
+
 :::
 ::::
 
 :::::
 
-## Update one locator's location
+## List all locations
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+GET /v2/locators/:locator_id/locations HTTP/1.1
+```
+
+::::
+
+:::: right
+::: details CODE SAMPLE
+
+```shell
+curl --location --request GET 'https://api.vyte.in/v2/locators/:locator_id/locations' \
+--header 'Authorization: apiKey' \
+```
+
+:::
+
+::: details RESPONSE SAMPLE
+
+```json
+{
+
+}
+```
+
+:::
+::::
+
+:::::
+
+## Create a location
 
 ::::: panel
 :::: left
@@ -275,6 +313,79 @@ curl --location --request PUT 'https://api.vyte.in/v2/locators/:locator_id/locat
 
 }
 ```
+
+:::
+::::
+
+:::::
+
+## Update a location
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+PUT /v2/locators/:locator_id/locations/:location_id HTTP/1.1
+```
+
+::::
+
+:::: right
+::: details CODE SAMPLE
+
+```shell
+curl --location --request PUT 'https://api.vyte.in/v2/locators/:locator_id/locations/:location_id' \
+--header 'Authorization: apiKey' \
+```
+
+:::
+
+::: details RESPONSE SAMPLE
+
+```json
+{
+
+}
+```
+
+:::
+::::
+
+:::::
+
+## Delete a location
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+PUT /v2/locators/:locator_id/locations/:location_id HTTP/1.1
+```
+
+::::
+
+:::: right
+::: details CODE SAMPLE
+
+```shell
+curl --location --request PUT 'https://api.vyte.in/v2/locators/:locator_id/locations/:location_id' \
+--header 'Authorization: apiKey' \
+```
+
+:::
+
+::: details RESPONSE SAMPLE
+
+```json
+{
+
+}
+```
+
 :::
 ::::
 

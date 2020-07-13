@@ -14,7 +14,7 @@
   max-width 450px!important
 
 div.theme-default-content:not(.custom)
-    max-width: 100%;
+  max-width: 100%;
 
 div.page-nav
   max-width: 100%;
@@ -95,9 +95,14 @@ blue      #268bd2
 cyan      #2aa198
 green     #859900
 */
+div[class*="language-"]{
+  background-color: #4f566b;
+}
+
 
 .light-code
   background-color: #f7fafc!important;
+  font-size: 14px;
 
   code[class*="language-"],
   pre[class*="language-"] {
@@ -174,6 +179,10 @@ green     #859900
   .token.symbol,
   .token.deleted {
     color: #268bd2; /* blue */
+  }
+
+  .token.boolean{
+    font-weight: 600;
   }
 
   .token.selector,

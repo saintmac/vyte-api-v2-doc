@@ -3,7 +3,7 @@
 You can use the `/v2/events` endpoints to manage the events for your organization.
 
 ::: warning
-There is no DELETE endpoint provided for the Event API.
+There is no DELETE endpoint provided for the Event API yet. Use the `/v2/events/:event_id/cancel` endpoint instead.
 :::
 
 ## The event object
@@ -13,101 +13,128 @@ There is no DELETE endpoint provided for the Event API.
 
 <attributes title="Attributes">
 
-<attribute name="confirmed" type="object">
+<attribute name="confirmed" type="hash">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Information about the status of the event.
 
 <attributes isChild=true>
   <attribute name="flag" type="boolean" :parentNames="['confirmed']" isChild=true isLast=true>
-    lorem
+    Whether or not the event is confirmed.
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="created_by" type="object">
+<attribute name="created_by" type="hash">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Information about the user who created the event. If it is a smart group scheduling event, the `created_by` is the user who create the event; if it is a booking page event, the `created_by` is the user who exposed his availability.
 
 <attributes isChild=true>
   <attribute name="email" type="string" :parentNames="['created_by']" isChild=true isLast=true>
-    lorem
+    The creator email.
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="dates" type="array">
+<attribute name="dates" type="array of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Available dates for the event.
 
 <attributes isChild=true>
-  <attribute name="all_day" type="boolean" :parentNames="['dates']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="all_day" type="boolean" :parentNames="['dates']" isChild=true>
+    Whether or not the event lasts all day long.
   </attribute>
-  <attribute name="date" type="date" :parentNames="['dates']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="date" type="date" :parentNames="['dates']" isChild=true>
+
+Starting date of the event. The date is expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601).
+
   </attribute>
-  <attribute name="end_date" type="date" :parentNames="['dates']" isParentArray=true isChild=true isLast=true>
-    lorem
+  <attribute name="end_date" type="date" :parentNames="['dates']" isChild=true isLast=true>
+
+Ending date of the event. The date is expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601).
+
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="invitees" type="array">
+<attribute name="invitees" type="array of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Information about the invitees.
 
 <attributes isChild=true>
-  <attribute name="full_name" type="string" :parentNames="['invitees']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="full_name" type="string" :parentNames="['invitees']" isChild=true>
+    Full name of the invitee.
   </attribute>
-  <attribute name="email" type="string" :parentNames="['invitees']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="email" type="string" :parentNames="['invitees']" isChild=true>
+    Email of the invitee.
   </attribute>
-  <attribute name="phone" type="string" :parentNames="['invitees']" isParentArray=true isChild=true isLast=true>
-    lorem
+  <attribute name="phone" type="string" :parentNames="['invitees']" isChild=true>
+    Phone number of the invitee.
+  </attribute>
+  <attribute name="user" type="string" :parentNames="['invitees']" isChild=true isLast=true>
+
+If the invitee is an existing Vyte user, we automatically bind the invitee to the user through the `user_id`.
+  
   </attribute>
 </attributes>
 
 </attribute>
 
 <attribute name="lang" type="string">
-The event language.
+
+Language of the event. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+Default is `en`.
+
 </attribute>
 
 <attribute name="locale" type="string">
-The event locale.
+
+Locale of the event used for date formatting. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+Default is `en`.
+
 </attribute>
 
-<attribute name="messages" type="array">
+<attribute name="messages" type="list of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+List of all messages sent on the event page.
 
 <attributes isChild=true>
+  <attribute name="created_by" type="hash" :parentNames="['messages']" isParentArray=true isChild=true>
+
+Object referencing the message sender. It contains the `_id` of the user.
+
+  </attribute>
+  <attribute name="from" type="string" :parentNames="['messages']" isParentArray=true isChild=true>
+    Email of the message sender.
+  </attribute>
   <attribute name="body" type="string" :parentNames="['messages']" isParentArray=true isChild=true isLast=true>
-    lorem
+    Body of the message.
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="places" type="array">
+<attribute name="places" type="array of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Available places for the event.
 
 <attributes isChild=true>
-  <attribute name="name" type="string" :parentNames="['places']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="name" type="string" :parentNames="['places']" isChild=true>
+    Name of the places.
   </attribute>
-  <attribute name="address" type="string" :parentNames="['places']" isParentArray=true isChild=true isLast=true>
-    lorem
+  <attribute name="address" type="string" :parentNames="['places']" isChild=true isLast=true>
+
+Address of the places. It can be a *url*, a *mailing address*, a *phone number* or whatever you consider as a meeting place.
+
   </attribute>
 </attributes>
 
 <attribute name="timezone" type="string">
-The event timezone.
+
+The event timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
 </attribute>
 
 <attribute name="title" type="string">
@@ -115,26 +142,24 @@ The event title.
 </attribute>
 
 <attribute name="vyteme" type="boolean">
-True if it's a vyteme event.
+
+Whether or not it is a `vyteme` event. If you need information about `vyteme` event, please check up the [introduction](/reference/) part.
+
 </attribute>
 
-<attribute name="third_party" type="object" isLast=true>
+<attribute name="third_party" type="hash" isLast=true>
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Information about third-party. Useful if the event was created thanks to the third-party API. For more informations, please check the [third-parties](./thirdParties.md) page.
 
 <attributes isChild=true>
   <attribute name="ct" type="string" :parentNames="['third_party']" isChild=true>
-    lorem
+    Creator token of the third-party.
   </attribute>
   <attribute name="app" type="string" :parentNames="['third_party']" isChild=true>
-    lorem
+    Creator token of the third-party.
   </attribute>
-  <attribute name="group_ids" type="array" :parentNames="['third_party']" isChild=true isLast=true>
-    <attributes isChild=true>
-      <attribute name="ids" type="string" :parentNames="['third_party', 'group_ids']" isChild=true isLast=true>
-        lorem
-      </attribute>
-    </attributes>
+  <attribute name="group_ids" type="array of strings" :parentNames="['third_party']" isChild=true isLast=true>
+    List of groups to which you want to link the event.
   </attribute>
 </attributes>
 
@@ -152,46 +177,50 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
 
 ```json light-code
 {
-  "confirmed":{
-    "flag":true
+  "confirmed": {
+    "flag": true
   },
-  "created_by":{
-    "email":"user.name@domain.com"
+  "created_by": {
+    "email": "user.name@domain.com"
   },
-  "dates":[
+  "dates": [
     {
-      "all_day":false,
-      "date":"2017-11-10T11:00:00.000Z",
-      "end_date":"2017-11-10T12:00:00.000Z"
+      "all_day": false,
+      "date": "2017-11-10T11:00:00.000Z",
+      "end_date": "2017-11-10T12:00:00.000Z"
     }
   ],
-  "invitees":[
+  "invitees": [
     {
-      "full_name":"Person booking a slot name",
-      "email":"jean.dupont@domain.com",
-      "phone":"0601020304"
+      "full_name": "Person booking a slot name",
+      "email": "jean.dupont@domain.com",
+      "phone": "0601020304"
     }
   ],
-  "lang":"fr",
-  "locale":"fr",
-  "messages":[
+  "lang": "fr",
+  "locale": "fr",
+  "messages": [
     {
-      "body":"I’m booking appointment about this"
+      "created_by": {
+        "_id": "userId"
+      },
+      "from": "user@example.com",
+      "body": "I’m booking appointment about this",
     }
   ],
-  "places":[
+  "places": [
     {
-      "name":"Office name",
-      "address":"12 rue de Rivoli, 75004, Paris, France"
+      "name": "Office name",
+      "address": "12 rue de Rivoli, 75004, Paris, France"
     }
   ],
-  "timezone":"Europe/Paris",
-  "title":"Appointment about topic",
-  "vyteme":true,
-  "third_party":{
-    "ct":"creator_token",
-    "app":"app_id",
-    "group_ids":[
+  "timezone": "Europe/Paris",
+  "title": "Appointment about topic",
+  "vyteme": true,
+  "third_party": {
+    "ct": "creator_token",
+    "app": "app_id",
+    "group_ids": [
       "user123",
       "group456",
       "companyABC"
@@ -204,7 +233,7 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
 
 :::::
 
-## Retrieve the events
+## List all events
 
 :::::: panel
 ::::: left
@@ -231,9 +260,9 @@ curl \
 :::
 ::::
 
-::: details RESPONSE SAMPLE
+> RESPONSE SAMPLE
 
-```json
+```json light-code
 [
     {
         "_id": "569c3b6105dc780300951bd0",
@@ -454,7 +483,6 @@ curl \
 ]
 ```
 
-:::
 :::::
 
 ::::::
@@ -472,7 +500,7 @@ POST /v2/events HTTP/1.1
 
 <attributes title="Body">
 
-<attribute name="confirmed" type="object">
+<attribute name="confirmed" type="hash">
 
 The id of your your Organization. Found as `_id` when requesting your Organization.
 
@@ -484,7 +512,7 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
 
 </attribute>
 
-<attribute name="created_by" type="object">
+<attribute name="created_by" type="hash">
 
 The id of your your Organization. Found as `_id` when requesting your Organization.
 
@@ -577,7 +605,7 @@ The event title.
 True if it's a vyteme event.
 </attribute>
 
-<attribute name="third_party" type="object" isLast=true>
+<attribute name="third_party" type="hash" isLast=true>
 
 The id of your your Organization. Found as `_id` when requesting your Organization.
 

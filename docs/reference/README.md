@@ -9,3 +9,7 @@ The API provides useful functionalities such as:
   2. Then you'll be able to link to Vyte to schedule an event with all the members of a team, project, task (we call that a "group")
   3. You'll be able to retrieve all the events related to that group
 2. Link to a Vyte page and pass parameters in the URL
+
+## Vyteme events
+
+lorem

@@ -4,7 +4,6 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'Vyte API',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -28,12 +27,10 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: '',
     editLinks: false,
-    docsDir: '',
-    editLinkText: '',
     lastUpdated: true,
     smoothScroll: true,
+    logo: '/logo.svg',
     nav: [
       {
         text: 'Api Reference',

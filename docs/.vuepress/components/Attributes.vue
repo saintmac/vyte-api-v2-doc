@@ -43,7 +43,7 @@
   &.attributes-isChild{
     border: 1px solid #eaecef;
     border-radius: 10px;
-    margin: 10px 0;
+    margin: 0;
     display: inline-block;
 
     &.attributes-isChild-expanded{

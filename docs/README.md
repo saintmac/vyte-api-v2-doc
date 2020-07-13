@@ -1,6 +1,7 @@
 ---
 home: true
-heroImage: https://api-doc.vyte.in/images/logo.png
+heroText: Vyte API
+heroImage: /vyte-api.svg
 tagline: Explore our guides and examples to integrate Vyte.
 actionText: API Reference →
 actionLink: /reference/
