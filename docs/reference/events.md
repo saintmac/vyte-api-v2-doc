@@ -1,10 +1,29 @@
 # Events
 
+:::::panel
+
+:::: left
 You can use the `/v2/events` endpoints to manage the events for your organization.
 
 ::: warning
 There is no DELETE endpoint provided for the Event API yet. Use the `/v2/events/:event_id/cancel` endpoint instead.
 :::
+::::
+
+:::: right
+
+> ENDPOINTS
+
+<endpoints>
+  <endpoint method="get" path="/v2/events" href="#list-all-events"></endpoint>
+  <endpoint method="post" path="/v2/events" href="#create-an-event"></endpoint>
+  <endpoint method="put" path="/v2/events/:event_id" href="#update-an-event"></endpoint>
+  <endpoint method="post" path="/v2/events/:event_id/confirm" href="#confirm-an-event"></endpoint>
+  <endpoint method="post" path="/v2/events/:event_id/cancel" href="#cancel-an-event"></endpoint>
+</endpoints>
+::::
+
+:::::
 
 ## The event object
 
