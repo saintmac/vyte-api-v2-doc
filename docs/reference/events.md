@@ -150,7 +150,7 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
 
 > THE EVENT OBJECT
 
-```json
+```json light-code
 {
   "confirmed":{
     "flag":true
@@ -206,8 +206,8 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
 
 ## Retrieve the events
 
-::::: panel
-:::: left
+:::::: panel
+::::: left
 
 > ENDPOINT <small>Authorization `apiKey`</small>
 
@@ -215,10 +215,12 @@ The id of your your Organization. Found as `_id` when requesting your Organizati
 GET /v2/events HTTP/1.1
 ```
 
-::::
+:::::
 
-:::: right
-::: details CODE SAMPLE
+::::: right
+
+:::: tabs type:card
+::: tab cURL
 
 ```shell
 curl \
@@ -227,6 +229,7 @@ curl \
 ```
 
 :::
+::::
 
 ::: details RESPONSE SAMPLE
 
@@ -452,9 +455,9 @@ curl \
 ```
 
 :::
-::::
-
 :::::
+
+::::::
 
 ## Create an event
 
@@ -691,15 +694,10 @@ curl --location --request PUT 'https://api.vyte.in/v2/events/:event_id' \
 POST /v2/events/:event_id/confirm HTTP/1.1
 ```
 
-<attributes title="Query parameters">
+<attributes title="Path parameters">
   <attribute name="event_id" type="string" required=true>
 
 Id of the event. Found as `_id` in event resources.
-
-  </attribute>
-  <attribute name="p" type="string">
-
-Id of the place that you want to confirm. Found as the `_id` of the relevant date object in the `places` array property of the event. Optional if the event has only one place. If the event has more than one place and it is not provided the first place with more votes will be used.
 
   </attribute>
 </attributes>
@@ -750,7 +748,7 @@ curl --location --request POST 'https://api.vyte.in/v2/events/:event_id/confirm'
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/events/:event_id/confirm HTTP/1.1
+POST /v2/events/:event_id/cancel HTTP/1.1
 ```
 
 <attributes title="Path parameters">

@@ -20,8 +20,6 @@
     "vuepress-plugin-container": "^2.1.4"
   },
   "dependencies": {
-    "vue-tabs-component": "^1.5.0",
-    "vuepress-plugin-element-tabs": "^0.2.8",
-    "vuepress-plugin-tabs": "^0.3.0"
+    "vuepress-plugin-element-tabs": "^0.2.8"
   }
 }
