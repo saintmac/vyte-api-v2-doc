@@ -1,7 +1,7 @@
 <template>
   <li class="attributes-list-item" v-bind:class="{ 'attributes-list-item-isChild': isChild, 'attributes-list-item-isLast': isLast }">
     <h5 class="attributes-list-item-title">
-      <span class="attributes-list-item-parent-name" v-if="parentNames">{{parentNameFormatted}}</span><span class="attributes-list-item-name">{{name}}</span><span class="attributes-list-item-type">{{type}}</span> <Badge text="required" type="error" vertical="middle" v-if="required"/>
+      <span class="attributes-list-item-parent-name" v-if="parentNames">{{parentNameFormatted}}</span><span class="attributes-list-item-name">{{name}}</span><span class="attributes-list-item-type">{{type}}</span> <Badge text="required" type="error" v-if="required"/>
     </h5>
     <div class="attributes-list-item-description">
       <slot></slot>

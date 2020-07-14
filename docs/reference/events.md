@@ -150,6 +150,8 @@ Address of the places. It can be a *url*, a *mailing address*, a *phone number* 
   </attribute>
 </attributes>
 
+</attribute>
+
 <attribute name="timezone" type="string">
 
 The event timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
@@ -181,8 +183,6 @@ Information about third-party. Useful if the event was created thanks to the thi
     List of groups to which you want to link the event.
   </attribute>
 </attributes>
-
-</attribute>
 
 </attribute>
 
@@ -254,6 +254,8 @@ Information about third-party. Useful if the event was created thanks to the thi
 
 ## List all events
 
+List all the events for which the administrator belongs to your organization.
+
 :::::: panel
 ::::: left
 
@@ -263,21 +265,40 @@ Information about third-party. Useful if the event was created thanks to the thi
 GET /v2/events HTTP/1.1
 ```
 
+<attributes title="Query parameters">
+  <attribute name="limit" type="string">
+
+Limits the number of events you want in return.
+
+  </attribute>
+  <attribute name="q" type="regex">
+
+Search events by title using a regex.
+
+  </attribute>
+  <attribute name="filter" type="string">
+
+Filter events by status. Value can be `confirmed` or `upcoming`.
+
+  </attribute>
+</attributes>
+
+<returns title="Returns">
+
+An array of `Event` objects. If there is no events available, return an empty array.
+
+</returns>
 :::::
 
 ::::: right
 
-:::: tabs type:card
-::: tab cURL
+> CODE SAMPLE
 
 ```shell
 curl \
 --request GET 'https://api.vyte.in/v2/events' \
 --header 'Authorization: apiKey' \
 ```
-
-:::
-::::
 
 > RESPONSE SAMPLE
 
@@ -517,159 +538,317 @@ curl \
 POST /v2/events HTTP/1.1
 ```
 
-<attributes title="Body">
+<attributes title="Attributes">
 
 <attribute name="confirmed" type="hash">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Information about the status of the event.
 
 <attributes isChild=true>
   <attribute name="flag" type="boolean" :parentNames="['confirmed']" isChild=true isLast=true>
-    lorem
+    Whether or not the event is confirmed.
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="created_by" type="hash">
+<attribute name="created_by" type="hash" :required="true">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Information about the user who created the event. If it is a smart group scheduling event, the `created_by` is the user who create the event; if it is a booking page event, the `created_by` is the user who exposed his availability.
 
 <attributes isChild=true>
-  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true isLast=true>
-    lorem
+  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true isLast=true :required="true">
+    The creator email.
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="dates" type="array">
+<attribute name="dates" type="array of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Available dates for the event. *If no dates are provided, the first user will be able to propose some dates.*
 
 <attributes isChild=true>
-  <attribute name="all_day" type="boolean" :parentNames="['dates']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="all_day" type="boolean" :parentNames="['dates']" isChild=true>
+    Whether or not the event lasts all day long.
   </attribute>
-  <attribute name="date" type="date" :parentNames="['dates']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="date" type="date" :parentNames="['dates']" isChild=true :required="true">
+
+Starting date of the event. The date is expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601).
+
   </attribute>
-  <attribute name="end_date" type="date" :parentNames="['dates']" isParentArray=true isChild=true isLast=true>
-    lorem
+  <attribute name="end_date" type="date" :parentNames="['dates']" isChild=true isLast=true :required="true">
+
+Ending date of the event. The date is expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601).
+
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="invitees" type="array">
+<attribute name="invitees" type="array of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Information about the invitees.
 
 <attributes isChild=true>
-  <attribute name="full_name" type="string" :parentNames="['invitees']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="full_name" type="string" :parentNames="['invitees']" isChild=true>
+    Full name of the invitee.
   </attribute>
-  <attribute name="email" type="string" :parentNames="['invitees']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="email" type="string" :parentNames="['invitees']" isChild=true :required="true">
+    Email of the invitee.
   </attribute>
-  <attribute name="phone" type="string" :parentNames="['invitees']" isParentArray=true isChild=true isLast=true>
-    lorem
+  <attribute name="phone" type="string" :parentNames="['invitees']" isChild=true>
+    Phone number of the invitee.
   </attribute>
 </attributes>
 
 </attribute>
 
 <attribute name="lang" type="string">
-The event language.
+
+Language of the event. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+Default is `en`.
+
 </attribute>
 
 <attribute name="locale" type="string">
-The event locale.
+
+Locale of the event used for date formatting. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+Default is `en`.
+
 </attribute>
 
-<attribute name="messages" type="array">
+<attribute name="messages" type="list of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+You can provide a first message sent in the event conversation. Moreover, this message will be in the body of the first mail sent to the event invitees.
 
 <attributes isChild=true>
-  <attribute name="body" type="string" :parentNames="['messages']" isParentArray=true isChild=true isLast=true>
-    lorem
+  <attribute name="body" type="string" :parentNames="['messages']" isParentArray=true isChild=true isLast=true :required="true">
+    Body of the message.
   </attribute>
 </attributes>
 
 </attribute>
 
-<attribute name="places" type="array">
+<attribute name="places" type="array of hashes">
 
-The id of your your Organization. Found as `_id` when requesting your Organization.
+Available places for the event.
 
 <attributes isChild=true>
-  <attribute name="name" type="string" :parentNames="['places']" isParentArray=true isChild=true>
-    lorem
+  <attribute name="name" type="string" :parentNames="['places']" isChild=true :required="true">
+    Name of the places.
   </attribute>
-  <attribute name="address" type="string" :parentNames="['places']" isParentArray=true isChild=true isLast=true>
-    lorem
+  <attribute name="address" type="string" :parentNames="['places']" isChild=true isLast=true>
+
+Address of the places. It can be a *url*, a *mailing address*, a *phone number* or whatever you consider as a meeting place.
+
   </attribute>
 </attributes>
+
+</attribute>
 
 <attribute name="timezone" type="string">
-The event timezone.
+
+The event timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
 </attribute>
 
-<attribute name="title" type="string">
+<attribute name="title" type="string" :required="true">
 The event title.
 </attribute>
 
 <attribute name="vyteme" type="boolean">
-True if it's a vyteme event.
-</attribute>
 
-<attribute name="third_party" type="hash" isLast=true>
-
-The id of your your Organization. Found as `_id` when requesting your Organization.
-
-<attributes isChild=true>
-  <attribute name="ct" type="string" :parentNames="['third_party']" isChild=true>
-    lorem
-  </attribute>
-  <attribute name="app" type="string" :parentNames="['third_party']" isChild=true>
-    lorem
-  </attribute>
-  <attribute name="group_ids" type="array" :parentNames="['third_party']" isChild=true isLast=true>
-    <attributes isChild=true>
-      <attribute name="ids" type="string" :parentNames="['third_party', 'group_ids']" isChild=true isLast=true>
-        lorem
-      </attribute>
-    </attributes>
-  </attribute>
-</attributes>
-
-</attribute>
+Whether or not it is a `vyteme` event. If you need information about `vyteme` event, please check up the [introduction](/reference/) part.
+Default is `false`.
 
 </attribute>
 
 </attributes>
+
+<returns title="Returns">
+
+An `Event` object if there is no error.
+
+</returns>
+
 ::::
 
 :::: right
-::: details CODE SAMPLE
+
+> CODE SAMPLE
 
 ```shell
-curl --location --request POST 'https://api.vyte.in/v2/events' \
---header 'Authorization: apiKey' \
+curl --request POST 'https://api-dev2.vyte.in/v2/events' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "First created event",
+    "created_by": {
+        "email": "creator@example.com"
+    },
+    "dates": [
+        {
+            "all_day": false,
+            "date": "2020-07-16T09:00:00",
+            "end_date": "2020-07-16T10:00:00"
+        },
+        {
+            "all_day": false,
+            "date": "2020-07-16T14:00:00+0100",
+            "end_date": "2020-07-16T15:00:00"
+        }
+    ],
+    "places": [
+        {
+            "name": "Place for the meeting."
+        }
+    ]
+}'
 ```
 
-:::
+> RESPONSE SAMPLE
 
-::: details RESPONSE SAMPLE
-
-```json
+```json light-code
 {
-
+    "created_by": {
+        "email": "creator@example.com",
+        "user": "5eecc40bb2181073ac6ff375",
+        "picture_url": "",
+        "full_name": "Jean Dupont"
+    },
+    "confirmed": {
+        "flag": false,
+        "updated_at": null,
+        "multi": false
+    },
+    "third_party": {
+        "group_ids": []
+    },
+    "ics_sequence": 0,
+    "version": 0,
+    "group_pro": false,
+    "identification_alternatives": [],
+    "_id": "5f0d7eb02003d0971e2a961a",
+    "title": "First created event",
+    "dates": [
+        {
+            "created_by": {
+                "user": "5eecc40bb2181073ac6ff375"
+            },
+            "votes": {
+                "yes": [
+                    {
+                        "created_by": {
+                            "user": "5eecc40bb2181073ac6ff375"
+                        },
+                        "_id": "5f0d7eb02003d04dab2a961f"
+                    }
+                ],
+                "no": []
+            },
+            "all_day": false,
+            "confirmed": false,
+            "confirmed_invitees": [],
+            "_id": "5f0d7eb02003d0174a2a961c",
+            "date": "2020-07-16T07:00:00.000Z",
+            "end_date": "2020-07-16T08:00:00.000Z",
+            "updatedAt": "2020-07-14T09:45:20.862Z",
+            "createdAt": "2020-07-14T09:45:20.862Z"
+        },
+        {
+            "created_by": {
+                "user": "5eecc40bb2181073ac6ff375"
+            },
+            "votes": {
+                "yes": [
+                    {
+                        "created_by": {
+                            "user": "5eecc40bb2181073ac6ff375"
+                        },
+                        "_id": "5f0d7eb02003d04ac22a9620"
+                    }
+                ],
+                "no": []
+            },
+            "all_day": false,
+            "confirmed": false,
+            "confirmed_invitees": [],
+            "_id": "5f0d7eb02003d04b512a961b",
+            "date": "2020-07-16T13:00:00.000Z",
+            "end_date": "2020-07-16T13:00:00.000Z",
+            "updatedAt": "2020-07-14T09:45:20.862Z",
+            "createdAt": "2020-07-14T09:45:20.862Z"
+        }
+    ],
+    "places": [
+        {
+            "created_by": {
+                "user": "5eecc40bb2181073ac6ff375"
+            },
+            "votes": {
+                "yes": [
+                    {
+                        "created_by": {
+                            "user": "5eecc40bb2181073ac6ff375"
+                        },
+                        "_id": "5f0d7eb02003d05ff72a9621"
+                    }
+                ],
+                "no": []
+            },
+            "source": "app",
+            "_id": "5f0d7eb02003d081072a961d",
+            "name": "Place for the meeting.",
+            "updatedAt": "2020-07-14T09:45:20.862Z",
+            "createdAt": "2020-07-14T09:45:20.862Z"
+        }
+    ],
+    "api": true,
+    "invitees": [
+        {
+            "created_by": {
+                "user": "5eecc40bb2181073ac6ff375"
+            },
+            "stats": {
+                "voted": {
+                    "dates": true,
+                    "places": true
+                }
+            },
+            "star": false,
+            "_id": "5f0d7eb02003d097742a961e",
+            "email": "creator@example.com",
+            "user": "5eecc40bb2181073ac6ff375",
+            "su": true,
+            "full_name": "Jean Dupont",
+            "picture_url": "",
+            "timezone": "Europe/Paris",
+            "locale": "fr"
+        }
+    ],
+    "messages": [],
+    "declines": [],
+    "lang": "en",
+    "locale": "en",
+    "updatedAt": "2020-07-14T09:45:20.862Z",
+    "createdAt": "2020-07-14T09:45:20.862Z",
+    "invitees_length": 1,
+    "email": "reply-to-participants-to-first-created-event-atpcovzku@vytein.mailgun.org",
+    "key_store": {
+        "_id": "5f0d7eb02003d0f6e32a9622",
+        "hash": {
+            "5eecc40bb2181073ac6ff375": "a2nv79gx86d5i0o3"
+        },
+        "updatedAt": "2020-07-14T09:45:20.870Z",
+        "createdAt": "2020-07-14T09:45:20.870Z",
+        "__v": 0
+    },
+    "links": null,
+    "__v": 0
 }
 ```
 
-:::
 ::::
 
 :::::

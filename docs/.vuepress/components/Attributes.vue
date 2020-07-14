@@ -1,6 +1,6 @@
 <template>
   <div class="attributes" v-bind:class="{ 'attributes-isChild': isChild, 'attributes-isChild-expanded': isExpanded}">
-    <h3 
+    <h4 
       class="attributes-title" 
       v-bind:class="{ 'attributes-title-isChild': isChild,  'attributes-title-isChild-expanded': isExpanded}" 
       v-if="isChild"
@@ -8,8 +8,9 @@
     >
       <span v-if="isExpanded">x Hide child attributes</span>
       <span v-else>+ Show child attributes</span>
-    </h3>
-    <h3 class="attributes-title" v-else>{{title}}</h3>
+    </h4>
+    <h4 class="attributes-title" v-else>{{title}}</h4>
+    <p v-if="isEmpty" class="attributes-isEmpty">No parameters.</p>
     <ul class="attributes-list" v-bind:class="{ 'attributes-list-isChild': isChild, 'attributes-list-isChild-expanded': isExpanded}">
       <slot></slot>
     </ul>
@@ -18,7 +19,7 @@
 
 <script>
   export default {
-    props: ['title', 'isChild'],
+    props: ['title', 'isChild', 'isEmpty'],
     methods: {
       expandChildAttributes() {
         this.isExpanded = !this.isExpanded
@@ -28,7 +29,7 @@
       return {
         isExpanded: false
       }
-    }
+    },
   }
   
 </script>
@@ -36,6 +37,7 @@
 <style lang="scss" scoped>
 
 .attributes{
+
   &:not(.attributes-isChild){
     margin: 20px 0;
   }
@@ -51,7 +53,7 @@
     }
   }
 
-  h3{
+  h4{
 
     &:not(.attributes-title-isChild){
       margin: 0;
@@ -90,6 +92,11 @@
         display: block;
       }
     }
+  }
+
+  .attributes-isEmpty{
+    font-size: 13px;
+    color: #8792a2;
   }
 
 }
