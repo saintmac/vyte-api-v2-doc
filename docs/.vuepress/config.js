@@ -45,6 +45,7 @@ module.exports = {
           children: [
             '',
             'events',
+            'locations',
             'locators',
             'teams',
             'thirdParties',
@@ -64,6 +65,7 @@ module.exports = {
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
     'vuepress-plugin-element-tabs',
+    'vuepress-plugin-mermaidjs',
     [
       'vuepress-plugin-container',
       {
