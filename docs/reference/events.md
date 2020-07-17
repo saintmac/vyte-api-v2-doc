@@ -297,7 +297,7 @@ An array of `Event` objects. If there is no events available, return an empty ar
 ```shell
 curl \
 --request GET 'https://api.vyte.in/v2/events' \
---header 'Authorization: apiKey' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
 > RESPONSE SAMPLE

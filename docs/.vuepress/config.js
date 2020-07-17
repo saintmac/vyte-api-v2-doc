@@ -48,7 +48,6 @@ module.exports = {
             'locations',
             'locators',
             'teams',
-            'thirdParties',
             'users',
             'webhooks',
             'errors'

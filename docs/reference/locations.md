@@ -7,7 +7,6 @@
 
 To manage the `Locations` of a `Locator`, you can use the `/v2/locators/:locator_id/locations` endpoints.
 
-
 ::::
 
 :::: right
@@ -266,94 +265,56 @@ POST /v2/locations HTTP/1.1
 
 <attributes title="Body parameters">
 
-<attribute name="no_results" type="hash">
+<attribute name="location" type="hash" :required=true>
 
-Define how it would look like if there is no results.
+Geolocation information of the location. **Required if no address is provided.**
 
 <attributes :isChild=true>
-<attribute name="button" type="hash" :parentNames="['no_results']" :isChild=true>
 
-Options for the button.
+<attribute name="type" type="string" :isChild=true :isLast=true :parentNames="['location']" :required=true>
 
-  <attributes :isChild=true>
-    <attribute name="label" type="string" :parentNames="['no_results', 'button']" :isChild=true>
-      Button label.
-    </attribute>
-    <attribute name="link" type="string" :parentNames="['no_results', 'button']" :isChild=true :isLast=true>
-      Button link.
-    </attribute>
-  </attributes>
+Type of coordinates. Default is `Point`.
+
 </attribute>
 
-<attribute name="message" type="string" :isChild=true :isLast=true :parentNames="['no_results']">
-Message if no results.
+<attribute name="coordinates" type="array of numbers" :parentNames="['location']" :isChild=true :required=true>
+
+Coordinates of the location. The first one is the latitude and the second one is the longitude, both expressed in [decimal degress](https://en.wikipedia.org/wiki/Decimal_degrees).
+
 </attribute>
 
 </attributes>
 </attribute>
 
-<attribute name="back_button" type="hash">
-
-Options for the back button.
-
-<attributes :isChild=true>
-<attribute name="label" type="string" :isChild=true :isLast=true :parentNames="['back_button']">
-Button label.
-</attribute>
-</attributes>
+<attribute name="name" type="string" :required=true>
+Name of the location.
 </attribute>
 
-<attribute name="geolocation" type="boolean">
-Whether or not you to activate the around me feature.
-</attribute>
+<attribute name="address" type="string" :required=true>
 
-<attribute name="handle" type="string" :required=true>
-
-A unique identifier set by yourself. *The namespace is global for all the organizations so the* `handle` *must be unique in the global namespace.*
+Address of the location. **Required if no coordinates are provided.**
 
 </attribute>
 
-<attribute name="postcode_filter" type="string">
-If you want to restrain the adress to a certain Postcode.
+<attribute name="picture_url" type="string">
+Picture url to illustrate the location.
 </attribute>
 
-<attribute name="address_postfix" type="string">
-An address part which will be added automatically to the address (for example, the country)
+<attribute name="link" type="string">
+Link of the location.
 </attribute>
 
-<attribute name="address_region_bias" type="string">
-Used by Google API to restrict auto-completion proposals to a certain area.
-</attribute>
+<attribute name="extid" type="string" :required=true>
 
-<attribute name="lang" type="string" :isLast=true>
-
-Language for the location. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
-Default is `en`.
+An external `id` set by yourself to identify the location on your side.
 
 </attribute>
 
-<attribute name="max_distance" type="number">
-
-Maximum distance around the locations (in meters).
-
-</attribute>
-
-<attribute name="message" type="string">
-
-Message shown on the location page.
-
-</attribute>
-
-<attribute name="title" type="string">
-
-Title on the location page.
-
-</attribute>
 </attributes>
 
 <returns title="Returns">
 
-Returns the created `location` object if a valid handle was provided, and returns an error otherwise.
+Returns the created `location` if a valid body was provided, and returns an error otherwise.
 
 </returns>
 
@@ -368,23 +329,20 @@ curl --request POST 'https://api-dev2.vyte.in/v2/locations' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "no_results": {
-    "button": {
-      "label": "Label",
-      "link": "https://vyte.com"
-    },
-    "message": "There is no locations available."
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      33.631839,
+      27.380583
+    ]
   },
-  "back_button": {
-    "label": "Back to location"
-  },
-  "geolocation": false,
-  "handle": "my-location",
+  "name": "Desert Breath",
+  "address": "Egypt",
+  "picture_url": "https://twistedsifter.files.wordpress.com/2014/03/desert-breath-land-art-installation-sahara-egypt-crop-circle-dast-arteam-2.jpg",
+  "link": "/exam-desert-breath",
+  "extid": "our-mysterious-meeting-place",
   "org": "5ef0cb128f284274b2361323",
-  "lang": "en",
-  "max_distance": 150000,
-  "message": "Find on of our locations around you for the meeting.",
-  "title": "Available locations"
+  "locator": "5ef9f3a3993a4d632a5c73e0",
 }'
 ```
 
@@ -392,25 +350,21 @@ curl --request POST 'https://api-dev2.vyte.in/v2/locations' \
 
 ```json light-code
 {
-  "no_results": {
-    "button": {
-      "label": "Label",
-      "link": "https://vyte.com"
-    },
-    "message": "There is no locations available."
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      33.631839,
+      27.380583
+    ]
   },
-  "back_button": {
-    "label": "Back to location"
-  },
-  "geolocation": false,
-  "_id": "5f0f64e22003d0340e2a9624",
-  "handle": "my-location",
+  "_id": "5ef202a1fe70c73e37549514",
+  "name": "Desert Breath",
+  "address": "Egypt",
+  "picture_url": "https://twistedsifter.files.wordpress.com/2014/03/desert-breath-land-art-installation-sahara-egypt-crop-circle-dast-arteam-2.jpg",
+  "link": "/exam-desert-breath",
+  "extid": "our-mysterious-meeting-place",
   "org": "5ef0cb128f284274b2361323",
-  "__v": 0,
-  "lang": "en",
-  "max_distance": 150000,
-  "message": "Find on of our locations around you for the meeting.",
-  "title": "Available locations"
+  "locator": "5ef9f3a3993a4d632a5c73e0",
 }
 ```
 
@@ -426,13 +380,18 @@ curl --request POST 'https://api-dev2.vyte.in/v2/locations' \
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/locations HTTP/1.1
+POST /v2/locators/:locator_id/locations/:location_id HTTP/1.1
 ```
 
 <attributes title="Path parameters">
+<attribute name="locator_id" type="string" :required=true>
+
+The `id` of the locator.
+
+</attribute>
 <attribute name="location_id" type="string" :required=true>
 
-The `_id` of the location. Be careful, this is not the `handle` but the `_id` given by Vyte to the location.
+The `id` of the location.
 
 </attribute>
 </attributes>
@@ -441,94 +400,56 @@ The `_id` of the location. Be careful, this is not the `handle` but the `_id` gi
 
 <attributes title="Body parameters">
 
-<attribute name="no_results" type="hash">
+<attribute name="location" type="hash">
 
-Define how it would look like if there is no results.
+Geolocation information of the location.
 
 <attributes :isChild=true>
-<attribute name="button" type="hash" :parentNames="['no_results']" :isChild=true>
 
-Options for the button.
+<attribute name="type" type="string" :isChild=true :isLast=true :parentNames="['location']">
 
-  <attributes :isChild=true>
-    <attribute name="label" type="string" :parentNames="['no_results', 'button']" :isChild=true>
-      Button label.
-    </attribute>
-    <attribute name="link" type="string" :parentNames="['no_results', 'button']" :isChild=true :isLast=true>
-      Button link.
-    </attribute>
-  </attributes>
+Type of coordinates. Default is `Point`.
+
 </attribute>
 
-<attribute name="message" type="string" :isChild=true :isLast=true :parentNames="['no_results']">
-Message if no results.
+<attribute name="coordinates" type="array of numbers" :parentNames="['location']" :isChild=true>
+
+Coordinates of the location. The first one is the latitude and the second one is the longitude, both expressed in [decimal degress](https://en.wikipedia.org/wiki/Decimal_degrees).
+
 </attribute>
 
 </attributes>
 </attribute>
 
-<attribute name="back_button" type="hash">
-
-Options for the back button.
-
-<attributes :isChild=true>
-<attribute name="label" type="string" :isChild=true :isLast=true :parentNames="['back_button']">
-Button label.
-</attribute>
-</attributes>
+<attribute name="name" type="string">
+Name of the location.
 </attribute>
 
-<attribute name="geolocation" type="boolean">
-Whether or not you to activate the around me feature.
-</attribute>
+<attribute name="address" type="string">
 
-<attribute name="handle" type="string">
-
-A unique identifier set by yourself. *The namespace is global for all the organizations so the* `handle` *must be unique in the global namespace.*
+Address of the location.
 
 </attribute>
 
-<attribute name="postcode_filter" type="string">
-If you want to restrain the adress to a certain Postcode.
+<attribute name="picture_url" type="string">
+Picture url to illustrate the location.
 </attribute>
 
-<attribute name="address_postfix" type="string">
-An address part which will be added automatically to the address (for example, the country)
+<attribute name="link" type="string">
+Link of the location.
 </attribute>
 
-<attribute name="address_region_bias" type="string">
-Used by Google API to restrict auto-completion proposals to a certain area.
-</attribute>
+<attribute name="extid" type="string">
 
-<attribute name="lang" type="string" :isLast=true>
-
-Language for the location. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
-Default is `en`.
+An external `id` set by yourself to identify the location on your side.
 
 </attribute>
 
-<attribute name="max_distance" type="number">
-
-Maximum distance around the locations (in meters).
-
-</attribute>
-
-<attribute name="message" type="string">
-
-Message shown on the location page.
-
-</attribute>
-
-<attribute name="title" type="string">
-
-Title on the location page.
-
-</attribute>
 </attributes>
 
 <returns title="Returns">
 
-Returns the created `location` object if a valid handle was provided, and returns an error otherwise.
+Returns the updated `location` if a valid body was provided, and returns an error otherwise.
 
 </returns>
 
@@ -539,11 +460,11 @@ Returns the created `location` object if a valid handle was provided, and return
 > CODE SAMPLE
 
 ```shell
-curl --request PUT 'https://api-dev2.vyte.in/v2/locations/5f0f64e22003d0340e2a9624' \
+curl --request PUT 'https://api-dev2.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "title": "This is my first location."
+  "name": "Mysterious place",
 }'
 ```
 
@@ -551,25 +472,21 @@ curl --request PUT 'https://api-dev2.vyte.in/v2/locations/5f0f64e22003d0340e2a96
 
 ```json light-code
 {
-  "no_results": {
-    "button": {
-      "label": "Label",
-      "link": "https://vyte.com"
-    },
-    "message": "There is no locations available."
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      33.631839,
+      27.380583
+    ]
   },
-  "back_button": {
-    "label": "Back to location"
-  },
-  "geolocation": false,
-  "_id": "5f0f64e22003d0340e2a9624",
-  "handle": "my-location",
+  "_id": "5ef202a1fe70c73e37549514",
+  "name": "Mysterious place",
+  "address": "Egypt",
+  "picture_url": "https://twistedsifter.files.wordpress.com/2014/03/desert-breath-land-art-installation-sahara-egypt-crop-circle-dast-arteam-2.jpg",
+  "link": "/exam-desert-breath",
+  "extid": "our-mysterious-meeting-place",
   "org": "5ef0cb128f284274b2361323",
-  "__v": 0,
-  "lang": "en",
-  "max_distance": 150000,
-  "message": "Find on of our locations around you for the meeting.",
-  "title": "This is my first location."
+  "locator": "5ef9f3a3993a4d632a5c73e0",
 }
 ```
 
@@ -577,7 +494,7 @@ curl --request PUT 'https://api-dev2.vyte.in/v2/locations/5f0f64e22003d0340e2a96
 
 :::::
 
-## Update a location
+## Delete a location
 
 ::::: panel
 :::: left
@@ -585,13 +502,18 @@ curl --request PUT 'https://api-dev2.vyte.in/v2/locations/5f0f64e22003d0340e2a96
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/locations HTTP/1.1
+DELETE /v2/locators/:locator_id/locations/:location_id HTTP/1.1
 ```
 
 <attributes title="Path parameters">
+<attribute name="locator_id" type="string" :required=true>
+
+The `id` of the locator.
+
+</attribute>
 <attribute name="location_id" type="string" :required=true>
 
-The `_id` of the location. Be careful, this is not the `handle` but the `_id` given by Vyte to the location.
+The `id` of the location.
 
 </attribute>
 </attributes>
@@ -600,7 +522,7 @@ The `_id` of the location. Be careful, this is not the `handle` but the `_id` gi
 
 <returns title="Returns">
 
-Returns the created `location` object if a valid handle was provided, and returns an error otherwise.
+Returns an object containing the number of row affected and the status if there is no error, and returns an error otherwise.
 
 </returns>
 
@@ -611,14 +533,17 @@ Returns the created `location` object if a valid handle was provided, and return
 > CODE SAMPLE
 
 ```shell
-curl --request DELETE 'https://api-dev2.vyte.in/v2/locations/5f0f64e22003d0340e2a9624' \
---header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+curl --request DELETE 'https://api-dev2.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
 > RESPONSE SAMPLE
 
 ```json light-code
-
+{
+  "n": 1,
+  "ok": 1
+}
 ```
 
 ::::

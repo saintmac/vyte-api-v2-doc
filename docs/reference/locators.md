@@ -12,7 +12,7 @@ You can use the `/v2/locators` endpoints to manage the locators for your organiz
   <endpoint method="get" path="/v2/locators/:handle" href="#retrieve-a-locator"/>
   <endpoint method="post" path="/v2/locators" href="#create-a-locator"/>
   <endpoint method="put" path="/v2/locators/:locator_id" href="#update-a-locator"/>
-  <endpoint method="delete" path="/v2/locators/:locator_id" href="#dekete-a-locator"/>
+  <endpoint method="delete" path="/v2/locators/:locator_id" href="#delete-a-locator"/>
 </endpoints>
 
 ::::
