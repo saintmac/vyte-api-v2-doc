@@ -11,6 +11,8 @@ To manage the `Locations` of a `Locator`, you can use the `/v2/locators/:locator
 
 :::: right
 
+> ENDPOINTS
+
 <endpoints>
   <endpoint method="get" path="/v2/locators/:locator_id/locations" href="#list-all-locations"/>
   <endpoint method="get" path="/v2/locators/:locator_id/locations/:locations_id" href="#retrieve-a-location"/>

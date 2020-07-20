@@ -7,6 +7,8 @@ You can use the `/v2/locators` endpoints to manage the locators for your organiz
 
 :::: right
 
+> ENDPOINTS
+
 <endpoints>
   <endpoint method="get" path="/v2/locators" href="#list-all-locators"/>
   <endpoint method="get" path="/v2/locators/:handle" href="#retrieve-a-locator"/>

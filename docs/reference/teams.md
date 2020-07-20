@@ -9,6 +9,8 @@ That's why you can be admin of a team whereas you are not member of the team.
 
 :::: right
 
+> ENDPOINTS
+
 <endpoints>
   <endpoint method="get" path="/v2/teams" href="#list-all-teams"/>
   <endpoint method="get" path="/v2/teams/:team_id" href="#retrieve-a-team"/>
