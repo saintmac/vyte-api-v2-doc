@@ -254,10 +254,10 @@ Information about third-party. Useful if the event was created thanks to the thi
 
 ## List all events
 
-List all the events for which the administrator belongs to your organization.
-
 :::::: panel
 ::::: left
+
+List all the events for which the administrator belongs to your organization.
 
 > ENDPOINT <small>Authorization `apiKey`</small>
 

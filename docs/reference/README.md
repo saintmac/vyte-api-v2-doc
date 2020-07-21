@@ -1,15 +1,45 @@
 # Introduction
 
-> This page will help you get started with Vyte. You'll be up and running in a minute! The API will let you integrate Vyte into your application.
+::::: panel
 
-The API provides useful functionalities such as:
+:::: left
+We provide a full [REST API](https://fr.wikipedia.org/wiki/Representational_state_transfer) to allow developpers to integate Vyte into their application.
 
-1. Create events in Vyte directly from your app
-  1. You will first need to register as a "third party" app in Vyte (through an endpoint)
-  2. Then you'll be able to link to Vyte to schedule an event with all the members of a team, project, task (we call that a "group")
-  3. You'll be able to retrieve all the events related to that group
-2. Link to a Vyte page and pass parameters in the URL
+::: warning
+The V2 of the API is in beta mode. Feel free to contact us via <intercom-button /> or via email at [support@vyte.in](support@vyte.in) if you find a problem or have any suggestions.
+:::
 
-## Vyteme events
+::::
 
-lorem
+:::: right
+> BASE URL
+
+``` url
+https://api.vyte.in/
+```
+
+::::
+
+:::::
+
+## Authentification
+
+::::: panel
+
+:::: left
+We use API keys to authenticate requests. Each organization has one API key that you can find on your [Vyte Dashboard](https://www.vyte.in/settings/organization/setup#api_key).
+
+::::
+
+:::: right
+> REQUEST EXAMPLE
+
+``` shell
+curl \
+--request GET 'https://api.vyte.in/v2/events' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+```
+
+::::
+
+:::::

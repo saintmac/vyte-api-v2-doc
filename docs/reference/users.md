@@ -469,8 +469,6 @@ curl --location --request POST 'https://api.vyte.in/v2/users' \
 --header 'Authorization: apiKey' \
 ```
 
-:::
-
 > RESPONSE SAMPLE
 
 ```json

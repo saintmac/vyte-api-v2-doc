@@ -21,6 +21,8 @@
     "vuepress-plugin-mermaidjs": "^1.5.1"
   },
   "dependencies": {
+    "vuepress-intercom": "^1.0.3",
+    "vuepress-plugin-code-copy": "^1.0.6",
     "vuepress-plugin-element-tabs": "^0.2.8"
   }
 }
