@@ -1,6 +1,8 @@
-# Getting started with Vyte API
+# Getting started
 
 In this guide you will learn how to get started with Vyte API. At the end, you will have created an organization, retrieved your API key and make your first request to test authentication.
+
+[[toc]]
 
 ::: warning
 
@@ -8,13 +10,13 @@ We remind here that the use of the Vyte API is reserved to pro members. Please r
 
 :::
 
-## Create you organization
+## Create an organization
 
 To be able to use the Vyte API, you have to create first an organization.
 
 To do this, go to this page [https://www.vyte.in/settings/organization/setup](https://www.vyte.in/settings/organization/setup), give a name to your organization and click on **Create my organization**.
 
-![Create an organization](/assets/img/create-organization.png)
+<img :src="$withBase('/assets/img/create-organization.png')" alt="Create an organization" class="medium-zoom-image">
 
 ## Retrieve your API key
 
@@ -22,7 +24,7 @@ Once your organization is created, you can now access your Vyte API key.
 
 > This key is essential to use our API since all requests must be authenticated using it.
 
-![Retrieve API key](/assets/img/retrieve-key.png)
+<img :src="$withBase('/assets/img/retrieve-key.png')" alt="Retrieve API key" class="medium-zoom-image">
 
 ## Test your API key
 

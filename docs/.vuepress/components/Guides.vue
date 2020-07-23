@@ -8,7 +8,7 @@
       :key="index"
       class="guide"
     >
-      <img :src="`/assets/img/${guide.image}.svg`" alt="Vyte API - Webhooks">
+      <img :src="$withBase(`/assets/img/${guide.image}.svg`)" alt="Vyte API - Webhooks">
       <h2>{{ guide.title }}</h2>
       <p>{{ guide.details }}</p>
       <p v-if="guide.path"><a :href="`/guides/${guide.path}`">See the guide →</a></p>
@@ -45,7 +45,7 @@
   text-align center
   padding 1.2rem 0.5rem
   margin 1.2rem 0
-  min-height 430px
+  min-height 400px
 
   img
     border 0
@@ -59,10 +59,11 @@
     border-bottom none
     padding-bottom 0
     color lighten($textColor, 10%)
-    height 30px
+    height 2.5rem
   p
     color lighten($textColor, 25%)
     font-size 0.8rem
+    height: 2.5rem
 
 
 </style>

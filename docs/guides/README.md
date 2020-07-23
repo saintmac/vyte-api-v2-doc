@@ -6,7 +6,8 @@ guides:
   path: getting-started
   image: api
 - title: Use Vyte API to create and manage booking pages
-  details:
+  details: Create your first user and set up his Vyte Page
+  path: create-and-manage-booking-pages
   image: api-scheduling
 - title: Scheduling API for 1-to-1 bookings
   details:

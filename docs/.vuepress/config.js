@@ -67,7 +67,8 @@ module.exports = {
           collapsable: true,
           children: [
             '',
-            'getting-started'
+            'getting-started',
+            'create-and-manage-booking-pages'
           ]
         }
       ],
