@@ -1,4 +1,5 @@
 ---
+pageClass: reference-page
 guides:
 - title: Getting started with Vyte API
   details: This page will help you get started with Vyte. You'll be up and running in a minute!
@@ -30,5 +31,7 @@ guides:
 # Introduction
 
 These guides will help you get started with Vyte. You'll be up and running in a minute! The API will let you integrate Vyte into your application.
+
+> If you need information about the available endpoints, have a look on the [API Reference](/reference).
 
 <Guides/>

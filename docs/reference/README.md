@@ -1,3 +1,7 @@
+---
+pageClass: reference-page
+---
+
 # Introduction
 
 ::::: panel

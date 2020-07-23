@@ -1,3 +1,7 @@
+---
+pageClass: reference-page
+---
+
 # Errors
 
 The Vyte API uses the following error codes:

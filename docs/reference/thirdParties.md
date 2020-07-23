@@ -1,3 +1,7 @@
+---
+pageClass: reference-page
+---
+
 # Third-parties
 
 ::::: panel

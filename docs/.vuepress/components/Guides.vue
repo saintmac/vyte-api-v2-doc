@@ -30,7 +30,6 @@
 <style lang="stylus" scoped>
 
 .guides
-  margin-top 2.5rem
   display flex
   flex-wrap wrap
   align-items flex-start
