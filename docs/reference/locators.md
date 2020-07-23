@@ -620,7 +620,7 @@ curl --request PUT 'https://api-dev2.vyte.in/v2/locators/5f0f64e22003d0340e2a962
 
 :::::
 
-## Update a locator
+## Delete a locator
 
 ::::: panel
 :::: left
@@ -628,7 +628,7 @@ curl --request PUT 'https://api-dev2.vyte.in/v2/locators/5f0f64e22003d0340e2a962
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/locators HTTP/1.1
+DELETE /v2/locators/:locator_id HTTP/1.1
 ```
 
 <attributes title="Path parameters">
@@ -643,7 +643,7 @@ The `_id` of the locator. Be careful, this is not the `handle` but the `_id` giv
 
 <returns title="Returns">
 
-Returns the created `Locator` object if a valid handle was provided, and returns an error otherwise.
+Returns an object containing the number of row affected and the status if there is no error, and returns an error otherwise.
 
 </returns>
 
@@ -661,7 +661,10 @@ curl --request DELETE 'https://api-dev2.vyte.in/v2/locators/5f0f64e22003d0340e2a
 > RESPONSE SAMPLE
 
 ```json light-code
-
+{
+  "n": 1,
+  "ok": 1
+}
 ```
 
 ::::

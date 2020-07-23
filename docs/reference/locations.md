@@ -18,7 +18,7 @@ To manage the `Locations` of a `Locator`, you can use the `/v2/locators/:locator
   <endpoint method="get" path="/v2/locators/:locator_id/locations/:locations_id" href="#retrieve-a-location"/>
   <endpoint method="post" path="/v2/locators/:locator_id/locations" href="#create-a-location"/>
   <endpoint method="put" path="/v2/locators/:locator_id/locations/:location_id" href="#update-a-location"/>
-  <endpoint method="delete" path="/v2/locators/:locator_id/locations/:location_id" href="#dekete-a-location"/>
+  <endpoint method="delete" path="/v2/locators/:locator_id/locations/:location_id" href="#delete-a-location"/>
 </endpoints>
 
 ::::

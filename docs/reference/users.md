@@ -807,7 +807,8 @@ Exchange password.
 
 <returns title="Returns">
 
-An object containing a `user` key whith the `User` object. If 
+An object containing a `user` key whith the `User` object. If `finish_signup_with` was set to `true`, the link 
+the link to complete the registration is also returned.
 
 </returns>
 
@@ -826,147 +827,49 @@ curl --location --request POST 'https://api.vyte.in/v2/users' \
 
 ```json light-code
 {
+  "finish_signup_with": "email",
+  "link": "https://vyte.in/signup/email/finish?email=jean.dupont%40example.com&token=v3ucsf76e6477unf65ty4809mvlz9ctn06shl5q0xr",
   "user": {
-    "organization": "yourVyteOrganizationId",
-    "finish_signup_with": "email",
-    "user": {
-      "email": "jean.dupont@acme.fr",
-      "first_name": "Jean",
-      "last_name": "Dupont",
-      "language": "fr",
-      "timezone": "Europe/Paris",
-      "picture_url": "https://www.example.com/picture/jean",
-      "account": {
-        "organization": {
-          "extid": "userIdInThirdPartyAppDatabase"
-        }
-      }
+    "calendars": {
+      "google": false,
+      "office365": false,
+      "exchange": false,
+      "icloud": false,
+      "caldav": false
     },
-    "login": {
-      "credentials": {
-        "username": "jean.dupont@example.com",
-        "password": "youllneverguessit"
-      }
+    "modules": {
+      "brand": false,
+      "assistant": false,
+      "vyteme": false,
+      "vyteme_pro": false,
+      "availabilities": false,
+      "billing": false,
+      "group_pro": false,
+      "team": false
     },
-    "availability": {
-      "timezone": "Europe/Paris",
-      "today_as_busy": false,
-      "past_as_busy": true,
-      "days_after_as_busy": 60,
-      "buffer_before": 0,
-      "buffer_after": 0,
-      "all_day_busy": true,
-      "days": {
-        "monday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T12:30"
-            },
-            {
-              "start_time": "2018-01-01T14:00",
-              "end_time": "2018-01-01T18:30"
-            }
-          ]
-        },
-        "tuesday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T12:30"
-            },
-            {
-              "start_time": "2018-01-01T14:00",
-              "end_time": "2018-01-01T18:30"
-            }
-          ]
-        },
-        "wednesday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T17:30"
-            }
-          ]
-        },
-        "thursday": {
-          "enabled": false
-        },
-        "friday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T17:30"
-            }
-          ]
-        },
-        "saturday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T17:30"
-            }
-          ]
-        },
-        "sunday": {
-          "enabled": false
-        }
-      }
+    "account": {
+      "organization": {
+        "name": "MyOrganization",
+        "id": "5ef0cb128f284274b2361323",
+        "extid": "userIdInThirdPartyAppDatabase"
+      },
+      "plan": "pro",
+      "app_url": "https://dellinger.vyte.in"
     },
-    "vyteme": {
-      "nickname": "appName-userIdInThidPartyAppDatabase",
-      "message": "Bienvenue sur ma page de RDV",
-      "custom": {
-        "auto_message": "Merci d'avoir pris RDV avec moi, j'ai hate de vous rencontrer.",
-        "auto_title": "RDV {{invitee}} / {{me}}",
-        "ask_phone": true,
-        "ask_company": false,
-        "block_new_invitee": false,
-        "duration": 30,
-        "set_lang": true,
-        "enable_api": true,
-        "fixed_lang": "fr",
-        "set_timezone": true,
-        "fixed_timezone": "Europe/Paris",
-        "event_hide_decline": false,
-        "hide_places": false,
-        "hide_support": true,
-        "hide_title": true,
-        "forbid_add_places": true,
-        "min_dates": 1,
-        "one_slot": true,
-        "auto_confirm": true,
-        "invite_title": "Book a short appointment with",
-        "redirect_url": "https://www.example.com/thanks-for-booking",
-        "fixed_places": [
-          {
-            "name": "Office",
-            "address": "Office address",
-            "source": "appName",
-            "source_id": "placeIdInThirdPartyAppDatabase"
-          },
-          {
-            "name": "Phone",
-            "address": "0102030405"
-          }
-        ]
-      }
-    },
-    "calendars": [
-      {
-        "source": "exchange",
-        "credentials": {
-          "server": "mail.exchangeserverdomain.com",
-          "username": "calendarUserName",
-          "password": "calendarPassword"
-        }
-      }
+    "emails": [
+      "jean.dupont@example.com"
     ],
+    "_id": "5f194e7dc1ac5d1c5cfc00dc",
+    "first_name": "Jean",
+    "last_name": "Dupont",
+    "language": "fr",
+    "timezone": "Europe/Paris",
+    "picture_url": "https://www.example.com/picture/jean",
+    "signedup_with": "api",
+    "full_name": "Jean Dupont",
+    "updatedAt": "2020-07-23T08:46:53.639Z",
+    "createdAt": "2020-07-23T08:46:53.639Z",
+    "__v": 0
   }
 }
 ```
