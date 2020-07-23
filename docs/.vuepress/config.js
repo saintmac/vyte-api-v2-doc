@@ -52,11 +52,25 @@ module.exports = {
     logo: '/logo.svg',
     nav: [
       {
+        text: 'Guides',
+        link: '/guides/',
+      },
+      {
         text: 'Api Reference',
         link: '/reference/',
       },
     ],
     sidebar: {
+      '/guides/' : [
+        {
+          title: 'API Guides',
+          collapsable: true,
+          children: [
+            '',
+            'getting-started'
+          ]
+        }
+      ],
       '/reference/': [
         {
           title: 'API Reference',
