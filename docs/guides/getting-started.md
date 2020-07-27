@@ -32,12 +32,13 @@ Now you will be able to perform your first request. To stay simple, we will just
 
 To do this, just make an HTTP request to `http://api.vyte.in/v2/auth/test` and authenticate the request with your API key :
 
-```shell
-curl --location --request GET 'http://api.vyte.in/v2/auth/test' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
-```
+<iframe
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=66px&dsblur=68px&wc=true&wa=true&pv=27px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520'http%253A%252F%252Fapi.vyte.in%252Fv2%252Fauth%252Ftest'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C"
+  style="width: 100%; height: 200px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+</iframe>
 
-If everything worked well, the response should be an `Organization` object :
+If everything worked well, the response should be an `Organization` object like this:
 
 ```json light-code
 {
@@ -58,3 +59,8 @@ If everything worked well, the response should be an `Organization` object :
   "__v": 1,
 }
 ```
+## Conclusion
+
+You're now ready to use the Vyte API.
+
+In the following guides, you will learn how to use the API to automate your workflow. For example, the next guide will teach you how to create your first user and then set up his Vyte Page.

@@ -99,6 +99,7 @@ module.exports = {
     '@vuepress/plugin-medium-zoom',
     'vuepress-plugin-element-tabs',
     'vuepress-plugin-mermaidjs',
+    'vuepress-plugin-export',
     [require('vuepress-intercom'), { appId: 'sqoiibtg' }],
     [
       'vuepress-plugin-container',
@@ -124,5 +125,8 @@ module.exports = {
         after: '</div>',
       },
     ],
-  ]
+  ],
+  markdown: {
+    plugins: []
+  }
 }

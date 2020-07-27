@@ -631,7 +631,8 @@ Whether or not the user must the user must provide their company.
 
 <attribute name="block_new_invitee" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-**A remplir**
+If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events. 
+Defaults to `false`.
 
 </attribute>
 
@@ -673,7 +674,8 @@ Fixed timezone expressed according to [TZ database name](https://en.wikipedia.or
 
 <attribute name="event_hide_decline" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-**A remplir**
+If enabled, it hides the Decline button on the event page of events booked from that Vyte booking page.
+Defaults to `false`.
 
 </attribute>
 
