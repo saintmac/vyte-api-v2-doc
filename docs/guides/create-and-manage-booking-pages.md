@@ -270,7 +270,7 @@ Whether or not the user must the user must provide their company.
 
 <attribute name="block_new_invitee" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events. 
+If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events.
 Defaults to `false`.
 
 </attribute>
