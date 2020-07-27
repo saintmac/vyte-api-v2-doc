@@ -432,4 +432,3 @@ Congrats! Our first Vyte Page is created :clap:
 This page is now accessible at [https://www.vyte.in/jonh-doe-acme](https://www.vyte.in/jonh-doe-acme) *(don't forget to replace the nickname with your own one)* and will look like this:
 
 <img :src="$withBase('/assets/img/vyte-page.png')" alt="Retrieve API key" class="medium-zoom-image">
-

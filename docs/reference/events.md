@@ -1,5 +1,7 @@
 ---
-pageClass: reference-page
+{
+  "pageClass": "reference-page"
+}
 ---
 
 # Events

@@ -59,6 +59,7 @@ If everything worked well, the response should be an `Organization` object like 
   "__v": 1,
 }
 ```
+
 ## Conclusion
 
 You're now ready to use the Vyte API.
