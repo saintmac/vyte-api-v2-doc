@@ -2,7 +2,7 @@
 home: true
 heroText: Vyte API
 heroImage: /vyte-api.svg
-tagline: Explore our guides and reference to integrate Vyte in your app.
+tagline: Explore our guides and reference to integrate Vyte.
 actionText: See our guides →
 actionLink: /guides/
 # features:

@@ -8,7 +8,7 @@ guides:
 - title: Use Vyte API to create and manage booking pages
   details: Create your first user and set up his Vyte Page
   path: create-and-manage-booking-pages
-  image: api-scheduling
+  image: api-team
 - title: Scheduling API for 1-to-1 bookings
   details:
   image: api-1to1
@@ -20,7 +20,7 @@ guides:
   image: api-team
 - title: Using team admins for notifications and event management
   details:
-  image: api-team
+  image: api-webhooks
 - title: Set up Webhooks to manage scheduling notifications
   details:
   image: api-webhooks

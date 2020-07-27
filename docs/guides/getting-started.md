@@ -16,7 +16,7 @@ To be able to use the Vyte API, you have to create first an organization.
 
 To do this, go to this page [https://www.vyte.in/settings/organization/setup](https://www.vyte.in/settings/organization/setup), give a name to your organization and click on **Create my organization**.
 
-<img :src="$withBase('/assets/img/create-organization.png')" alt="Create an organization" class="medium-zoom-image">
+<asset-image srcHtml="img/create-organization.png" altHtml="Create an organization" titleHtml="Create an organization"/>
 
 ## Retrieve your API key
 
@@ -24,7 +24,7 @@ Once your organization is created, you can now access your Vyte API key.
 
 > This key is essential to use our API since all requests must be authenticated using it.
 
-<img :src="$withBase('/assets/img/retrieve-key.png')" alt="Retrieve API key" class="medium-zoom-image">
+<asset-image srcHtml="img/retrieve-key.png" altHtml="Retrieve API key" titleHtml="Retrieve API key"/>
 
 ## Test your API key
 
