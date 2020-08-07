@@ -26,8 +26,8 @@ The response will include a nextAvailability object formatted as in the example.
 > ENDPOINTS
 
 <endpoints>
-  <endpoint method="get" path="/v2/slots" href="#list-all-events"></endpoint>
-  <endpoint method="get" path="/v2/slots/days" href="#create-an-event"></endpoint>
+  <endpoint method="get" path="/v2/slots" href="#list-all-free-slots"></endpoint>
+  <endpoint method="get" path="/v2/slots/days" href="#list-all-free-slots-grouped-by-days"></endpoint>
 </endpoints>
 ::::
 
