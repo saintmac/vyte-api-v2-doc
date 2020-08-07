@@ -315,7 +315,7 @@ Returns an array of `User` objects if there is some existing users. Otherwise, r
 > CODE SAMPLE
 
 ```shell
-curl --location --request GET 'https://api.vyte.in/v2/users' \
+curl  --request GET 'https://api.vyte.in/v2/users' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
@@ -495,7 +495,7 @@ Password for the user.
 To setup the availabilities of the user, just as they would set them on [https://www.vyte.in/pages/1#availabilities](https://www.vyte.in/pages/1#availabilities).
 
 <attributes :isChild=true>
-<attribute name="today" type="date" :parentNames="['availability']" :isChild=true>
+<attribute name="timezone" type="string" :parentNames="['availability']" :isChild=true>
 
 The user timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
@@ -824,7 +824,7 @@ An object containing a `user` key whith the `User` object. If `finish_signup_wit
 > CODE SAMPLE
 
 ```shell
-curl --location --request POST 'https://api.vyte.in/v2/users' \
+curl  --request POST 'https://api.vyte.in/v2/users' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -1367,7 +1367,7 @@ An object containing a `user` key whith the `User` object. If `finish_signup_wit
 > CODE SAMPLE
 
 ```shell
-curl --location --request PUT 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
+curl  --request PUT 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{

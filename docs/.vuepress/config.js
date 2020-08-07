@@ -93,6 +93,7 @@ module.exports = {
           collapsable: true,
           children: [
             '',
+            'availabilities',
             'events',
             'locations',
             'locators',

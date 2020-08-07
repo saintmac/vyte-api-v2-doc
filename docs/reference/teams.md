@@ -278,7 +278,7 @@ Returns the created `Team` object if a valid body was provided, and returns an e
 :::: right
 
 ```shell
-curl --location --request POST 'https://api.vyte.in/v2/teams' \
+curl  --request POST 'https://api.vyte.in/v2/teams' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -383,7 +383,7 @@ Returns the updated `Team` object if a valid body was provided, and returns an e
 :::: right
 
 ```shell
-curl --location --request PUT 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
+curl  --request PUT 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{

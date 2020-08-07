@@ -231,7 +231,7 @@ Id of the place in your own database/source.
 
 ```json light-code
 {
-  "nickname": "jonh-doe-acme",
+  "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
   "belongs_to": "5f1b018dc1ac5dc46efc0139",
   "custom": {
@@ -318,7 +318,7 @@ curl \
 
 ```json light-code
 {
-  "nickname": "jonh-doe-acme",
+  "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
@@ -570,7 +570,7 @@ Id of the place in your own database/source.
 
 <returns title="Returns">
 
-The created `Vyteme` object if no error occurred
+The created `Vyteme` object if no error occurred.
 
 </returns>
 :::::
@@ -585,7 +585,7 @@ curl \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "nickname": "jonh-doe-acme",
+  "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
@@ -629,7 +629,7 @@ curl \
 
 ```json light-code
 {
-  "nickname": "jonh-doe-acme",
+  "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
@@ -887,7 +887,7 @@ Id of the place in your own database/source.
 
 <returns title="Returns">
 
-The updated `Vyteme` object if no error occurred
+The updated `Vyteme` object if no error occurred.
 
 </returns>
 :::::
@@ -898,11 +898,11 @@ The updated `Vyteme` object if no error occurred
 
 ```shell
 curl \
---request POST 'https://api.vyte.in/v2/vytemes' \
+--request PUT 'https://api.vyte.in/v2/vytemes/john-doe-acme' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "nickname": "jonh-doe-acme",
+  "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
@@ -946,7 +946,7 @@ curl \
 
 ```json light-code
 {
-  "nickname": "jonh-doe-acme",
+  "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
