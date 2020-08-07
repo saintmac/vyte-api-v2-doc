@@ -631,7 +631,7 @@ Whether or not the user must the user must provide their company.
 
 <attribute name="block_new_invitee" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events. 
+If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events.
 Defaults to `false`.
 
 </attribute>
@@ -672,10 +672,10 @@ Fixed timezone expressed according to [TZ database name](https://en.wikipedia.or
 
 </attribute>
 
-<attribute name="event_hide_decline" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="event_hide_decline" type="number" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-If enabled, it hides the Decline button on the event page of events booked from that Vyte booking page.
-Defaults to `false`.
+Allow you to set how long (in hours) before the begining of the event the decline button will be hidden.
+Ex: if set to 24, the decline button will be hidden on the event page 24h before the confirmed date of the event.
 
 </attribute>
 
@@ -813,8 +813,7 @@ Exchange password.
 
 <returns title="Returns">
 
-An object containing a `user` key whith the `User` object. If `finish_signup_with` was set to `true`, the link 
-the link to complete the registration is also returned.
+An object containing a `user` key whith the `User` object. If `finish_signup_with` was set to `true`, the link to complete the registration is also returned.
 
 </returns>
 
@@ -825,16 +824,37 @@ the link to complete the registration is also returned.
 > CODE SAMPLE
 
 ```shell
-curl --location --request POST 'https://api.vyte.in/v2/users' \
---header 'Authorization: apiKey' \
+curl --location --request POST 'https://api-dev2.vyte.in/v2/users' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "organization": "5f198da1c1ac5d1a30fc00f3",
+  "user": {
+    "email": "john.doe@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "language": "en",
+    "timezone": "Europe/London",
+    "picture_url": "https://www.example.com/picture/jean",
+    "account": {
+      "organization": {
+        "extid": "userIdInThirdPartyAppDatabase"
+      }
+    }
+  },
+  "login": {
+    "credentials": {
+      "username": "john.doe@example.com",
+      "password": "youllneverguessit"
+    }
+  }
+}'
 ```
 
 > RESPONSE SAMPLE
 
 ```json light-code
 {
-  "finish_signup_with": "email",
-  "link": "https://vyte.in/signup/email/finish?email=jean.dupont%40example.com&token=v3ucsf76e6477unf65ty4809mvlz9ctn06shl5q0xr",
   "user": {
     "calendars": {
       "google": false,
@@ -855,26 +875,26 @@ curl --location --request POST 'https://api.vyte.in/v2/users' \
     },
     "account": {
       "organization": {
-        "name": "MyOrganization",
-        "id": "5ef0cb128f284274b2361323",
+        "name": "ACME",
+        "id": "5f198da1c1ac5d1a30fc00f3",
         "extid": "userIdInThirdPartyAppDatabase"
       },
       "plan": "pro",
-      "app_url": "https://dellinger.vyte.in"
+      "app_url": "https://my-page.vyte.in"
     },
     "emails": [
-      "jean.dupont@example.com"
+      "john.doe@example.com"
     ],
-    "_id": "5f194e7dc1ac5d1c5cfc00dc",
-    "first_name": "Jean",
-    "last_name": "Dupont",
-    "language": "fr",
-    "timezone": "Europe/Paris",
+    "_id": "5f2d28fb1e0662e70071d46b",
+    "first_name": "John",
+    "last_name": "Doe",
+    "language": "en",
+    "timezone": "Europe/London",
     "picture_url": "https://www.example.com/picture/jean",
     "signedup_with": "api",
-    "full_name": "Jean Dupont",
-    "updatedAt": "2020-07-23T08:46:53.639Z",
-    "createdAt": "2020-07-23T08:46:53.639Z",
+    "full_name": "John Doe",
+    "updatedAt": "2020-08-07T10:12:11.260Z",
+    "createdAt": "2020-08-07T10:12:11.260Z",
     "__v": 0
   }
 }
@@ -884,47 +904,17 @@ curl --location --request POST 'https://api.vyte.in/v2/users' \
 
 :::::
 
-## Batch create users
-
-::::: panel
-:::: left
-
-> ENDPOINT <small>Authorization `apiKey`</small>
-
-```http
-POST /v2/users/batch HTTP/1.1
-```
-
-We provide a way to batch create users. It works almost in the same way that the `/api/v2` endpoint. 
-
-::::
-
-:::: right
-::: details CODE SAMPLE
-
-```shell
-curl --location --request POST 'https://api.vyte.in/v2/users/batch' \
---header 'Authorization: apiKey' \
-```
-
-:::
-
-::: details RESPONSE SAMPLE
-
-```json
-{
-
-}
-```
-:::
-::::
-
-:::::
-
 ## Update a user
 
 ::::: panel
 :::: left
+
+::: warning
+
+Please note that the POST endpoint is idempotent. To perform an idempotent request, you can pass either the user `id` or the `extid` you gave during creation.
+
+But, to be more RESTful, we also provide a PUT endpoint to update the user.
+:::
 
 > ENDPOINT <small>Authorization `apiKey`</small>
 
@@ -1184,7 +1174,8 @@ Whether or not the user must the user must provide their company.
 
 <attribute name="block_new_invitee" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-**A remplir**
+If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events.
+Defaults to `false`.
 
 </attribute>
 
@@ -1224,9 +1215,10 @@ Fixed timezone expressed according to [TZ database name](https://en.wikipedia.or
 
 </attribute>
 
-<attribute name="event_hide_decline" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="event_hide_decline" type="number" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-**A remplir**
+Allow you to set how long (in hours) before the begining of the event the decline button will be hidden.
+Ex: if set to 24, the decline button will be hidden on the event page 24h before the confirmed date of the event.
 
 </attribute>
 
@@ -1364,7 +1356,7 @@ Exchange password.
 
 <returns title="Returns">
 
-An object containing a `user` key whith the `User` object. If 
+An object containing a `user` key whith the `User` object. If `finish_signup_with` was set to `true`, the link to complete the registration is also returned.
 
 </returns>
 
@@ -1375,8 +1367,15 @@ An object containing a `user` key whith the `User` object. If
 > CODE SAMPLE
 
 ```shell
-curl --location --request PUT 'https://api.vyte.in/v2/users/:user_id' \
---header 'Authorization: apiKey' \
+curl --location --request PUT 'https://api-dev2.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "organization": "5f198da1c1ac5d1a30fc00f3",
+  "user": {
+    "last_name": "Snow"
+  }
+}'
 ```
 
 > RESPONSE SAMPLE
@@ -1384,187 +1383,50 @@ curl --location --request PUT 'https://api.vyte.in/v2/users/:user_id' \
 ```json light-code
 {
   "user": {
-    "organization": "yourVyteOrganizationId",
-    "finish_signup_with": "email",
-    "user": {
-      "email": "jean.dupont@acme.fr",
-      "first_name": "Jean",
-      "last_name": "Dupont",
-      "language": "fr",
-      "timezone": "Europe/Paris",
-      "picture_url": "https://www.example.com/picture/jean",
-      "account": {
-        "organization": {
-          "extid": "userIdInThirdPartyAppDatabase"
-        }
-      }
+    "calendars": {
+      "google": false,
+      "office365": false,
+      "exchange": false,
+      "icloud": false,
+      "caldav": false
     },
-    "login": {
-      "credentials": {
-        "username": "jean.dupont@example.com",
-        "password": "youllneverguessit"
-      }
+    "modules": {
+      "brand": false,
+      "assistant": false,
+      "vyteme": false,
+      "vyteme_pro": false,
+      "availabilities": false,
+      "billing": false,
+      "group_pro": false,
+      "team": false
     },
-    "availability": {
-      "timezone": "Europe/Paris",
-      "today_as_busy": false,
-      "past_as_busy": true,
-      "days_after_as_busy": 60,
-      "buffer_before": 0,
-      "buffer_after": 0,
-      "all_day_busy": true,
-      "days": {
-        "monday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T12:30"
-            },
-            {
-              "start_time": "2018-01-01T14:00",
-              "end_time": "2018-01-01T18:30"
-            }
-          ]
-        },
-        "tuesday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T12:30"
-            },
-            {
-              "start_time": "2018-01-01T14:00",
-              "end_time": "2018-01-01T18:30"
-            }
-          ]
-        },
-        "wednesday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T17:30"
-            }
-          ]
-        },
-        "thursday": {
-          "enabled": false
-        },
-        "friday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T17:30"
-            }
-          ]
-        },
-        "saturday": {
-          "enabled": true,
-          "slots": [
-            {
-              "start_time": "2018-01-01T10:00",
-              "end_time": "2018-01-01T17:30"
-            }
-          ]
-        },
-        "sunday": {
-          "enabled": false
-        }
-      }
+    "account": {
+      "organization": {
+        "name": "ACME",
+        "id": "5f198da1c1ac5d1a30fc00f3",
+        "extid": "userIdInThirdPartyAppDatabase"
+      },
+      "plan": "pro",
+      "app_url": "https://my-page.vyte.in"
     },
-    "vyteme": {
-      "nickname": "appName-userIdInThidPartyAppDatabase",
-      "message": "Bienvenue sur ma page de RDV",
-      "custom": {
-        "auto_message": "Merci d'avoir pris RDV avec moi, j'ai hate de vous rencontrer.",
-        "auto_title": "RDV {{invitee}} / {{me}}",
-        "ask_phone": true,
-        "ask_company": false,
-        "block_new_invitee": false,
-        "duration": 30,
-        "set_lang": true,
-        "enable_api": true,
-        "fixed_lang": "fr",
-        "set_timezone": true,
-        "fixed_timezone": "Europe/Paris",
-        "event_hide_decline": false,
-        "hide_places": false,
-        "hide_support": true,
-        "hide_title": true,
-        "forbid_add_places": true,
-        "min_dates": 1,
-        "one_slot": true,
-        "auto_confirm": true,
-        "invite_title": "Book a short appointment with",
-        "redirect_url": "https://www.example.com/thanks-for-booking",
-        "fixed_places": [
-          {
-            "name": "Office",
-            "address": "Office address",
-            "source": "appName",
-            "source_id": "placeIdInThirdPartyAppDatabase"
-          },
-          {
-            "name": "Phone",
-            "address": "0102030405"
-          }
-        ]
-      }
-    },
-    "calendars": [
-      {
-        "source": "exchange",
-        "credentials": {
-          "server": "mail.exchangeserverdomain.com",
-          "username": "calendarUserName",
-          "password": "calendarPassword"
-        }
-      }
+    "emails": [
+      "john.doe@example.com"
     ],
+    "_id": "5f2d28fb1e0662e70071d46b",
+    "first_name": "John",
+    "last_name": "Snow",
+    "language": "en",
+    "timezone": "Europe/London",
+    "picture_url": "https://www.example.com/picture/jean",
+    "signedup_with": "api",
+    "full_name": "John Snow",
+    "updatedAt": "2020-08-07T10:12:11.260Z",
+    "createdAt": "2020-08-07T10:12:11.260Z",
+    "__v": 0
   }
 }
 ```
 
-::::
-
-:::::
-
-## Batch update users
-
-::::: panel
-:::: left
-
-> ENDPOINT <small>Authorization `apiKey`</small>
-
-```http
-PUT /v2/users HTTP/1.1
-```
-
-We provide a way to batch create users. It works almost in the same way that the `/api/v2` endpoint. 
-
-::::
-
-:::: right
-::: details CODE SAMPLE
-
-```shell
-curl --location --request PUT 'https://api.vyte.in/v2/users/batch' \
---header 'Authorization: apiKey' \
-```
-
-:::
-
-::: details RESPONSE SAMPLE
-
-```json
-{
-
-}
-```
-:::
 ::::
 
 :::::
