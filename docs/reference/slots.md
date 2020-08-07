@@ -14,7 +14,7 @@ You can use the `/v2/slots` endpoints to manage the events for your organization
 ::: warning
 If the user you are requesting available slots for has no availability in the requested time frame, Vyte’s API will tell you their next availability.
 
-In this case you will have slots: [] if you’ve used /slots (1.1) or days: {} for /slots/days (1.2)
+In this case you will have `slots: []` if you’ve used [/slots](#list-all-free-slots) or `days: {}` for [/slots/days](#list-all-free-slots-grouped-by-days).
 
 The response will include a nextAvailability object formatted as in the example.
 :::
