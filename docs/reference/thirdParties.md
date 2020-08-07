@@ -42,7 +42,7 @@ GET /v2/third-parties HTTP/1.1
 
 ```shell
 curl --location --request GET 'https://api.vyte.in/v2/third-parties' \
---header 'Authorization: apiKey' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
 :::
@@ -77,7 +77,7 @@ POST /v2/third-parties HTTP/1.1
 
 ```shell
 curl --location --request POST 'https://api.vyte.in/v2/third-parties' \
---header 'Authorization: apiKey' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
 :::
@@ -112,7 +112,7 @@ GET /v2/third-parties/token HTTP/1.1
 
 ```shell
 curl --location --request GET 'https://api.vyte.in/v2/third-parties/token' \
---header 'Authorization: apiKey' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
 :::

@@ -825,7 +825,7 @@ An object containing a `user` key whith the `User` object. If `finish_signup_wit
 
 ```shell
 curl --location --request POST 'https://api.vyte.in/v2/users' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "organization": "5f198da1c1ac5d1a30fc00f3",
@@ -1368,7 +1368,7 @@ An object containing a `user` key whith the `User` object. If `finish_signup_wit
 
 ```shell
 curl --location --request PUT 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "organization": "5f198da1c1ac5d1a30fc00f3",

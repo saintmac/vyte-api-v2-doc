@@ -87,7 +87,7 @@ An object with a `slots` array containing all the free slots.
 
 ```shell
 curl --request GET 'https://api.vyte.in/v2/slots?duration=30&emails=john.doe@example.com&from=2020-09-01&to=2020-09-02' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
 > RESPONSE SAMPLE
@@ -249,7 +249,7 @@ An object with a `slots` array containing all the free slots.
 
 ```shell
 curl --request GET 'https://api.vyte.in/v2/slots/days?duration=30&emails=john.doe@example.com&from=2020-09-01&to=2020-09-02' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
 > RESPONSE SAMPLE
