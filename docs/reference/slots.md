@@ -9,7 +9,7 @@
 :::::panel
 
 :::: left
-You can use the `/v2/slots` endpoints to manage the events for your organization.
+You can use the `/v2/slots` endpoints to get the free slots of a Vyte user.
 
 ::: warning
 If the user you are requesting available slots for has no availability in the requested time frame, Vyte’s API will tell you their next availability.

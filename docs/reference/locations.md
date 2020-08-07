@@ -154,7 +154,7 @@ Returns an array of `location` objects if there is some existing locations. Othe
 > CODE SAMPLE
 
 ```shell
-curl --request GET 'https://api-dev2.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations' \
+curl --request GET 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
@@ -224,7 +224,7 @@ Returns a `location` object if a valid `locator_id` and `location_id` were provi
 > CODE SAMPLE
 
 ```shell
-curl --request GET 'https://api-dev2.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
+curl --request GET 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
@@ -331,7 +331,7 @@ Returns the created `location` if a valid body was provided, and returns an erro
 > CODE SAMPLE
 
 ```shell
-curl --request POST 'https://api-dev2.vyte.in/v2/locations' \
+curl --request POST 'https://api.vyte.in/v2/locations' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -466,7 +466,7 @@ Returns the updated `location` if a valid body was provided, and returns an erro
 > CODE SAMPLE
 
 ```shell
-curl --request PUT 'https://api-dev2.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
+curl --request PUT 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -539,7 +539,7 @@ Returns an object containing the number of row affected and the status if there 
 > CODE SAMPLE
 
 ```shell
-curl --request DELETE 'https://api-dev2.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
+curl --request DELETE 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations/5ef202a1fe70c73e37549514' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 

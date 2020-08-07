@@ -824,7 +824,7 @@ An object containing a `user` key whith the `User` object. If `finish_signup_wit
 > CODE SAMPLE
 
 ```shell
-curl --location --request POST 'https://api-dev2.vyte.in/v2/users' \
+curl --location --request POST 'https://api.vyte.in/v2/users' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -1367,7 +1367,7 @@ An object containing a `user` key whith the `User` object. If `finish_signup_wit
 > CODE SAMPLE
 
 ```shell
-curl --location --request PUT 'https://api-dev2.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
+curl --location --request PUT 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
 --data-raw '{

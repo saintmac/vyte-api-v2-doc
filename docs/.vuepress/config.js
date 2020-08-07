@@ -99,6 +99,7 @@ module.exports = {
             'slots',
             'teams',
             'users',
+            'vytemes',
             'webhooks',
             'errors'
           ]

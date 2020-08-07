@@ -278,7 +278,7 @@ Returns the created `Team` object if a valid body was provided, and returns an e
 :::: right
 
 ```shell
-curl --location --request POST 'https://api-dev2.vyte.in/v2/teams' \
+curl --location --request POST 'https://api.vyte.in/v2/teams' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -383,7 +383,7 @@ Returns the updated `Team` object if a valid body was provided, and returns an e
 :::: right
 
 ```shell
-curl --location --request PUT 'https://api-dev2.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
+curl --location --request PUT 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -446,7 +446,7 @@ Returns an object containing the number of row affected and the status if there 
 :::: right
 
 ```shell
-curl --location --request DELETE 'https://api-dev2.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
+curl --request DELETE 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
@@ -623,7 +623,7 @@ An `Event` object if there is no error.
 > CODE SAMPLE
 
 ```shell
-curl --request POST 'https://api-dev2.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/events' \
+curl --request POST 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/events' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{

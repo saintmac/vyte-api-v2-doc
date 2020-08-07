@@ -685,7 +685,7 @@ An `Event` object if there is no error.
 > CODE SAMPLE
 
 ```shell
-curl --request POST 'https://api-dev2.vyte.in/v2/events' \
+curl --request POST 'https://api.vyte.in/v2/events' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -1019,7 +1019,7 @@ An `Event` object if there is no error.
 > CODE SAMPLE
 
 ```shell
-curl --request PUT 'https://api-dev2.vyte.in/v2/events/5f0d7eb02003d0971e2a961a' \
+curl --request PUT 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -1218,7 +1218,7 @@ The `Event` object if there is no error.
 > CODE SAMPLE
 
 ```shell
-curl --location --request POST 'https://api-dev2.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/confirm' \
+curl --location --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/confirm' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
@@ -1399,7 +1399,7 @@ Id of the event. Found as `_id` in event resources.
 > CODE SAMPLE
 
 ```shell
-curl --location --request POST 'https://api-dev2.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/cancel' \
+curl --location --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/cancel' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 

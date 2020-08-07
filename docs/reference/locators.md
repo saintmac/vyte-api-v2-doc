@@ -187,7 +187,7 @@ Returns an array of `Locator` objects if there is some existing locators. Otherw
 > CODE SAMPLE
 
 ```shell
-curl --request GET 'https://api-dev2.vyte.in/v2/locators' \
+curl --request GET 'https://api.vyte.in/v2/locators' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
@@ -259,7 +259,7 @@ Returns a `Locator` object if a valid handle was provided, and returns an error 
 > CODE SAMPLE
 
 ```shell
-curl --request GET 'https://api-dev2.vyte.in/v2/locators/my-locator' \
+curl --request GET 'https://api.vyte.in/v2/locators/my-locator' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
@@ -411,7 +411,7 @@ Returns the created `Locator` object if a valid handle was provided, and returns
 > CODE SAMPLE
 
 ```shell
-curl --request POST 'https://api-dev2.vyte.in/v2/locators' \
+curl --request POST 'https://api.vyte.in/v2/locators' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -586,7 +586,7 @@ Returns the created `Locator` object if a valid handle was provided, and returns
 > CODE SAMPLE
 
 ```shell
-curl --request PUT 'https://api-dev2.vyte.in/v2/locators/5f0f64e22003d0340e2a9624' \
+curl --request PUT 'https://api.vyte.in/v2/locators/5f0f64e22003d0340e2a9624' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -658,7 +658,7 @@ Returns an object containing the number of row affected and the status if there 
 > CODE SAMPLE
 
 ```shell
-curl --request DELETE 'https://api-dev2.vyte.in/v2/locators/5f0f64e22003d0340e2a9624' \
+curl --request DELETE 'https://api.vyte.in/v2/locators/5f0f64e22003d0340e2a9624' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
