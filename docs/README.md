@@ -3,7 +3,7 @@ home: true
 heroText: Vyte API
 heroImage: /vyte-api.svg
 tagline: Explore our guides and reference to integrate Vyte.
-actionText: See our guides →
+actionText: Get started with our guides →
 actionLink: /guides/
 # features:
 # - title: Feature 1 Title
