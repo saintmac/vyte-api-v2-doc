@@ -5,6 +5,8 @@ heroImage: /vyte-api.svg
 tagline: Explore our guides and reference to integrate Vyte.
 actionText: Get started with our guides →
 actionLink: /guides/
+actionText2: See our API reference →
+actionLink2: /reference/
 # features:
 # - title: Feature 1 Title
 #   details: Feature 1 Description

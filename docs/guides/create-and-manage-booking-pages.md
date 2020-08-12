@@ -11,7 +11,7 @@ In this guide, we will learn how to create a user with the API, from his creatio
 For the following requests, you will need the `_id` of your organization. The easiest way to retrieve it is to make a `GET` request to the `https://api.vyte.in/v2/auth/test` endpoint.
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=66px&dsblur=68px&wc=true&wa=true&pv=27px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520'http%253A%252F%252Fapi.vyte.in%252Fv2%252Fauth%252Ftest'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=66px&dsblur=68px&wc=true&wa=true&pv=27px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520'https%253A%252F%252Fapi.vyte.in%252Fv2%252Fauth%252Ftest'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C"
   style="width: 100%; height: 200px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin">
 </iframe>
@@ -21,12 +21,8 @@ You receive in response an object containing information about your organization
 ```json light-code
 {
   "lang": "en",
-  "admins": [
-    "5f198d23c1ac5d0bcafc00ee"
-  ],
-  "members": [
-    "5f198d23c1ac5d0bcafc00ee"
-  ],
+  "admins": ["5f198d23c1ac5d0bcafc00ee"],
+  "members": ["5f198d23c1ac5d0bcafc00ee"],
   "private": false,
   "_id": "5f198da1c1ac5d1a30fc00f3",
   "name": "ACME",
@@ -34,7 +30,7 @@ You receive in response an object containing information about your organization
   "superadmin_team": "5f198da1c1ac5d283ffc00f4",
   "updatedAt": "2020-07-23T13:16:17.129Z",
   "createdAt": "2020-07-23T13:16:17.125Z",
-  "__v": 1,
+  "__v": 1
 }
 ```
 
@@ -76,9 +72,7 @@ The response should be the an object containing the created user :
         "extid": "userIdInThirdPartyAppDatabase"
       }
     },
-    "emails": [
-      "john.doe@example.com"
-    ],
+    "emails": ["john.doe@example.com"],
     "_id": "5f1abb4ac1ac5d338dfc0127",
     "first_name": "John",
     "last_name": "Doe",
@@ -429,6 +423,6 @@ Remember that the namespace for the Vyte Page nickname is global. So, in the fol
 
 Congrats! Our first Vyte Page is created :clap:
 
-This page is now accessible at [https://www.vyte.in/jonh-doe-acme](https://www.vyte.in/jonh-doe-acme) *(don't forget to replace the nickname with your own one)* and will look like this:
+This page is now accessible at [https://www.vyte.in/jonh-doe-acme](https://www.vyte.in/jonh-doe-acme) _(don't forget to replace the nickname with your own one)_ and will look like this:
 
 <asset-image srcHtml="img/vyte-page.png" altHtml="Vyte Page" titleHtml="Vyte Page"/>

@@ -30,10 +30,10 @@ Once your organization is created, you can now access your Vyte API key.
 
 Now you will be able to perform your first request. To stay simple, we will just test if your API key work well.
 
-To do this, just make an HTTP request to `http://api.vyte.in/v2/auth/test` and authenticate the request with your API key :
+To do this, just make an HTTP request to `https://api.vyte.in/v2/auth/test` and authenticate the request with your API key :
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=66px&dsblur=68px&wc=true&wa=true&pv=27px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520'http%253A%252F%252Fapi.vyte.in%252Fv2%252Fauth%252Ftest'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=66px&dsblur=68px&wc=true&wa=true&pv=27px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520'https%253A%252F%252Fapi.vyte.in%252Fv2%252Fauth%252Ftest'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C"
   style="width: 100%; height: 200px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin">
 </iframe>
@@ -43,12 +43,8 @@ If everything worked well, the response should be an `Organization` object like 
 ```json light-code
 {
   "lang": "en",
-  "admins": [
-    "5f198d23c1ac5d0bcafc00ee"
-  ],
-  "members": [
-    "5f198d23c1ac5d0bcafc00ee"
-  ],
+  "admins": ["5f198d23c1ac5d0bcafc00ee"],
+  "members": ["5f198d23c1ac5d0bcafc00ee"],
   "private": false,
   "_id": "5f198da1c1ac5d1a30fc00f3",
   "name": "ACME",
@@ -56,7 +52,7 @@ If everything worked well, the response should be an `Organization` object like 
   "superadmin_team": "5f198da1c1ac5d283ffc00f4",
   "updatedAt": "2020-07-23T13:16:17.129Z",
   "createdAt": "2020-07-23T13:16:17.125Z",
-  "__v": 1,
+  "__v": 1
 }
 ```
 
