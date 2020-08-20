@@ -189,7 +189,12 @@ module.exports = {
         {
           title: "API Guides",
           collapsable: true,
-          children: ["", "getting-started", "create-and-manage-booking-pages"],
+          children: [
+            "",
+            "getting-started",
+            "create-and-manage-booking-pages",
+            //"scheduling-api-for-1-to-1-bookings",
+          ],
         },
       ],
       "/reference/": [
@@ -246,6 +251,14 @@ module.exports = {
         type: "panel",
         before: `<div class="parent">`,
         after: "</div>",
+      },
+    ],
+    [
+      "vuepress-plugin-clean-urls",
+      {
+        normalSuffix: "/",
+        indexSuffix: "/",
+        notFoundPath: "/404.html",
       },
     ],
   ],
