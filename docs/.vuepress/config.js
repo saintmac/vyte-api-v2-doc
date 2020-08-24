@@ -192,7 +192,7 @@ module.exports = {
       "/guides/": [
         {
           title: "API Guides",
-          collapsable: true,
+          collapsable: false,
           children: [
             "",
             "getting-started",
@@ -204,7 +204,7 @@ module.exports = {
       "/reference/": [
         {
           title: "API Reference",
-          collapsable: true,
+          collapsable: false,
           children: [
             "",
             "availabilities",
