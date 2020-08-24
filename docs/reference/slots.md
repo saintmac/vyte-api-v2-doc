@@ -56,6 +56,15 @@ Duration of the appointment in minutes.
 
 Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
 
+**Required if no `user_id` is sent**
+
+  </attribute>
+  <attribute name="user_id" type="string" :required=true>
+
+Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
+
+**Required if no `email` is sent**
+
   </attribute>
   <attribute name="from" type="string" :required=true>
 

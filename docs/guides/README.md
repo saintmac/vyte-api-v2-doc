@@ -11,6 +11,7 @@ guides:
   image: api-team
 - title: Scheduling API for 1-to-1 bookings
   details:
+  path: scheduling-api-for-1-to-1-bookings
   image: api-1to1
 - title: Add scheduling features to your app or platform
   details:

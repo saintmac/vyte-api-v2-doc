@@ -193,7 +193,7 @@ module.exports = {
             "",
             "getting-started",
             "create-and-manage-booking-pages",
-            //"scheduling-api-for-1-to-1-bookings",
+            "scheduling-api-for-1-to-1-bookings",
           ],
         },
       ],
