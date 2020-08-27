@@ -15,6 +15,7 @@ guides:
   image: api-1to1
 - title: Add scheduling features to your app or platform
   details:
+  path: add-scheduling-features-to-your-app-or-platform
   image: api-scheduling
 - title: Set up team booking
   details:
