@@ -107,10 +107,7 @@ The locator `id`.
 {
   "location": {
     "type": "Point",
-    "coordinates": [
-      33.631839,
-      27.380583
-    ]
+    "coordinates": [33.631839, 27.380583]
   },
   "_id": "5ef202a1fe70c73e37549514",
   "name": "Desert Breath",
@@ -119,7 +116,7 @@ The locator `id`.
   "link": "/exam-desert-breath",
   "extid": "our-mysterious-meeting-place",
   "org": "5ef0cb128f284274b2361323",
-  "locator": "5ef9f3a3993a4d632a5c73e0",
+  "locator": "5ef9f3a3993a4d632a5c73e0"
 }
 ```
 
@@ -151,6 +148,7 @@ Returns an array of `location` objects if there is some existing locations. Othe
 ::::
 
 :::: right
+
 > CODE SAMPLE
 
 ```shell
@@ -165,10 +163,7 @@ curl --request GET 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/loc
   {
     "location": {
       "type": "Point",
-      "coordinates": [
-        33.631839,
-        27.380583
-      ]
+      "coordinates": [33.631839, 27.380583]
     },
     "_id": "5ef202a1fe70c73e37549514",
     "name": "Desert Breath",
@@ -177,8 +172,8 @@ curl --request GET 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/loc
     "link": "/exam-desert-breath",
     "extid": "our-mysterious-meeting-place",
     "org": "5ef0cb128f284274b2361323",
-    "locator": "5ef9f3a3993a4d632a5c73e0",
-  },
+    "locator": "5ef9f3a3993a4d632a5c73e0"
+  }
 ]
 ```
 
@@ -221,6 +216,7 @@ Returns a `location` object if a valid `locator_id` and `location_id` were provi
 ::::
 
 :::: right
+
 > CODE SAMPLE
 
 ```shell
@@ -234,10 +230,7 @@ curl --request GET 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/loc
 {
   "location": {
     "type": "Point",
-    "coordinates": [
-      33.631839,
-      27.380583
-    ]
+    "coordinates": [33.631839, 27.380583]
   },
   "_id": "5ef202a1fe70c73e37549514",
   "name": "Desert Breath",
@@ -246,7 +239,7 @@ curl --request GET 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/loc
   "link": "/exam-desert-breath",
   "extid": "our-mysterious-meeting-place",
   "org": "5ef0cb128f284274b2361323",
-  "locator": "5ef9f3a3993a4d632a5c73e0",
+  "locator": "5ef9f3a3993a4d632a5c73e0"
 }
 ```
 
@@ -271,9 +264,9 @@ POST /v2/locations HTTP/1.1
 
 <attributes title="Body parameters">
 
-<attribute name="location" type="hash" :required=true>
+<attribute name="location" type="hash" :required=true details="if no address is provided">
 
-Geolocation information of the location. **Required if no address is provided.**
+Geolocation information of the location.
 
 <attributes :isChild=true>
 
@@ -296,9 +289,9 @@ Coordinates of the location. The first one is the latitude and the second one is
 Name of the location.
 </attribute>
 
-<attribute name="address" type="string" :required=true>
+<attribute name="address" type="string" :required=true details="if no coordinates are provided">
 
-Address of the location. **Required if no coordinates are provided.**
+Address of the location.
 
 </attribute>
 
@@ -358,10 +351,7 @@ curl --request POST 'https://api.vyte.in/v2/locations' \
 {
   "location": {
     "type": "Point",
-    "coordinates": [
-      33.631839,
-      27.380583
-    ]
+    "coordinates": [33.631839, 27.380583]
   },
   "_id": "5ef202a1fe70c73e37549514",
   "name": "Desert Breath",
@@ -370,7 +360,7 @@ curl --request POST 'https://api.vyte.in/v2/locations' \
   "link": "/exam-desert-breath",
   "extid": "our-mysterious-meeting-place",
   "org": "5ef0cb128f284274b2361323",
-  "locator": "5ef9f3a3993a4d632a5c73e0",
+  "locator": "5ef9f3a3993a4d632a5c73e0"
 }
 ```
 
@@ -480,10 +470,7 @@ curl --request PUT 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/loc
 {
   "location": {
     "type": "Point",
-    "coordinates": [
-      33.631839,
-      27.380583
-    ]
+    "coordinates": [33.631839, 27.380583]
   },
   "_id": "5ef202a1fe70c73e37549514",
   "name": "Mysterious place",
@@ -492,7 +479,7 @@ curl --request PUT 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/loc
   "link": "/exam-desert-breath",
   "extid": "our-mysterious-meeting-place",
   "org": "5ef0cb128f284274b2361323",
-  "locator": "5ef9f3a3993a4d632a5c73e0",
+  "locator": "5ef9f3a3993a4d632a5c73e0"
 }
 ```
 
