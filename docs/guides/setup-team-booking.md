@@ -17,8 +17,26 @@ To create our first team, let's just make a `POST` request at `/v2/teams` :
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522admins%2522%253A%2520%255B%250A%2520%2520%2520%2520%25225eecc40bb2181073ac6ff375%2522%250A%2520%2520%255D%252C%250A%2520%2520%2522members%2522%253A%2520%255B%250A%2520%2520%2520%2520%25225eecc40bb2181073ac6ff375%2522%252C%250A%2520%2520%2520%2520%25225f198d23c1ac5d0bcafc00ee%2522%250A%2520%2520%255D%252C%250A%2520%2520%2522extid%2522%253A%2520%25221%2522%252C%250A%2520%2520%2522name%2522%253A%2520%2522sales%2522%252C%250A%2520%2520%2522level_name%2522%253A%2520%2522company%2522%250A%257D%27"
   style="width: 100%; height: 530px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request POST 'https://api.vyte.in/v2/teams' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "admins": [
+    "5eecc40bb2181073ac6ff375"
+  ],
+  "members": [
+    "5eecc40bb2181073ac6ff375",
+    "5f198d23c1ac5d0bcafc00ee"
+  ],
+  "extid": "1",
+  "name": "sales",
+  "level_name": "company"
+}'
+```
 
 Our first team is now created :clap:
 
@@ -48,8 +66,21 @@ Let's make a `PUT` request at `/v2/team/5f47af4d2285550793c632c4` :
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--location%2520--request%2520PUT%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f47af4d2285550793c632c4%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522members%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%25225eecc40bb2181073ac6ff375%2522%252C%250A%2520%2520%2520%2520%2520%2520%25225f198d23c1ac5d0bcafc00ee%2522%252C%250A%2520%2520%2520%2520%2520%2520%25225f2809b0f678a7a0227f94ac%2522%250A%2520%2520%255D%250A%257D%27"
   style="width: 100%; height: 450px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --location --request PUT 'https://api.vyte.in/v2/teams/5f47af4d2285550793c632c4' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "members": [
+      "5eecc40bb2181073ac6ff375",
+      "5f198d23c1ac5d0bcafc00ee",
+      "5f2809b0f678a7a0227f94ac"
+  ]
+}'
+```
 
 And now our new Sales is part of the team.
 
@@ -64,8 +95,30 @@ So, we'are ready to create our first team's event :
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--location%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f47af4d2285550793c632c4%252Fevents%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522title%2522%253A%2520%2522First%2520created%2520event%2522%252C%250A%2520%2520%2522dates%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522all_day%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2520%2520%2522date%2522%253A%2520%25222020-09-16T09%253A00%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522end_date%2522%253A%2520%25222020-09-16T10%253A00%253A00%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522places%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Place%2520for%2520the%2520meeting.%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522timezone%2522%253A%2520%2522Europe%252FParis%2522%250A%257D%27"
   style="width: 100%; height: 630px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --location --request POST 'https://api.vyte.in/v2/teams/5f47af4d2285550793c632c4/events' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "title": "First created event",
+  "dates": [
+    {
+      "all_day": false,
+      "date": "2020-09-16T09:00:00",
+      "end_date": "2020-09-16T10:00:00"
+    }
+  ],
+  "places": [
+    {
+      "name": "Place for the meeting."
+    }
+  ],
+  "timezone": "Europe/Paris"
+}'
+```
 
 We get in response the create event and we can see that the creator was automatically chose by the API:
 

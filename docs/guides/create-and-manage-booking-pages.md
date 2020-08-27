@@ -13,8 +13,13 @@ For the following requests, you will need the `_id` of your organization. The ea
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=66px&dsblur=68px&wc=true&wa=true&pv=27px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520'https%253A%252F%252Fapi.vyte.in%252Fv2%252Fauth%252Ftest'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C"
   style="width: 100%; height: 200px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request GET 'https://api.vyte.in/v2/auth/test' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+```
 
 You receive in response an object containing information about your organization, and in particular the `_id`.
 
@@ -50,8 +55,37 @@ In the following request, don't forget to replace the API key and the organizati
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=66px&dsblur=68px&wc=true&wa=true&pv=27px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520'https%253A%252F%252Fapi.vyte.in%252Fv2%252Fusers'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C%250A--header%2520'Content-Type%253A%2520application%252Fjson'%2520%255C%250A--data-raw%2520'%257B%250A%2520%2520%2522organization%2522%253A%2520%25225f198da1c1ac5d1a30fc00f3%2522%252C%250A%2520%2520%2522user%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522email%2522%253A%2520%2522john.doe%2540example.com%2522%252C%250A%2520%2520%2520%2520%2522first_name%2522%253A%2520%2522John%2522%252C%250A%2520%2520%2520%2520%2522last_name%2522%253A%2520%2522Doe%2522%252C%250A%2520%2520%2520%2520%2522language%2522%253A%2520%2522en%2522%252C%250A%2520%2520%2520%2520%2522timezone%2522%253A%2520%2522Europe%252FLondon%2522%252C%250A%2520%2520%2520%2520%2522picture_url%2522%253A%2520%2522https%253A%252F%252Fwww.example.com%252Fpicture%252Fjean%2522%252C%250A%2520%2520%2520%2520%2522account%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522organization%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522extid%2522%253A%2520%2522userIdInThirdPartyAppDatabase%2522%250A%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%257D%250A%2520%2520%257D%252C%250A%2520%2520%2522login%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522credentials%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522username%2522%253A%2520%2522john.doe%2540example.com%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522password%2522%253A%2520%2522youllneverguessit%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%257D%250A%257D'"
   style="width: 100%; height: 700px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request POST 'https://api.vyte.in/v2/users' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "organization": "5f198da1c1ac5d1a30fc00f3",
+  "user": {
+    "email": "john.doe@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "language": "en",
+    "timezone": "Europe/London",
+    "picture_url": "https://www.example.com/picture/jean",
+    "account": {
+      "organization": {
+        "extid": "userIdInThirdPartyAppDatabase"
+      }
+    }
+  },
+  "login": {
+    "credentials": {
+      "username": "john.doe@example.com",
+      "password": "youllneverguessit"
+    }
+  }
+}'
+```
+
 The response should be the an object containing the created user :
 
 ```json light-code
@@ -208,8 +242,87 @@ So, here is as an example a request to set up availabilities for our user. You c
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520PUT%2520'https%253A%252F%252Fapi.vyte.in%252Fv2%252Fusers'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C%250A--header%2520'Content-Type%253A%2520application%252Fjson'%2520%255C%250A--data-raw%2520'%257B%250A%2520%2520%2522organization%2522%253A%2520%25225f198da1c1ac5d1a30fc00f3%2522%252C%250A%2520%2520%2522user%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522email%2522%253A%2520%2522john.doe%2540example.com%2522%252C%250A%2520%2520%2520%2520%2522account%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522organization%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522extid%2522%253A%2520%2522userIdInThirdPartyAppDatabase%2522%250A%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%257D%250A%2520%2520%257D%252C%250A%2520%2520%2522availability%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522timezone%2522%253A%2520%2522Europe%252FLondon%2522%252C%250A%2520%2520%2520%2520%2522today_as_busy%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2522past_as_busy%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2522days_after_as_busy%2522%253A%252060%252C%250A%2520%2520%2520%2520%2522buffer_before%2522%253A%25200%252C%250A%2520%2520%2520%2520%2522buffer_after%2522%253A%25200%252C%250A%2520%2520%2520%2520%2522all_day_busy%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2522days%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522monday%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522enabled%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522slots%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522start_time%2522%253A%2520%25222018-01-01T09%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522end_time%2522%253A%2520%25222018-01-01T17%253A00%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%255D%250A%2520%2520%2520%2520%2520%2520%257D%252C%250A%2520%2520%2520%2520%2520%2520%2522tuesday%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522enabled%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522slots%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522start_time%2522%253A%2520%25222018-01-01T09%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522end_time%2522%253A%2520%25222018-01-01T17%253A00%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%255D%250A%2520%2520%2520%2520%2520%2520%257D%252C%250A%2520%2520%2520%2520%2520%2520%2522wednesday%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522enabled%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522slots%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522start_time%2522%253A%2520%25222018-01-01T09%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522end_time%2522%253A%2520%25222018-01-01T17%253A00%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%255D%250A%2520%2520%2520%2520%2520%2520%257D%252C%250A%2520%2520%2520%2520%2520%2520%2522thursday%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522enabled%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522slots%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522start_time%2522%253A%2520%25222018-01-01T09%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522end_time%2522%253A%2520%25222018-01-01T17%253A00%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%255D%250A%2520%2520%2520%2520%2520%2520%257D%252C%250A%2520%2520%2520%2520%2520%2520%2522friday%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522enabled%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522slots%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522start_time%2522%253A%2520%25222018-01-01T09%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522end_time%2522%253A%2520%25222018-01-01T17%253A00%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%255D%250A%2520%2520%2520%2520%2520%2520%257D%252C%250A%2520%2520%2520%2520%2520%2520%2522saturday%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522enabled%2522%253A%2520false%250A%2520%2520%2520%2520%2520%2520%257D%252C%250A%2520%2520%2520%2520%2520%2520%2522sunday%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522enabled%2522%253A%2520false%250A%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%257D%250A%2520%2520%257D%250A%257D'"
   style="width: 100%; height: 1800px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request PUT 'https://api.vyte.in/v2/users' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "organization": "5f198da1c1ac5d1a30fc00f3",
+  "user": {
+    "email": "john.doe@example.com",
+    "account": {
+      "organization": {
+        "extid": "userIdInThirdPartyAppDatabase"
+      }
+    }
+  },
+  "availability": {
+    "timezone": "Europe/London",
+    "today_as_busy": false,
+    "past_as_busy": true,
+    "days_after_as_busy": 60,
+    "buffer_before": 0,
+    "buffer_after": 0,
+    "all_day_busy": true,
+    "days": {
+      "monday": {
+        "enabled": true,
+        "slots": [
+          {
+            "start_time": "2018-01-01T09:00",
+            "end_time": "2018-01-01T17:00"
+          }
+        ]
+      },
+      "tuesday": {
+        "enabled": true,
+        "slots": [
+          {
+            "start_time": "2018-01-01T09:00",
+            "end_time": "2018-01-01T17:00"
+          }
+        ]
+      },
+      "wednesday": {
+        "enabled": true,
+        "slots": [
+          {
+            "start_time": "2018-01-01T09:00",
+            "end_time": "2018-01-01T17:00"
+          }
+        ]
+      },
+      "thursday": {
+        "enabled": true,
+        "slots": [
+          {
+            "start_time": "2018-01-01T09:00",
+            "end_time": "2018-01-01T17:00"
+          }
+        ]
+      },
+      "friday": {
+        "enabled": true,
+        "slots": [
+          {
+            "start_time": "2018-01-01T09:00",
+            "end_time": "2018-01-01T17:00"
+          }
+        ]
+      },
+      "saturday": {
+        "enabled": false
+      },
+      "sunday": {
+        "enabled": false
+      }
+    }
+  }
+}'
+```
 
 ### Create and set up the Vyte Page
 
@@ -416,8 +529,64 @@ Remember that the namespace for the Vyte Page nickname is global. So, in the fol
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520PUT%2520'https%253A%252F%252Fapi.vyte.in%252Fv2%252Fusers'%2520%255C%250A--header%2520'Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'%2520%255C%250A--header%2520'Content-Type%253A%2520application%252Fjson'%2520%255C%250A--data-raw%2520'%257B%250A%2520%2520%2522organization%2522%253A%2520%25225f198da1c1ac5d1a30fc00f3%2522%252C%250A%2520%2520%2522user%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522email%2522%253A%2520%2522john.doe%2540example.com%2522%252C%250A%2520%2520%2520%2520%2522account%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522organization%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2522extid%2522%253A%2520%2522userIdInThirdPartyAppDatabase%2522%250A%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%257D%250A%2520%2520%257D%252C%250A%2520%2520%2522vyteme%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522nickname%2522%253A%2520%2522jonh-doe-acme%2522%252C%250A%2520%2520%2520%2520%2522message%2522%253A%2520%2522Welcome%2520to%2520my%2520booking%2520page%2522%252C%250A%2520%2520%2520%2520%2522custom%2522%253A%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522auto_message%2522%253A%2520%2522Thank%2520you%2520for%2520your%2520booking.%2520See%2520you%2520soon.%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522auto_title%2522%253A%2520%2522RDV%2520%257B%257Binvitee%257D%257D%2520%252F%2520%257B%257Bme%257D%257D%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522ask_phone%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522ask_company%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2520%2520%2522block_new_invitee%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2520%2520%2522duration%2522%253A%252030%252C%250A%2520%2520%2520%2520%2520%2520%2522set_lang%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522enable_api%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522fixed_lang%2522%253A%2520%2522en%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522set_timezone%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522fixed_timezone%2522%253A%2520%2522Europe%252FLondon%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522event_hide_decline%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2520%2520%2522hide_places%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2520%2520%2522hide_support%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522hide_title%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522forbid_add_places%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522min_dates%2522%253A%25201%252C%250A%2520%2520%2520%2520%2520%2520%2522one_slot%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522auto_confirm%2522%253A%2520true%252C%250A%2520%2520%2520%2520%2520%2520%2522invite_title%2522%253A%2520%2522Book%2520a%2520short%2520appointment%2520with%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522redirect_url%2522%253A%2520%2522https%253A%252F%252Fwww.example.com%252Fthanks-for-booking%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522fixed_places%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Office%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522address%2522%253A%2520%2522Office%2520address%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522source%2522%253A%2520%2522appName%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522source_id%2522%253A%2520%2522placeIdInThirdPartyAppDatabase%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Phone%2522%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2522address%2522%253A%2520%25220102030405%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%255D%250A%2520%2520%2520%2520%257D%250A%2520%2520%257D%250A%257D'"
   style="width: 100%; height: 1299px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request PUT 'https://api.vyte.in/v2/users' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "organization": "5f198da1c1ac5d1a30fc00f3",
+  "user": {
+    "email": "john.doe@example.com",
+    "account": {
+      "organization": {
+        "extid": "userIdInThirdPartyAppDatabase"
+      }
+    }
+  },
+  "vyteme": {
+    "nickname": "jonh-doe-acme",
+    "message": "Welcome to my booking page",
+    "custom": {
+      "auto_message": "Thank you for your booking. See you soon.",
+      "auto_title": "RDV {{invitee}} / {{me}}",
+      "ask_phone": true,
+      "ask_company": false,
+      "block_new_invitee": false,
+      "duration": 30,
+      "set_lang": true,
+      "enable_api": true,
+      "fixed_lang": "en",
+      "set_timezone": true,
+      "fixed_timezone": "Europe/London",
+      "event_hide_decline": false,
+      "hide_places": false,
+      "hide_support": true,
+      "hide_title": true,
+      "forbid_add_places": true,
+      "min_dates": 1,
+      "one_slot": true,
+      "auto_confirm": true,
+      "invite_title": "Book a short appointment with",
+      "redirect_url": "https://www.example.com/thanks-for-booking",
+      "fixed_places": [
+        {
+          "name": "Office",
+          "address": "Office address",
+          "source": "appName",
+          "source_id": "placeIdInThirdPartyAppDatabase"
+        },
+        {
+          "name": "Phone",
+          "address": "0102030405"
+        }
+      ]
+    }
+  }
+}'
+```
 
 ## Access the Vyte page
 

@@ -15,8 +15,13 @@ So, the first things to do is to register a new third-party. To do this, we just
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fthird_parties%253Fname%253Dacme%2526contact_email%253Dcontact%2540acme.com%2526contact_name%253DACME%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
   style="width: 100%; height: 280px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request POST 'https://api.vyte.in/v2/third_parties?name=acme&contact_email=contact@acme.com&contact_name=ACME' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+```
 
 This endpoint registers your app as a third party app and lets you obtain your `app_id` and `app_secret` :
 
@@ -106,8 +111,13 @@ So, in the case that our user doesn't have a Vyte accout, let's create a new tok
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fthird_parties%252Ftoken%253Fcm%253Djane.doe%2540acme.com%2526secret%253Dcfsvut1yp6dd2nuwkxjo%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
   style="width: 100%; height: 280px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request GET 'https://api.vyte.in/v2/third_parties/token?cm=jane.doe@acme.com&secret=cfsvut1yp6dd2nuwkxjo' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+```
 
 The response provide us a new token for our user :
 
@@ -145,8 +155,13 @@ To retrieve the third-parties you registered with your API key, you can just mak
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--location%2520--request%2520GET%2520%27https%253A%252F%252Fapi-dev2.vyte.in%252Fv2%252Fthird_parties%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
   style="width: 100%; height: 260px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --location --request GET 'https://api-dev2.vyte.in/v2/third_parties' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+```
 
 The response will look like this :
 

@@ -58,8 +58,13 @@ So, to retrieve the availabilities of our user for these days, we make the follo
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fslots%253Fduration%253D60%2526users%253D5f3feb7821046c3bb9327e6a%2526from%253D2020-10-01%2526to%253D2020-10-02%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
   style="width: 100%; height: 300px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request GET 'https://api.vyte.in/v2/slots?duration=60&users=5f3feb7821046c3bb9327e6a&from=2020-10-01&to=2020-10-02' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+```
 
 We get the following response :
 
@@ -119,8 +124,37 @@ So, we will do this by making this `POST` request :
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fevents%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522title%2522%253A%2520%2522Meeting%2520with%2520Quentin%2520Tarantino%2522%252C%250A%2520%2520%2522created_by%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522user%2522%253A%2520%25225f3feb7821046c3bb9327e6a%2522%250A%2520%2520%257D%252C%250A%2520%2520%2522dates%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522all_day%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2520%2520%2522date%2522%253A%2520%25222020-09-02T10%253A00%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522end_date%2522%253A%2520%25222020-09-02T11%253A00%253A00%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522invitees%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522full_name%2522%253A%2520%2522Quentin%2520Tarantino%2522%252C%250A%2520%2520%2520%2520%2522email%2522%253A%2520%2522quentin.tarantino%2540hollywood.com%2522%250A%2520%2520%257D%252C%250A%2520%2520%2522places%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Place%2520for%2520the%2520meeting.%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522vyteme%2522%253A%2520true%250A%257D%27"
   style="width: 100%; height: 770px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request POST 'https://api.vyte.in/v2/events' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "title": "Meeting with Quentin Tarantino",
+  "created_by": {
+    "user": "5f3feb7821046c3bb9327e6a"
+  },
+  "dates": [
+    {
+      "all_day": false,
+      "date": "2020-09-02T10:00:00",
+      "end_date": "2020-09-02T11:00:00"
+    }
+  ],
+  "invitees": {
+    "full_name": "Quentin Tarantino",
+    "email": "quentin.tarantino@hollywood.com"
+  },
+  "places": [
+    {
+      "name": "Place for the meeting."
+    }
+  ],
+  "vyteme": true
+}'
+```
 
 > Note that it's important for this use case to set the param `vyteme` to true. If you need more information, please refere to [this part](../reference/README.md#vyteme-or-not-vyteme).
 
@@ -136,7 +170,12 @@ Nothing complicated for this. We just have to send a `GET` request at `/v2/event
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi-dev2.vyte.in%252Fv2%252Fevents%252F5f43a0caf795d9206556122a%252Fconfirm%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
   style="width: 100%; height: 270px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin">
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+```bash screen-hidden
+curl --request POST 'https://api-dev2.vyte.in/v2/events/5f43a0caf795d9206556122a/confirm' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+```
 
 Here we are ! We successed to manage a new booking request from end-to-end only with the API.
