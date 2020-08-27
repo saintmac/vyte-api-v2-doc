@@ -1,7 +1,10 @@
 <template>
   <div v-if="data.guides && data.guides.length" class="guides">
     <div v-for="(guide, index) in data.guides" :key="index" class="guide">
-      <img :src="$withBase(`/assets/img/${guide.image}.svg`)" alt="Vyte API - Webhooks" />
+      <img
+        :src="$withBase(`/assets/img/${guide.image}.svg`)"
+        alt="Vyte API - Webhooks"
+      />
       <h2>{{ guide.title }}</h2>
       <p>{{ guide.details }}</p>
       <p v-if="guide.path">
@@ -33,14 +36,13 @@ export default {
 
 .guide {
   flex-grow: 1;
-  flex-basis: 30%;
-  max-width: 30%;
-  min-width: 300px;
+  flex-basis: 350px;
+  width: 350px;
   border: 1px solid $borderColor;
   border-radius: 10px;
   text-align: center;
   padding: 1.2rem 0.5rem;
-  margin: 1.2rem 0;
+  margin: 1.2rem 1.2rem;
   min-height: 400px;
 
   img {
@@ -63,6 +65,19 @@ export default {
     color: lighten($textColor, 25%);
     font-size: 0.8rem;
     height: 2.5rem;
+  }
+}
+
+@media (max-width: 848px){
+  .guide {
+    width: 100%;
+    min-width: 100%;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    text-align: center;
+    padding: 1.2rem 0.5rem;
+    margin: 1.2rem 0;
+    min-height: 400px;
   }
 }
 </style>
