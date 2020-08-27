@@ -1,7 +1,5 @@
 ---
-{
-  "pageClass": "reference-page"
-}
+{ "pageClass": "reference-page" }
 ---
 
 # Slots
@@ -44,26 +42,20 @@ The response will include a nextAvailability object formatted as in the example.
 GET /v2/slots HTTP/1.1
 ```
 
-<attributes title="Path parameters" :isEmpty=true></attributes>
-
 <attributes title="Query parameters">
   <attribute name="duration" type="number" :required=true>
 
 Duration of the appointment in minutes.
 
   </attribute>
-  <attribute name="emails" type="string" :required=true>
+  <attribute name="emails" type="string" :required=true details="you need either emails or user_ids">
 
 Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
-
-**Required if no `user_id` is sent**
 
   </attribute>
-  <attribute name="user_id" type="string" :required=true>
+  <attribute name="users" type="string" :required=true details="you need either emails or user_ids">
 
-Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
-
-**Required if no `email` is sent**
+List of `user_id` you want to book an appointment with. It must be separated with a comma and if several `user_id` are provided, it returns the slots to which all users are available.
 
   </attribute>
   <attribute name="from" type="string" :required=true>
@@ -223,9 +215,14 @@ GET /v2/slots/days HTTP/1.1
 Duration of the appointment in minutes.
 
   </attribute>
-  <attribute name="emails" type="string" :required=true>
+  <attribute name="emails" type="string" :required=true details="you need either emails or user_ids">
 
 Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
+
+  </attribute>
+  <attribute name="users" type="string" :required=true details="you need either emails or user_ids">
+
+List of `user_id` you want to book an appointment with. It must be separated with a comma and if several `user_id` are provided, it returns the slots to which all users are available.
 
   </attribute>
   <attribute name="from" type="string" :required=true>

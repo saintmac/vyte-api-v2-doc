@@ -27,9 +27,9 @@ Address of the person you want to book an appointment with. It has to be the add
 **Required if no `user_id` is sent**
 
   </attribute>
-  <attribute name="user_id" type="string" :required=true>
+  <attribute name="users" type="string" :required=true>
 
-Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
+List of `user_id` you want to book an appointment with. It must be separated with a comma and if several `user_id` are provided, it returns the slots to which all users are available.
 
 **Required if no `email` is sent**
 
@@ -56,7 +56,7 @@ In the rest of this guide, we will assume that someone wants to make a 1 hour me
 So, to retrieve the availabilities of our user for these days, we make the following request :
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fslots%253Fduration%253D60%2526user_id%253D5f3feb7821046c3bb9327e6a%2526from%253D2020-10-01%2526to%253D2020-10-02%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fslots%253Fduration%253D60%2526users%253D5f3feb7821046c3bb9327e6a%2526from%253D2020-10-01%2526to%253D2020-10-02%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
   style="width: 100%; height: 300px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin">
 </iframe>

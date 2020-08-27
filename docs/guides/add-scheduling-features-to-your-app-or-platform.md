@@ -41,52 +41,52 @@ This endpoint registers your app as a third party app and lets you obtain your `
 You can set different parameters for the event creation such as title, invitees, places, and message. Here are the available parameters :
 
 <attributes title="Query parameters">
-<attribute name="aid" type="string" :require=true>
+<attribute name="aid" type="string" :required=true>
 
 App ID: your app ID for Vyte. You get it when you register your app with GET /thirdparties/new.
 
 </attribute>
-<attribute name="agid" type="string" :require=false>
+<attribute name="agid" type="string" :required=false>
 
 App Group ID: this is an id you will provide to Vyte, that you will use to identify a group of users such as a team, a project, etc.
 
 </attribute>
-<attribute name="cm" type="string" :require=false>
+<attribute name="cm" type="string" :required=false details="optional if the user already has a Vyte account.">
 
-Creator e-mail: **optional** if the user already has a Vyte account.
+Creator e-mail.
 
 </attribute>
-<attribute name="cn" type="string" :require=false>
+<attribute name="cn" type="string" :required=false>
 
 Creator name: useful to auto set a title with the name of all the participants.
 
 </attribute>
-<attribute name="ct" type="string" :require=false>
+<attribute name="ct" type="string" :required=false details="optional if the user already has a Vyte account.">
 
-Creator token: **optional** if the user already has a Vyte account.
+Creator token.
 
 </attribute>
-<attribute name="em" type="string" :require=false>
+<attribute name="em" type="string" :required=false>
 
 Event message.
 
 </attribute>
-<attribute name="et" type="string" :require=false>
+<attribute name="et" type="string" :required=false>
 
 Event title.
 
 </attribute>
-<attribute name="im" type="string" :require=false>
+<attribute name="im" type="string" :required=false>
 
 Invitee e-mail(s), separated by a pipe (|).
 
 </attribute>
-<attribute name="em" type="string" :require=false>
+<attribute name="em" type="string" :required=false>
 
 Invitee name(s), separated by a pipe (|). To be used with `im`, with emails and names listed in the same order.
 
 </attribute>
-<attribute name="places" type="string" :require=false>
+<attribute name="places" type="string" :required=false>
 
 Event places, with place name and address separated by a single pipe (|) and several places separated by a double pipe (||).
 
