@@ -71,7 +71,6 @@ export default {
 @media (max-width: 848px){
   .guide {
     width: 100%;
-    min-width: 100%;
     border: 1px solid $borderColor;
     border-radius: 10px;
     text-align: center;
