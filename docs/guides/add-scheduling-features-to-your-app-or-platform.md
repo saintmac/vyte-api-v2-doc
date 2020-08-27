@@ -128,7 +128,7 @@ Now we are ready to generate our first link to an event creation page. Let's con
 
 So, we just have to serialize/urlEncode all these params to generate the url for our link:
 
-```url
+```
 aid=5f476269f795d9f0df561256&cm=jane.doe@acme.com&cn=Jane%20Doe&ct=c56675c718dec0566c0f6eb1256d12d4dc7eda779a4f690dcc3f26fc8d312ca8&em=Important%20brainstorming%20for%20a%20new%20feature.%20We%20hope%20you%20will%20be%20at%20100%%20!&et=Brainstorming%20for%20a%20new%20feature&im=oscar.simpson@acme.com|emanuel.buckner@came.com|ezekiel.carr@acme.com|zayne.rhodes@acme.com&in=Oscar%20Simpson|Emanuel%20Buckner|Ezekiel%20Carr|Zayne%20Rhodes&places=The%20Office|2553%20Trouser%20Leg%20Road,%20Springfield,%2001103,%20Massachusetts||Coworking%20Place|4927%20Leverton%20Cove%20Road,%20Springfield,%2001103,%20Massachusetts
 ```
 
