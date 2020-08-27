@@ -199,6 +199,7 @@ module.exports = {
             "create-and-manage-booking-pages",
             "scheduling-api-for-1-to-1-bookings",
             "add-scheduling-features-to-your-app-or-platform",
+            "setup-team-booking",
           ],
         },
       ],
