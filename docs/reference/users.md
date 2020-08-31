@@ -154,7 +154,7 @@ Date (expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601))
 </attributes>
 </attribute>
 
-<attribute name="emails" type="array of string">
+<attribute name="emails" type="array of strings">
 
 Contact email of the user. **This is an array but it can contain only one email.**
 
@@ -263,9 +263,7 @@ Date the profile infromation were last fetched, expressed according to [ISO 8601
   "consent": {
     "terms": "2020-06-24T09:42:41.225Z"
   },
-  "emails": [
-    "jean.dupont@example.com",
-  ],
+  "emails": ["jean.dupont@example.com"],
   "calendars": {
     "google": true,
     "office365": false,
@@ -280,7 +278,7 @@ Date the profile infromation were last fetched, expressed according to [ISO 8601
     "token": "5f1174267931de7e41cc729a",
     "last_contacts_fetch": "2020-07-13T15:45:04.688Z",
     "last_profile_fetch": "2020-07-14T09:36:22.997Z"
-  },
+  }
 }
 ```
 
@@ -312,6 +310,7 @@ Returns an array of `User` objects if there is some existing users. Otherwise, r
 ::::
 
 :::: right
+
 > CODE SAMPLE
 
 ```shell
@@ -348,9 +347,7 @@ curl  --request GET 'https://api.vyte.in/v2/users' \
     "consent": {
       "terms": "2020-06-24T09:42:41.225Z"
     },
-    "emails": [
-      "jean.dupont@example.com",
-    ],
+    "emails": ["jean.dupont@example.com"],
     "calendars": {
       "google": true,
       "office365": false,
@@ -365,7 +362,7 @@ curl  --request GET 'https://api.vyte.in/v2/users' \
       "token": "5f1174267931de7e41cc729a",
       "last_contacts_fetch": "2020-07-13T15:45:04.688Z",
       "last_profile_fetch": "2020-07-14T09:36:22.997Z"
-    },
+    }
   }
 ]
 ```
@@ -407,7 +404,7 @@ Information about the user.
 
 <attributes :isChild=true>
 
-<attribute name="emails" type="string" :parentNames="['user']" :isChild=true>
+<attribute name="emails" type="array of strings" :parentNames="['user']" :isChild=true>
 
 Email of the user.
 
@@ -607,7 +604,7 @@ Custom settings for the user Vyte Page.
 <attributes :isChild=true>
 <attribute name="auto_message" type="string" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-Auto response message when someone book a meeting on the Vyte Page.
+Auto response message when someone books a meeting on the Vyte Page.
 
 </attribute>
 
@@ -617,15 +614,15 @@ Auto title for the event.
 
 </attribute>
 
-<attribute name="ask_phone" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="ask_phone" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true details="default to false">
 
-Whether or not the user must the user must provide their phone number.
+Whether or not the person making the booking must provide their phone number.
 
 </attribute>
 
-<attribute name="ask_company" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="ask_company" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true details="default to false">
 
-Whether or not the user must the user must provide their company.
+Whether or not the person making the booking must provide their company name.
 
 </attribute>
 
@@ -703,9 +700,9 @@ Whether or not you forbid from suggesting other places from the booking page.
 
 </attribute>
 
-<attribute name="min_dates" type="number" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="min_dates" type="number" :parentNames="['vyteme', 'custom']" :isChild=true details="default to 1">
 
-Enforces a minimum number of slots on the booking page (only works for calendar vie, not slots view).
+Enforces a minimum number of slots on the booking page (only works for calendar view, not slots view).
 
 </attribute>
 
@@ -775,7 +772,7 @@ Id of the place in your own database/source.
 
 <attribute name="calendars" type="array of hashes">
 
-If you have access to your google Exchange credentials you can set their calendars on Vyte directly.
+If you have access to your users' Exchange credentials you can set their calendars on Vyte directly.
 
 <attributes :isChild=true>
 
@@ -882,9 +879,7 @@ curl  --request POST 'https://api.vyte.in/v2/users' \
       "plan": "pro",
       "app_url": "https://my-page.vyte.in"
     },
-    "emails": [
-      "john.doe@example.com"
-    ],
+    "emails": ["john.doe@example.com"],
     "_id": "5f2d28fb1e0662e70071d46b",
     "first_name": "John",
     "last_name": "Doe",
@@ -950,7 +945,7 @@ Information about the user.
 
 <attributes :isChild=true>
 
-<attribute name="emails" type="string" :parentNames="['user']" :isChild=true>
+<attribute name="emails" type="array of strings" :parentNames="['user']" :isChild=true>
 
 Email of the user.
 
@@ -1150,7 +1145,7 @@ Custom settings for the user Vyte Page.
 <attributes :isChild=true>
 <attribute name="auto_message" type="string" :parentNames="['vyteme', 'custom']" :isChild=true>
 
-Auto response message when someone book a meeting on the Vyte Page.
+Auto response message when someone books a meeting on the Vyte Page.
 
 </attribute>
 
@@ -1160,15 +1155,15 @@ Auto title for the event.
 
 </attribute>
 
-<attribute name="ask_phone" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="ask_phone" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true details="default to false">
 
-Whether or not the user must the user must provide their phone number.
+Whether or not the person making the booking must provide their phone number.
 
 </attribute>
 
-<attribute name="ask_company" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="ask_company" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true details="default to false">
 
-Whether or not the user must the user must provide their company.
+Whether or not the person making the booking must provide their company name.
 
 </attribute>
 
@@ -1246,19 +1241,19 @@ Whether or not you forbid from suggesting other places from the booking page.
 
 </attribute>
 
-<attribute name="min_dates" type="number" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="min_dates" type="number" :parentNames="['vyteme', 'custom']" :isChild=true details="default to 1">
 
-Enforces a minimum number of slots on the booking page (only works for calendar vie, not slots view).
+Enforces a minimum number of slots on the booking page (only works for calendar view, not slots view).
 
 </attribute>
 
-<attribute name="one_slot" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="one_slot" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true details="default to false">
 
 Whether or not only one slot can be suggested on the calendar view.
 
 </attribute>
 
-<attribute name="auto_confirm" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true>
+<attribute name="auto_confirm" type="boolean" :parentNames="['vyteme', 'custom']" :isChild=true details="default to false">
 
 Whether or not the event will be booked as confirmed automatically.
 
@@ -1318,7 +1313,7 @@ Id of the place in your own database/source.
 
 <attribute name="calendars" type="array of hashes">
 
-If you have access to your google Exchange credentials you can set their calendars on Vyte directly.
+If you have access to your users' Exchange credentials you can set their calendars on Vyte directly.
 
 <attributes :isChild=true>
 
@@ -1409,9 +1404,7 @@ curl  --request PUT 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
       "plan": "pro",
       "app_url": "https://my-page.vyte.in"
     },
-    "emails": [
-      "john.doe@example.com"
-    ],
+    "emails": ["john.doe@example.com"],
     "_id": "5f2d28fb1e0662e70071d46b",
     "first_name": "John",
     "last_name": "Snow",
