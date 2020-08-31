@@ -279,13 +279,13 @@ The last step in this workflow is to confirm (or cancel) the meeting as soon as 
 Nothing complicated for this. We just have to send a `GET` request at `/v2/events/:event_id/confirm` (or `/v2/events/:event_id/cancel`) :
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi-dev2.vyte.in%252Fv2%252Fevents%252F5f43a0caf795d9206556122a%252Fconfirm%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fevents%252F5f43a0caf795d9206556122a%252Fconfirm%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
   style="width: 100%; height: 270px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
 ```bash screen-hidden
-curl --request POST 'https://api-dev2.vyte.in/v2/events/5f43a0caf795d9206556122a/confirm' \
+curl --request POST 'https://api.vyte.in/v2/events/5f43a0caf795d9206556122a/confirm' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```
 

@@ -126,7 +126,7 @@ We have created our first user with Vyte API :clap:
 
 ## Configure his Vyte Page
 
-Now that our user is created, we will go further and create his Vyte Page. To sum up, we will use the API to create the Vyte Page as we would do directly on the [Vyte.in dashboard](https://www-dev2.vyte.in/pages?lang=en).
+Now that our user is created, we will go further and create his Vyte Page. To sum up, we will use the API to create the Vyte Page as we would do directly on the [Vyte.in dashboard](https://www.vyte.in/pages?lang=en).
 
 At the end, his Vyte Page will look like this:
 
