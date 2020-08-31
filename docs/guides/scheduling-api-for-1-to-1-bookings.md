@@ -119,7 +119,7 @@ _We will consider here that September 2 from 10:00 to 11:00 a.m. is a good choic
 
 ### Using our web component
 
-We provide a web component to integrate the Vyte slot picker directly in your website. This is a fully configurable Vue.js component with the following attributes:
+We provide a web component to integrate the Vyte slot picker directly in your website. This is a fully configurable Vue.js component with the following props:
 
 <attributes title="Properties">
 
@@ -177,8 +177,13 @@ Number of slots max shown per day.
 
 The following code show you how to integrate it easily:
 
-::: demo html
+<iframe
+  src="/slot-picker.html"
+  style="width: 100%; height: 300px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
+</iframe>
 
+```html
 <!-- Optional scripts if you want compatibility with older browsers like IE11 -->
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 <script src="https://unpkg.com/unfetch/polyfill"></script>
@@ -201,26 +206,25 @@ The following code show you how to integrate it easily:
 <!--/ Web component -->
 
 <vyte-slot-picker
-id="vyte-slot-picker"
-emails="martin@vytein.com"
-:ndays="5"
-timezone="Europe/Paris"
-lang="en"
-
-> </vyte-slot-picker>
+  id="vyte-slot-picker"
+  emails="martin@vytein.com"
+  :ndays="5"
+  timezone="Europe/Paris"
+  lang="en"
+>
+</vyte-slot-picker>
 
 <script>
-function slotSelectedHandler(event) {
-  const slot = event.detail[0];
-  const startDate = new Date(slot.start.dateTime);
-  const endDate = new Date(slot.end.dateTime);
-  console.log("Slot selected", startDate, endDate);
-}
-const element = document.getElementById("vyte-slot-picker");
-element.addEventListener("slot-selected", slotSelectedHandler);
+  function slotSelectedHandler(event) {
+    const slot = event.detail[0];
+    const startDate = new Date(slot.start.dateTime);
+    const endDate = new Date(slot.end.dateTime);
+    console.log("Slot selected", startDate, endDate);
+  }
+  const element = document.getElementById("vyte-slot-picker");
+  element.addEventListener("slot-selected", slotSelectedHandler);
 </script>
-
-:::
+```
 
 ## Create a new event
 
