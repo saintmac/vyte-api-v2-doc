@@ -19,7 +19,7 @@ To manage the `Locations` of a `Locator`, you can use the `/v2/locators/:locator
 
 <endpoints>
   <endpoint method="get" path="/v2/locators/:locator_id/locations" href="#list-all-locations"/>
-  <endpoint method="get" path="/v2/locators/:locator_id/locations/:locations_id" href="#retrieve-a-location"/>
+  <endpoint method="get" path="/v2/locators/:locator_id/locations/:location_id" href="#retrieve-a-location"/>
   <endpoint method="post" path="/v2/locators/:locator_id/locations" href="#create-a-location"/>
   <endpoint method="put" path="/v2/locators/:locator_id/locations/:location_id" href="#update-a-location"/>
   <endpoint method="delete" path="/v2/locators/:locator_id/locations/:location_id" href="#delete-a-location"/>
@@ -74,7 +74,10 @@ Picture url to illustrate the location.
 </attribute>
 
 <attribute name="link" type="string">
-Link of the location.
+
+Link of the location. Users will be pointed to that link when clicking on the location in the locator results page.
+It can be an absolute http(s) link, but in most cases it should just be the path to a Vyte booking page. ex: `/exam-desert-breath`.
+
 </attribute>
 
 <attribute name="extid" type="string">
@@ -255,10 +258,16 @@ curl --request GET 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/loc
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/locations HTTP/1.1
+POST /v2/locators/:locator_id/locations HTTP/1.1
 ```
 
-<attributes title="Path parameters" :isEmpty=true />
+<attributes title="Path parameters">
+<attribute name="locator_id" type="string" :required=true>
+
+The `id` of the locator.
+
+</attribute>
+</attributes>
 
 <attributes title="Query parameters" :isEmpty=true />
 
@@ -324,7 +333,7 @@ Returns the created `location` if a valid body was provided, and returns an erro
 > CODE SAMPLE
 
 ```shell
-curl --request POST 'https://api.vyte.in/v2/locations' \
+curl --request POST 'https://api.vyte.in/v2/locators/5ef9f3a3993a4d632a5c73e0/locations' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -339,9 +348,7 @@ curl --request POST 'https://api.vyte.in/v2/locations' \
   "address": "Egypt",
   "picture_url": "https://twistedsifter.files.wordpress.com/2014/03/desert-breath-land-art-installation-sahara-egypt-crop-circle-dast-arteam-2.jpg",
   "link": "/exam-desert-breath",
-  "extid": "our-mysterious-meeting-place",
-  "org": "5ef0cb128f284274b2361323",
-  "locator": "5ef9f3a3993a4d632a5c73e0",
+  "extid": "our-mysterious-meeting-place"
 }'
 ```
 
