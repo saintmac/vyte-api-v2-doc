@@ -70,7 +70,7 @@ Button label.
 </attribute>
 
 <attribute name="geolocation" type="boolean">
-Whether or not you to activate the around me feature.
+Whether or not to show a Geolocation button on the address field.
 </attribute>
 
 <attribute name="_id" type="string">
@@ -78,7 +78,9 @@ Unique identifier for the locator.
 </attribute>
 
 <attribute name="handle" type="string">
-Another unique identifier set by yourself.
+
+A unique identifier that let you access the locator at `https://vyte.in/locators/:handle`
+
 </attribute>
 
 <attribute name="org" type="string">
@@ -88,7 +90,9 @@ The `id`of your organization.
 </attribute>
 
 <attribute name="postcode_filter" type="string">
-If you want to restrain the adress to a certain Postcode.
+
+A [Regex](https://en.wikipedia.org/wiki/Regular_expression) to restrain the adress to certain postcodes.
+
 </attribute>
 
 <attribute name="address_postfix" type="string">
@@ -108,7 +112,7 @@ Default is `en`.
 
 <attribute name="max_distance" type="number">
 
-Maximum distance around the locations.
+Maximum distance (in meters) around the locations.
 
 </attribute>
 
@@ -128,6 +132,7 @@ Title on the locator page.
 ::::
 
 :::: right
+
 > THE LOCATOR OBJECT
 
 ```json light-code
@@ -184,6 +189,7 @@ Returns an array of `Locator` objects if there is some existing locators. Otherw
 ::::
 
 :::: right
+
 > CODE SAMPLE
 
 ```shell
@@ -218,7 +224,7 @@ curl --request GET 'https://api.vyte.in/v2/locators' \
     "max_distance": 150000,
     "message": "Find on of our locations around you for the meeting.",
     "title": "Available locations"
-  },
+  }
 ]
 ```
 
@@ -256,6 +262,7 @@ Returns a `Locator` object if a valid handle was provided, and returns an error 
 ::::
 
 :::: right
+
 > CODE SAMPLE
 
 ```shell
@@ -356,7 +363,7 @@ Whether or not you to activate the around me feature.
 
 <attribute name="handle" type="string" :required=true>
 
-A unique identifier set by yourself. *The namespace is global for all the organizations so the* `handle` *must be unique in the global namespace.*
+A unique identifier set by yourself. _The namespace is global for all the organizations so the_ `handle` _must be unique in the global namespace._
 
 </attribute>
 
@@ -473,7 +480,7 @@ curl --request POST 'https://api.vyte.in/v2/locators' \
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/locators HTTP/1.1
+POST /v2/locators/:locator_id HTTP/1.1
 ```
 
 <attributes title="Path parameters">
@@ -531,7 +538,7 @@ Whether or not you to activate the around me feature.
 
 <attribute name="handle" type="string">
 
-A unique identifier set by yourself. *The namespace is global for all the organizations so the* `handle` *must be unique in the global namespace.*
+A unique identifier set by yourself. _The namespace is global for all the organizations so the_ `handle` _must be unique in the global namespace._
 
 </attribute>
 
