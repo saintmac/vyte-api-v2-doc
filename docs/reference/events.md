@@ -41,8 +41,25 @@ There is no DELETE endpoint provided for the Event API yet. Use the `/v2/events/
 Information about the status of the event.
 
 <attributes isChild=true>
-  <attribute name="flag" type="boolean" :parentNames="['confirmed']" isChild=true isLast=true>
-    Whether or not the event is confirmed.
+  <attribute name="flag" type="boolean" :parentNames="['confirmed']" isChild=true>
+
+Whether or not the event is confirmed.
+
+  </attribute>
+  <attribute name="updated_at" type="date" :parentNames="['confirmed']" isChild=true>
+
+Date the event was confirmed or canceled expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601).
+  
+  </attribute>
+  <attribute name="date_id" type="string" :parentNames="['confirmed']" isChild=true>
+
+`id` of the confirmed date for the event.
+
+  </attribute>
+  <attribute name="place_id" type="string" :parentNames="['confirmed']" isChild=true isLast=true>
+
+`id` of the confirmed place for the event.
+
   </attribute>
 </attributes>
 
@@ -205,16 +222,85 @@ Information about third-party. Useful if the event was created thanks to the thi
 ```json light-code
 {
   "confirmed": {
-    "flag": true
+    "flag": true,
+    "updated_at": "2020-08-31T09:22:37.910Z",
+    "date_id": "5f4cc0d72285556ee2c6332d",
+    "place_id": "5f4cc0d72285555c38c6332e"
   },
   "created_by": {
     "email": "user.name@domain.com"
   },
   "dates": [
     {
+      "created_by": {
+        "user": "5eecc40bb2181073ac6ff375"
+      },
+      "votes": {
+        "yes": [
+          {
+            "created_by": {
+              "user": "5eecc40bb2181073ac6ff375"
+            },
+            "_id": "5f4cc0d72285556728c63330"
+          }
+        ],
+        "no": []
+      },
       "all_day": false,
-      "date": "2017-11-10T11:00:00.000Z",
-      "end_date": "2017-11-10T12:00:00.000Z"
+      "confirmed": false,
+      "confirmed_invitees": [],
+      "_id": "5f4cc0d72285556ee2c6332d",
+      "date": "2020-07-16T07:00:00.000Z",
+      "end_date": "2020-07-16T08:00:00.000Z",
+      "updatedAt": "2020-08-31T09:22:37.930Z",
+      "createdAt": "2020-08-31T09:20:23.360Z"
+    },
+    {
+      "created_by": {
+        "user": "5eecc40bb2181073ac6ff375"
+      },
+      "votes": {
+        "yes": [
+          {
+            "created_by": {
+              "user": "5eecc40bb2181073ac6ff375"
+            },
+            "_id": "5f4cc0d722855508bac63331"
+          }
+        ],
+        "no": []
+      },
+      "all_day": false,
+      "confirmed": false,
+      "confirmed_invitees": [],
+      "_id": "5f4cc0d72285557bfcc6332c",
+      "date": "2020-07-16T13:00:00.000Z",
+      "end_date": "2020-07-16T13:00:00.000Z",
+      "updatedAt": "2020-08-31T09:22:37.930Z",
+      "createdAt": "2020-08-31T09:20:23.360Z"
+    }
+  ],
+  "places": [
+    {
+      "created_by": {
+        "user": "5eecc40bb2181073ac6ff375"
+      },
+      "votes": {
+        "yes": [
+          {
+            "created_by": {
+              "user": "5eecc40bb2181073ac6ff375"
+            },
+            "_id": "5f4cc0d72285550744c63332"
+          }
+        ],
+        "no": []
+      },
+      "source": "app",
+      "_id": "5f4cc0d72285555c38c6332e",
+      "name": "Place for the meeting.",
+      "updatedAt": "2020-08-31T09:22:37.930Z",
+      "createdAt": "2020-08-31T09:20:23.360Z"
     }
   ],
   "invitees": [
@@ -235,19 +321,17 @@ Information about third-party. Useful if the event was created thanks to the thi
       "body": "I’m booking appointment about this"
     }
   ],
-  "places": [
-    {
-      "name": "Office name",
-      "address": "12 rue de Rivoli, 75004, Paris, France"
-    }
-  ],
   "timezone": "Europe/Paris",
   "title": "Appointment about topic",
   "vyteme": true,
   "third_party": {
     "ct": "creator_token",
     "app": "app_id",
-    "group_ids": ["user123", "group456", "companyABC"]
+    "group_ids": [
+      "user123",
+      "group456",
+      "companyABC"
+    ]
   }
 }
 ```
