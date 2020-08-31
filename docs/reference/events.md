@@ -50,11 +50,15 @@ Information about the status of the event.
 
 <attribute name="created_by" type="hash">
 
-Information about the user who created the event. If it is a smart group scheduling event, the `created_by` is the user who create the event; if it is a booking page event, the `created_by` is the user who exposed his availability.
+Information about the user who creates the event. If it is a smart group scheduling event, the `created_by` is the user who creates the event; if it is a booking page event, the `created_by` is the user who exposed his availability.
 
 <attributes isChild=true>
-  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true isLast=true>
+  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true>
     The creator email.
+  </attribute>
+
+  <attribute name="user" type="string" :parentNames="['created_by']" isChild=true isLast=true>
+    The creator id.
   </attribute>
 </attributes>
 
@@ -279,13 +283,14 @@ Search events by title using a regex.
   <attribute name="filter" type="string">
 
 Filter events by status. Value can be `confirmed` or `upcoming`.
+*If no value is provided all events will be returned.*
 
   </attribute>
 </attributes>
 
 <returns title="Returns">
 
-An array of `Event` objects. If there is no events available, return an empty array.
+An array of `Event` objects. If there is no events available, returns an empty array.
 
 </returns>
 :::::
@@ -554,11 +559,15 @@ Information about the status of the event.
 
 <attribute name="created_by" type="hash" :required="true">
 
-Information about the user who created the event. If it is a smart group scheduling event, the `created_by` is the user who create the event; if it is a booking page event, the `created_by` is the user who exposed his availability.
+Information about the user who creates the event. If it is a smart group scheduling event, the `created_by` is the user who creates the event; if it is a booking page event, the `created_by` is the user who exposed his availability.
 
 <attributes isChild=true>
-  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true isLast=true :required="true">
+  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true :required="true" details="if no user id is provided">
     The creator email.
+  </attribute>
+
+  <attribute name="user" type="string" :parentNames="['created_by']" isChild=true isLast=true :required=true details="if no email is provided">
+    The creator id.
   </attribute>
 </attributes>
 
@@ -876,30 +885,6 @@ Id of the event you want to update. Found as `_id` in event resources.
 
 <attributes title="Body parameters">
 
-<attribute name="confirmed" type="hash">
-
-Information about the status of the event.
-
-<attributes isChild=true>
-  <attribute name="flag" type="boolean" :parentNames="['confirmed']" isChild=true isLast=true>
-    Whether or not the event is confirmed.
-  </attribute>
-</attributes>
-
-</attribute>
-
-<attribute name="created_by" type="hash">
-
-Information about the user who created the event. If it is a smart group scheduling event, the `created_by` is the user who create the event; if it is a booking page event, the `created_by` is the user who exposed his availability.
-
-<attributes isChild=true>
-  <attribute name="email" type="string" :parentNames="['created_by']" isChild=true isLast=true :required="true">
-    The creator email.
-  </attribute>
-</attributes>
-
-</attribute>
-
 <attribute name="dates" type="array of hashes">
 
 Available dates for the event. _If no dates are provided, the first user will be able to propose some dates._
@@ -922,50 +907,6 @@ Ending date of the event. The date is expressed according to [ISO 8601](https://
 
 </attribute>
 
-<attribute name="invitees" type="array of hashes">
-
-Information about the invitees.
-
-<attributes isChild=true>
-  <attribute name="full_name" type="string" :parentNames="['invitees']" isChild=true>
-    Full name of the invitee.
-  </attribute>
-  <attribute name="email" type="string" :parentNames="['invitees']" isChild=true :required="true">
-    Email of the invitee.
-  </attribute>
-  <attribute name="phone" type="string" :parentNames="['invitees']" isChild=true>
-    Phone number of the invitee.
-  </attribute>
-</attributes>
-
-</attribute>
-
-<attribute name="lang" type="string">
-
-Language of the event. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
-Default is `en`.
-
-</attribute>
-
-<attribute name="locale" type="string">
-
-Locale of the event used for date formatting. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
-Default is `en`.
-
-</attribute>
-
-<attribute name="messages" type="list of hashes">
-
-You can provide a first message sent in the event conversation. Moreover, this message will be in the body of the first mail sent to the event invitees.
-
-<attributes isChild=true>
-  <attribute name="body" type="string" :parentNames="['messages']" isParentArray=true isChild=true isLast=true :required="true">
-    Body of the message.
-  </attribute>
-</attributes>
-
-</attribute>
-
 <attribute name="places" type="array of hashes">
 
 Available places for the event.
@@ -980,23 +921,6 @@ Address of the places. It can be a _url_, a _mailing address_, a _phone number_ 
 
   </attribute>
 </attributes>
-
-</attribute>
-
-<attribute name="timezone" type="string">
-
-The event timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
-
-</attribute>
-
-<attribute name="title" type="string">
-The event title.
-</attribute>
-
-<attribute name="vyteme" type="boolean">
-
-Whether or not it is a `vyteme` event. If you need information about `vyteme` event, please check up the [introduction](README.md#vyteme-or-not-vyteme) part.
-Default is `false`.
 
 </attribute>
 
