@@ -7,8 +7,12 @@
 ## Development
 
 ```bash
-yarn dev
-yarn build
+npm run dev
+npm run build
 ```
 
 For more details, please head VuePress's [documentation](https://v1.vuepress.vuejs.org/).
+
+## Deployment (CD thanks to Github Actions)
+
+Deployment is automacally achieved when a git action on branch master is triggered (push, merge).
