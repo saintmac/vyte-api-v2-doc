@@ -12,7 +12,7 @@ We remind here that the use of the Vyte API is reserved to pro members. Please r
 
 ## Create an organization
 
-To be able to use the Vyte API, you have to create first an organization.
+To be able to use the Vyte API, you first have to create an organization.
 
 To do this, go to this page [https://www.vyte.in/settings/organization/setup](https://www.vyte.in/settings/organization/setup), give a name to your organization and click on **Create my organization**.
 
@@ -28,7 +28,7 @@ Once your organization is created, you can now access your Vyte API key.
 
 ## Test your API key
 
-Now you will be able to perform your first request. To stay simple, we will just test if your API key work well.
+Now you will be able to perform your first request. To stay simple, we will just test if your API key works well.
 
 To do this, just make an HTTP request to `https://api.vyte.in/v2/auth/test` and authenticate the request with your API key :
 
