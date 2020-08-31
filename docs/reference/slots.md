@@ -50,7 +50,7 @@ Duration of the appointment in minutes.
   </attribute>
   <attribute name="emails" type="string" :required=true details="you need either emails or user_ids">
 
-Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
+Email(s) of people that have already signed up with on Vyte and with whom you want to book an appointment. It must be separated with a comma and if several emails are provided, it returns the slots at which all users are available.
 
   </attribute>
   <attribute name="users" type="string" :required=true details="you need either emails or user_ids">
@@ -217,7 +217,7 @@ Duration of the appointment in minutes.
   </attribute>
   <attribute name="emails" type="string" :required=true details="you need either emails or user_ids">
 
-Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
+Email(s) of people that have already signed up with on Vyte and with whom you want to book an appointment. It must be separated with a comma and if several emails are provided, it returns the slots at which all users are available.
 
   </attribute>
   <attribute name="users" type="string" :required=true details="you need either emails or user_ids">
