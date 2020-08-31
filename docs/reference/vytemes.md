@@ -1,7 +1,5 @@
 ---
-{
-  "pageClass": "reference-page"
-}
+{ "pageClass": "reference-page" }
 ---
 
 # Vytemes
@@ -36,19 +34,31 @@ You can use the `/v2/vytemes` endpoints to manage the Vyte Page of your users.
 
 <attribute name="nickname" type="string">
 
-Nickname for the user Vyte Page.
+Nickname for the user Vyte Page. The nickname is the last part of the path to access the Vyte booking page. Ex: if the nickname is `john-doe`, the booking page will be accessible at `https://vyte.in/john-doe`.
 
 </attribute>
 
 <attribute name="message" type="string">
 
-Message for the user Vyte Page.
+Message shown on the Vyte page.
 
 </attribute>
 
 <attribute name="belongs_to" type="string">
 
 The `id` of the user who own the Vyte Page.
+
+</attribute>
+
+<attribute name="secondary" type="boolean">
+
+Set to true if you want to set a second Vyte page for the user. Secondary Vyte Pages can only be set and customized through the API.
+
+</attribute>
+
+<attribute name="active" type="boolean">
+
+Whether or not the Vyte page is active.
 
 </attribute>
 
@@ -234,6 +244,8 @@ Id of the place in your own database/source.
   "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
   "belongs_to": "5f1b018dc1ac5dc46efc0139",
+  "secondary": false,
+  "active": true,
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
@@ -320,6 +332,8 @@ curl \
 {
   "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
+  "secondary": false,
+  "active": true,
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
@@ -387,13 +401,25 @@ Nickname for the user Vyte Page.
 
 <attribute name="message" type="string">
 
-Message for the user Vyte Page.
+Message shown on the Vyte page.
 
 </attribute>
 
-<attribute name="belongs_to" type="string">
+<attribute name="belongs_to" type="string" :required=true>
 
 The `id` of the user who own the Vyte Page.
+
+</attribute>
+
+<attribute name="secondary" type="boolean" details="default to false">
+
+Set to true if you want to set a second Vyte page for the user. Secondary Vyte Pages can only be set and customized through the API.
+
+</attribute>
+
+<attribute name="active" type="boolean" details="default to true">
+
+Whether or not the Vyte page is active.
 
 </attribute>
 
@@ -631,6 +657,8 @@ curl \
 {
   "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
+  "secondary": false,
+  "active": true,
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
@@ -698,19 +726,31 @@ The nickname of the Vyte Page.
 
 <attribute name="nickname" type="string">
 
-Nickname for the user Vyte Page.
+Nickname for the user Vyte Page. The nickname is the last part of the path to access the Vyte booking page. Ex: if the nickname is `john-doe`, the booking page will be accessible at `https://vyte.in/john-doe`.
 
 </attribute>
 
 <attribute name="message" type="string">
 
-Message for the user Vyte Page.
+Message shown on the Vyte page.
 
 </attribute>
 
 <attribute name="belongs_to" type="string">
 
 The `id` of the user who own the Vyte Page.
+
+</attribute>
+
+<attribute name="secondary" type="boolean" details="default to false">
+
+Set to true if you want to set a second Vyte page for the user. Secondary Vyte Pages can only be set and customized through the API.
+
+</attribute>
+
+<attribute name="active" type="boolean" details="default to true">
+
+Whether or not the Vyte page is active.
 
 </attribute>
 
@@ -948,6 +988,8 @@ curl \
 {
   "nickname": "john-doe-acme",
   "message": "Welcome to my booking page",
+  "secondary": false,
+  "active": true,
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
