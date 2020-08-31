@@ -7,8 +7,8 @@ pageClass: reference-page
 ::::: panel
 :::: left
 You can use the `/v2/teams` endpoints to manage the teams for your organization.
-The `Team` object is really versatile so that you can represent all types of organizational structure, from structural to matrix structure.
-That's why you can be admin of a team whereas you are not member of the team.
+The `Team` object is really versatile so that you can represent all types of organizational structure, from hierarchical to matrix structure.
+That's why you can be an admin of a team while not being a member of that team
 ::::
 
 :::: right
@@ -21,8 +21,8 @@ That's why you can be admin of a team whereas you are not member of the team.
   <endpoint method="post" path="/v2/team" href="#create-a-team"/>
   <endpoint method="put" path="/v2/team/:team_id" href="#update-a-team"/>
   <endpoint method="delete" path="/v2/team/:team_id" href="#delete-a-team"/>
-  <endpoint method="post" path="/v2/team/:team_id/events" href="#create-a-team-s-event"/>
-  <endpoint method="get" path="/v2/team/:team_id/events" href="#list-all-team-s-event"/>
+  <endpoint method="post" path="/v2/team/:team_id/events" href="#book-an-event-with-a-member-of-a-team"/>
+  <endpoint method="get" path="/v2/team/:team_id/events" href="#list-team-members-events"/>
 </endpoints>
 
 ::::
@@ -37,13 +37,13 @@ That's why you can be admin of a team whereas you are not member of the team.
 <attributes title="Attributes">
 <attribute name="admins" type="array of string">
 
-Array containing the `_id` of the admins of the team.
+Array containing the user `_id` of the admins of the team.
 
 </attribute>
 
 <attribute name="members" type="array of string">
 
-Array containing the `_id` of the members of the team.
+Array containing the user `_id` of the members of the team.
 
 </attribute>
 
@@ -73,7 +73,7 @@ The name of the team.
 
 <attribute name="level_name" type="string">
 
-The level name of the team.
+The level name of the team. For instance: "top management", "regional team", "agency".
 
 </attribute>
 </attributes>
@@ -81,22 +81,18 @@ The level name of the team.
 ::::
 
 :::: right
+
 > THE LOCATOR OBJECT
 
 ```json light-code light-code
 {
-  "admins": [
-    "5f1077cf21f43b0b99660619"
-  ],
-  "members": [
-    "5f1077cf21f43b0b99660619",
-    "5f1077e1eaf7c424af51a847",
-  ],
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
   "_id": "5ef9e5489b10b33ad0898ca3",
   "organization": "5ef0cb128f284274b2361323",
   "extid": "2",
   "name": "sales",
-  "level_name": "agency",
+  "level_name": "agency"
 }
 ```
 
@@ -121,13 +117,14 @@ GET /v2/teams HTTP/1.1
 
 <returns title="Returns">
 
-Returns an array of `Team` objects if there is some existing teams. Otherwise, returns an empty array.
+Returns an array of `Team` objects if there is some existing teams in your organization. Otherwise, returns an empty array.
 
 </returns>
 
 ::::
 
 :::: right
+
 > CODE SAMPLE
 
 ```shell
@@ -140,18 +137,13 @@ curl --request GET 'https://api.vyte.in/v2/teams/' \
 ```json light-code
 [
   {
-    "admins": [
-      "5f1077cf21f43b0b99660619"
-    ],
-    "members": [
-      "5f1077cf21f43b0b99660619",
-      "5f1077e1eaf7c424af51a847",
-    ],
+    "admins": ["5f1077cf21f43b0b99660619"],
+    "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
     "_id": "5ef9e5489b10b33ad0898ca3",
     "organization": "5ef0cb128f284274b2361323",
     "extid": "2",
     "name": "sales",
-    "level_name": "agency",
+    "level_name": "agency"
   }
 ]
 ```
@@ -190,6 +182,7 @@ Returns a `Team` object if a valid id was provided, and returns an error otherwi
 ::::
 
 :::: right
+
 > CODE SAMPLE
 
 ```shell
@@ -201,18 +194,13 @@ curl --request GET 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
 
 ```json light-code
 {
-  "admins": [
-    "5f1077cf21f43b0b99660619"
-  ],
-  "members": [
-    "5f1077cf21f43b0b99660619",
-    "5f1077e1eaf7c424af51a847",
-  ],
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
   "_id": "5ef9e5489b10b33ad0898ca3",
   "organization": "5ef0cb128f284274b2361323",
   "extid": "2",
   "name": "sales",
-  "level_name": "agency",
+  "level_name": "agency"
 }
 ```
 
@@ -300,18 +288,13 @@ curl  --request POST 'https://api.vyte.in/v2/teams' \
 
 ```json light-code
 {
-  "admins": [
-    "5f1077cf21f43b0b99660619"
-  ],
-  "members": [
-    "5f1077cf21f43b0b99660619",
-    "5f1077e1eaf7c424af51a847",
-  ],
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
   "_id": "5ef9e5489b10b33ad0898ca3",
   "organization": "5ef0cb128f284274b2361323",
   "extid": "2",
   "name": "sales",
-  "level_name": "agency",
+  "level_name": "agency"
 }
 ```
 
@@ -319,7 +302,7 @@ curl  --request POST 'https://api.vyte.in/v2/teams' \
 
 :::::
 
-## Udpate a team
+## Update a team
 
 ::::: panel
 :::: left
@@ -395,18 +378,13 @@ curl  --request PUT 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
 
 ```json light-code
 {
-  "admins": [
-    "5f1077cf21f43b0b99660619"
-  ],
-  "members": [
-    "5f1077cf21f43b0b99660619",
-    "5f1077e1eaf7c424af51a847",
-  ],
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
   "_id": "5ef9e5489b10b33ad0898ca3",
   "organization": "5ef0cb128f284274b2361323",
   "extid": "2",
   "name": "sales",
-  "level_name": "company",
+  "level_name": "company"
 }
 ```
 
@@ -463,7 +441,9 @@ curl --request DELETE 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
 
 :::::
 
-## Create a team's event
+## Book an event with a member of a team
+
+This endpoint will let you book an event with a member of the team. Vyte will assign that event to a member of the team depending on several customizable rules. Contact our support via <intercom-button /> or via email at [support@vyte.in](mailto:support@vyte.in) to know more.
 
 ::::: panel
 :::: left
@@ -483,6 +463,8 @@ The `_id` of the team.
 </attributes>
 
 <attributes title="Body parameters">
+
+This is finally an `Event` object as for a classic event creation.
 
 <attribute name="confirmed" type="hash">
 
@@ -510,7 +492,7 @@ Information about the user who created the event. If it is a smart group schedul
 
 <attribute name="dates" type="array of hashes">
 
-Available dates for the event. *If no dates are provided, the first user will be able to propose some dates.*
+Available dates for the event. _If no dates are provided, the first user will be able to propose some dates._
 
 <attributes isChild=true>
   <attribute name="all_day" type="boolean" :parentNames="['dates']" isChild=true>
@@ -584,7 +566,7 @@ Available places for the event.
   </attribute>
   <attribute name="address" type="string" :parentNames="['places']" isChild=true isLast=true>
 
-Address of the places. It can be a *url*, a *mailing address*, a *phone number* or whatever you consider as a meeting place.
+Address of the places. It can be a _url_, a _mailing address_, a _phone number_ or whatever you consider as a meeting place.
 
   </attribute>
 </attributes>
@@ -601,10 +583,9 @@ The event timezone expressed according to [TZ database name](https://en.wikipedi
 The event title.
 </attribute>
 
-<attribute name="vyteme" type="boolean">
+<attribute name="vyteme" type="boolean" :required=true details="has to be set to true">
 
 Whether or not it is a `vyteme` event. If you need information about `vyteme` event, please check up the [introduction](/reference/) part.
-Default is `false`.
 
 </attribute>
 
@@ -797,7 +778,7 @@ curl --request POST 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/event
 
 :::::
 
-## List all team's events
+## List team members' events
 
 List all the events in which team members are involved to (as an administrator or an invitee).
 
@@ -857,222 +838,222 @@ curl \
 
 ```json light-code
 [
-    {
-        "_id": "569c3b6105dc780300951bd0",
-        "key_store": "569c3b6105dc780300951bd7",
-        "email": "reply-to-participants-to-meeting-for-project-vqdhhcxqd@vyte.in",
-        "invitees_length": 3,
-        "createdAt": "2016-01-18T01:09:53.477Z",
-        "updatedAt": "2016-01-18T01:10:05.670Z",
-        "alias": "alias_web_522984fb35eaa70200000007_1453079356811",
-        "app_url": "https://www.vyte.in",
-        "lang": "en",
-        "locale": "en",
-        "timezone": "Europe/Paris",
-        "title": "Meeting for project",
-        "__v": 3,
-        "version": 3,
-        "third_party": {
-            "app": "569c2e2fa28cc30300778c4c",
-            "group_ids": ["project_85fc5"],
-            "name": "superapp"
-        },
-        "ics_sequence": 0,
-        "confirmed": {
-            "updated_at": null,
-            "flag": false
-        },
-        "places": [
-            {
-                "createdAt": "2016-01-18T01:09:53.290Z",
-                "updatedAt": "2016-01-18T01:10:05.665Z",
-                "name": "Appear.in",
-                "address": "http://appear.in/cool-meeting",
-                "icon": "P",
-                "_id": "569c3b6105dc780300951bd3",
-                "votes": {
-                    "no": [],
-                    "yes": [
-                        {
-                            "_id": "569c3b6105dc780300951bd6",
-                            "createdAt": "2016-01-18T01:09:54.161Z",
-                            "updatedAt": "2016-01-18T01:10:05.664Z",
-                            "created_by": {
-                                "user": "522984fb35eaa70200000007"
-                            }
-                        }
-                    ]
-                },
-                "created_by": {
-                    "user": "522984fb35eaa70200000007"
-                },
-                "source": "Appear.in"
-            }
-        ],
-        "dates": [
-            {
-                "createdAt": "2016-01-18T01:10:05.665Z",
-                "updatedAt": "2016-01-18T01:10:05.665Z",
-                "date": "2016-01-22T10:00:00.000Z",
-                "end_date": "2016-01-22T11:00:00.000Z",
-                "_id": "569c3b6da28cc30300778c72",
-                "votes": {
-                    "no": [],
-                    "yes": [
-                        {
-                            "_id": "569c3b6da28cc30300778c74",
-                            "created_by": {
-                                "user": "522984fb35eaa70200000007"
-                            }
-                        }
-                    ]
-                },
-                "created_by": {
-                    "user": "522984fb35eaa70200000007"
-                },
-                "all_day": false
-            },
-            {
-                "createdAt": "2016-01-18T01:10:05.665Z",
-                "updatedAt": "2016-01-18T01:10:05.665Z",
-                "date": "2016-01-22T15:00:00.000Z",
-                "end_date": "2016-01-22T16:00:00.000Z",
-                "_id": "569c3b6da28cc30300778c73",
-                "votes": {
-                    "no": [],
-                    "yes": [
-                        {
-                            "_id": "569c3b6da28cc30300778c76",
-                            "created_by": {
-                                "user": "522984fb35eaa70200000007"
-                            }
-                        }
-                    ]
-                },
-                "created_by": {
-                    "user": "522984fb35eaa70200000007"
-                },
-                "all_day": false
-            }
-        ],
-        "declines": [],
-        "messages": [
-            {
-                "from": "martin.saintmac@gmail.com",
-                "createdAt": "2016-01-18T01:09:53.290Z",
-                "updatedAt": "2016-01-18T01:10:05.664Z",
-                "body": "Another meeting for that project",
-                "_id": "569c3b6105dc780300951bd4",
-                "created_by": {
-                    "user": "522984fb35eaa70200000007"
-                }
-            }
-        ],
-        "invitees": [],
-        "created_by": {
-            "full_name": "Martin Saint-Macary",
-            "picture_url": "https://lh3.googleusercontent.com/-PWeG6KmcyVw/AAAAAAAAAAI/AAAAAAAAJa4/kcQXhsmUmTQ/photo.jpg",
-            "user": "522984fb35eaa70200000007",
-            "email": "martin.saintmac@gmail.com"
-        }
+  {
+    "_id": "569c3b6105dc780300951bd0",
+    "key_store": "569c3b6105dc780300951bd7",
+    "email": "reply-to-participants-to-meeting-for-project-vqdhhcxqd@vyte.in",
+    "invitees_length": 3,
+    "createdAt": "2016-01-18T01:09:53.477Z",
+    "updatedAt": "2016-01-18T01:10:05.670Z",
+    "alias": "alias_web_522984fb35eaa70200000007_1453079356811",
+    "app_url": "https://www.vyte.in",
+    "lang": "en",
+    "locale": "en",
+    "timezone": "Europe/Paris",
+    "title": "Meeting for project",
+    "__v": 3,
+    "version": 3,
+    "third_party": {
+      "app": "569c2e2fa28cc30300778c4c",
+      "group_ids": ["project_85fc5"],
+      "name": "superapp"
     },
-    {
-        "_id": "569c3afaa28cc30300778c69",
-        "key_store": "569c3afba28cc30300778c71",
-        "email": "reply-to-participants-to-meeting-martin-saint-macary-martin-saint-macary-awtdmgsnm@vyte.in",
-        "invitees_length": 2,
-        "createdAt": "2016-01-18T01:08:11.524Z",
-        "updatedAt": "2016-01-18T01:08:12.691Z",
-        "alias": "alias_web_522984fb35eaa70200000007_1453079284514",
-        "app_url": "https://www.vyte.in",
-        "lang": "en",
-        "locale": "en",
-        "timezone": "Europe/Paris",
-        "title": "Meeting Martin Saint-Macary, Martin Saint-Macary",
-        "__v": 1,
-        "version": 1,
-        "third_party": {
-            "app": "569c2e2fa28cc30300778c4c",
-            "group_ids": ["project_85fc5"],
-            "name": "superapp"
-        },
-        "ics_sequence": 0,
-        "confirmed": {
-            "updated_at": null,
-            "flag": false
-        },
-        "places": [
+    "ics_sequence": 0,
+    "confirmed": {
+      "updated_at": null,
+      "flag": false
+    },
+    "places": [
+      {
+        "createdAt": "2016-01-18T01:09:53.290Z",
+        "updatedAt": "2016-01-18T01:10:05.665Z",
+        "name": "Appear.in",
+        "address": "http://appear.in/cool-meeting",
+        "icon": "P",
+        "_id": "569c3b6105dc780300951bd3",
+        "votes": {
+          "no": [],
+          "yes": [
             {
-                "createdAt": "2016-01-18T01:08:10.933Z",
-                "updatedAt": "2016-01-18T01:08:12.688Z",
-                "name": "Skype",
-                "address": "martin.saint-macary",
-                "_id": "569c3afaa28cc30300778c6c",
-                "votes": {
-                    "no": [],
-                    "yes": [
-                        {
-                            "_id": "569c3afba28cc30300778c6f",
-                            "createdAt": "2016-01-18T01:08:12.688Z",
-                            "updatedAt": "2016-01-18T01:08:12.688Z",
-                            "created_by": {
-                                "user": "522984fb35eaa70200000007"
-                            }
-                        }
-                    ]
-                },
-                "created_by": {
-                    "user": "522984fb35eaa70200000007"
-                },
-                "source": "app"
-            },
-            {
-                "createdAt": "2016-01-18T01:08:10.934Z",
-                "updatedAt": "2016-01-18T01:08:12.689Z",
-                "name": "Google Hangouts",
-                "address": "martin@vytein.com",
-                "_id": "569c3afaa28cc30300778c6b",
-                "votes": {
-                    "no": [],
-                    "yes": [
-                        {
-                            "_id": "569c3afba28cc30300778c70",
-                            "createdAt": "2016-01-18T01:08:12.688Z",
-                            "updatedAt": "2016-01-18T01:08:12.688Z",
-                            "created_by": {
-                                "user": "522984fb35eaa70200000007"
-                            }
-                        }
-                    ]
-                },
-                "created_by": {
-                    "user": "522984fb35eaa70200000007"
-                },
-                "source": "app"
+              "_id": "569c3b6105dc780300951bd6",
+              "createdAt": "2016-01-18T01:09:54.161Z",
+              "updatedAt": "2016-01-18T01:10:05.664Z",
+              "created_by": {
+                "user": "522984fb35eaa70200000007"
+              }
             }
-        ],
-        "dates": [],
-        "declines": [],
-        "messages": [
-            {
-                "from": "martin.saintmac@gmail.com",
-                "createdAt": "2016-01-18T01:08:10.934Z",
-                "updatedAt": "2016-01-18T01:08:12.688Z",
-                "body": "Hi Martin, please find my suggestions for our 15 min call setup session on vyte.in. Best",
-                "_id": "569c3afaa28cc30300778c6d",
-                "created_by": {
-                    "user": "522984fb35eaa70200000007"
-                }
-            }
-        ],
-        "invitees": [],
+          ]
+        },
         "created_by": {
-            "full_name": "Martin Saint-Macary",
-            "picture_url": "https://lh3.googleusercontent.com/-PWeG6KmcyVw/AAAAAAAAAAI/AAAAAAAAJa4/kcQXhsmUmTQ/photo.jpg",
-            "user": "522984fb35eaa70200000007",
-            "email": "martin.saintmac@gmail.com"
+          "user": "522984fb35eaa70200000007"
+        },
+        "source": "Appear.in"
+      }
+    ],
+    "dates": [
+      {
+        "createdAt": "2016-01-18T01:10:05.665Z",
+        "updatedAt": "2016-01-18T01:10:05.665Z",
+        "date": "2016-01-22T10:00:00.000Z",
+        "end_date": "2016-01-22T11:00:00.000Z",
+        "_id": "569c3b6da28cc30300778c72",
+        "votes": {
+          "no": [],
+          "yes": [
+            {
+              "_id": "569c3b6da28cc30300778c74",
+              "created_by": {
+                "user": "522984fb35eaa70200000007"
+              }
+            }
+          ]
+        },
+        "created_by": {
+          "user": "522984fb35eaa70200000007"
+        },
+        "all_day": false
+      },
+      {
+        "createdAt": "2016-01-18T01:10:05.665Z",
+        "updatedAt": "2016-01-18T01:10:05.665Z",
+        "date": "2016-01-22T15:00:00.000Z",
+        "end_date": "2016-01-22T16:00:00.000Z",
+        "_id": "569c3b6da28cc30300778c73",
+        "votes": {
+          "no": [],
+          "yes": [
+            {
+              "_id": "569c3b6da28cc30300778c76",
+              "created_by": {
+                "user": "522984fb35eaa70200000007"
+              }
+            }
+          ]
+        },
+        "created_by": {
+          "user": "522984fb35eaa70200000007"
+        },
+        "all_day": false
+      }
+    ],
+    "declines": [],
+    "messages": [
+      {
+        "from": "martin.saintmac@gmail.com",
+        "createdAt": "2016-01-18T01:09:53.290Z",
+        "updatedAt": "2016-01-18T01:10:05.664Z",
+        "body": "Another meeting for that project",
+        "_id": "569c3b6105dc780300951bd4",
+        "created_by": {
+          "user": "522984fb35eaa70200000007"
         }
+      }
+    ],
+    "invitees": [],
+    "created_by": {
+      "full_name": "Martin Saint-Macary",
+      "picture_url": "https://lh3.googleusercontent.com/-PWeG6KmcyVw/AAAAAAAAAAI/AAAAAAAAJa4/kcQXhsmUmTQ/photo.jpg",
+      "user": "522984fb35eaa70200000007",
+      "email": "martin.saintmac@gmail.com"
     }
+  },
+  {
+    "_id": "569c3afaa28cc30300778c69",
+    "key_store": "569c3afba28cc30300778c71",
+    "email": "reply-to-participants-to-meeting-martin-saint-macary-martin-saint-macary-awtdmgsnm@vyte.in",
+    "invitees_length": 2,
+    "createdAt": "2016-01-18T01:08:11.524Z",
+    "updatedAt": "2016-01-18T01:08:12.691Z",
+    "alias": "alias_web_522984fb35eaa70200000007_1453079284514",
+    "app_url": "https://www.vyte.in",
+    "lang": "en",
+    "locale": "en",
+    "timezone": "Europe/Paris",
+    "title": "Meeting Martin Saint-Macary, Martin Saint-Macary",
+    "__v": 1,
+    "version": 1,
+    "third_party": {
+      "app": "569c2e2fa28cc30300778c4c",
+      "group_ids": ["project_85fc5"],
+      "name": "superapp"
+    },
+    "ics_sequence": 0,
+    "confirmed": {
+      "updated_at": null,
+      "flag": false
+    },
+    "places": [
+      {
+        "createdAt": "2016-01-18T01:08:10.933Z",
+        "updatedAt": "2016-01-18T01:08:12.688Z",
+        "name": "Skype",
+        "address": "martin.saint-macary",
+        "_id": "569c3afaa28cc30300778c6c",
+        "votes": {
+          "no": [],
+          "yes": [
+            {
+              "_id": "569c3afba28cc30300778c6f",
+              "createdAt": "2016-01-18T01:08:12.688Z",
+              "updatedAt": "2016-01-18T01:08:12.688Z",
+              "created_by": {
+                "user": "522984fb35eaa70200000007"
+              }
+            }
+          ]
+        },
+        "created_by": {
+          "user": "522984fb35eaa70200000007"
+        },
+        "source": "app"
+      },
+      {
+        "createdAt": "2016-01-18T01:08:10.934Z",
+        "updatedAt": "2016-01-18T01:08:12.689Z",
+        "name": "Google Hangouts",
+        "address": "martin@vytein.com",
+        "_id": "569c3afaa28cc30300778c6b",
+        "votes": {
+          "no": [],
+          "yes": [
+            {
+              "_id": "569c3afba28cc30300778c70",
+              "createdAt": "2016-01-18T01:08:12.688Z",
+              "updatedAt": "2016-01-18T01:08:12.688Z",
+              "created_by": {
+                "user": "522984fb35eaa70200000007"
+              }
+            }
+          ]
+        },
+        "created_by": {
+          "user": "522984fb35eaa70200000007"
+        },
+        "source": "app"
+      }
+    ],
+    "dates": [],
+    "declines": [],
+    "messages": [
+      {
+        "from": "martin.saintmac@gmail.com",
+        "createdAt": "2016-01-18T01:08:10.934Z",
+        "updatedAt": "2016-01-18T01:08:12.688Z",
+        "body": "Hi Martin, please find my suggestions for our 15 min call setup session on vyte.in. Best",
+        "_id": "569c3afaa28cc30300778c6d",
+        "created_by": {
+          "user": "522984fb35eaa70200000007"
+        }
+      }
+    ],
+    "invitees": [],
+    "created_by": {
+      "full_name": "Martin Saint-Macary",
+      "picture_url": "https://lh3.googleusercontent.com/-PWeG6KmcyVw/AAAAAAAAAAI/AAAAAAAAJa4/kcQXhsmUmTQ/photo.jpg",
+      "user": "522984fb35eaa70200000007",
+      "email": "martin.saintmac@gmail.com"
+    }
+  }
 ]
 ```
 
