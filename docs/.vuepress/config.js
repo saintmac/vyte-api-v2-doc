@@ -200,7 +200,7 @@ module.exports = {
             "scheduling-api-for-1-to-1-bookings",
             "add-scheduling-features-to-your-app-or-platform",
             "setup-team-booking",
-            "using-team-admins-for-notifications-and-event-management",
+            //"using-team-admins-for-notifications-and-event-management",
           ],
         },
       ],
