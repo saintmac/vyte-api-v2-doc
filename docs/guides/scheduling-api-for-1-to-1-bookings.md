@@ -12,7 +12,7 @@ This guide will teach you how to completely dispense with the Vyte interface and
 
 ### Using the API
 
-When someone wants an appointment with a the user, the first thing we have to do is to retrieve when the user is available (to draw a parallel with the Vyte Page, we want to retrieve what is shown in the datepicker).
+When someone wants an appointment with a the user, the first thing we have to do is to retrieve when the user is available (to draw a parallel with the Vyte Page, we want to retrieve what is shown in the slot picker).
 
 To achieve this, we will use the [Slots API](../reference/slots.md). We will perform a `GET` request to the `/v2/slots` endpoint. Here is a little reminder of the available query params :
 
@@ -22,18 +22,14 @@ To achieve this, we will use the [Slots API](../reference/slots.md). We will per
 Duration of the appointment in minutes.
 
   </attribute>
-  <attribute name="emails" type="string" :required=true>
+  <attribute name="emails" type="string" :required=true details="you need either emails or user_ids">
 
-Address of the person you want to book an appointment with. It has to be the address that person is signed up with on Vyte.
-
-**Required if no `user_id` is sent**
+Email(s) of people that have already signed up with on Vyte and with whom you want to book an appointment. It must be separated with a comma and if several emails are provided, it returns the slots at which all users are available.
 
   </attribute>
-  <attribute name="users" type="string" :required=true>
+  <attribute name="users" type="string" :required=true details="you need either emails or user_ids">
 
 List of `user_id` you want to book an appointment with. It must be separated with a comma and if several `user_id` are provided, it returns the slots to which all users are available.
-
-**Required if no `email` is sent**
 
   </attribute>
   <attribute name="from" type="string" :required=true>
@@ -113,122 +109,19 @@ We get the following response :
 }
 ```
 
-Now that we have all the available slots for our user John Doe, we can make our choose one that seems to be good (pratically, we will use some algorithm or conditions to determine which one is the best).
+> Remember that you can also retrieve these slots grouped by day by making the request to `/v2/slots/days` instead of `/v2/slots`.
+
+Now that we have all the available slots for our user John Doe, we can make our other user choose a slot that works for them. You may also want to use some algorithm or conditions on your end to automatically determine which one is the best.
 
 _We will consider here that September 2 from 10:00 to 11:00 a.m. is a good choice._
 
-### Using our web component
+### (Optional) Using our web component
 
-We provide a web component to integrate the Vyte slot picker directly in your website. This is a fully configurable Vue.js component with the following props:
-
-<attributes title="Properties">
-
-<attribute name="emails" type="string" :required=true details="if no users is passed">
-
-Email of the person whose availabilities you want to show (Vyte account required).
-
-</attribute>
-<attribute name="users" type="string" :required=true details="if no emails is passed">
-
-Vyte `user_id` of the person whose availabilities you want to show (Vyte account required).
-
-</attribute>
-<attribute name="ndays" type="number" details="default is 5">
-
-Number of days you want to show.
-
-</attribute>
-<attribute name="timezone" type="string" :required=true>
-
-The timezone you want the availabilities displayed in. It must be expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
-
-</attribute>
-<attribute name="duration" type="string" details="default is 30">
-
-Duration in minutes.
-
-</attribute>
-<attribute name="lang" type="string" details="default is english">
-
-Language of the event. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
-
-</attribute>
-<attribute name="one-column" type="boolean" details="default is false">
-
-If you want the slots to be displayed on 1 column (vs 1 column per day which).
-
-</attribute>
-<attribute name="start" type="date" details="defaults to today">
-
-Start date expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601).
-
-</attribute>
-<attribute name="start-at-first-availability" type="boolean" details="default is false">
-
-If you want the first date to jump to your first availability.
-
-</attribute>
-<attribute name="nslots" type="number">
-
-Number of slots max shown per day.
-
-</attribute>
-</attributes>
-
-The following code show you how to integrate it easily:
-
-<iframe
-  src="/slot-picker.html"
-  style="width: 100%; height: 300px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
-</iframe>
-
-```html
-<!-- Optional scripts if you want compatibility with older browsers like IE11 -->
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-<script src="https://unpkg.com/unfetch/polyfill"></script>
-<script src="https://cdn.jsdelivr.net/npm/custom-event-polyfill@1.0.6/polyfill"></script>
-<!--/ optional scripts -->
-<!-- Mandatory dependency scripts -->
-<!-- If you were already loading them for another component of your page no need to load them twice -->
-<script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
-<script src="https://unpkg.com/document-register-element@1.13.1/build/document-register-element.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-custom-element@3.2.6/dist/vue-custom-element.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-<!-- Mandatory scripts -->
-<!-- Web component -->
-<script src="https://assets-cdn.vyte.in/wc/vyte-slot-picker/dist/js/app.js"></script>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://assets-cdn.vyte.in/wc/vyte-slot-picker/dist/css/app.css"
-/>
-<!--/ Web component -->
-
-<vyte-slot-picker
-  id="vyte-slot-picker"
-  emails="martin@vytein.com"
-  :ndays="5"
-  timezone="Europe/Paris"
-  lang="en"
->
-</vyte-slot-picker>
-
-<script>
-  function slotSelectedHandler(event) {
-    const slot = event.detail[0];
-    const startDate = new Date(slot.start.dateTime);
-    const endDate = new Date(slot.end.dateTime);
-    console.log("Slot selected", startDate, endDate);
-  }
-  const element = document.getElementById("vyte-slot-picker");
-  element.addEventListener("slot-selected", slotSelectedHandler);
-</script>
-```
+We provide a useful slot picker as a Vue.js component to easily let your users choose a slot. For more information, please check [this guide](../guides/use-our-web-components.md).
 
 ## Create a new event
 
-Let's create a new meeting request to John Doe for the chosen date. To achieve this, we have to create a new event thanks to the [Events API](../reference/events.md).
+Let's create a new meeting request to John Doe for the chosen date. To achieve this, we have to create a new event using the [Events API](../reference/events.md).
 
 So, we will do this by making this `POST` request :
 
