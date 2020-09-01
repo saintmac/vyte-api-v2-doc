@@ -237,7 +237,8 @@ module.exports = {
     "vuepress-plugin-mermaidjs",
     "vuepress-plugin-export",
     "demo-code",
-    [require("vuepress-intercom"), { appId: "sqoiibtg" }],
+    "reading-progress",
+    [(require("vuepress-intercom"), { appId: "sqoiibtg" })],
     [
       "vuepress-plugin-container",
       {
