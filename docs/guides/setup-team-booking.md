@@ -6,6 +6,8 @@ Here we will learn how to create and manage our first team. At the end, we will 
 
 > NB: a team's event isn't an event between the member of a team. A team event allow you to create new appointment with someone of the team. For instance, you can create an event with the Sales team, and it will automatically assign the event to someone of the sales team (based on some parameters you can set up).
 
+[[toc]]
+
 ## Create your first team
 
 Let's create our first team. But to begin, a team is composed of admins and members. But don't forget that **the admins are not member of the team by default**. If you want an admin to be part of the team, you have to add him as a member too.

@@ -23,7 +23,6 @@ guides:
     image: api-team
   - title: Using team admins for notifications and event management
     details:
-    path: using-team-admins-for-notifications-and-event-management
     image: api-webhooks
   - title: Set up Webhooks to manage scheduling notifications
     details:
