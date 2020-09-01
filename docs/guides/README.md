@@ -30,6 +30,10 @@ guides:
   - title: Adding a simple locator to your scheduling experience
     details:
     image: api
+  - title: Use our web components
+    details: Learn how to easily integrate some of our public web components
+    path: use-our-web-components
+    image: api-1to1
 ---
 
 # Introduction
