@@ -59,7 +59,7 @@ So, to retrieve the availabilities of our user for these days, we make the follo
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request GET 'https://api.vyte.in/v2/slots?duration=60&users=5f3feb7821046c3bb9327e6a&from=2020-10-01&to=2020-10-02' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```
@@ -131,7 +131,7 @@ So, we will do this by making this `POST` request :
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request POST 'https://api.vyte.in/v2/events' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
@@ -177,7 +177,7 @@ Nothing complicated for this. We just have to send a `GET` request at `/v2/event
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request POST 'https://api.vyte.in/v2/events/5f43a0caf795d9206556122a/confirm' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```

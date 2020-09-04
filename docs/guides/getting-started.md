@@ -38,7 +38,7 @@ To do this, just make an HTTP request to `https://api.vyte.in/v2/auth/test` and 
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request GET 'https://api.vyte.in/v2/auth/test' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```
