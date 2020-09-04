@@ -12,7 +12,7 @@ This guide will teach you how to completely dispense with the Vyte interface and
 
 ### Using the API
 
-When someone wants an appointment with a the user, the first thing we have to do is to retrieve when the user is available (to draw a parallel with the Vyte Page, we want to retrieve what is shown in the slot picker).
+When someone wants an appointment with a user, the first thing we have to do is to retrieve when this user is available (to draw a parallel with the Vyte Page, we want to retrieve what is shown in the slot picker).
 
 To achieve this, we will use the [Slots API](../reference/slots.md). We will perform a `GET` request to the `/v2/slots` endpoint. Here is a little reminder of the available query params :
 
@@ -24,12 +24,12 @@ Duration of the appointment in minutes.
   </attribute>
   <attribute name="emails" type="string" :required=true details="you need either emails or user_ids">
 
-Email(s) of people that have already signed up with on Vyte and with whom you want to book an appointment. It must be separated with a comma and if several emails are provided, it returns the slots at which all users are available.
+Email(s) of people that already have a Vyte account and with whom you want to book an appointment. If several emails are provided, they must be separated with a comma and and the API returns the slots at which all users are available.
 
   </attribute>
   <attribute name="users" type="string" :required=true details="you need either emails or user_ids">
 
-List of `user_id` you want to book an appointment with. It must be separated with a comma and if several `user_id` are provided, it returns the slots to which all users are available.
+List of `user_id` you want to book an appointment with. If several `user_id` are provided, they must be separated with a comma and and the API returns the slots at which all users are available.
 
   </attribute>
   <attribute name="from" type="string" :required=true>

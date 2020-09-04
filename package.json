@@ -25,6 +25,7 @@
     "vuepress-intercom": "^1.0.3",
     "vuepress-plugin-code-copy": "^1.0.6",
     "vuepress-plugin-element-tabs": "^0.2.8",
-    "vuepress-plugin-export": "^0.2.0"
+    "vuepress-plugin-export": "^0.2.0",
+    "vuepress-plugin-reading-progress": "^1.0.10"
   }
 }
