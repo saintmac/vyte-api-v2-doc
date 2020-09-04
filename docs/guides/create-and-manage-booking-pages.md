@@ -18,7 +18,7 @@ For the following requests, you will need the `_id` of your organization. The ea
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request GET 'https://api.vyte.in/v2/auth/test' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```
@@ -60,7 +60,7 @@ In the following request, don't forget to replace the API key and the organizati
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request POST 'https://api.vyte.in/v2/users' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
@@ -243,7 +243,7 @@ So, here is as an example request to set up availabilities for our user. You can
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request POST 'https://api.vyte.in/v2/users/5f4e06da01326ebd4f69152d/availabilities' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
@@ -528,7 +528,7 @@ Remember that the namespace for the Vyte Page nickname is global. So, in the fol
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request PUT 'https://api.vyte.in/v2/users' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \

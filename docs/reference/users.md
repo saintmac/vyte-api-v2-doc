@@ -10,10 +10,6 @@ You can use the `/v2/users` endpoints to manage the users for your organization.
 With the User REST API, you will be able to automate the user creation task, and then to retrieve all the users linked to your organization. This API become really useful when it's used with the Team API, providing a full workflow to manage your users and to group them in teams.
 Moreover, we provide a endpoint to batch create users to optimize the workflow in case you have a lot of users to create.
 
-::: warning
-There is no DELETE endpoint provided for the User API. You can only unlink a user from your company, so that you are no longer billed for him.
-:::
-
 ::::
 
 :::: right
@@ -24,8 +20,9 @@ There is no DELETE endpoint provided for the User API. You can only unlink a use
   <endpoint method="get" path="/v2/users" href="#list-all-users-linked-to-you-organization"></endpoint>
   <endpoint method="post" path="/v2/users" href="#create-a-user"></endpoint>
   <endpoint method="post" path="/v2/users/batch" href="#batch-create-users"></endpoint>
-  <endpoint method="put" path="/v2/users" href="#update-a-user"></endpoint>
+  <endpoint method="put" path="/v2/users/:user_id" href="#update-a-user"></endpoint>
   <endpoint method="put" path="/v2/users/batch" href="#batch-update-users"></endpoint>
+  <endpoint method="delete" path="/v2/users/:user_id" href="#remove-a-user-from-your-organization"></endpoint>
 </endpoints>
 ::::
 
@@ -1422,4 +1419,87 @@ curl  --request PUT 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b' \
 
 ::::
 
+:::::
+
+## Remove a user from your organization
+
+This endpoint doesn't allow you to totally remove a user from Vyte. You can only unlink a user from your company, so that you are no longer billed for him.
+
+If you need to delete a Vyte account, please contact our support via <intercom-button /> or via email at [support@vyte.in](mailto:support@vyte.in).
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+DELETE /v2/users/:user_id HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="user_id" type="string" :required=true>
+
+The `id` of the user.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+An `Organization` object if there is no error.
+
+</returns>
+::::
+
+:::: right
+
+```shell
+curl --request DELETE 'https://api-dev2.vyte.in/v2/users/5f4f70bd74f686ee5d46b5bc' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+```
+
+```json light-code
+{
+  "lang": "en",
+  "admins": [
+      "5f4e16c301326e82fa691552"
+  ],
+  "members": [
+      {
+          "calendars": {
+              "google": false,
+              "office365": false,
+              "exchange": false,
+              "icloud": false,
+              "caldav": false
+          },
+          "account": {
+              "plan": "pro"
+          },
+          "emails": [
+              "john.doe@example.com"
+          ],
+          "_id": "5f4e16c301326e82fa691552",
+          "picture_url": "https://images.pexels.com/photos/2853664/pexels-photo-2853664.jpeg",
+          "full_name": "John Doe"
+      }
+  ],
+  "private": false,
+  "_id": "5f198da1c1ac5d1a30fc00f3",
+  "name": "ACME",
+  "plan": "pro",
+  "superadmin_team": "5f198da1c1ac5d283ffc00f4",
+  "updatedAt": "2020-09-04T09:31:01.381Z",
+  "createdAt": "2020-07-23T13:16:17.125Z",
+  "__v": 69,
+  "free_trial_days": 14,
+  "free_trial_started": "2020-07-23T13:14:18.924Z",
+  "free_trial_until": "2020-08-06T13:14:18.924Z",
+  "brand": "5f1ac17cc1ac5d4fbefc012a"
+}
+```
+
+::::
 :::::

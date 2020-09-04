@@ -18,7 +18,7 @@ So, the first things to do is to register a new third-party. To do this, we just
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request POST 'https://api.vyte.in/v2/third_parties?name=acme&contact_email=contact@acme.com&contact_name=ACME' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```
@@ -114,7 +114,7 @@ So, in the case that our user doesn't have a Vyte accout, let's create a new tok
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request GET 'https://api.vyte.in/v2/third_parties/token?cm=jane.doe@acme.com&secret=cfsvut1yp6dd2nuwkxjo' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```
@@ -158,7 +158,7 @@ To retrieve the third-parties you registered with your API key, you can just mak
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --location --request GET 'https://api.vyte.in/v2/third_parties' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 ```

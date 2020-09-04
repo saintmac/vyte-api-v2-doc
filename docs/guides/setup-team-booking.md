@@ -22,7 +22,7 @@ To create our first team, let's just make a `POST` request at `/v2/teams` :
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --request POST 'https://api.vyte.in/v2/teams' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
@@ -71,7 +71,7 @@ Let's make a `PUT` request at `/v2/team/5f47af4d2285550793c632c4` :
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --location --request PUT 'https://api.vyte.in/v2/teams/5f47af4d2285550793c632c4' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
@@ -100,7 +100,7 @@ So, we'are ready to create our first team's event :
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-```bash screen-hidden
+```shell screen-hidden
 curl --location --request POST 'https://api.vyte.in/v2/teams/5f47af4d2285550793c632c4/events' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
