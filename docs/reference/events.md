@@ -616,6 +616,67 @@ curl \
 
 ::::::
 
+## Search event by parametres
+
+Allows searching events by creator ids or emails, invitees ids or emails, third party ids or third party group ids.
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/events HTTP/1.1
+```
+
+<attributes title="Query parameters">
+  <attribute name="created_by.user" type="string">
+    Returns events created by particular creators.
+  </attribute>
+  
+ <attribute name="created_by.email" type="string">
+    Returns events created by particular creators, but search with emails.
+  </attribute>
+  
+ <attribute name="invitees.user" type="string">
+    Returns events with particular invitees. If there are several invitees in query, returns all events with these invitees.
+  </attribute>
+  
+ <attribute name="invitees.email" type="string">
+    Returns events with particular invitees, but search with emails.
+  </attribute>
+  
+ <attribute name="third_party.app" type="string">
+    Returns events, which belongs to the particular third party application.
+  </attribute>
+  
+ <attribute name="third_party.group_ids" type="string">
+    Returns events of particular groups within one third party application.
+  </attribute>
+
+<returns title="Returns">
+
+An array of `Event` objects. If there is no events available, returns an empty array.
+
+</returns>
+
+:::::
+
+::::: right
+
+> CODE SAMPLE
+
+```shell
+curl \
+--request GET 'https://api.vyte.in//v2/events/?creator_emails=mail@test123@gmail.com' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+```
+
+
+::::
+
+:::::
+
 ## Create an event
 
 ::::: panel
