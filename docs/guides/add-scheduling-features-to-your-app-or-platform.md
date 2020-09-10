@@ -1,16 +1,16 @@
 # Add scheduling features to your app or platform
 
-In this guide, we will explore an other way to add Vyte to your app or platform.
+In this guide, we will explore an other way to add Vyte to your app or platform. This will let you easily add a button in your product to schedule a meting with 1 person or a group.
 
-In fact, we will learn how to generate links to some Vyte Page with pre-defined option as path parameters. For instance, you will be able to create a button to redirect from your website to a event creation page with pre-filled fields.
+In fact, we will learn how to generate links to some Vyte Page with pre-defined option as query parameters. For instance, you will be able to create a button to redirect from your website to an event creation page with pre-filled fields.
 
 [[toc]]
 
 ## Register your app
 
-In this part, we will discover a new notion which is the idea of third-party and secret key. This differs from the classic API because we will generate a token, and this token will able us to generate links to some Vyte pages.
+In this part, we will discover a new notion which is the idea of third-party app and secret key. This differs from the classic API because we will generate a token, and this token will enable us to generate links to some Vyte pages.
 
-So, the first things to do is to register a new third-party. To do this, we just have to make a `GET` request at `/v2/third_parties/new` with some query parameters :
+So, the first things to do is to register a new third-party app. To do this, we just have to make a `GET` request at `/v2/third_parties/new` with document query parameters (api_key authorization is required) :
 
 <iframe
   src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fthird_parties%253Fname%253Dacme%2526contact_email%253Dcontact%2540acme.com%2526contact_name%253DACME%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
@@ -40,6 +40,8 @@ This endpoint registers your app as a third party app and lets you obtain your `
   "__v": 0
 }
 ```
+Here you can find your `app_id` - it is an `_id` in the response. Also your `app_secret` is a `secret` in the response. It might be useful to note them, we will need them in the future.
+
 
 ## Create links to event creation pages
 
@@ -53,22 +55,22 @@ App ID: your app ID for Vyte. You get it when you register your app with GET /th
 </attribute>
 <attribute name="agid" type="string" :required=false>
 
-App Group ID: this is an id you will provide to Vyte, that you will use to identify a group of users such as a team, a project, etc.
+App Group ID: this is an id you will provide to Vyte, that you will use to identify a group of users such as a team, a project, etc. You can also pass several ID's, separating them by comma.
 
 </attribute>
-<attribute name="cm" type="string" :required=false details="optional if the user already has a Vyte account.">
+<attribute name="cm" type="string" :required=false details="optional if the user already has a Vyte account and is expected to be logged in with it on the same browser.">
 
 Creator e-mail.
 
 </attribute>
 <attribute name="cn" type="string" :required=false>
 
-Creator name: useful to auto set a title with the name of all the participants.
+Creator name: useful if the creator doesn't have a Vyte account yet.
 
 </attribute>
-<attribute name="ct" type="string" :required=false details="optional if the user already has a Vyte account.">
+<attribute name="ct" type="string" :required=false details="ooptional if the user already has a Vyte account and is expected to be logged in with it on the same browser.">
 
-Creator token.
+Creator token is sed to authenticate the request. See below how to generate such a token.
 
 </attribute>
 <attribute name="em" type="string" :required=false>
@@ -86,7 +88,7 @@ Event title.
 Invitee e-mail(s), separated by a pipe (|).
 
 </attribute>
-<attribute name="em" type="string" :required=false>
+<attribute name="in" type="string" :required=false>
 
 Invitee name(s), separated by a pipe (|). To be used with `im`, with emails and names listed in the same order.
 
@@ -142,9 +144,10 @@ So, we just have to serialize/urlEncode all these params to generate the url for
 aid=5f476269f795d9f0df561256&cm=jane.doe@acme.com&cn=Jane%20Doe&ct=c56675c718dec0566c0f6eb1256d12d4dc7eda779a4f690dcc3f26fc8d312ca8&em=Important%20brainstorming%20for%20a%20new%20feature.%20We%20hope%20you%20will%20be%20at%20100%%20!&et=Brainstorming%20for%20a%20new%20feature&im=oscar.simpson@acme.com|emanuel.buckner@came.com|ezekiel.carr@acme.com|zayne.rhodes@acme.com&in=Oscar%20Simpson|Emanuel%20Buckner|Ezekiel%20Carr|Zayne%20Rhodes&places=The%20Office|2553%20Trouser%20Leg%20Road,%20Springfield,%2001103,%20Massachusetts||Coworking%20Place|4927%20Leverton%20Cove%20Road,%20Springfield,%2001103,%20Massachusetts
 ```
 
-And let's try our new link :
+And let's try our new link (it is expected that the final creation of the meeting will fail as these credentials are fake) :
 
-<Button path="https://www.vyte.in/add_invitees?aid=5f476269f795d9f0df561256&cm=jane.doe@acme.com&cn=Jane%20Doe&ct=c56675c718dec0566c0f6eb1256d12d4dc7eda779a4f690dcc3f26fc8d312ca8&em=Important%20brainstorming%20for%20a%20new%20feature.%20We%20hope%20you%20will%20be%20at%20100%%20!&et=Brainstorming%20for%20a%20new%20feature&im=oscar.simpson@acme.com|emanuel.buckner@came.com|ezekiel.carr@acme.com|zayne.rhodes@acme.com&in=Oscar%20Simpson|Emanuel%20Buckner|Ezekiel%20Carr|Zayne%20Rhodes&places=The%20Office|2553%20Trouser%20Leg%20Road,%20Springfield,%2001103,%20Massachusetts||Coworking%20Place|4927%20Leverton%20Cove%20Road,%20Springfield,%2001103,%20Massachusetts">Create a new event</Button>
+<Button 
+="https://www.vyte.in/add_invitees?aid=5f476269f795d9f0df561256&cm=jane.doe@acme.com&cn=Jane%20Doe&ct=c56675c718dec0566c0f6eb1256d12d4dc7eda779a4f690dcc3f26fc8d312ca8&em=Important%20brainstorming%20for%20a%20new%20feature.%20We%20hope%20you%20will%20be%20at%20100%%20!&et=Brainstorming%20for%20a%20new%20feature&im=oscar.simpson@acme.com|emanuel.buckner@came.com|ezekiel.carr@acme.com|zayne.rhodes@acme.com&in=Oscar%20Simpson|Emanuel%20Buckner|Ezekiel%20Carr|Zayne%20Rhodes&places=The%20Office|2553%20Trouser%20Leg%20Road,%20Springfield,%2001103,%20Massachusetts||Coworking%20Place|4927%20Leverton%20Cove%20Road,%20Springfield,%2001103,%20Massachusetts">Create a new event</Button>
 
 Here we are! This is how you can integrate Vyte in your app by easily generating links to pre-fill some information on the event creation page.
 
