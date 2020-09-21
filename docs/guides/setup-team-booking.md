@@ -94,6 +94,7 @@ To get all the slots when at least one member of your team is available, you can
   style="width: 100%; height: 294px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
 ```shell screen-hidden
 curl --request GET 'https://api.vyte.in/v2/slots?duration=30&team=5f47af4d2285550793c632c4&from=2020-09-01&to=2020-09-02' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'
