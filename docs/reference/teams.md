@@ -76,6 +76,12 @@ The name of the team.
 The level name of the team. For instance: "top management", "regional team", "agency".
 
 </attribute>
+
+<attribute name="_id" type="string">
+  
+Note that `_id` of admins and members might take `user_id` as an ObjectID from the users. For example, we want to create a team with existing users. These users already have their `user_id`. So as a members of new team they will have their `members_id` passed from `user_id`.
+  
+  </attributes>
 </attributes>
 
 ::::
@@ -93,6 +99,15 @@ The level name of the team. For instance: "top management", "regional team", "ag
   "extid": "2",
   "name": "sales",
   "level_name": "agency"
+}
+```
+```json light-code light-code
+{
+  "members": [
+    {"_id": user_id},
+    {"email": "email@company.com"},
+    {"extid": "UserIdInCompanyDatabase"}    
+  ]
 }
 ```
 
