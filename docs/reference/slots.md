@@ -48,14 +48,19 @@ GET /v2/slots HTTP/1.1
 Duration of the appointment in minutes.
 
   </attribute>
-  <attribute name="emails" type="string" :required=true details="you need either emails or user_ids">
+  <attribute name="emails" type="string" :required=true details="you need either emails, user_ids or team">
 
 Email(s) of people that already have a Vyte account and with whom you want to book an appointment. If several emails are provided, they must be separated with a comma and and the API returns the slots at which all users are available.
 
   </attribute>
-  <attribute name="users" type="string" :required=true details="you need either emails or user_ids">
+  <attribute name="users" type="string" :required=true details="you need either emails, user_ids or team">
 
 List of `user_id` you want to book an appointment with. If several `user_id` are provided, they must be separated with a comma and and the API returns the slots at which all users are available.
+
+  </attribute>
+  <attribute name="team" type="string" :required=true details="you need either emails, user_ids or team">
+
+Id of a team you want to get the available slots for members of. If several team members are available at the same time, only one slot will be returned.
 
   </attribute>
   <attribute name="from" type="string" :required=true>
