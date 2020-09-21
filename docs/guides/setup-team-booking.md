@@ -1,10 +1,10 @@
 # Set up team booking
 
-Thanks to the API, you are able to group your user by team. The [team API](../reference/teams.md) is really versatile so that you can represent all types of organizational structure, from structural to matrix structure.
+Thanks to the API, you are able to group your user by team. The [team API](../reference/teams.md) is really versatile so that you can represent all types of organizational structure, from hierarchical to matrix structure.
 
 Here we will learn how to create and manage our first team. At the end, we will see how to create a team's event.
 
-> NB: a team's event isn't an event between the member of a team. A team event allow you to create new appointment with someone of the team. For instance, you can create an event with the Sales team, and it will automatically assign the event to someone of the sales team (based on some parameters you can set up).
+> NB: a team's event isn't an event between the member of a team. A team event allows you to create new appointment with someone of the team. For instance, you can create an event with the Sales team, and it will automatically assign the event to someone of the sales team (based on some parameters you can set up).
 
 [[toc]]
 
@@ -94,25 +94,99 @@ To get all the slots when at least one member of your team is available, you can
   style="width: 100%; height: 294px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
 ```shell screen-hidden
 curl --request GET 'https://api.vyte.in/v2/slots?duration=30&team=5f47af4d2285550793c632c4&from=2020-09-01&to=2020-09-02' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'
 ```
 
+We get in response a list of slots so you can let your user pick one.
+
+```jsonp light-code
+{
+  "timezone": "Europe/Paris",
+  "from": "2020-09-01",
+  "to": "2020-09-02",
+  "slots": [
+    {
+      "start": {
+        "dateTime": "2020-09-01T02:00:00+02:00"
+      },
+      "end": {
+        "dateTime": "2020-09-01T02:30:00+02:00"
+      }
+    },
+    {
+      "start": {
+        "dateTime": "2020-09-01T02:30:00+02:00"
+      },
+      "end": {
+        "dateTime": "2020-09-01T03:00:00+02:00"
+      }
+    },
+    {
+      "start": {
+        "dateTime": "2020-09-01T03:00:00+02:00"
+      },
+      "end": {
+        "dateTime": "2020-09-01T03:30:00+02:00"
+      }
+    },
+    {
+      "start": {
+        "dateTime": "2020-09-01T03:30:00+02:00"
+      },
+      "end": {
+        "dateTime": "2020-09-01T04:00:00+02:00"
+      }
+    },
+    {
+      "start": {
+        "dateTime": "2020-09-01T04:00:00+02:00"
+      },
+      "end": {
+        "dateTime": "2020-09-01T04:30:00+02:00"
+      }
+    },
+    {
+      "start": {
+        "dateTime": "2020-09-01T04:30:00+02:00"
+      },
+      "end": {
+        "dateTime": "2020-09-01T05:00:00+02:00"
+      }
+    },
+    {
+      "start": {
+        "dateTime": "2020-09-01T09:00:00+02:00"
+      },
+      "end": {
+        "dateTime": "2020-09-01T09:30:00+02:00"
+      }
+    },
+    ...
+  ]
+}
+```
+
+
 
 ## Create your first team's event
 
-As we explained before, the Team API allow you to create events and automatically assign the event to someone of the team who is available on the requested date.
+As we explained before, the Team API allows you to create events and automatically assign the event to someone of the team who is available on the requested date.
 
 It works quite the same as a classic event creation. The only things to change is that you can't send several dates and you don't have to provide creator information (because he will be automatically chosen by the API).
 
 So, we'are ready to create our first team's event :
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--location%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f47af4d2285550793c632c4%252Fevents%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522title%2522%253A%2520%2522First%2520created%2520event%2522%252C%250A%2520%2520%2522dates%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522all_day%2522%253A%2520false%252C%250A%2520%2520%2520%2520%2520%2520%2522date%2522%253A%2520%25222020-09-16T09%253A00%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522end_date%2522%253A%2520%25222020-09-16T10%253A00%253A00%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522places%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Place%2520for%2520the%2520meeting.%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522timezone%2522%253A%2520%2522Europe%252FParis%2522%250A%257D%27"
-  style="width: 100%; height: 630px; border:0; transform: scale(1); overflow:hidden;"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--location%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f47af4d2285550793c632c4%252Fevents%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522title%2522%253A%2520%2522First%2520created%2520event%2522%252C%250A%2520%2520%2522dates%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522date%2522%253A%2520%25222020-09-01T09%253A00%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522end_date%2522%253A%2520%25222020-09-01T09%253A30%253A00%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522places%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Place%2520for%2520the%2520meeting.%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522timezone%2522%253A%2520%2522Europe%252FParis%2522%252C%250A%2520%2520%2522invitees%2522%253A%2520%255B%257B%250A%2520%2520%2520%2520%2522email%2522%253A%2520%2522john.doe%2540personmakingthebooking.com%2522%252C%250A%2520%2520%2520%2520%2522full_name%2522%253A%2520%2522John%2520Doe%2522%250A%2520%2520%257D%255D%250A%257D%27"
+  style="width: 100%; height: 650px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
+
+
+
 
 ```shell screen-hidden
 curl --location --request POST 'https://api.vyte.in/v2/teams/5f47af4d2285550793c632c4/events' \
@@ -122,9 +196,8 @@ curl --location --request POST 'https://api.vyte.in/v2/teams/5f47af4d2285550793c
   "title": "First created event",
   "dates": [
     {
-      "all_day": false,
-      "date": "2020-09-16T09:00:00",
-      "end_date": "2020-09-16T10:00:00"
+      "date": "2020-09-01T09:00:00",
+      "end_date": "2020-09-01T10:00:00"
     }
   ],
   "places": [
@@ -132,11 +205,15 @@ curl --location --request POST 'https://api.vyte.in/v2/teams/5f47af4d2285550793c
       "name": "Place for the meeting."
     }
   ],
-  "timezone": "Europe/Paris"
+  "timezone": "Europe/Paris",
+  "invitees": [{
+    "email": "john.doe@personmakingthebooking.com",
+    "full_name": "John Doe"
+  }]
 }'
 ```
 
-We get in response the create event and we can see that the creator was automatically chose by the API:
+We get in response the event created and we can see that the creator was automatically chosen:
 
 ```json light-code
 {
