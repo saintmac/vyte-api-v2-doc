@@ -86,6 +86,20 @@ curl --location --request PUT 'https://api.vyte.in/v2/teams/5f47af4d2285550793c6
 
 And now our new Sales is part of the team.
 
+## Get available slots for your team
+To get all the slots when at least one member of your team is available, you can use the `/v2/slots` or `/v2/slots/days` endpoints as such:
+
+<iframe
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fslots%253Fduration%253D30%2526team%253D5f47af4d2285550793c632c4%2526from%253D2020-09-01%2526to%253D2020-09-02%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
+  style="width: 100%; height: 294px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
+</iframe>
+```shell screen-hidden
+curl --request GET 'https://api.vyte.in/v2/slots?duration=30&team=5f47af4d2285550793c632c4&from=2020-09-01&to=2020-09-02' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'
+```
+
+
 ## Create your first team's event
 
 As we explained before, the Team API allow you to create events and automatically assign the event to someone of the team who is available on the requested date.
