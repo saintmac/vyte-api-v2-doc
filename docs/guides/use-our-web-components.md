@@ -76,6 +76,7 @@ The following code shows you how to integrate our web component easily:
 <script src="https://unpkg.com/document-register-element@1.13.1/build/document-register-element.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-custom-element@3.2.6/dist/vue-custom-element.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+<!--/ Mandatory dependency scripts -->
 <!-- Web component -->
 <script src="https://assets-cdn.vyte.in/wc/vyte-slot-picker/dist/js/app.js"></script>
 <link
