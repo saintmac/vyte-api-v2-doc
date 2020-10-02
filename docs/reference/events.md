@@ -386,7 +386,7 @@ An array of `Event` objects. If no events match the query parameters, returns an
 ```shell
 curl \
 --request GET 'https://api.vyte.in/v2/events' \
---header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
 > RESPONSE SAMPLE
