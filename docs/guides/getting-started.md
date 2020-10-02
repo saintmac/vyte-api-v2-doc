@@ -1,4 +1,4 @@
-# Getting started
+# Get started
 
 In this guide you will learn how to get started with Vyte API. At the end, you will have created an organization, retrieved your API key and make your first request to test authentication.
 

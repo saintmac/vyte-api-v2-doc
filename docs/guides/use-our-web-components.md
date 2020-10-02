@@ -11,7 +11,12 @@ Email of the person whose availabilities you want to show (Vyte account required
 </attribute>
 <attribute name="users" type="string" :required=true details="if no emails is passed">
 
-Vyte `user_id` of the person whose availabilities you want to show (Vyte account required). You can pass a list of user_ids by comma separating them. Slots returned will be slots when all of those users are available.
+Vyte `user._id` of the person whose availabilities you want to show (Vyte account required). You can pass a list of user_ids by comma separating them. Slots returned will be slots when all of those users are available.
+
+</attribute>
+<attribute name="availability" type="string" :required=false>
+
+The `_id` of a specific availability you want to use for those slots. This availability could match a specific appointment type for instance.
 
 </attribute>
 <attribute name="ndays" type="number" details="default is 5">

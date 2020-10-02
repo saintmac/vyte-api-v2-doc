@@ -1,7 +1,7 @@
 ---
 pageClass: reference-page
 guides:
-  - title: Getting started with Vyte API
+  - title: Get started with Vyte API
     details: This page will help you get started with Vyte. You'll be up and running in a minute!
     path: getting-started
     image: api

@@ -1,6 +1,6 @@
 # Create and manage booking pages
 
-You should now be able to access the API with your API key, but if you aren't, read our [Getting started guide](../guides/getting-started.md).
+You should now be able to access the API with your API key, but if you aren't, read our [Get started guide](../guides/getting-started.md).
 
 Let's see how you can use Vyte API to automate your scheduling workflow.
 
