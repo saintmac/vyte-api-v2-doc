@@ -375,7 +375,7 @@ Filter events by status. Value can be `confirmed` or `upcoming`.
     Returns events created by particular creators.
   </attribute>
   
- <attribute name="creator_emails" type="string">
+ <attribute name="creator_emails" type="string" detail="ignored if creator_users set">
     Returns events created by particular creators, but search with emails.
   </attribute>
   
@@ -383,7 +383,7 @@ Filter events by status. Value can be `confirmed` or `upcoming`.
     Returns events with particular invitees. If there are several invitees in query, returns all events with these invitees.
   </attribute>
   
- <attribute name="invitee_emails" type="string">
+ <attribute name="invitee_emails" type="string" detail="ignored if invitee_users set">
     Returns events with particular invitees, but search with emails. You can use both `invitee_emails` and `invitee_users` parameters in the same query.
   </attribute>
   
