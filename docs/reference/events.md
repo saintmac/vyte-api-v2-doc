@@ -374,7 +374,7 @@ Filter events by status. Value can be `confirmed` or `upcoming`.
 
 <returns title="Returns">
 
-An array of `Event` objects. If there is no events available, returns an empty array.
+An array of `Event` objects. If no events match the query parameters, returns an empty array.
 
 </returns>
 :::::
@@ -615,6 +615,67 @@ curl \
 :::::
 
 ::::::
+
+## Search event by parametres
+
+Allows searching events by creator ids or emails, invitees ids or emails, third party ids or third party group ids.
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/events HTTP/1.1
+```
+
+<attributes title="Query parameters">
+  <attribute name="creator_users" type="string">
+    Returns events created by particular creators.
+  </attribute>
+  
+ <attribute name="creator_emails" type="string">
+    Returns events created by particular creators, but search with emails.
+  </attribute>
+  
+ <attribute name="invitee_users" type="string">
+    Returns events with particular invitees. If there are several invitees in query, returns all events with these invitees.
+  </attribute>
+  
+ <attribute name="invitee_emails" type="string">
+    Returns events with particular invitees, but search with emails. You can use both `invitee_emails` and `invitee_users` parameters in the same query.
+  </attribute>
+  
+ <attribute name="app_id" type="string">
+    Returns events, which belongs to the particular third party application.
+  </attribute>
+  
+ <attribute name="group_ids" type="string">
+    Returns events of particular groups within one third party application.
+  </attribute>
+
+<returns title="Returns">
+
+An array of `Event` objects. If there is no events available, returns an empty array.
+
+</returns>
+
+:::::
+
+::::: right
+
+> CODE SAMPLE
+
+```shell
+curl \
+--request GET 'https://api.vyte.in//v2/events/?app_id=5f6b14c1282630001ceeb22f&group_ids=abc&creator_users=5f6b14c1282630001ceeb22a&invitee_emails=test1@mail.com' \
+--header 'Authorization: 'jwut3wa4jp7xzdle57x5t0pr7f9xvwa8y2qd0lsongiruijdoc' \
+```
+
+
+::::
+
+:::::
 
 ## Create an event
 
