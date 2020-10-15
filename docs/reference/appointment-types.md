@@ -30,108 +30,205 @@ You can use the `/v2/vytemes/:nickname/types` endpoints to manage the availabili
 </endpoints>
 ::::
 
-:::::
-
-## The appointment type object
+## The Appointment type object
 
 ::::: panel
 :::: left
 
 <attributes title="Attributes">
 
-<attribute name="Vyteme" type="ObjectId">
+<attribute name="vyteme" type="ObjectId">
 
-Required property, the `id` of Vyteme, whithin which the Appointment type is created.
+The `id` of Vyteme page connected with this Appointment type.
+
+</attribute>
+
+<attribute name="availability" type="ObjectId">
+
+The `id` of Availability page connected with this Appointment type.
 
 </attribute>
 
 <attribute name="name" type="string">
-
-Name of the Appointment type, required.
-
+  
+  Name of the Appointment type
+  
 </attribute>
-
+ 
 <attribute name="handle" type="string">
-
-The name of the Appointment type, used for identification and endpoints. Should be unique for particular Vyteme. Handle is generated from the name by urlifying.
-
+  
+Handle is used at the endpoints as a unique identificator of the Appointment type. Created atomatically from the name by urlifying. For example, name `Conference lunch` will be transfomed into `conference-lunch`.
+  
 </attribute>
 
 <attribute name="active" type="boolean">
 
-Par default all the Appointment types are created active. They are deactivated in two cases: by user or automatically with downgrading from 'pro' plan to 'free'.
-
-</attribute>
-
-<attribute name="availability" type="string">
-
-The `id` of the availability, connected with this Appointment type.
-
-</attribute>
-
-<attribute name="description" type="string">
-
-Description of an Appointment type.
+Whether or not the Appointment type is active.
 
 </attribute>
 
 <attribute name="message" type="string">
 
-Message to send to invitees within this Appointment type.
+Message shown on the Appointment type page.
+
+</attribute>
+
+<attribute name="description" type="string">
+
+Description shown on the Appointment type page.
 
 </attribute>
 
 <attribute name="public" type="boolean">
 
-The Appointment types can be public and private.
+Whether or not the Appointment type is public.
 
 </attribute>
+
+<attribute name="custom" type="hash">
+
+Custom settings for the user Appointment type.
+
+<attributes :isChild=true>
+<attribute name="auto_message" type="string" :parentNames="['custom']" :isChild=true>
+
+Auto response message when someone book a meeting at this Appointment type.
+
+</attribute>
+
+<attribute name="auto_title" type="string" :parentNames="['custom']" :isChild=true>
+
+Auto title for the event.
+
+</attribute>
+
+<attribute name="ask_phone" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the user must the user must provide their phone number.
+
+</attribute>
+
+<attribute name="ask_company" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the user must the user must provide their company.
+
+</attribute>
+
+<attribute name="block_new_invitee" type="boolean" :parentNames="['custom']" :isChild=true>
+
+If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events.
+Defaults to `false`.
+
+</attribute>
+
+<attribute name="duration" type="number" :parentNames="['custom']" :isChild=true>
+
+Default duration for the event.
+
+</attribute>
+
+<attribute name="set_lang" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Only use if you only accept bookings in one language.
+
+</attribute>
+
+<attribute name="enable_api" type="boolean" :parentNames="['custom']" :isChild=true>
+
+To enable API variables.
+
+</attribute>
+
+<attribute name="fixed_lang" type="string" :parentNames="['custom']" :isChild=true>
+
+Fixed lang expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+
+</attribute>
+
+<attribute name="set_timezone" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Only use if you only accept bookings from people on your own timezone.
+
+</attribute>
+
+<attribute name="fixed_timezone" type="string" :parentNames="['custom']" :isChild=true>
+
+Fixed timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+</attribute>
+
+<attribute name="event_hide_decline" type="number" :parentNames="['custom']" :isChild=true>
+
+Allow you to set how long (in hours) before the begining of the event the decline button will be hidden.
+Ex: if set to 24, the decline button will be hidden on the event page 24h before the confirmed date of the event.
+
+</attribute>
+
+<attribute name="hide_places" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Hide places from the booking page.
+
+</attribute>
+
+<attribute name="hide_support" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Hide support button from the booking page (recommended for an integration).
+
+</attribute>
+
+<attribute name="hide_title" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not people booking can set a title / subject for the event.
+
+</attribute>
+
+<attribute name="forbid_add_places" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not you forbid from suggesting other places from the booking page.
+
+</attribute>
+
+<attribute name="min_dates" type="number" :parentNames="['custom']" :isChild=true>
+
+Enforces a minimum number of slots on the booking page (only works for calendar view, not slots view).
+
+</attribute>
+
+<attribute name="one_slot" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not only one slot can be suggested on the calendar view.
+
+</attribute>
+
+<attribute name="auto_confirm" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the event will be booked as confirmed automatically.
+
+</attribute>
+
+<attribute name="invite_title" type="string" :parentNames="['custom']" :isChild=true>
+
+Customize the wording on the booking page.
+
+</attribute>
+
+<attribute name="redirect_url" type="string" :parentNames="['custom']" :isChild=true>
+
+Url to redirect people after the booking is made.
+
+</attribute>
+
+<attribute name="fixed_places" type="array of hashes" :parentNames="['custom']" :isChild=true :isLast=true>
+
+Set up a list of places on the booking page
+
+</attribute>
+
+</attribute>
+
 </attributes>
 
-<attributes title="Customs">
-The custom settings are populated with events automatically. So if you create an event within particular Appointment type, all the custom settings of the Appointment type will be inherited by event.
-
-<attribute name="auto_confirm" type="boolean">
-Set auto-confirmation of proposed time and date.
 </attribute>
-
-<attribute name="auto_message" type="string">
-Set the text of the message send to invitee after picking up the date and time.
-</attribute>
-
-<attribute name="auto_title" type="string">
-Set up automatically generated title.
-</attribute>
-
-<attribute name="ask_phone" type="boolean">
-Set up an option of asking the phone number.
-</attribute>
-
-<attribute name="ask_company" type="boolean">
-Set up an option of asking the company name.
-</attribute>
-
-<attribute name="block_new_invitee" type="boolean">
-Block events from inviting new invitees.
-</attribute>
-
-<attribute name="duration" type="number">
-Set up the duration of events in minutes.
-</attribute>
-
-<attribute name="ask_company" type="boolean">
-Set up an option of asking the company name.
-</attribute>
-
-
-
-
-
-
-
-
-
-
 
 </attributes>
 
@@ -139,79 +236,51 @@ Set up an option of asking the company name.
 
 :::: right
 
-> THE AVAILABILITY OBJECT
+> THE APPOINTMENT TYPE OBJECT
 
 ```json light-code
 {
-  "days": {
-    "monday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e066227db71d493",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "tuesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e066220c571d494",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "wednesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e0662ab1b71d495",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "thursday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e0662590c71d496",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "friday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e06626d7871d497",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "saturday": {
-      "enabled": false
-    },
-    "sunday": {
-      "enabled": false
-    }
-  },
-  "past_as_busy": true,
-  "trim_scheduler": true,
-  "_id": "5f2d4abf1e0662085171d476",
-  "belongs_to": "5f2d4abf1e0662386371d475",
-  "timezone": "Europe/London",
-  "dates": [],
-  "today_as_busy": false,
-  "days_after_as_busy": 60,
-  "buffer_before": 0,
-  "buffer_after": 0,
-  "all_day_busy": true,
+  "vyteme": "5f1b018dc1ac5dc46efc8763",
+  "name": "Lunch or dinner",
+  "handle": "lunch-or-dinner",
+  "message": "Welcome to my booking page",
+  "active": true,
+  "availability": "5f1b018dc1ac5dc46efc64b8"
+  "public": true
+  "description": "My conference appointment type"
+  "custom": {
+    "auto_message": "Thank you for your booking. See you soon.",
+    "auto_title": "RDV {{invitee}} / {{me}}",
+    "ask_phone": true,
+    "ask_company": false,
+    "block_new_invitee": false,
+    "duration": 30,
+    "set_lang": true,
+    "enable_api": true,
+    "fixed_lang": "en",
+    "set_timezone": true,
+    "fixed_timezone": "Europe/London",
+    "event_hide_decline": false,
+    "hide_places": false,
+    "hide_support": true,
+    "hide_title": true,
+    "forbid_add_places": true,
+    "min_dates": 1,
+    "one_slot": true,
+    "auto_confirm": true,
+    "invite_title": "Book a short appointment with",
+    "redirect_url": "https://www.example.com/thanks-for-booking",
+    "fixed_places": [
+      {
+        "name": "Office",
+        "address": "Office address"
+      },
+      {
+        "name": "Phone",
+        "address": "0102030405"
+      }
+    ]
+  }
 }
 ```
 
@@ -219,7 +288,7 @@ Set up an option of asking the company name.
 
 :::::
 
-## Retrieve the availabilities of a user
+## List all appointment types
 
 :::::: panel
 ::::: left
@@ -227,13 +296,13 @@ Set up an option of asking the company name.
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-GET /v2/users/:user_id/availabilities HTTP/1.1
+GET /v2/vytemes/:nickname/types HTTP/1.1
 ```
 
 <attributes title="Path parameters">
-  <attribute name="user_id" type="string">
+  <attribute name="nickname" type="string">
 
-The `id` of the user whose availability you want to retrieve.
+The nickname of the Vyte Page.
 
   </attribute>
 </attributes>
@@ -242,7 +311,7 @@ The `id` of the user whose availability you want to retrieve.
 
 <returns title="Returns">
 
-An `Availability` object if there is no error.
+All `Appointment type` objects of this Vyteme if there is no error.
 
 </returns>
 :::::
@@ -253,7 +322,7 @@ An `Availability` object if there is no error.
 
 ```shell
 curl \
---request GET 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b/availabilities' \
+--request GET 'https://api.vyte.in/v2/vytemes/john-doe/types' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
@@ -261,65 +330,45 @@ curl \
 
 ```json light-code
 {
-  "timezone": "Europe/London",
-  "today_as_busy": false,
-  "past_as_busy": true,
-  "days_after_as_busy": 60,
-  "buffer_before": 0,
-  "buffer_after": 0,
-  "all_day_busy": true,
-  "days": {
-    "monday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "tuesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "wednesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "thursday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "friday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "saturday": {
-      "enabled": false
-    },
-    "sunday": {
-      "enabled": false
-    }
+  "name": "Lunch or dinner",
+  "handle": "lunch-or-dinner",
+  "message": "Welcome to my booking page",
+  "active": true,
+  "availability": "5f1b018dc1ac5dc46efc64b8"
+  "public": true
+  "description": "My conference appointment type"
+  "custom": {
+    "auto_message": "Thank you for your booking. See you soon.",
+    "auto_title": "RDV {{invitee}} / {{me}}",
+    "ask_phone": true,
+    "ask_company": false,
+    "block_new_invitee": false,
+    "duration": 30,
+    "set_lang": true,
+    "enable_api": true,
+    "fixed_lang": "en",
+    "set_timezone": true,
+    "fixed_timezone": "Europe/London",
+    "event_hide_decline": false,
+    "hide_places": false,
+    "hide_support": true,
+    "hide_title": true,
+    "forbid_add_places": true,
+    "min_dates": 1,
+    "one_slot": true,
+    "auto_confirm": true,
+    "invite_title": "Book a short appointment with",
+    "redirect_url": "https://www.example.com/thanks-for-booking",
+    "fixed_places": [
+      {
+        "name": "Office",
+        "address": "Office address"
+      },
+      {
+        "name": "Phone",
+        "address": "0102030405"
+      }
+    ]
   }
 }
 ```
@@ -328,7 +377,7 @@ curl \
 
 ::::::
 
-## Set the availabilities of a user
+## Create an appointment type
 
 :::::: panel
 ::::: left
@@ -336,13 +385,13 @@ curl \
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/users/:user_id/availabilities HTTP/1.1
+POST /v2/vytemes/:nickname/types HTTP/1.1
 ```
 
 <attributes title="Path parameters">
-  <attribute name="user_id" type="string">
+  <attribute name="nickname" type="string">
 
-The `id` of the user whose availability you want to create.
+The nickname of the Vyte Page.
 
   </attribute>
 </attributes>
@@ -350,97 +399,206 @@ The `id` of the user whose availability you want to create.
 <attributes title="Query parameters" :isEmpty=true></attributes>
 
 <attributes title="Body parameters">
+  
+<attribute name="nickname" type="string">
 
-<attribute name="timezone" type="string">
-
-The user timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
-
-</attribute>
-
-<attribute name="today_as_busy" type="boolean">
-
-Prevent from booking on the same day.
+Nickname for the user Vyte Page. Appointment types are created within Vyteme pages. Ex: if the nickname is `john-doe`, the appointment type page will be accessible at `https://vyte.in/john-doe/types/:handle`.
 
 </attribute>
 
-<attribute name="past_as_busy" type="boolean">
+<attribute name="availability" type="ObjectId">
 
-Prevent from booking in the past.
-
-</attribute>
-
-<attribute name="days_after_as_busy" type="number">
-
-Prevent from booking in more than n days.
+The `id` of Availability page connected with this Appointment type.
 
 </attribute>
 
-<attribute name="buffer_before" type="number">
+<attribute name="name" type="string">
+  
+  Name of the Appointment type
+  
+</attribute>
+ 
+<attribute name="handle" type="string">
+  
+Handle is used at the endpoints as a unique identificator of the Appointment type. Created atomatically from the name by urlifying. For example, name `Conference lunch` will be transfomed into `conference-lunch`.
+  
+</attribute>
 
-Ensure users have at least n minutes free before each meeting.
+<attribute name="active" type="boolean">
+
+Whether or not the Appointment type is active.
 
 </attribute>
 
-<attribute name="buffer_after" type="number">
+<attribute name="message" type="string">
 
-Ensure users have at least n minutes free after each meeting.
-
-</attribute>
-
-<attribute name="all_day_busy" type="boolean">
-
-If the user has busy all day events on its calendar the full day will be marked as busy on Vyte
+Message shown on the Appointment type page.
 
 </attribute>
 
-<attribute name="days" type="hash">
+<attribute name="description" type="string">
 
-Here you can define the availabilities for each day of the week. **We present the structure only for monday, but it is the same for the othe days.**
+Description shown on the Appointment type page.
+
+</attribute>
+
+<attribute name="public" type="boolean">
+
+Whether or not the Appointment type is public.
+
+</attribute>
+
+<attribute name="custom" type="hash">
+
+Custom settings for the user Appointment type.
 
 <attributes :isChild=true>
+<attribute name="auto_message" type="string" :parentNames="['custom']" :isChild=true>
 
-<attribute name="monday" type="hash" :parentNames="['days']" :isChild=true :isLast=true>
-
-Settings for monday.
-
-<attributes :isChild=true>
-<attribute name="enabled" type="boolean" :parentNames="['days', 'monday']" :isChild=true>
-
-Whether or not we enable booking on that day.
+Auto response message when someone book a meeting at this Appointment type.
 
 </attribute>
 
-<attribute name="slots" type="array of hashes" :parentNames="['days', 'monday']" :isChild=true :isLast=true>
+<attribute name="auto_title" type="string" :parentNames="['custom']" :isChild=true>
 
-An array of slots defining when the user is available.
-
-<attributes :isChild=true>
-<attribute name="start_time" type="date" :parentNames="['days', 'monday', 'slots[0]']" :isChild=true>
-
-The start time of the slot expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601). **Be careful, date part of the string doesn't matter.**
+Auto title for the event.
 
 </attribute>
 
-<attribute name="end_time" type="date" :parentNames="['days', 'monday', 'slots[0]']" :isChild=true :isLast=true>
+<attribute name="ask_phone" type="boolean" :parentNames="['custom']" :isChild=true>
 
-The end time of the slot expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601). **Be careful, date part of the string doesn't matter.**
+Whether or not the user must the user must provide their phone number.
 
 </attribute>
+
+<attribute name="ask_company" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the user must the user must provide their company.
+
+</attribute>
+
+<attribute name="block_new_invitee" type="boolean" :parentNames="['custom']" :isChild=true>
+
+If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events.
+Defaults to `false`.
+
+</attribute>
+
+<attribute name="duration" type="number" :parentNames="['custom']" :isChild=true>
+
+Default duration for the event.
+
+</attribute>
+
+<attribute name="set_lang" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Only use if you only accept bookings in one language.
+
+</attribute>
+
+<attribute name="enable_api" type="boolean" :parentNames="['custom']" :isChild=true>
+
+To enable API variables.
+
+</attribute>
+
+<attribute name="fixed_lang" type="string" :parentNames="['custom']" :isChild=true>
+
+Fixed lang expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+
+</attribute>
+
+<attribute name="set_timezone" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Only use if you only accept bookings from people on your own timezone.
+
+</attribute>
+
+<attribute name="fixed_timezone" type="string" :parentNames="['custom']" :isChild=true>
+
+Fixed timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+</attribute>
+
+<attribute name="event_hide_decline" type="number" :parentNames="['custom']" :isChild=true>
+
+Allow you to set how long (in hours) before the begining of the event the decline button will be hidden.
+Ex: if set to 24, the decline button will be hidden on the event page 24h before the confirmed date of the event.
+
+</attribute>
+
+<attribute name="hide_places" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Hide places from the booking page.
+
+</attribute>
+
+<attribute name="hide_support" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Hide support button from the booking page (recommended for an integration).
+
+</attribute>
+
+<attribute name="hide_title" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not people booking can set a title / subject for the event.
+
+</attribute>
+
+<attribute name="forbid_add_places" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not you forbid from suggesting other places from the booking page.
+
+</attribute>
+
+<attribute name="min_dates" type="number" :parentNames="['custom']" :isChild=true>
+
+Enforces a minimum number of slots on the booking page (only works for calendar view, not slots view).
+
+</attribute>
+
+<attribute name="one_slot" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not only one slot can be suggested on the calendar view.
+
+</attribute>
+
+<attribute name="auto_confirm" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the event will be booked as confirmed automatically.
+
+</attribute>
+
+<attribute name="invite_title" type="string" :parentNames="['custom']" :isChild=true>
+
+Customize the wording on the booking page.
+
+</attribute>
+
+<attribute name="redirect_url" type="string" :parentNames="['custom']" :isChild=true>
+
+Url to redirect people after the booking is made.
+
+</attribute>
+
+<attribute name="fixed_places" type="array of hashes" :parentNames="['custom']" :isChild=true :isLast=true>
+
+Set up a list of places on the booking page
+
+</attribute>
+
+</attribute>
+
 </attributes>
 
 </attribute>
-</attributes>
-
-</attribute>
-</attributes>
-
-</attribute>
 
 </attributes>
+
 
 <returns title="Returns">
 
-The created `Availability` object if no error occurred.
+The created `Appointment type` object if no error occurred.
 
 </returns>
 :::::
@@ -451,69 +609,50 @@ The created `Availability` object if no error occurred.
 
 ```shell
 curl \
---request POST 'https://api.vyte.in/v2/users/5f2d28fb1e0662e70071d46b/availabilities' \
+--request POST 'https://api.vyte.in/v2/vytemes/john-doe/types' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "timezone": "Europe/London",
-  "today_as_busy": false,
-  "past_as_busy": true,
-  "days_after_as_busy": 60,
-  "buffer_before": 0,
-  "buffer_after": 0,
-  "all_day_busy": true,
-  "days": {
-    "monday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "tuesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "wednesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "thursday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "friday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "saturday": {
-      "enabled": false
-    },
-    "sunday": {
-      "enabled": false
-    }
+
+  "name": "Lunch or dinner",
+  "handle": "lunch-or-dinner",
+  "message": "Welcome to my booking page",
+  "active": true,
+  "availability": "5f1b018dc1ac5dc46efc64b8"
+  "public": true
+  "description": "My conference appointment type"
+  "custom": {
+    "auto_message": "Thank you for your booking. See you soon.",
+    "auto_title": "RDV {{invitee}} / {{me}}",
+    "ask_phone": true,
+    "ask_company": false,
+    "block_new_invitee": false,
+    "duration": 30,
+    "set_lang": true,
+    "enable_api": true,
+    "fixed_lang": "en",
+    "set_timezone": true,
+    "fixed_timezone": "Europe/London",
+    "event_hide_decline": false,
+    "hide_places": false,
+    "hide_support": true,
+    "hide_title": true,
+    "forbid_add_places": true,
+    "min_dates": 1,
+    "one_slot": true,
+    "auto_confirm": true,
+    "invite_title": "Book a short appointment with",
+    "redirect_url": "https://www.example.com/thanks-for-booking",
+    "fixed_places": [
+      {
+        "name": "Office",
+        "address": "Office address"
+      },
+      {
+        "name": "Phone",
+        "address": "0102030405"
+      }
+    ]
   }
 }'
 ```
@@ -522,78 +661,46 @@ curl \
 
 ```json light-code
 {
-  "days": {
-    "monday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e066227db71d493",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "tuesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e066220c571d494",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "wednesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e0662ab1b71d495",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "thursday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e0662590c71d496",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "friday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d70c51e06626d7871d497",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "saturday": {
-      "enabled": false
-    },
-    "sunday": {
-      "enabled": false
-    }
-  },
-  "past_as_busy": true,
-  "trim_scheduler": true,
-  "_id": "5f2d4abf1e0662085171d476",
-  "belongs_to": "5f2d4abf1e0662386371d475",
-  "timezone": "Europe/London",
-  "dates": [],
-  "today_as_busy": false,
-  "days_after_as_busy": 60,
-  "buffer_before": 0,
-  "buffer_after": 0,
-  "all_day_busy": true,
-  "updatedAt": "2020-08-07T15:18:29.263Z",
-  "createdAt": "2020-08-07T12:36:16.024Z",
-  "__v": 0
+  "name": "Lunch or dinner",
+  "handle": "lunch-or-dinner",
+  "message": "Welcome to my booking page",
+  "active": true,
+  "availability": "5f1b018dc1ac5dc46efc64b8"
+  "public": true
+  "description": "My conference appointment type"
+  "custom": {
+    "auto_message": "Thank you for your booking. See you soon.",
+    "auto_title": "RDV {{invitee}} / {{me}}",
+    "ask_phone": true,
+    "ask_company": false,
+    "block_new_invitee": false,
+    "duration": 30,
+    "set_lang": true,
+    "enable_api": true,
+    "fixed_lang": "en",
+    "set_timezone": true,
+    "fixed_timezone": "Europe/London",
+    "event_hide_decline": false,
+    "hide_places": false,
+    "hide_support": true,
+    "hide_title": true,
+    "forbid_add_places": true,
+    "min_dates": 1,
+    "one_slot": true,
+    "auto_confirm": true,
+    "invite_title": "Book a short appointment with",
+    "redirect_url": "https://www.example.com/thanks-for-booking",
+    "fixed_places": [
+      {
+        "name": "Office",
+        "address": "Office address"
+      },
+      {
+        "name": "Phone",
+        "address": "0102030405"
+      }
+    ]
+  }
 }
 ```
 
@@ -601,7 +708,7 @@ curl \
 
 ::::::
 
-## Update the availabilities of a user
+## Retrieve an Appointment type
 
 :::::: panel
 ::::: left
@@ -609,111 +716,27 @@ curl \
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-PUT /v2/users/:user_id/availabilities HTTP/1.1
+PUT /v2/vytemes/:nickname/types/:handle HTTP/1.1
 ```
 
 <attributes title="Path parameters">
-  <attribute name="user_id" type="string">
+  <attribute name="nickname" type="string">
+    
+The nickname of the Vyte Page.
 
-The `id` of the user whose availability you want to update.
+  </attribute>
+  <attribute name="handle" type="string">
+    
+The handle of the Appointment type (urlified from the name par default).
 
   </attribute>
 </attributes>
 
 <attributes title="Query parameters" :isEmpty=true></attributes>
 
-<attributes title="Body parameters">
-
-<attribute name="timezone" type="string">
-
-The user timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
-
-</attribute>
-
-<attribute name="today_as_busy" type="boolean">
-
-Prevent from booking on the same day.
-
-</attribute>
-
-<attribute name="past_as_busy" type="boolean">
-
-Prevent from booking in the past.
-
-</attribute>
-
-<attribute name="days_after_as_busy" type="number">
-
-Prevent from booking in more than n days.
-
-</attribute>
-
-<attribute name="buffer_before" type="number">
-
-Ensure users have at least n minutes free before each meeting.
-
-</attribute>
-
-<attribute name="buffer_after" type="number">
-
-Ensure users have at least n minutes free after each meeting.
-
-</attribute>
-
-<attribute name="all_day_busy" type="boolean">
-
-If the user has busy all day events on its calendar the full day will be marked as busy on Vyte
-
-</attribute>
-
-<attribute name="days" type="hash">
-
-Here you can define the availabilities for each day of the week. **We present the structure only for monday, but it is the same for the othe days.**
-
-<attributes :isChild=true>
-
-<attribute name="monday" type="hash" :parentNames="['days']" :isChild=true :isLast=true>
-
-Settings for monday.
-
-<attributes :isChild=true>
-<attribute name="enabled" type="boolean" :parentNames="['days', 'monday']" :isChild=true>
-
-Whether or not we enable booking on that day.
-
-</attribute>
-
-<attribute name="slots" type="array of hashes" :parentNames="['days', 'monday']" :isChild=true :isLast=true>
-
-An array of slots defining when the user is available.
-
-<attributes :isChild=true>
-<attribute name="start_time" type="date" :parentNames="['days', 'monday', 'slots[0]']" :isChild=true>
-
-The start time of the slot expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601). **Be careful, date part of the string doesn't matter.**
-
-</attribute>
-
-<attribute name="end_time" type="date" :parentNames="['days', 'monday', 'slots[0]']" :isChild=true :isLast=true>
-
-The end time of the slot expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601). **Be careful, date part of the string doesn't matter.**
-
-</attribute>
-</attributes>
-
-</attribute>
-</attributes>
-
-</attribute>
-</attributes>
-
-</attribute>
-
-</attributes>
-
 <returns title="Returns">
 
-The updated `Availability` object if no error occurred.
+The particular `Appointment type` object if no error occurred.
 
 </returns>
 :::::
@@ -723,155 +746,55 @@ The updated `Availability` object if no error occurred.
 > CODE SAMPLE
 
 ```shell
-curl --request PUT 'https://api.vyte.in/v2/users/5f2d4abf1e0662386371d475/availabilities' \
+curl \
+--request GET 'https://api.vyte.in/v2/vytemes/john-doe/types' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "days": {
-    "monday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "tuesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "wednesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "thursday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "friday": {
-      "enabled": true,
-      "slots": [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T17:00"
-        }
-      ]
-    },
-    "saturday": {
-      "enabled": true,
-      "slots" : [
-        {
-          "start_time": "2018-01-01T09:00",
-          "end_time": "2018-01-01T12:00"
-        }
-      ]
-    },
-    "sunday": {
-      "enabled": false
-    }
-  }
-}'
 ```
 
 > RESPONSE SAMPLE
 
 ```json light-code
 {
-  "days": {
-    "monday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d712c1e0662346c71d499",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "tuesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d712c1e0662419b71d49a",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "wednesday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d712c1e0662b11f71d49b",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "thursday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d712c1e06628d3971d49c",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "friday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d712c1e0662234a71d49d",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T16:00:00.000Z"
-        }
-      ]
-    },
-    "saturday": {
-      "enabled": true,
-      "slots": [
-        {
-          "_id": "5f2d712c1e0662502e71d49e",
-          "start_time": "2018-01-01T08:00:00.000Z",
-          "end_time": "2018-01-01T11:00:00.000Z"
-        }
-      ]
-    },
-    "sunday": {
-      "enabled": false
-    }
-  },
-  "past_as_busy": true,
-  "trim_scheduler": true,
-  "_id": "5f2d4abf1e0662085171d476",
-  "belongs_to": "5f2d4abf1e0662386371d475",
-  "timezone": "Europe/London",
-  "dates": [],
-  "today_as_busy": false,
-  "days_after_as_busy": 60,
-  "buffer_before": 0,
-  "buffer_after": 0,
-  "all_day_busy": true,
-  "updatedAt": "2020-08-07T15:20:12.611Z",
-  "createdAt": "2020-08-07T12:36:16.024Z",
-  "__v": 0
+  "name": "Lunch or dinner",
+  "handle": "lunch-or-dinner",
+  "message": "Welcome to my booking page",
+  "active": true,
+  "availability": "5f1b018dc1ac5dc46efc64b8"
+  "public": true
+  "description": "My conference appointment type"
+  "custom": {
+    "auto_message": "Thank you for your booking. See you soon.",
+    "auto_title": "RDV {{invitee}} / {{me}}",
+    "ask_phone": true,
+    "ask_company": false,
+    "block_new_invitee": false,
+    "duration": 30,
+    "set_lang": true,
+    "enable_api": true,
+    "fixed_lang": "en",
+    "set_timezone": true,
+    "fixed_timezone": "Europe/London",
+    "event_hide_decline": false,
+    "hide_places": false,
+    "hide_support": true,
+    "hide_title": true,
+    "forbid_add_places": true,
+    "min_dates": 1,
+    "one_slot": true,
+    "auto_confirm": true,
+    "invite_title": "Book a short appointment with",
+    "redirect_url": "https://www.example.com/thanks-for-booking",
+    "fixed_places": [
+      {
+        "name": "Office",
+        "address": "Office address"
+      },
+      {
+        "name": "Phone",
+        "address": "0102030405"
+      }
+    ]
+  }
 }
 ```
 
@@ -879,7 +802,342 @@ curl --request PUT 'https://api.vyte.in/v2/users/5f2d4abf1e0662386371d475/availa
 
 ::::::
 
-## Delete the availabilities of a user
+## Update an Appointment type
+
+:::::: panel
+::::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+PUT /v2/vytemes/:nickname/types/:handle HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="nickname" type="string">
+    
+The nickname of the Vyte Page.
+
+  </attribute>
+  <attribute name="handle" type="string">
+    
+The handle of the Appointment type (urlified from the name par default).
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true></attributes>
+
+<attributes title="Body parameters">
+
+<attribute name="nickname" type="string">
+
+Nickname for the user Vyte Page. Appointment types are created within Vyteme pages. Ex: if the nickname is `john-doe`, the appointment type page will be accessible at `https://vyte.in/john-doe/types/:handle`.
+
+</attribute>
+
+<attribute name="availability" type="ObjectId">
+
+The `id` of Availability page connected with this Appointment type.
+
+</attribute>
+
+<attribute name="name" type="string">
+  
+  Name of the Appointment type
+  
+</attribute>
+ 
+<attribute name="handle" type="string">
+  
+Handle is used at the endpoints as a unique identificator of the Appointment type. Created atomatically from the name by urlifying. For example, name `Conference lunch` will be transfomed into `conference-lunch`.
+  
+</attribute>
+
+<attribute name="active" type="boolean">
+
+Whether or not the Appointment type is active.
+
+</attribute>
+
+<attribute name="message" type="string">
+
+Message shown on the Appointment type page.
+
+</attribute>
+
+<attribute name="description" type="string">
+
+Description shown on the Appointment type page.
+
+</attribute>
+
+<attribute name="public" type="boolean">
+
+Whether or not the Appointment type is public.
+
+</attribute>
+
+<attribute name="custom" type="hash">
+
+Custom settings for the user Appointment type.
+
+<attributes :isChild=true>
+<attribute name="auto_message" type="string" :parentNames="['custom']" :isChild=true>
+
+Auto response message when someone book a meeting at this Appointment type.
+
+</attribute>
+
+<attribute name="auto_title" type="string" :parentNames="['custom']" :isChild=true>
+
+Auto title for the event.
+
+</attribute>
+
+<attribute name="ask_phone" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the user must the user must provide their phone number.
+
+</attribute>
+
+<attribute name="ask_company" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the user must the user must provide their company.
+
+</attribute>
+
+<attribute name="block_new_invitee" type="boolean" :parentNames="['custom']" :isChild=true>
+
+If enabled, it prevents people that have booked events on that Vyte booking page to add other invitees to those events.
+Defaults to `false`.
+
+</attribute>
+
+<attribute name="duration" type="number" :parentNames="['custom']" :isChild=true>
+
+Default duration for the event.
+
+</attribute>
+
+<attribute name="set_lang" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Only use if you only accept bookings in one language.
+
+</attribute>
+
+<attribute name="enable_api" type="boolean" :parentNames="['custom']" :isChild=true>
+
+To enable API variables.
+
+</attribute>
+
+<attribute name="fixed_lang" type="string" :parentNames="['custom']" :isChild=true>
+
+Fixed lang expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+
+</attribute>
+
+<attribute name="set_timezone" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Only use if you only accept bookings from people on your own timezone.
+
+</attribute>
+
+<attribute name="fixed_timezone" type="string" :parentNames="['custom']" :isChild=true>
+
+Fixed timezone expressed according to [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+</attribute>
+
+<attribute name="event_hide_decline" type="number" :parentNames="['custom']" :isChild=true>
+
+Allow you to set how long (in hours) before the begining of the event the decline button will be hidden.
+Ex: if set to 24, the decline button will be hidden on the event page 24h before the confirmed date of the event.
+
+</attribute>
+
+<attribute name="hide_places" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Hide places from the booking page.
+
+</attribute>
+
+<attribute name="hide_support" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Hide support button from the booking page (recommended for an integration).
+
+</attribute>
+
+<attribute name="hide_title" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not people booking can set a title / subject for the event.
+
+</attribute>
+
+<attribute name="forbid_add_places" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not you forbid from suggesting other places from the booking page.
+
+</attribute>
+
+<attribute name="min_dates" type="number" :parentNames="['custom']" :isChild=true>
+
+Enforces a minimum number of slots on the booking page (only works for calendar view, not slots view).
+
+</attribute>
+
+<attribute name="one_slot" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not only one slot can be suggested on the calendar view.
+
+</attribute>
+
+<attribute name="auto_confirm" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Whether or not the event will be booked as confirmed automatically.
+
+</attribute>
+
+<attribute name="invite_title" type="string" :parentNames="['custom']" :isChild=true>
+
+Customize the wording on the booking page.
+
+</attribute>
+
+<attribute name="redirect_url" type="string" :parentNames="['custom']" :isChild=true>
+
+Url to redirect people after the booking is made.
+
+</attribute>
+
+<attribute name="fixed_places" type="array of hashes" :parentNames="['custom']" :isChild=true :isLast=true>
+
+Set up a list of places on the booking page
+
+</attribute>
+
+</attribute>
+
+</attributes>
+
+</attribute>
+
+</attributes>
+
+
+<returns title="Returns">
+
+The updated `Appointment type` object if no error occurred.
+
+</returns>
+:::::
+
+::::: right
+
+> CODE SAMPLE
+
+```shell
+curl \
+--request PUT 'https://api.vyte.in/v2/vytemes/john-doe/types/lunch-or-dinner' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+      "name": "Lunch or dinner",
+      "handle": "lunch-or-dinner",
+      "message": "Welcome to my VERY NEW page",
+      "active": true,
+      "availability": "5f1b018dc1ac5dc46efc64b8"
+      "public": true
+      "description": "My ANOTHER appointment type"
+      "custom": {
+        "auto_message": "Thank you for your booking. See you soon IN 2021.",
+        "auto_title": "RDV {{invitee}} / {{me}}",
+        "ask_phone": true,
+        "ask_company": false,
+        "block_new_invitee": false,
+        "duration": 30,
+        "set_lang": true,
+        "enable_api": true,
+        "fixed_lang": "en",
+        "set_timezone": true,
+        "fixed_timezone": "Europe/London",
+        "event_hide_decline": false,
+        "hide_places": false,
+        "hide_support": true,
+        "hide_title": true,
+        "forbid_add_places": true,
+        "min_dates": 1,
+        "one_slot": true,
+        "auto_confirm": true,
+        "invite_title": "Book a short appointment with",
+        "redirect_url": "https://www.example.com/thanks-for-booking",
+        "fixed_places": [
+          {
+            "name": "Office",
+            "address": "Office address"
+          },
+          {
+            "name": "Phone",
+            "address": "0102030405"
+          }
+        ]
+      }
+    }'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+      "name": "Lunch or dinner",
+      "handle": "lunch-or-dinner",
+      "message": "Welcome to my VERY NEW page",
+      "active": true,
+      "availability": "5f1b018dc1ac5dc46efc64b8"
+      "public": true
+      "description": "My ANOTHER appointment type"
+      "custom": {
+        "auto_message": "Thank you for your booking. See you soon IN 2021.",
+        "auto_title": "RDV {{invitee}} / {{me}}",
+        "ask_phone": true,
+        "ask_company": false,
+        "block_new_invitee": false,
+        "duration": 30,
+        "set_lang": true,
+        "enable_api": true,
+        "fixed_lang": "en",
+        "set_timezone": true,
+        "fixed_timezone": "Europe/London",
+        "event_hide_decline": false,
+        "hide_places": false,
+        "hide_support": true,
+        "hide_title": true,
+        "forbid_add_places": true,
+        "min_dates": 1,
+        "one_slot": true,
+        "auto_confirm": true,
+        "invite_title": "Book a short appointment with",
+        "redirect_url": "https://www.example.com/thanks-for-booking",
+        "fixed_places": [
+          {
+            "name": "Office",
+            "address": "Office address"
+          },
+          {
+            "name": "Phone",
+            "address": "0102030405"
+          }
+    ]
+  }
+}
+```
+
+:::::
+
+::::::
+
+## Delete an Appointment type
 
 ::::: panel
 :::: left
@@ -887,13 +1145,18 @@ curl --request PUT 'https://api.vyte.in/v2/users/5f2d4abf1e0662386371d475/availa
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-DELETE /v2/users/:user_id/availabilities HTTP/1.1
+DELETE /v2/vytemes/:nickname/types/:handle HTTP/1.1
 ```
 
 <attributes title="Path parameters">
-  <attribute name="user_id" type="string">
+  <attribute name="nickname" type="string">
 
-The `id` of the user whose availability you want to delete.
+The nickname of the Vyte Page.
+
+  </attribute>
+  <attribute name="handle" type="string">
+    
+The handle of the Appointment type (urlified from the name par default).
 
   </attribute>
 </attributes>
@@ -911,7 +1174,7 @@ Returns an object containing the number of row affected and the status if there 
 :::: right
 
 ```shell
-curl --request DELETE 'https://api.vyte.in/v2/users/5f2d4abf1e0662386371d475/availabilities' \
+curl --request DELETE 'https://api.vyte.in/v2/vytemes/john-doe/types/lunch-or-dinner' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
@@ -927,4 +1190,3 @@ curl --request DELETE 'https://api.vyte.in/v2/users/5f2d4abf1e0662386371d475/ava
 ::::
 
 :::::
-
