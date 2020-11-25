@@ -167,14 +167,15 @@ This setting allows to get notifications when the event is created from your Vyt
       vyteme_created_admin: false
     }
   },
-_id: 5fbd38e7198731eeaf57e4cb,
-belongs_to: 5fbd38e7a6bb1d001c11863a,
-updatedAt: 2020-11-24T16:46:31.666Z,
-createdAt: 2020-11-24T16:46:31.666Z,
-__v: 0
-}
+  _id: 5fbd38e7198731eeaf57e4cb,
+  belongs_to: 5fbd38e7a6bb1d001c11863a,
+  updatedAt: 2020-11-24T16:46:31.666Z,
+  createdAt: 2020-11-24T16:46:31.666Z,
+  __v: 0
+  }
 
 ```
+
 
 ::::
 
