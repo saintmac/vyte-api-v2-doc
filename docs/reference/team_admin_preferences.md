@@ -566,6 +566,7 @@ curl --request PUT 'https://api.vyte.in/v2/teams/5fbe426b28fd0e0016ca3ff5/admin-
     }
 }
 '
+```
 
 > RESPONSE SAMPLE
 ```json light-code
