@@ -149,29 +149,29 @@ This setting allows to get notifications when the event is created from your Vyt
 
 ```json light-code
 {
-  prefs: {
-    email: {
-      attending: true,
-      declined: true,
-      event_cancelled: true,
-      event_cancelled_admin: true,
-      event_confirmed: true,
-      event_confirmed_admin: false,
-      new_event: false,
-      new_event_admin: false,
-      new_message: false,
-      new_suggestion: false,
-      new_suggestion_own: false,
-      vote_update: false,
-      vote_confirmation: false,
-      vyteme_created_admin: false
+  "prefs": {
+    "email": {
+      "attending": true,
+      "declined": true,
+      "event_cancelled": true,
+      "event_cancelled_admin": true,
+      "event_confirmed": true,
+      "event_confirmed_admin": false,
+      "new_event": false,
+      "new_event_admin": false,
+      "new_message": false,
+      "new_suggestion": false,
+      "new_suggestion_own": false,
+      "vote_update": false,
+      "vote_confirmation": false,
+      "vyteme_created_admin": false
     }
   },
-  _id: 5fbd38e7198731eeaf57e4cb,
-  belongs_to: 5fbd38e7a6bb1d001c11863a,
-  updatedAt: 2020-11-24T16:46:31.666Z,
-  createdAt: 2020-11-24T16:46:31.666Z,
-  __v: 0
+  "_id": "5fbd38e7198731eeaf57e4cb",
+  "belongs_to": "5fbd38e7a6bb1d001c11863a",
+  "updatedAt": "2020-11-24T16:46:31.666Z",
+  "createdAt": "2020-11-24T16:46:31.666Z",
+  "__v": 0
   }
 
 ```
@@ -223,30 +223,30 @@ curl \
 
 ```json light-code
 {
-  prefs: {
-    email: {
-      attending: true,
-      declined: true,
-      event_cancelled: true,
-      event_cancelled_admin: true,
-      event_confirmed: true,
-      event_confirmed_admin: false,
-      new_event: false,
-      new_event_admin: false,
-      new_message: false,
-      new_suggestion: false,
-      new_suggestion_own: false,
-      vote_update: false,
-      vote_confirmation: false,
-      vyteme_created_admin: false
+  "prefs": {
+    "email": {
+      "attending": true,
+      "declined": true,
+      "event_cancelled": true,
+      "event_cancelled_admin": true,
+      "event_confirmed": true,
+      "event_confirmed_admin": false,
+      "new_event": false,
+      "new_event_admin": false,
+      "new_message": false,
+      "new_suggestion": false,
+      "new_suggestion_own": false,
+      "vote_update": false,
+      "vote_confirmation": false,
+      "vyteme_created_admin": false
     }
   },
-_id: 5fbd38e7198731eeaf57e4cb,
-belongs_to: 5fbd38e7a6bb1d001c11863a,
-updatedAt: 2020-11-24T16:46:31.666Z,
-createdAt: 2020-11-24T16:46:31.666Z,
-__v: 0
-}
+  "_id": "5fbd38e7198731eeaf57e4cb",
+  "belongs_to": "5fbd38e7a6bb1d001c11863a",
+  "updatedAt": "2020-11-24T16:46:31.666Z",
+  "createdAt": "2020-11-24T16:46:31.666Z",
+  "__v": 0
+  }
 
 ```
 
@@ -380,14 +380,14 @@ curl \
 --header 'Content-Type: application/json' \
 --data-raw '
     {
-      prefs: {
-        email: {
-          attending: true,
-          declined: true,
-          event_cancelled: true,
-          event_cancelled_admin: true,
-          event_confirmed: true,
-          new_event: true
+      "prefs": {
+        "email": {
+          "attending": true,
+          "declined": true,
+          "event_cancelled": true,
+          "event_cancelled_admin": true,
+          "event_confirmed": true,
+          "new_event": true
         }
     }
 }'
@@ -397,29 +397,29 @@ curl \
 
 ```json light-code
 {
-  prefs: {
-    email: {
-      attending: true,
-      declined: true,
-      event_cancelled: true,
-      event_cancelled_admin: true,
-      event_confirmed: true,
-      event_confirmed_admin: false,
-      new_event: true,
-      new_event_admin: false,
-      new_message: false,
-      new_suggestion: false,
-      new_suggestion_own: false,
-      vote_update: false,
-      vote_confirmation: false,
-      vyteme_created_admin: false
+  "prefs": {
+    "email": {
+      "attending": true,
+      "declined": true,
+      "event_cancelled": true,
+      "event_cancelled_admin": true,
+      "event_confirmed": true,
+      "event_confirmed_admin": false,
+      "new_event": true,
+      "new_event_admin": false,
+      "new_message": false,
+      "new_suggestion": false,
+      "new_suggestion_own": false,
+      "vote_update": false,
+      "vote_confirmation": false,
+      "vyteme_created_admin": false
     }
   },
-_id: 5fbd38e7198731eeaf57e4cb,
-belongs_to: 5fbd38e7a6bb1d001c11863a,
-updatedAt: 2020-11-24T16:46:31.666Z,
-createdAt: 2020-11-24T16:46:31.666Z,
-__v: 0
+"_id": "5fbd38e7198731eeaf57e4cb",
+"belongs_to": "5fbd38e7a6bb1d001c11863a",
+"updatedAt": "2020-11-24T16:46:31.666Z",
+"createdAt": "2020-11-24T16:46:31.666Z",
+"__v": 0
 }
 
 ```
@@ -554,15 +554,15 @@ curl --request PUT 'https://api.vyte.in/v2/teams/5fbe426b28fd0e0016ca3ff5/admin-
 --header 'Content-Type: application/json' \
 --data-raw '
  {
-      prefs: {
-        email: {
-          attending: true,
-          declined: true,
-          event_cancelled: true,
-           event_cancelled_admin: true,
-          event_confirmed: true,
-          new_event: false
-          vite_confirmation: true
+      "prefs": {
+        "email": {
+          "attending": true,
+          "declined": true,
+          "event_cancelled": true,
+          "event_cancelled_admin": true,
+          "event_confirmed": true,
+          "new_event": false
+          "vite_confirmation": true
         }
     }
 }
@@ -572,29 +572,29 @@ curl --request PUT 'https://api.vyte.in/v2/teams/5fbe426b28fd0e0016ca3ff5/admin-
 > RESPONSE SAMPLE
 ```json light-code
 {
-  prefs: {
-    email: {
-      attending: true,
-      declined: true,
-      event_cancelled: true,
-      event_cancelled_admin: true,
-      event_confirmed: true,
-      event_confirmed_admin: false,
-      new_event: false,
-      new_event_admin: false,
-      new_message: false,
-      new_suggestion: false,
-      new_suggestion_own: false,
-      vote_update: false,
-      vote_confirmation: true,
-      vyteme_created_admin: false
+  "prefs": {
+    "email": {
+      "attending": true,
+      "declined": true,
+      "event_cancelled": true,
+      "event_cancelled_admin": true,
+      "event_confirmed": true,
+      "event_confirmed_admin": false,
+      "new_event": false,
+      "new_event_admin": false,
+      "new_message": false,
+      "new_suggestion": false,
+      "new_suggestion_own": false,
+      "vote_update": false,
+      "vote_confirmation": true,
+      "vyteme_created_admin": false
     }
   },
-_id: 5fbd38e7198731eeaf57e4cb,
-belongs_to: 5fbd38e7a6bb1d001c11863a,
-updatedAt: 2020-11-24T16:46:31.666Z,
-createdAt: 2020-11-24T16:46:31.666Z,
-__v: 0
+"_id": "5fbd38e7198731eeaf57e4cb",
+"belongs_to": "5fbd38e7a6bb1d001c11863a",
+"updatedAt": "2020-11-24T16:46:31.666Z",
+"createdAt": "2020-11-24T16:46:31.666Z",
+"__v": 0
 }
 
 ```
