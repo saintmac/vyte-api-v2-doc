@@ -316,6 +316,29 @@ An `Vyteme` object if there is no error.
 </returns>
 :::::
 
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+GET /v2/users/:user_id/vyteme HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="user_id" type="string">
+
+The `_id` of user, whom the Vyte Page belongs to.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true></attributes>
+
+<returns title="Returns">
+
+An `Vyteme` object if there is no error. It returns the primary `Vyteme`, where property `secondary` is not true.
+
+</returns>
+:::::
+
 ::::: right
 
 > CODE SAMPLE
@@ -323,6 +346,14 @@ An `Vyteme` object if there is no error.
 ```shell
 curl \
 --request GET 'https://api.vyte.in/v2/vytemes/john-doe-acme' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+```
+
+> CODE SAMPLE
+
+```shell
+curl \
+--request GET 'https://api.vyte.in/v2/users/5fd356f7e34eaa001c4844cc/vyteme' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
@@ -375,6 +406,93 @@ curl \
 :::::
 
 ::::::
+
+## List all Vyteme pages of the user
+
+:::::: panel
+::::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+GET /v2/users/:user_id/vytemes HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="user_id" type="string">
+
+The `_id` of user, whom the Vyte Page belongs to.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true></attributes>
+
+<returns title="Returns">
+
+An array of `Vyteme` objects if there is no error.
+
+</returns>
+:::::
+
+> CODE SAMPLE
+
+```shell
+curl \
+--request GET 'https://api.vyte.in/v2/users/5fd359112162de001c023573/vytemes' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+
+[ { "custom":
+    { "set_lang": false,
+      "set_timezone": false,
+      "min_dates": 1,
+      "no_emails": false,
+      "one_slot": true,
+      "auto_confirm": true,
+      "fixed_places": [] },
+    "hub": false,
+    "urls":
+      [ "http://twitter.com/sample",
+        "http://facebook.com/sample" ],
+     "active": true,
+     "_id": "5fd35911bbeb07f575771da1",
+     "nickname": "sample",
+     "belongs_to": "5fd359112162de001c023573",
+     "message": "Hello everyone",
+     "updatedAt": "2020-12-11T11:33:38.211Z",
+     "createdAt": "2020-12-11T11:33:38.046Z",
+     "__v": 1 },
+   { "custom":
+      { "set_lang": false,
+        "set_timezone": false,
+        "min_dates": 1,
+        "no_emails": false,
+        "one_slot": true,
+        "auto_confirm": true,
+        "fixed_places": [] },
+     "hub": false,
+     "urls": [],
+     "active": true,
+     "_id": "5fd359122162de001c023578",
+     "nickname": "sampletwo",
+     "message": "kikoo",
+     "belongs_to": "5fd359112162de001c023573",
+     "updatedAt": "2020-12-11T11:33:38.303Z",
+     "createdAt": "2020-12-11T11:33:38.303Z",
+     "__v": 0 } ]
+
+```
+
+:::::
+
+::::::
+
+
 
 ## Create a vyteme
 
