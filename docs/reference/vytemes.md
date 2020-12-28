@@ -195,6 +195,24 @@ Url to redirect people after the booking is made.
 
 </attribute>
 
+<attribute name="title_label" type="string" :parentNames="['custom']" :isChild=true>
+
+Label of the title field.
+
+</attribute>
+
+<attribute name="title_placeholder" type="string" :parentNames="['custom']" :isChild=true>
+
+Placeholder of the title field.
+
+</attribute>
+
+<attribute name="title_mandatory" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Make the title mandatory, if set `true`.
+
+</attribute>
+
 <attribute name="fixed_places" type="array of hashes" :parentNames="['custom']" :isChild=true :isLast=true>
 
 Set up a list of places on the booking page
@@ -268,6 +286,9 @@ Id of the place in your own database/source.
     "auto_confirm": true,
     "invite_title": "Book a short appointment with",
     "redirect_url": "https://www.example.com/thanks-for-booking",
+    "title_label": "The subject of meeting",
+    "title_placeholder": "Discuss the project",
+    "title_mandatory": true,
     "fixed_places": [
       {
         "name": "Office",
@@ -356,6 +377,9 @@ curl \
     "auto_confirm": true,
     "invite_title": "Book a short appointment with",
     "redirect_url": "https://www.example.com/thanks-for-booking",
+    "title_label": "The subject of meeting",
+    "title_placeholder": "Discuss the project",
+    "title_mandatory": true,
     "fixed_places": [
       {
         "name": "Office",
@@ -556,6 +580,24 @@ Url to redirect people after the booking is made.
 
 </attribute>
 
+<attribute name="title_label" type="string" :parentNames="['custom']" :isChild=true>
+
+Label of the title field.
+
+</attribute>
+
+<attribute name="title_placeholder" type="string" :parentNames="['custom']" :isChild=true>
+
+Placeholder of the title field.
+
+</attribute>
+
+<attribute name="title_mandatory" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Make the title mandatory, if set `true`.
+
+</attribute>
+
 <attribute name="fixed_places" type="array of hashes" :parentNames="['custom']" :isChild=true :isLast=true>
 
 Set up a list of places on the booking page
@@ -635,6 +677,9 @@ curl \
     "auto_confirm": true,
     "invite_title": "Book a short appointment with",
     "redirect_url": "https://www.example.com/thanks-for-booking",
+    "title_label": "The subject of meeting",
+    "title_placeholder": "Discuss the project",
+    "title_mandatory": true,
     "fixed_places": [
       {
         "name": "Office",
@@ -681,6 +726,9 @@ curl \
     "auto_confirm": true,
     "invite_title": "Book a short appointment with",
     "redirect_url": "https://www.example.com/thanks-for-booking",
+    "title_label": "The subject of meeting",
+    "title_placeholder": "Discuss the project",
+    "title_mandatory": true,
     "fixed_places": [
       {
         "name": "Office",
@@ -887,6 +935,24 @@ Url to redirect people after the booking is made.
 
 </attribute>
 
+<attribute name="title_label" type="string" :parentNames="['custom']" :isChild=true>
+
+Label of the title field.
+
+</attribute>
+
+<attribute name="title_placeholder" type="string" :parentNames="['custom']" :isChild=true>
+
+Placeholder of the title field.
+
+</attribute>
+
+<attribute name="title_mandatory" type="boolean" :parentNames="['custom']" :isChild=true>
+
+Make the title mandatory, if set `true`.
+
+</attribute>
+
 <attribute name="fixed_places" type="array of hashes" :parentNames="['custom']" :isChild=true :isLast=true>
 
 Set up a list of places on the booking page
@@ -966,6 +1032,9 @@ curl \
     "auto_confirm": true,
     "invite_title": "Book a short appointment with",
     "redirect_url": "https://www.example.com/thanks-for-booking",
+    "title_label": "The subject of phone call",
+    "title_placeholder": "Discuss the new project",
+    "title_mandatory": true,
     "fixed_places": [
       {
         "name": "Office",
@@ -1012,6 +1081,9 @@ curl \
     "auto_confirm": true,
     "invite_title": "Book a short appointment with",
     "redirect_url": "https://www.example.com/thanks-for-booking",
+    "title_label": "The subject of phone call",
+    "title_placeholder": "Discuss the new project",
+    "title_mandatory": true,
     "fixed_places": [
       {
         "name": "Office",
