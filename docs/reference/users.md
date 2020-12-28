@@ -18,6 +18,7 @@ Moreover, we provide a endpoint to batch create users to optimize the workflow i
 
 <endpoints>
   <endpoint method="get" path="/v2/users" href="#list-all-users-linked-to-you-organization"></endpoint>
+  <endpoint method="get" path="/v2/users/:user_id" href="#retrieve-a-user"></endpoint>
   <endpoint method="post" path="/v2/users" href="#create-a-user"></endpoint>
   <endpoint method="post" path="/v2/users/batch" href="#batch-create-users"></endpoint>
   <endpoint method="put" path="/v2/users/:user_id" href="#update-a-user"></endpoint>
@@ -367,6 +368,100 @@ curl  --request GET 'https://api.vyte.in/v2/users' \
 ::::
 
 :::::
+
+
+## Retrieve a user
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+GET /v2/users/:user_id HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="user_id" type="string" :required=true>
+
+The `id` of the user.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns a `User` object if the user exists. Otherwise returns `404`.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl  --request GET 'https://api.vyte.in/v2/users/5f11747afb208c814fd24bb7' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+[
+  {
+    "_id": "5f11747afb208c814fd24bb7",
+    "first_name": "Jean",
+    "last_name": "Dupont",
+    "full_name": "Jean Dupont",
+    "timezone": "Europe/Paris",
+    "language": "fr",
+    "signedup_with": "email",
+    "calendarList": "5f1175516b229dad991a7949",
+    "picture_url": "https://pictures-cdn.vyte.in/l0hev89qp5nla0bzhszy6.jpg",
+    "account": {
+      "organization": {
+        "name": "My Organization",
+        "id": "5f117442d7535f4c7ba5b3e7",
+        "admin": true
+      },
+      "plan": "pro",
+      "free_trial_days": 14,
+      "free_trial_started": "2020-06-22T15:15:18.474Z",
+      "free_trial_until": "2020-07-06T15:15:18.475Z",
+      "app_url": "https://jean-dupont.vyte.in"
+    },
+    "consent": {
+      "terms": "2020-06-24T09:42:41.225Z"
+    },
+    "emails": ["jean.dupont@example.com"],
+    "calendars": {
+      "google": true,
+      "office365": false,
+      "exchange": false,
+      "icloud": false,
+      "caldav": false
+    },
+    "google": {
+      "id": "112448977134001874141",
+      "email": "jean.dupont@example.com",
+      "picture": "http://example.com/picture",
+      "token": "5f1174267931de7e41cc729a",
+      "last_contacts_fetch": "2020-07-13T15:45:04.688Z",
+      "last_profile_fetch": "2020-07-14T09:36:22.997Z"
+    }
+  }
+]
+```
+
+::::
+
+:::::
+
+
 
 ## Create a user
 
