@@ -1435,3 +1435,59 @@ curl  --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/can
 ::::
 
 :::::
+
+## Change event organizer
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/events/:event_id/admin HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="event_id" type="string" required=true>
+  
+Id of the event. Found as `_id` in event resources.
+
+  </attribute>
+</attributes>
+
+<attributes>
+  <attribute name="user" type="ObjectId">
+    The `_id` of the new organizer.
+  </attribute>
+  
+  <attribute name="keep_as_invitee" type="Boolean">
+    If set `true` it keeps the previous organizer as invitee of the event, set to `false` - remove if from the invitees array. Par default set to `false`.
+  </attribute>
+  
+  </attributes>
+
+<returns title="Returns">
+
+`OK` if there is no error.
+
+</returns>
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl  --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/admin' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "user": "5f0d7eb02003d0971e2a961b",
+    "keep_as_invitee": false
+}'
+```
+
+::::
+
+:::::
+
