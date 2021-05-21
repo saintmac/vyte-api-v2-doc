@@ -392,6 +392,7 @@ Id of your organization.
 <attribute name="finish_signup_with" type="string" :required=false>
 
 If you want your user to finish signing up on Vyte to set their password, then set that to `email` (the actual "email" string, not the email of the user), otherwise don't use it.
+With this set, the response will contain a link which the user can complete the registration with.
 
 </attribute>
 
@@ -807,7 +808,7 @@ Exchange password.
 
 <returns title="Returns">
 
-An object containing a `user` key whith the `User` object. If `finish_signup_with` was set to `true`, the link to complete the registration is also returned.
+An object containing a `user` key whith the `User` object. If `finish_signup_with` was set to `email`, the link to complete the registration is also returned.
 
 </returns>
 
