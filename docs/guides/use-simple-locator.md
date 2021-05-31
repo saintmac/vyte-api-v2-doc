@@ -101,7 +101,7 @@ What will happen if nothing is found?
 <attributes :isChild=true>
 <attribute name="message" type="string" :isChild=true :parentNames="['no_results']">
 
-Custom your message. Like 'Nothing is found'
+Custom your message. Like 'Nothing is found'.
 
 </attribute>
 <attribute name="button" type="object" :isChild=true :parentNames="['no_results']">
@@ -136,7 +136,7 @@ Label of the custom back button.
 
 <attribute name="max_distance" type="number">
 
-Maxx distance from client's location in meters.
+Max distance from client's location in meters.
 
 </attribute>
 <attribute name="postcode_filter" type="string">
@@ -194,7 +194,7 @@ Basically `Location` is an element of `Locator`, so every locator can have sever
 
 ## Create the location
 There are two ways to create locations:
-* Using `POST` at `/v2/locators` while creating the locator for the first time. Useful if you create the locator and already have the lict of locations;
+* Using `POST` at `/v2/locators` while creating the locator for the first time. Useful if you create the locator and already have the list of locations;
 * Using `POST` at `/v2/locators/:locator_id/locations`. Useful if you need to add new location to the existing locator.
 
 Let's have a look at the second one :
@@ -216,7 +216,26 @@ curl --request POST 'https://api.vyte.in/v2/locators/60afc3fb228757001d737c11/lo
 '
 ```
 
+If everything is okay, it should create the object like this:
+```json light-code
+    {
+        "location":
+            { "type": "Point",
+            "coordinates": ["Array"] },
+        "_id": "60b4c4c3b66924001789ba3e",
+        "name": "Jim",
+        "locator": "0afc3fb228757001d737c11",
+        "extid": "1",
+        "address": "96bis Boulevard Raspail",
+        "picture_url": "https://picture.com/123",
+        "link": "https://www.agoranov.com/",
+        "extid": "1234352",
+        "org": "60b4c4c1b66924001789ba3a",
+        "updatedAt": "2021-05-31T11:13:07.067Z",
+        "createdAt": "2021-05-31T11:13:07.067Z",
+        "__v": 0 }
 
+```
 ### What do these properties mean?
 <attributes title="Properties">
 
@@ -237,13 +256,26 @@ Link to the picture used for this location.
 </attribute>
 
 <attribute name="link" type="string">
-Redicrection if chosen.
+Redicrection if the location is chosen.
 </attribute>
 
 <attribute name="extid" type="string">
 If you have the points in your own database with specific `ids` you can keep them stored as `external_id`.
 </attribute>
 </attributes>
+
+## Retrieve, update or delete location
+For all these manipulations you can you one endpoint: `/v2/locators/:locator_id/locations/:location_id` with `GET`, `PUT` or `DELETE`.
+* `GET` will return the object with particular location
+* `PUT` will update the location with provided data
+* `DELETE` will delete the location with `200` status response
+
+Looks quite easy, right? Let us know what do think!
+
+
+
+
+
 
 
 
