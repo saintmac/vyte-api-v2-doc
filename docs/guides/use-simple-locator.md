@@ -169,13 +169,28 @@ Array of locations of your points/stores/centers. It is an example of `Location`
 </attributes>
 
 
-
 ## List all locators
+To list all the locators, you can use `GET` request at `/v2/locators` :
+```shell screen-hidden
+curl --request GET 'https://api.vyte.in/v2/locators' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'
+```
+This one will return the array of created locators, if they exist. If you don't have locators yet, it will return empty array with `200` response.
 
 ## Retrieve locator
+This one works quite the same as listing all the locators, we just need the `handle` of locator. So let's go to `/v2/locators/:handle` using `GET`:
 
-## Update locator
+```shell screen-hidden
+curl --request GET 'https://api.vyte.in/v2/locators/stores' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'
+```
+It will return the particular locator, if it exists.
 
-## Delete locator
+## Update or delete locator
+The endpoint `/v2/locators/:handle` is very useful: with `PUT` and `DELETE` you can also update or delete particular locator.
+
+
+
+
 
 
