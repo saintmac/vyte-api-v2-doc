@@ -1,4 +1,5 @@
 # Use team admins notifications
+Vyte provide powerful API to create and manage different teams, some examples you can find in our [Guide](/guides/setup-team-booking) and [Reference](/reference/teams). Here we are going to talk about team admin notifications settings.
 
 Team admins notifications help to set up email notifications for different event changes. It uses following preferences:
 
@@ -86,11 +87,11 @@ Send notification, when new event is created from your Vyte page. As an owner of
 </attribute>
 
 ## Set up your team admin preferences
-To set up your team admin preferences you can use the `/teams/:team_id/admin-preferences` endpoint with your team `_id` and POST method. If some preferences are not defined they will be set up `false` par default.
+To set up your team admin preferences you can use the `/v2/teams/:team_id/admin-preferences` endpoint with your team `_id` and POST method. If some preferences are not defined they will be set up `false` par default.
 
 ```shell screen-hidden
-curl --request POST 'https://api.vyte.in/teams/:team_id/admin-preferences' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+curl --request POST 'https://api.vyte.in/v2/teams/:team_id/admin-preferences' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7y6g' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "prefs":
@@ -105,35 +106,35 @@ curl --request POST 'https://api.vyte.in/teams/:team_id/admin-preferences' \
 ```
 
 ## Get your team admin preferences
-To get your team admin preferences you can use the `/teams/:team_id/admin-preferences` endpoint with your team `_id` and GET method. The response should be the an object containing the preferences :
+To get your team admin preferences you can use the `/v2/teams/:team_id/admin-preferences` endpoint with your team `_id` and GET method. The response should be the an object containing the preferences :
 
 ```json light-code
-    {
+{
     "prefs":
         "email":
-            "attending": true
-            "declined": true
-            "event_cancelled": true
-            "event_cancelled_admin": true
-            "event_confirmed": true
-            "event_confirmed_admin": false
-            "new_event": false
-            "new_event_admin": false
-            "new_message": false
-            "new_suggestion": false
-            "new_suggestion_own": false
-            "vote_update": false
-            "vote_confirmation": false
+            "attending": true,
+            "declined": true,
+            "event_cancelled": true,
+            "event_cancelled_admin": true,
+            "event_confirmed": true,
+            "event_confirmed_admin": false,
+            "new_event": false,
+            "new_event_admin": false,
+            "new_message": false,
+            "new_suggestion": false,
+            "new_suggestion_own": false,
+            "vote_update": false,
+            "vote_confirmation": false,
             "vyteme_created_admin": false
-        }'
+    }
 
 ```
 
 ## Modify your team admin preferences
-To modify your team admin preferences you can use the `/teams/:team_id/admin-preferences` endpoint with your team `_id` and PUT method.
+To modify your team admin preferences you can use the `/v2/teams/:team_id/admin-preferences` endpoint with your team `_id` and PUT method.
 
 ```shell screen-hidden
-curl --request PUT 'https://api.vyte.in/teams/:team_id/admin-preferences' \
+curl --request PUT 'https://api.vyte.in/v2/teams/:team_id/admin-preferences' \
 --header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -148,24 +149,24 @@ curl --request PUT 'https://api.vyte.in/teams/:team_id/admin-preferences' \
 The response should be the an object containing the updated preferences :
 
 ```json light-code
-    {
+{
     "prefs":
         "email":
-            "attending": true
-            "declined": true
-            "event_cancelled": true
-            "event_cancelled_admin": true
-            "event_confirmed": true
-            "event_confirmed_admin": false
-            "new_event": false
-            "new_event_admin": false
-            "new_message": false
-            "new_suggestion": false
-            "new_suggestion_own": false
-            "vote_update": true
-            "vote_confirmation": true
+            "attending": true,
+            "declined": true,
+            "event_cancelled": true,
+            "event_cancelled_admin": true,
+            "event_confirmed": true,
+            "event_confirmed_admin": false,
+            "new_event": false,
+            "new_event_admin": false,
+            "new_message": false,
+            "new_suggestion": false,
+            "new_suggestion_own": false,
+            "vote_update": true,
+            "vote_confirmation": true,
             "vyteme_created_admin": true
-        }'
+        }
 
 ```
 
