@@ -187,7 +187,67 @@ curl --request GET 'https://api.vyte.in/v2/locators/stores' \
 It will return the particular locator, if it exists.
 
 ## Update or delete locator
-The endpoint `/v2/locators/:handle` is very useful: with `PUT` and `DELETE` you can also update or delete particular locator.
+To manipulate the locators we use `/v2/locators/:locator_id` endpoints. `PUT`for updating the locator, `DELETE` to delete. One important thing: above we mentioned `Locations`: basically every locator contains the array of `locations`. To modify them we are going to use separate endpoints.
+
+# Locations
+Basically `Location` is an element of `Locator`, so every locator can have several locations to show to the user.
+
+## Create the location
+There are two ways to create locations:
+* Using `POST` at `/v2/locators` while creating the locator for the first time. Useful if you create the locator and already have the lict of locations;
+* Using `POST` at `/v2/locators/:locator_id/locations`. Useful if you need to add new location to the existing locator.
+
+Let's have a look at the second one :
+```shell screen-hidden
+curl --request POST 'https://api.vyte.in/v2/locators/60afc3fb228757001d737c11/locations' \
+--header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Content-Type: application/json' \
+--data-raw '
+{
+    name: "Jim"
+    address: "96bis Boulevard Raspail"
+    location:
+        type: "Point"
+        coordinates: [2.3, 48.8]
+    picture_url: "https://picture.com/123"
+    link: "https://www.agoranov.com/"
+    extid: "1234352"
+}
+'
+```
+
+
+### What do these properties mean?
+<attributes title="Properties">
+
+<attribute name="name" type="string">
+The name of the point/store/center. Should be easy to identify.
+</attribute>
+
+<attribute name="address" type="string">
+Address of the point.
+</attribute>
+
+<attribute name="location" type="Point">
+Coordinates of the point. You can find coordinates in many geo services like [GoogleMaps](https://support.google.com/maps/answer/18539). Here we use the Point type which stores geographical coordinates in [GeoJSON](https://geojson.org) format.
+</attribute>
+
+<attribute name="picture_url" type="string">
+Link to the picture used for this location.
+</attribute>
+
+<attribute name="link" type="string">
+Redicrection if chosen.
+</attribute>
+
+<attribute name="extid" type="string">
+If you have the points in your own database with specific `ids` you can keep them stored as `external_id`.
+</attribute>
+</attributes>
+
+
+
+
 
 
 
