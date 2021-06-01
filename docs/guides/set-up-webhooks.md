@@ -1,8 +1,8 @@
 # Webhooks for flexible scheduling notifications
-Webhooks are the easiest and fastest solution for quick notification. If something happens, they send the automated message to particular URL. It works for notification and also integration with different platforms. So, how does it work in Vyte?
+Webhooks are the easiest and fastest solution for quick notification. If something happens, they send an automated message to a particular URL. It works for notification and also integrating with other platforms. So, how does it work in Vyte?
 
 ## About our hooks
-The hook has two main properties: `target_url` and `action`. Target URL leads to the recipient application (your website or app), `action` defines the type of event happened. For now Vyte uses several hooks:
+The hook has two main properties: `target_url` and `action`. `Target URL` is a API endpoint that our server should call when the `action` happens on Vyte. For now Vyte allows register several hooks:
 
 * Event:
     created
@@ -17,6 +17,8 @@ The hook has two main properties: `target_url` and `action`. Target URL leads to
 
 * Vyteme:
     updated
+
+The full description you will find in our [Webhook API Reference](/reference/webhooks).
 
 But it is not all. The funny thing about hooks - they can send also some data, often called `payload`. It means, that your app or site can get info about the event and participants, not only status.
 
@@ -136,7 +138,7 @@ It returns an object:
 ```
 
 ## Delete the hook
-You can delete particular hook using `/hooks/:hook_id` endpoint and DELETE method.
+If you want Vyte to stop calling your server for this hook, you can delete it using `/hooks/:hook_id` endpoint and `DELETE` method.
 
 ```shell screen-hidden
 curl --request DELETE 'https://api.vyte.in/v2/hooks/60af526954e6605aae0dad4d' \
@@ -145,9 +147,5 @@ curl --request DELETE 'https://api.vyte.in/v2/hooks/60af526954e6605aae0dad4d' \
 
 ```
 
-If you used Zapier hooks, the way is a bit different: `POST` method for `/hooks/zapier/delete` endpoint.
-
-## Last but not least
-Wanna test hooks? Check out our [Webhook tester](https://github.com/saintmac/webhook-tester) for automated testing.
 
 
