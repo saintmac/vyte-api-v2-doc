@@ -10,7 +10,7 @@
 
 :::: left
 
-You can use the `/v2/vytemes/:nickname/types` endpoints to manage the availabilities of your users.
+You can use the `/v2/vytemes/:nickname/types` endpoints to manage the appointment types of your users.
 
 > This API is an extension of the Vyteme API, that's why all url are prefixed with `/vyteme/:nickname/`. You can refer to the [Vyteme API reference](vytemes.md) to have more informations about Vyteme creation.
 
@@ -57,7 +57,7 @@ The `id` of Availability page connected with this Appointment type.
  
 <attribute name="handle" type="string">
   
-Handle is used at the endpoints as a unique identificator of the Appointment type. Created atomatically from the name by urlifying. For example, name `Conference lunch` will be transfomed into `conference-lunch`.
+Handle is used at the endpoints as a identificator of the Appointment type. Created atomatically from the name by urlifying. For example, name `Conference lunch` will be transfomed into `conference-lunch`. Handle is unique within Vyteme page, but not globally. It means that several users with vytemes can have `conference-lunch` appointment types, but one user will have only one appountment type with that handle.
   
 </attribute>
 
@@ -76,12 +76,6 @@ Message shown on the Appointment type page.
 <attribute name="description" type="string">
 
 Description shown on the Appointment type page.
-
-</attribute>
-
-<attribute name="public" type="boolean">
-
-Whether or not the Appointment type is public.
 
 </attribute>
 
@@ -245,9 +239,9 @@ Set up a list of places on the booking page
   "handle": "lunch-or-dinner",
   "message": "Welcome to my booking page",
   "active": true,
-  "availability": "5f1b018dc1ac5dc46efc64b8"
-  "public": true
-  "description": "My conference appointment type"
+  "availability": "5f1b018dc1ac5dc46efc64b8",
+  "public": true,
+  "description": "My conference appointment type",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
@@ -334,9 +328,9 @@ curl \
   "handle": "lunch-or-dinner",
   "message": "Welcome to my booking page",
   "active": true,
-  "availability": "5f1b018dc1ac5dc46efc64b8"
-  "public": true
-  "description": "My conference appointment type"
+  "availability": "5f1b018dc1ac5dc46efc64b8",
+  "public": true,
+  "description": "My conference appointment type",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
@@ -665,9 +659,9 @@ curl \
   "handle": "lunch-or-dinner",
   "message": "Welcome to my booking page",
   "active": true,
-  "availability": "5f1b018dc1ac5dc46efc64b8"
-  "public": true
-  "description": "My conference appointment type"
+  "availability": "5f1b018dc1ac5dc46efc64b8",
+  "public": true,
+  "description": "My conference appointment type",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
@@ -759,9 +753,9 @@ curl \
   "handle": "lunch-or-dinner",
   "message": "Welcome to my booking page",
   "active": true,
-  "availability": "5f1b018dc1ac5dc46efc64b8"
-  "public": true
-  "description": "My conference appointment type"
+  "availability": "5f1b018dc1ac5dc46efc64b8",
+  "public": true,
+  "description": "My conference appointment type",
   "custom": {
     "auto_message": "Thank you for your booking. See you soon.",
     "auto_title": "RDV {{invitee}} / {{me}}",
@@ -1094,9 +1088,9 @@ curl \
       "handle": "lunch-or-dinner",
       "message": "Welcome to my VERY NEW page",
       "active": true,
-      "availability": "5f1b018dc1ac5dc46efc64b8"
-      "public": true
-      "description": "My ANOTHER appointment type"
+      "availability": "5f1b018dc1ac5dc46efc64b8",
+      "public": true,
+      "description": "My ANOTHER appointment type",
       "custom": {
         "auto_message": "Thank you for your booking. See you soon IN 2021.",
         "auto_title": "RDV {{invitee}} / {{me}}",
@@ -1165,7 +1159,7 @@ The handle of the Appointment type (urlified from the name par default).
 
 <returns title="Returns">
 
-Returns an object containing the number of row affected and the status if there is no error, and returns an error otherwise.
+If everything is alright deleting returns `204` status, if nothing was deleted (number of affected rows is 0) - returns `404`. In case of error returns `500` and error message.
 
 </returns>
 
@@ -1178,14 +1172,6 @@ curl --request DELETE 'https://api.vyte.in/v2/vytemes/john-doe/types/lunch-or-di
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 ```
 
-> RESPONSE SAMPLE
-
-```json light-code
-{
-  "n": 1,
-  "ok": 1
-}
-```
 
 ::::
 
