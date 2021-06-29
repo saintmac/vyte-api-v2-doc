@@ -1463,14 +1463,14 @@ Id of the event. Found as `_id` in event resources.
 
 <attribute name="" type="array">
 
-Takes array of invitees, which should be added to the event. It might be array of `_ids` of exisiting users or `emails`.
+Takes array of invitees `email`, which should be added to the event.
 
   </attribute>
 </attributes>
 
 <returns title="Returns">
 
-The `Invitees` array if there is no error.
+The `invitees` array if there is no error.
 
 </returns>
 ::::
@@ -1483,16 +1483,40 @@ The `Invitees` array if there is no error.
 curl  --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/invitees' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
 --data-raw '[{
-              "email": "newinviteetoadd@gmail.com",
+              "email": "newinviteetoadd@gmail.com"
+              },
+            {
               "email": "anotherinviteetoadd@mail.com"
-      }]'
-
-
+              }]'
 ```
 
 > RESPONSE SAMPLE
 
 ```json light-code
+
+[
+  {
+    "created_by": { "user": "60db26c587f89b0021659a5c" },
+    "star": false,
+    "_id": "60db26c687f89b0021659a64",
+    "email": "invitee1@gmail.com",
+    "user": "60db26c587f89b0021659a5c" },
+
+    {
+    "created_by": { "user": "60db26c587f89b0021659a5c" },
+    "star": false,
+    "_id": "60db26d5d8f21a477b09538a",
+    "email": "newinviteetoadd@gmail.com",
+    "user": "60db26c6d8f21a74f4095363" },
+
+    {
+    "created_by": { "user": "60db26c587f89b0021659a5c" },
+    "star": false,
+    "_id": "60db26d5d8f21a030409538b",
+    "email": "anotherinviteetoadd@mail.com",
+    "user": "60db26d5d8f21a5adb09538c" },
+
+]
 
 
 ```
@@ -1500,4 +1524,55 @@ curl  --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/inv
 ::::
 
 :::::
+
+## Delete invitee
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/events/:event_id/invitees/:invitee_id HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="event_id" type="string" required=true>
+
+Id of the event. Found as `_id` in event resources.
+
+  </attribute>
+
+  <attribute name="invitee_id" type="string" required=true>
+
+Id of the invitee to delete. Attention: `invitee_id` and `user_id` are different things. You can access to `invitee_id` by `invitees[i]._id` and to invitee `user_id` by `invitees[i].user`.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty="true"/>
+
+<attributes title="Body parameters" :isEmpty="true"/>
+
+<returns title="Returns">
+
+Returns `OK` if there is no error.
+
+</returns>
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl  --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/invitees/60db26c587f89b0021659a5c' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+
+```
+
+::::
+
+:::::
+
 
