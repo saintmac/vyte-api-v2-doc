@@ -24,6 +24,8 @@ There is no DELETE endpoint provided for the Event API yet. Use the `/v2/events/
   <endpoint method="put" path="/v2/events/:event_id" href="#update-an-event"></endpoint>
   <endpoint method="post" path="/v2/events/:event_id/confirm" href="#confirm-an-event"></endpoint>
   <endpoint method="post" path="/v2/events/:event_id/cancel" href="#cancel-an-event"></endpoint>
+  <endpoint method="post" path="/v2/events/:event_id/invitees" href="#add-invitees"></endpoint>
+  <endpoint method="delete" path="/v2/events/:event_id/invitees/:invitee_id" href="#delete-invitee"></endpoint>
 </endpoints>
 ::::
 
@@ -1435,3 +1437,67 @@ curl  --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/can
 ::::
 
 :::::
+
+## Add invitee(s)
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/events/:event_id/invitees HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="event_id" type="string" required=true>
+
+Id of the event. Found as `_id` in event resources.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty="true"/>
+
+<attributes title="Body parameters">
+
+<attribute name="" type="array">
+
+Takes array of invitees, which should be added to the event. It might be array of `_ids` of exisiting users or `emails`.
+
+  </attribute>
+</attributes>
+
+<returns title="Returns">
+
+The `Invitees` array if there is no error.
+
+</returns>
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl  --request POST 'https://api.vyte.in/v2/events/5f0d7eb02003d0971e2a961a/invitees' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+--data-raw '[{
+              "email": "newinviteetoadd@gmail.com",
+              "email": "anotherinviteetoadd@mail.com"
+      }]'
+
+
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+
+
+```
+
+::::
+
+:::::
+
