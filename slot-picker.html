@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vyte Slot Picker title and instructions</title>
+    <!-- Optional scripts if you want compatibility with older browsers like IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src="https://unpkg.com/unfetch/polyfill"></script>
+    <script src="https://cdn.jsdelivr.net/npm/custom-event-polyfill@1.0.6/polyfill"></script>
+    <!--/ optional scripts -->
+    <!-- Mandatory dependency scripts -->
+    <!-- If you were already loading them for another component of your page no need to load them twice -->
+    <script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/document-register-element@1.13.1/build/document-register-element.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-custom-element@3.2.6/dist/vue-custom-element.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <!-- Mandatory scripts -->
+    <!-- Web component -->
+    <script src="https://assets-cdn.vyte.in/wc/vyte-slot-picker/dist/js/app.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://assets-cdn.vyte.in/wc/vyte-slot-picker/dist/css/app.css"
+    />
+    <!--/ Web component -->
+  </head>
+
+  <body>
+    <vyte-slot-picker
+      id="vyte-slot-picker"
+      emails="martin@vytein.com"
+      :ndays="5"
+      timezone="Europe/Paris"
+      lang="en"
+    >
+    </vyte-slot-picker>
+  </body>
+  <script>
+    function slotSelectedHandler(event) {
+      const slot = event.detail[0];
+      const startDate = new Date(slot.start.dateTime);
+      const endDate = new Date(slot.end.dateTime);
+      console.log("Slot selected", startDate, endDate);
+    }
+    const element = document.getElementById("vyte-slot-picker");
+    element.addEventListener("slot-selected", slotSelectedHandler);
+  </script>
+</html>
