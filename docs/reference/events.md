@@ -1016,6 +1016,12 @@ curl --request GET 'https://api.vyte.in/v2/events/5f4cc0d72285556ee2c6332d' \
 
 ```json light-code
 {
+  "created_by": {
+    "email": "creator@example.com",
+    "user": "5eecc40bb2181073ac6ff375",
+    "picture_url": "",
+    "full_name": "Jean Dupont"
+  },
   "confirmed": {
     "flag": false,
     "updated_at": null,
@@ -1024,6 +1030,10 @@ curl --request GET 'https://api.vyte.in/v2/events/5f4cc0d72285556ee2c6332d' \
   "third_party": {
     "group_ids": []
   },
+  "ics_sequence": 0,
+  "version": 0,
+  "group_pro": false,
+  "identification_alternatives": [],
   "_id": "5f4cc0d72285556ee2c6332d",
   "title": "First created event",
   "dates": [
@@ -1142,12 +1152,12 @@ curl --request GET 'https://api.vyte.in/v2/events/5f4cc0d72285556ee2c6332d' \
   "links": null,
   "__v": 0
 }
+
 ```
 
 ::::
 
 :::::
-
 
 ## Update an event
 
