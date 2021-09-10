@@ -21,6 +21,7 @@ There is no DELETE endpoint provided for the Event API yet. Use the `/v2/events/
 <endpoints>
   <endpoint method="get" path="/v2/events" href="#list-all-events"></endpoint>
   <endpoint method="post" path="/v2/events" href="#create-an-event"></endpoint>
+  <endpoint method="get" path="/v2/events/:event_id" href="#retrieve-an-event"></endpoint>
   <endpoint method="put" path="/v2/events/:event_id" href="#update-an-event"></endpoint>
   <endpoint method="post" path="/v2/events/:event_id/confirm" href="#confirm-an-event"></endpoint>
   <endpoint method="post" path="/v2/events/:event_id/cancel" href="#cancel-an-event"></endpoint>
@@ -967,6 +968,191 @@ curl --request POST 'https://api.vyte.in/v2/events' \
   "links": null,
   "__v": 0
 }
+```
+
+::::
+
+:::::
+
+## Retrieve an event
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+GET /v2/events/:event_id HTTP/1.1
+```
+<attributes title="Path parameters">
+  <attribute name="event_id" type="string" :required=true>
+    
+The `_id` of the Event.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true></attributes>
+
+<returns title="Returns">
+
+An `Event` object if there is no error.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request GET 'https://api.vyte.in/v2/events/5f4cc0d72285556ee2c6332d' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+--header 'Content-Type: application/json' \
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "created_by": {
+    "email": "creator@example.com",
+    "user": "5eecc40bb2181073ac6ff375",
+    "picture_url": "",
+    "full_name": "Jean Dupont"
+  },
+  "confirmed": {
+    "flag": false,
+    "updated_at": null,
+    "multi": false
+  },
+  "third_party": {
+    "group_ids": []
+  },
+  "ics_sequence": 0,
+  "version": 0,
+  "group_pro": false,
+  "identification_alternatives": [],
+  "_id": "5f4cc0d72285556ee2c6332d",
+  "title": "First created event",
+  "dates": [
+    {
+      "created_by": {
+        "user": "5eecc40bb2181073ac6ff375"
+      },
+      "votes": {
+        "yes": [
+          {
+            "created_by": {
+              "user": "5eecc40bb2181073ac6ff375"
+            },
+            "_id": "5f0d7eb02003d04dab2a961f"
+          }
+        ],
+        "no": []
+      },
+      "all_day": false,
+      "confirmed": false,
+      "confirmed_invitees": [],
+      "_id": "5f0d7eb02003d0174a2a961c",
+      "date": "2020-07-16T07:00:00.000Z",
+      "end_date": "2020-07-16T08:00:00.000Z",
+      "updatedAt": "2020-07-14T09:45:20.862Z",
+      "createdAt": "2020-07-14T09:45:20.862Z"
+    },
+    {
+      "created_by": {
+        "user": "5eecc40bb2181073ac6ff375"
+      },
+      "votes": {
+        "yes": [
+          {
+            "created_by": {
+              "user": "5eecc40bb2181073ac6ff375"
+            },
+            "_id": "5f0d7eb02003d04ac22a9620"
+          }
+        ],
+        "no": []
+      },
+      "all_day": false,
+      "confirmed": false,
+      "confirmed_invitees": [],
+      "_id": "5f0d7eb02003d04b512a961b",
+      "date": "2020-07-16T13:00:00.000Z",
+      "end_date": "2020-07-16T13:00:00.000Z",
+      "updatedAt": "2020-07-14T09:45:20.862Z",
+      "createdAt": "2020-07-14T09:45:20.862Z"
+    }
+  ],
+  "places": [
+    {
+      "created_by": {
+        "user": "5eecc40bb2181073ac6ff375"
+      },
+      "votes": {
+        "yes": [
+          {
+            "created_by": {
+              "user": "5eecc40bb2181073ac6ff375"
+            },
+            "_id": "5f0d7eb02003d05ff72a9621"
+          }
+        ],
+        "no": []
+      },
+      "source": "app",
+      "_id": "5f0d7eb02003d081072a961d",
+      "name": "Place for the meeting.",
+      "updatedAt": "2020-07-14T09:45:20.862Z",
+      "createdAt": "2020-07-14T09:45:20.862Z"
+    }
+  ],
+  "api": true,
+  "invitees": [
+    {
+      "created_by": {
+        "user": "5eecc40bb2181073ac6ff375"
+      },
+      "stats": {
+        "voted": {
+          "dates": true,
+          "places": true
+        }
+      },
+      "star": false,
+      "_id": "5f0d7eb02003d097742a961e",
+      "email": "creator@example.com",
+      "user": "5eecc40bb2181073ac6ff375",
+      "su": true,
+      "full_name": "Jean Dupont",
+      "picture_url": "",
+      "timezone": "Europe/Paris",
+      "locale": "fr"
+    }
+  ],
+  "messages": [],
+  "declines": [],
+  "lang": "en",
+  "locale": "en",
+  "updatedAt": "2020-07-14T09:45:20.862Z",
+  "createdAt": "2020-07-14T09:45:20.862Z",
+  "invitees_length": 1,
+  "email": "reply-to-participants-to-first-created-event-atpcovzku@vytein.mailgun.org",
+  "key_store": {
+    "_id": "5f0d7eb02003d0f6e32a9622",
+    "hash": {
+      "5eecc40bb2181073ac6ff375": "a2nv79gx86d5i0o3"
+    },
+    "updatedAt": "2020-07-14T09:45:20.870Z",
+    "createdAt": "2020-07-14T09:45:20.870Z",
+    "__v": 0
+  },
+  "links": null,
+  "__v": 0
+}
+
 ```
 
 ::::
