@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: vuepress-deploy
-        uses: jenkey2011/vuepress-deploy@master
+        uses: jenkey2011/vuepress-deploy@c125854a55a2d3fbe1847e0fc25a4aa662582520
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           TARGET_REPO: saintmac/vyte-api-v2-doc
