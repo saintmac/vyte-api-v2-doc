@@ -5,13 +5,27 @@ But you also can add some parameters of you meeting directly to the link. Let's 
 
 [[toc]]
 
+## Embedding a Vyte Page (optional)
+
+If you would like to embed a Vyte booking page directly into your website, it is very simple.
+Just add the following line of code to your website:
+
+```
+<iframe src="https://www.vyte.in/demovyte?embed" width="100%" height="1000px" frameborder="0">https://www.vyte.in/demovyte</iframe>
+```
+where `/demovyte` is the path of your Vyte booking Page.
+
+As you may have noticed there is a `?embed` query paramater, make sure to keep it if you add other query parameters to ensure that the booking page is optimized for iframe embeds.
+
+You can also get this line of code, customized for a specific user from [that user account settings](https://www.vyte.in/pages/1#share)
+
 ## Getting started
 
 You don't need to register your app to do that, however you will need to have set up a Vyte page with a pro Vyte account.
 
 - If you don't have a Vyte account yet, [sign up](https://vyte.in/page) to set up your Vyte page.
-- If you already have a Vyte account, but don't have a Vyte page yet, set it up from your [settings](https://www.vyte.in/settings#vyteme).
-- Make sure to enable the "Enable API variables in URL" setting in the [advanced Vyte page settings](https://www.vyte.in/settings#vyteme_pro).
+- If you already have a Vyte account, but don't have a Vyte page yet, set it up from your [Vyte account](https://www.vyte.in/pages).
+- Make sure to enable the "Enable API variables in URL" setting in the [advanced Vyte page settings](https://www.vyte.in/pages/1#pro).
 
 ## Appointment duration
 
