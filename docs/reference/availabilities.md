@@ -10,7 +10,7 @@
 
 :::: left
 
-You can use the `/v2/users/:user_id/availabilities` endpoints to manage the availabilities your users.
+You can use the `/v2/users/:user_id/availabilities` endpoints to manage the availabilities of your users.
 
 > This API is an extension of the Users API, that's why all url are prefixed with `/users/:user_id/`. You can refer to the [User API reference](users.md) to have more informations about user creation.
 
@@ -922,3 +922,253 @@ curl --request DELETE 'https://api.vyte.in/v2/users/5f2d4abf1e0662386371d475/ava
 ::::
 
 :::::
+
+## Availabilities of organization
+
+:::::panel
+
+:::: left
+
+You can use the `/v2/availabilities` endpoints to manage the availabilities of your organization.
+
+::::
+
+:::: right
+
+> ENDPOINTS
+
+<endpoints>
+  <endpoint method="get" path="/v2/availabilities" href="#list-the-availabilities-of-an-organization"></endpoint>
+  <endpoint method="post" path="/v2/availabilities" href="#create-the-availability-of-an-organization"></endpoint>
+  <endpoint method="get" path="/v2/availabilities/:availability_id" href="#retrieve-the-availability-of-an-organization"></endpoint>
+  <endpoint method="put" path="/v2/availabilities/:availability_id" href="#update-the-availability-of-an-organization"></endpoint>
+  <endpoint method="delete" path="/v2/availabilities/:availability_id" href="#delete-the-availability-of-an-organization"></endpoint>
+</endpoints>
+
+::::
+
+:::::
+
+## List the availabilities of an organization
+
+:::::: panel
+::::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+GET /v2/availabilities HTTP/1.1
+```
+
+<returns title="Returns">
+
+All `Availability` objects of the organization if there is no error.
+
+</returns>
+
+:::::
+
+::::: right
+
+> CODE SAMPLE
+
+```shell
+curl \
+--request GET 'https://api.vyte.in/v2/availabilities' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+```
+
+> RESPONCE SAMPLE
+
+```
+[ { days:
+     { monday: [Object],
+       tuesday: [Object],
+       wednesday: [Object],
+       thursday: [Object],
+       friday: [Object],
+       saturday: [Object],
+        sunday: [Object] },
+    past_as_busy: true,
+    trim_scheduler: true,
+    _id: '5f881b976054d0f1590c30fc',
+    timezone: 'Europe/Paris',
+    days_after_as_busy: 43,
+    hours_before_as_busy: 3,
+    buffer_before: 45,
+    buffer_after: 20,
+    organization: '5f881b97833cbc0021715b93',
+    dates: [],
+    updatedAt: '2020-10-15T09:51:19.873Z',
+    createdAt: '2020-10-15T09:51:19.873Z',
+    __v: 0 } ]
+
+```
+:::::
+
+::::::
+
+## Create the availability of an organization
+
+:::::: panel
+::::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/availabilities HTTP/1.1
+```
+
+<attributes title="Parameters">
+
+<attribute name="parameters" type="string">
+
+Availability parameters are the same like the parameters for availability of a user. If ``belongs_to`` property is not passed within a body, the ``organization`` property is set, matching the ``organization`` in api_key.
+
+</attribute>
+</attributes>
+
+
+<returns title="Returns">
+
+The created `Availability` object if no error occurred.
+
+</returns>
+
+:::::
+
+::::::
+
+## Retrieve the availabilitiy of an organization
+
+:::::: panel
+::::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+GET /v2/availabilities/:availability_id HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="availability_id" type="string">
+
+The `id` of the particular availability you want to retrieve.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true></attributes>
+
+<returns title="Returns">
+
+The particular `Availability` object belonging to this organization if no error occurred.
+
+</returns>
+
+:::: rigth
+
+>CODE SAMPLE
+
+```shell
+curl --request GET 'https://api.vyte.in/v2/availabilities/5f881b976054d0f1590c30fc' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+
+:::::
+
+::::::
+
+## Update the availabilities of an organization
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+PUT /v2/availabilities/:availability_id HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="availability_id" type="string">
+
+The `id` of the particular availability you want to update.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns an updated object.
+
+</returns>
+
+::::
+
+:::: right
+
+>CODE SAMPLE
+
+```shell
+curl --request PUT 'https://api.vyte.in/v2/availabilities/5f881b976054d0f1590c30fc' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+::::
+
+:::::
+
+## Delete the availabilities of an organization
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+PUT /v2/availabilities/:availability_id HTTP/1.1
+```
+
+<attributes title="Path parameters">
+  <attribute name="availability_id" type="string">
+
+The `id` of the particular availability you want to delete.
+
+  </attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns an object containing the number of row affected and the status if there is no error, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+>CODE SAMPLE
+
+```shell
+curl --request DELETE 'https://api.vyte.in/v2/availabilities/5f881b976054d0f1590c30fc' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+
+>RESPONCE SAMPLE
+
+```
+{ n: 1, ok: 1 }
+```
+
+
+
+::::
+
+:::::
+
+
+
