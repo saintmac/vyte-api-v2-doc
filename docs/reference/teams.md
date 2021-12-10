@@ -23,6 +23,7 @@ That's why you can be an admin of a team while not being a member of that team
   <endpoint method="delete" path="/v2/team/:team_id" href="#delete-a-team"/>
   <endpoint method="post" path="/v2/team/:team_id/events" href="#book-an-event-with-a-member-of-a-team"/>
   <endpoint method="get" path="/v2/team/:team_id/events" href="#list-team-members-events"/>
+  <endpoint method="get" path="/v2/team/:team_id/public" href="#list-public-team"/>
 </endpoints>
 
 ::::
@@ -80,6 +81,12 @@ The level name of the team. For instance: "top management", "regional team", "ag
 <attribute name="_id" type="string">
   
 Note that `_id` of admins and members might take `user_id` as an ObjectID from the users. For example, we want to create a team with existing users. These users already have their `user_id`. So as a members of new team they will have their `members_id` passed from `user_id`.
+
+<attribute name="public" type="boolean">
+
+If `public` is true, members of the team will be visible without authentification as the team `name`. Only first name, last name and photo of team members are visible. By default this property is set to false.
+
+</attribute>
   
   </attributes>
 </attributes>
@@ -159,6 +166,7 @@ curl --request GET 'https://api.vyte.in/v2/teams/' \
     "extid": "2",
     "name": "sales",
     "level_name": "agency"
+    "public": "false"
   }
 ]
 ```
@@ -216,6 +224,7 @@ curl --request GET 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
   "extid": "2",
   "name": "sales",
   "level_name": "agency"
+  "public": "false"
 }
 ```
 
@@ -268,6 +277,12 @@ The name of the team.
 The level name of the team.
 
 </attribute>
+
+<attribute name="public" type="boolean">
+
+If `public` is true, members of the team will be visible without authentification as the team `name`. Only first name, last name and photo of team members are visible. By default this property is set to false.
+
+</attribute>
 </attributes>
 
 <returns title="Returns">
@@ -296,6 +311,7 @@ curl  --request POST 'https://api.vyte.in/v2/teams' \
   "extid": "2",
   "name": "sales",
   "level_name": "agency",
+  "public": "false"
 }'
 ```
 
@@ -310,6 +326,7 @@ curl  --request POST 'https://api.vyte.in/v2/teams' \
   "extid": "2",
   "name": "sales",
   "level_name": "agency"
+  "public": "false"
 }
 ```
 
@@ -368,6 +385,12 @@ The name of the team.
 The level name of the team.
 
 </attribute>
+
+<attribute name="public" type="boolean">
+
+If `public` is true, members of the team will be visible without authentification as the team `name`. Only first name, last name and photo of team members are visible. By default this property is set to false.
+
+</attribute>
 </attributes>
 
 <returns title="Returns">
@@ -400,6 +423,7 @@ curl  --request PUT 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
   "extid": "2",
   "name": "sales",
   "level_name": "company"
+  "public": "false"
 }
 ```
 
@@ -1075,3 +1099,65 @@ curl \
 :::::
 
 ::::::
+
+## List public team
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>No authorization</small>
+
+```http
+GET /v2/teams/:team_id/public HTTP/1.1
+```
+
+<attributes title="Path parameters"/>
+<attribute name="team_id" type="string" :required=true>
+
+The `_id` of the team.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns team `_id`, team `name` and list of members. Member description includes first and last names, photo and member `_id`. Works only if `public` property of the team is set `true`.
+
+</returns>
+
+::::
+
+:::: right
+
+```shell
+curl --request GET 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/public' \
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "_id": "5ef9e5489b10b33ad0898ca3"
+  "name": "test public team"
+  "members": [
+     {"_id": "5fda0414a4d645001d148243"
+      "first_name": "John"
+      "last_name": "Dow"
+      "picture_url": "https://domain.com/john.jpg"
+     },
+     {"_id": "5fda0414a4d645001d148241"
+      "first_name": "Jane"
+      "last_name": "Dow"
+      "picture_url": "https://domain.com/jane.jpg"
+     }
+  ]
+  
+}
+```
+
+::::
+
+:::::
+
