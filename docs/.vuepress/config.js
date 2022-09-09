@@ -221,7 +221,7 @@ module.exports = {
             "team_admin_preferences",
             "teams",
             "thirdParties",
-            "user-preference",
+            "user_preference",
             "users",
             "vytemes",
             "webhooks",
