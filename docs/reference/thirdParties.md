@@ -77,7 +77,7 @@ POST /v2/third_parties HTTP/1.1
 ::: details CODE SAMPLE
 
 ```shell
-curl  --request POST 'https://api.vyte.in/v2/third_parties' \
+curl  --request POST 'https://api.vyte.in/v2/third_parties?name=MYAPPNAME' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
