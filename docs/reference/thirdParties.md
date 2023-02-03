@@ -6,7 +6,7 @@ pageClass: reference-page
 
 ::::: panel
 :::: left
-You can use the `/v2/third-parties` endpoints to manage the third-parties for your organization.
+You can use the `/v2/third_parties` endpoints to manage the third-parties for your organization.
 ::::
 
 :::: right
@@ -33,7 +33,7 @@ You can use the `/v2/third-parties` endpoints to manage the third-parties for yo
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-GET /v2/third-parties HTTP/1.1
+GET /v2/third_parties HTTP/1.1
 ```
 
 ::::
@@ -42,7 +42,7 @@ GET /v2/third-parties HTTP/1.1
 ::: details CODE SAMPLE
 
 ```shell
-curl  --request GET 'https://api.vyte.in/v2/third-parties' \
+curl  'https://api.vyte.in/v2/third_parties' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
@@ -68,7 +68,7 @@ curl  --request GET 'https://api.vyte.in/v2/third-parties' \
 > ENDPOINT <small>Authorization `apiKey`</small>
 
 ```http
-POST /v2/third-parties HTTP/1.1
+POST /v2/third_parties HTTP/1.1
 ```
 
 ::::
@@ -77,7 +77,7 @@ POST /v2/third-parties HTTP/1.1
 ::: details CODE SAMPLE
 
 ```shell
-curl  --request POST 'https://api.vyte.in/v2/third-parties' \
+curl  --request POST 'https://api.vyte.in/v2/third_parties' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
@@ -103,7 +103,7 @@ curl  --request POST 'https://api.vyte.in/v2/third-parties' \
 > ENDPOINT
 
 ```http
-GET /v2/third-parties/token HTTP/1.1
+GET /v2/third_parties/token HTTP/1.1
 ```
 
 ::::
@@ -112,7 +112,7 @@ GET /v2/third-parties/token HTTP/1.1
 ::: details CODE SAMPLE
 
 ```shell
-curl  --request GET 'https://api.vyte.in/v2/third-parties/token' \
+curl  --request GET 'https://api.vyte.in/v2/third_parties/token' \
 --header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
 ```
 
