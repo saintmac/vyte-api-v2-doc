@@ -5525,9 +5525,9 @@ minimatch@^3.0.4, minimatch@~3.0.2:
     brace-expansion "^1.1.7"
 
 minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
-  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
+  integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
 mississippi@^3.0.0:
   version "3.0.0"
@@ -8463,6 +8463,11 @@ vuepress-intercom@^1.0.3:
   dependencies:
     vue-intercom "^1.0.12"
 
+vuepress-plugin-clean-urls@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-clean-urls/-/vuepress-plugin-clean-urls-1.1.2.tgz#40e3ef16a029dca71b23eb0523957a2abec9dc8d"
+  integrity sha512-36r6XT9stybGSL9zHfFM6F+EBOF9rRDzGdNeias3AmU3AH5+DqsciMjRpHfecKXDKeVcc0PlNfG1Tf19CW5MzA==
+
 vuepress-plugin-code-copy@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vuepress-plugin-code-copy/-/vuepress-plugin-code-copy-1.0.6.tgz#6431dab764b48b5b203e4936d98b1943651ce4ad"
@@ -8498,6 +8503,11 @@ vuepress-plugin-mermaidjs@^1.5.1:
   integrity sha512-1xvA6o2cNeWZQqZFo3f9+vkSYodNN1gb3YY1EAygG88Jf0P8ZHRTLAVj8Iu9gINEhbH5c0k7hGHS4ledTFKpuQ==
   dependencies:
     mermaid "^8.5.0"
+
+vuepress-plugin-reading-progress@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-reading-progress/-/vuepress-plugin-reading-progress-1.0.10.tgz#0b9d44e27d583ff20e0307993aa4cbda49f3bdca"
+  integrity sha512-7OxcjNEDf9gqFTns0YnXrqPnTRlX6wvxWFr7D8tlfyMPpsZwJkh/MkJveRrEaKcU0gk8QGmPHnXLAZ3soTThVg==
 
 vuepress-plugin-smooth-scroll@^0.0.3:
   version "0.0.3"
