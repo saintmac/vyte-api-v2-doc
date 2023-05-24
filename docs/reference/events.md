@@ -785,6 +785,11 @@ Default is `false`.
 
 </attribute>
 
+<attribute>
+  <attribute name="no_emails" type="boolean" :parentNames="['settings']" isChild=true>
+    Disables all emails of this event if set true.
+</attribute>
+
 </attributes>
 
 <returns title="Returns">
