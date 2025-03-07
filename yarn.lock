@@ -8463,6 +8463,11 @@ vuepress-intercom@^1.0.3:
   dependencies:
     vue-intercom "^1.0.12"
 
+vuepress-plugin-clean-urls@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-clean-urls/-/vuepress-plugin-clean-urls-1.1.2.tgz#40e3ef16a029dca71b23eb0523957a2abec9dc8d"
+  integrity sha512-36r6XT9stybGSL9zHfFM6F+EBOF9rRDzGdNeias3AmU3AH5+DqsciMjRpHfecKXDKeVcc0PlNfG1Tf19CW5MzA==
+
 vuepress-plugin-code-copy@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vuepress-plugin-code-copy/-/vuepress-plugin-code-copy-1.0.6.tgz#6431dab764b48b5b203e4936d98b1943651ce4ad"
@@ -8498,6 +8503,11 @@ vuepress-plugin-mermaidjs@^1.5.1:
   integrity sha512-1xvA6o2cNeWZQqZFo3f9+vkSYodNN1gb3YY1EAygG88Jf0P8ZHRTLAVj8Iu9gINEhbH5c0k7hGHS4ledTFKpuQ==
   dependencies:
     mermaid "^8.5.0"
+
+vuepress-plugin-reading-progress@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-reading-progress/-/vuepress-plugin-reading-progress-1.0.10.tgz#0b9d44e27d583ff20e0307993aa4cbda49f3bdca"
+  integrity sha512-7OxcjNEDf9gqFTns0YnXrqPnTRlX6wvxWFr7D8tlfyMPpsZwJkh/MkJveRrEaKcU0gk8QGmPHnXLAZ3soTThVg==
 
 vuepress-plugin-smooth-scroll@^0.0.3:
   version "0.0.3"
@@ -8776,9 +8786,9 @@ xtend@^4.0.0, xtend@~4.0.1:
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
 
 y18n@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
-  integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.1.tgz#8db2b83c31c5d75099bb890b23f3094891e247d4"
+  integrity sha512-wNcy4NvjMYL8gogWWYAO7ZFWFfHcbdbE57tZO8e4cbpj8tfUcwrwqSl3ad8HxpYWCdXcJUCeKKZS62Av1affwQ==
 
 yallist@^2.1.2:
   version "2.1.2"
