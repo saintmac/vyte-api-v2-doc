@@ -369,7 +369,8 @@ Search events by title using a regex.
   </attribute>
   <attribute name="filter" type="string">
 
-Filter events by status. Value can be `confirmed` or `upcoming`.
+Filter events by status. Value can be `confirmed`, `upcoming`, or `future`.
+`future` returns all events that are in the future, even if they are cancelled.
 *If no value is provided all events will be returned.*
 
   </attribute>
