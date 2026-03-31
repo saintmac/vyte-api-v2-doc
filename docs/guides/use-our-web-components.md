@@ -70,26 +70,9 @@ The following code shows you how to integrate our web component easily:
 </iframe>
 
 ```html
-<!-- Optional scripts if you want compatibility with older browsers like IE11 -->
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-<script src="https://unpkg.com/unfetch/polyfill"></script>
-<script src="https://cdn.jsdelivr.net/npm/custom-event-polyfill@1.0.6/polyfill"></script>
-<!--/ optional scripts -->
-<!-- Mandatory dependency scripts -->
-<!-- If you were already loading them for another component of your page no need to load them twice -->
-<script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
-<script src="https://unpkg.com/document-register-element@1.13.1/build/document-register-element.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-custom-element@3.2.6/dist/vue-custom-element.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-<!--/ Mandatory dependency scripts -->
-<!-- Web component -->
-<script src="https://assets-cdn.vyte.in/wc/vyte-slot-picker/dist/js/app.js"></script>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://assets-cdn.vyte.in/wc/vyte-slot-picker/dist/css/app.css"
-/>
-<!--/ Web component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<link rel="stylesheet" href="https://wc-cdn.vyte.in/vyte-slot-picker/vyte-slot-picker.css">
+<script src="https://wc-cdn.vyte.in/vyte-slot-picker/vyte-slot-picker.js"></script>
 
 <vyte-slot-picker
   id="vyte-slot-picker"
