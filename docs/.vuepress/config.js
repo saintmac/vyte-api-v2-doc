@@ -201,6 +201,7 @@ module.exports = {
             "add-scheduling-features-to-your-app-or-platform",
             "setup-team-booking",
             //"using-team-admins-for-notifications-and-event-management",
+            "connect-calendar",
             "use-our-web-components",
           ],
         },

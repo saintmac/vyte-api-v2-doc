@@ -34,6 +34,10 @@ guides:
     details: Learn how to easily integrate some of our public web components
     path: use-our-web-components
     image: api-1to1
+  - title: Connect a user's calendar
+    details: Learn how to redirect a user to the Vyte calendar settings page using a short-lived authentication token.
+    path: connect-calendar
+    image: api
 ---
 
 # Introduction
