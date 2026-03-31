@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
 
       - name: vuepress-deploy
-        uses: jenkey2011/vuepress-deploy@c125854a55a2d3fbe1847e0fc25a4aa662582520
+        uses: jenkey2011/vuepress-deploy@6319ae7dccd72bb5bb0eeb6a86ea048574ad6f28
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           TARGET_REPO: saintmac/vyte-api-v2-doc
