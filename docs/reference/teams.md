@@ -18,12 +18,19 @@ That's why you can be an admin of a team while not being a member of that team
 <endpoints>
   <endpoint method="get" path="/v2/teams" href="#list-all-teams"/>
   <endpoint method="get" path="/v2/teams/:team_id" href="#retrieve-a-team"/>
-  <endpoint method="post" path="/v2/team" href="#create-a-team"/>
-  <endpoint method="put" path="/v2/team/:team_id" href="#update-a-team"/>
-  <endpoint method="delete" path="/v2/team/:team_id" href="#delete-a-team"/>
-  <endpoint method="post" path="/v2/team/:team_id/events" href="#book-an-event-with-a-member-of-a-team"/>
-  <endpoint method="get" path="/v2/team/:team_id/events" href="#list-team-members-events"/>
-  <endpoint method="get" path="/v2/team/:team_id/public" href="#list-public-team"/>
+  <endpoint method="post" path="/v2/teams" href="#create-a-team"/>
+  <endpoint method="post" path="/v2/teams/batch" href="#batch-create-teams"/>
+  <endpoint method="put" path="/v2/teams/:team_id" href="#update-a-team"/>
+  <endpoint method="delete" path="/v2/teams/:team_id" href="#delete-a-team"/>
+  <endpoint method="post" path="/v2/teams/:team_id/members" href="#add-a-member-to-a-team"/>
+  <endpoint method="delete" path="/v2/teams/:team_id/members/:member_id" href="#remove-a-member-from-a-team"/>
+  <endpoint method="post" path="/v2/teams/:team_id/members/:member_id/admin" href="#set-a-member-as-admin"/>
+  <endpoint method="delete" path="/v2/teams/:team_id/members/:member_id/admin" href="#remove-admin-rights-from-a-member"/>
+  <endpoint method="post" path="/v2/teams/:team_id/members/:member_id/admin-only" href="#set-a-user-as-admin-only"/>
+  <endpoint method="delete" path="/v2/teams/:team_id/members/:member_id/admin-only" href="#remove-admin-only-rights-from-a-user"/>
+  <endpoint method="post" path="/v2/teams/:team_id/events" href="#book-an-event-with-a-member-of-a-team"/>
+  <endpoint method="get" path="/v2/teams/:team_id/events" href="#list-team-members-events"/>
+  <endpoint method="get" path="/v2/teams/:team_id/public" href="#list-public-team"/>
 </endpoints>
 
 ::::
@@ -36,18 +43,6 @@ That's why you can be an admin of a team while not being a member of that team
 :::: left
 
 <attributes title="Attributes">
-<attribute name="admins" type="array of string">
-
-Array containing the user `_id` of the admins of the team.
-
-</attribute>
-
-<attribute name="members" type="array of string">
-
-Array containing the user `_id` of the members of the team.
-
-</attribute>
-
 <attribute name="_id" type="string">
 
 A unique identifier for the team.
@@ -56,13 +51,13 @@ A unique identifier for the team.
 
 <attribute name="organization" type="string">
 
-The `_id` of the organization.
+The `_id` of the organization the team belongs to.
 
 </attribute>
 
-<attribute name="extid" type="string">
+<attribute name="created_by" type="string">
 
-An external `id` set by yourself to identify the team on your side.
+The `_id` of the user who created the team.
 
 </attribute>
 
@@ -72,23 +67,60 @@ The name of the team.
 
 </attribute>
 
-<attribute name="level_name" type="string">
+<attribute name="extid" type="string">
 
-The level name of the team. For instance: "top management", "regional team", "agency".
+An external `id` set by yourself to identify the team on your side. Useful for integrations where you want to store your own identifier for the team.
 
 </attribute>
 
-<attribute name="_id" type="string">
-  
-Note that `_id` of admins and members might take `user_id` as an ObjectID from the users. For example, we want to create a team with existing users. These users already have their `user_id`. So as a members of new team they will have their `members_id` passed from `user_id`.
+<attribute name="level_name" type="string">
+
+The level name of the team. Allows defining hierarchical levels of teams, for instance: "company", "department", "team", "agency".
+
+</attribute>
+
+<attribute name="admins" type="array of string">
+
+Array containing the user `_id` of the admins of the team. Note that a user can be an admin without being a member.
+
+</attribute>
+
+<attribute name="members" type="array of string">
+
+Array containing the user `_id` of the members of the team.
+
+</attribute>
 
 <attribute name="public" type="boolean">
 
-If `public` is true, members of the team will be visible without authentification as the team `name`. Only first name, last name and photo of team members are visible. By default this property is set to false.
+If `public` is true, members of the team will be visible without authentication under the team `name`. Only first name, last name and photo of team members are visible. By default this property is set to false.
 
 </attribute>
-  
-  </attributes>
+
+<attribute name="admin_preference" type="string">
+
+The `_id` of the `AdminPreference` object defining the email notification preferences for the team's admins.
+
+</attribute>
+
+<attribute name="memberRole" type="string">
+
+The `_id` of a Role object defining the permissions and visible features for team members in the interface.
+
+</attribute>
+
+<attribute name="adminRole" type="string">
+
+The `_id` of a Role object defining the permissions and visible features for team admins in the interface.
+
+</attribute>
+
+<attribute name="booking_page_path" type="string">
+
+A custom path for the team's booking page. When set, this path can be displayed as a button in the admin interface.
+
+</attribute>
+
 </attributes>
 
 ::::
@@ -334,6 +366,94 @@ curl  --request POST 'https://api.vyte.in/v2/teams' \
 
 :::::
 
+## Batch create teams
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/teams/batch HTTP/1.1
+```
+
+<attributes title="Path parameters" :isEmpty=true />
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<attributes title="Body parameters">
+<attribute name="teams" type="array of hashes" :required=true>
+
+An array of team objects to create. Each team object supports the same body parameters as the [Create a team](#create-a-team) endpoint.
+
+</attribute>
+</attributes>
+
+<returns title="Returns">
+
+Returns an array of the created `Team` objects if a valid body was provided, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request POST 'https://api.vyte.in/v2/teams/batch' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "teams": [
+    {
+      "name": "sales",
+      "extid": "team-sales",
+      "level_name": "department",
+      "admins": ["5f1077cf21f43b0b99660619"],
+      "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"]
+    },
+    {
+      "name": "engineering",
+      "extid": "team-engineering",
+      "level_name": "department",
+      "admins": ["5f1077cf21f43b0b99660619"],
+      "members": ["5f1077cf21f43b0b99660619"]
+    }
+  ]
+}'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+[
+  {
+    "admins": ["5f1077cf21f43b0b99660619"],
+    "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
+    "_id": "5ef9e5489b10b33ad0898ca3",
+    "organization": "5ef0cb128f284274b2361323",
+    "extid": "team-sales",
+    "name": "sales",
+    "level_name": "department"
+  },
+  {
+    "admins": ["5f1077cf21f43b0b99660619"],
+    "members": ["5f1077cf21f43b0b99660619"],
+    "_id": "5ef9e5489b10b33ad0898ca4",
+    "organization": "5ef0cb128f284274b2361323",
+    "extid": "team-engineering",
+    "name": "engineering",
+    "level_name": "department"
+  }
+]
+```
+
+::::
+
+:::::
+
 ## Update a team
 
 ::::: panel
@@ -473,6 +593,381 @@ curl --request DELETE 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3' \
 {
   "n": 1,
   "ok": 1
+}
+```
+
+::::
+
+:::::
+
+## Add a member to a team
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/teams/:team_id/members HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="team_id" type="string" :required=true>
+
+The `_id` of the team.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<attributes title="Body parameters">
+<attribute name="user" type="string" :required=true>
+
+The `_id` of the user to add as a member of the team.
+
+</attribute>
+</attributes>
+
+<returns title="Returns">
+
+Returns the updated `Team` object if the request is valid, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request POST 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/members' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "user": "5f1077e1eaf7c424af51a848"
+}'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847", "5f1077e1eaf7c424af51a848"],
+  "_id": "5ef9e5489b10b33ad0898ca3",
+  "organization": "5ef0cb128f284274b2361323",
+  "extid": "2",
+  "name": "sales",
+  "level_name": "agency"
+}
+```
+
+::::
+
+:::::
+
+## Remove a member from a team
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+DELETE /v2/teams/:team_id/members/:member_id HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="team_id" type="string" :required=true>
+
+The `_id` of the team.
+
+</attribute>
+<attribute name="member_id" type="string" :required=true>
+
+The `_id` of the user to remove from the team.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns the updated `Team` object if the request is valid, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request DELETE 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/members/5f1077e1eaf7c424af51a848' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
+  "_id": "5ef9e5489b10b33ad0898ca3",
+  "organization": "5ef0cb128f284274b2361323",
+  "extid": "2",
+  "name": "sales",
+  "level_name": "agency"
+}
+```
+
+::::
+
+:::::
+
+## Set a member as admin
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/teams/:team_id/members/:member_id/admin HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="team_id" type="string" :required=true>
+
+The `_id` of the team.
+
+</attribute>
+<attribute name="member_id" type="string" :required=true>
+
+The `_id` of the user to set as admin of the team. The user must already be a member of the team.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns the updated `Team` object if the request is valid, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request POST 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/members/5f1077e1eaf7c424af51a847/admin' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "admins": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
+  "_id": "5ef9e5489b10b33ad0898ca3",
+  "organization": "5ef0cb128f284274b2361323",
+  "extid": "2",
+  "name": "sales",
+  "level_name": "agency"
+}
+```
+
+::::
+
+:::::
+
+## Remove admin rights from a member
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+DELETE /v2/teams/:team_id/members/:member_id/admin HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="team_id" type="string" :required=true>
+
+The `_id` of the team.
+
+</attribute>
+<attribute name="member_id" type="string" :required=true>
+
+The `_id` of the user whose admin rights should be removed.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns the updated `Team` object if the request is valid, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request DELETE 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/members/5f1077e1eaf7c424af51a847/admin' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
+  "_id": "5ef9e5489b10b33ad0898ca3",
+  "organization": "5ef0cb128f284274b2361323",
+  "extid": "2",
+  "name": "sales",
+  "level_name": "agency"
+}
+```
+
+::::
+
+:::::
+
+## Set a user as admin-only
+
+Add a user as an admin of a team without making them a member of that team.
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+POST /v2/teams/:team_id/members/:member_id/admin-only HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="team_id" type="string" :required=true>
+
+The `_id` of the team.
+
+</attribute>
+<attribute name="member_id" type="string" :required=true>
+
+The `_id` of the user to set as an admin-only of the team.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns the updated `Team` object if the request is valid, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request POST 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/members/5f1077e1eaf7c424af51a849/admin-only' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "admins": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a849"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
+  "_id": "5ef9e5489b10b33ad0898ca3",
+  "organization": "5ef0cb128f284274b2361323",
+  "extid": "2",
+  "name": "sales",
+  "level_name": "agency"
+}
+```
+
+::::
+
+:::::
+
+## Remove admin-only rights from a user
+
+::::: panel
+:::: left
+
+> ENDPOINT <small>Authorization `apiKey`</small>
+
+```http
+DELETE /v2/teams/:team_id/members/:member_id/admin-only HTTP/1.1
+```
+
+<attributes title="Path parameters">
+<attribute name="team_id" type="string" :required=true>
+
+The `_id` of the team.
+
+</attribute>
+<attribute name="member_id" type="string" :required=true>
+
+The `_id` of the user whose admin-only rights should be removed.
+
+</attribute>
+</attributes>
+
+<attributes title="Query parameters" :isEmpty=true />
+
+<returns title="Returns">
+
+Returns the updated `Team` object if the request is valid, and returns an error otherwise.
+
+</returns>
+
+::::
+
+:::: right
+
+> CODE SAMPLE
+
+```shell
+curl --request DELETE 'https://api.vyte.in/v2/teams/5ef9e5489b10b33ad0898ca3/members/5f1077e1eaf7c424af51a849/admin-only' \
+--header 'Authorization: vkjvi2bvfo54ssbybmcts0x42z1sbzm6t0mot8trh8i03reno0'
+```
+
+> RESPONSE SAMPLE
+
+```json light-code
+{
+  "admins": ["5f1077cf21f43b0b99660619"],
+  "members": ["5f1077cf21f43b0b99660619", "5f1077e1eaf7c424af51a847"],
+  "_id": "5ef9e5489b10b33ad0898ca3",
+  "organization": "5ef0cb128f284274b2361323",
+  "extid": "2",
+  "name": "sales",
+  "level_name": "agency"
 }
 ```
 
