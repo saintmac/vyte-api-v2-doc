@@ -26,7 +26,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          # node-sass@4.14.1 (transitive VuePress 1.x dep) only ships prebuilt
+          # binaries through Node 14; newer Node tries to compile from source
+          # and fails on the runner. Node 14 also avoids needing
+          # --openssl-legacy-provider (that flag only exists on Node 17+).
+          node-version: 14
           cache: yarn
 
       # Only needed for the build (skipped when the PR is just being closed).
@@ -35,8 +39,6 @@ jobs:
         env:
           # Serve assets from the preview subpath. Trailing slash required.
           DEPLOY_BASE: /pr-preview/pr-${{ github.event.number }}/
-          # VuePress 1.x / webpack 4 needs the legacy OpenSSL provider on Node 17+.
-          NODE_OPTIONS: --openssl-legacy-provider
         run: |
           yarn install
           yarn build
