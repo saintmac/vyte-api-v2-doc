@@ -1,0 +1,49 @@
+name: PR Preview
+
+# Builds each pull request and publishes it to a subfolder of the gh-pages
+# branch (pr-preview/pr-<N>/), then comments the preview URL on the PR.
+# The folder is removed automatically when the PR is closed/merged.
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+# Allow only one concurrent preview deployment per PR.
+concurrency:
+  group: pr-preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: yarn
+
+      # Only needed for the build (skipped when the PR is just being closed).
+      - name: Install & build
+        if: github.event.action != 'closed'
+        env:
+          # Serve assets from the preview subpath. Trailing slash required.
+          DEPLOY_BASE: /pr-preview/pr-${{ github.event.number }}/
+          # VuePress 1.x / webpack 4 needs the legacy OpenSSL provider on Node 17+.
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: |
+          yarn install
+          yarn build
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: docs/.vuepress/dist
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview

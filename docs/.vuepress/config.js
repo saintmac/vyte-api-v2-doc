@@ -2,6 +2,14 @@ const { description } = require("../../package");
 
 module.exports = {
   /**
+   * Base public path. Defaults to "/" for the production site served at the
+   * domain root. PR preview builds set DEPLOY_BASE (e.g. "/pr-preview/pr-42/")
+   * so absolute asset URLs (/logo.svg, /assets/...) resolve under the subpath.
+   * ref：https://v1.vuepress.vuejs.org/config/#base
+   */
+  base: process.env.DEPLOY_BASE || "/",
+
+  /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
   /**
