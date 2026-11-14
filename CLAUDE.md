@@ -9,7 +9,8 @@ This is the **Vyte API v2 documentation site** — a static site built with **Vu
 ## Commands
 
 ```shell
-npm run dev      # local dev server with hot reload (vuepress dev docs)
+npm start        # dev server in Docker (docker compose up dev) → http://localhost:8080
+npm run dev      # local dev server with hot reload (vuepress dev docs) — needs Node 14 on the host
 npm run build    # production build to docs/.vuepress/dist (vuepress build docs)
 ```
 

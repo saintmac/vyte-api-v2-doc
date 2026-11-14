@@ -9,6 +9,7 @@
   },
   "repository": "https://github.com/ladislas14/vyte-api-v2-doc.git/vyte-api-v2-doc",
   "scripts": {
+    "start": "docker compose up dev",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs"
   },
