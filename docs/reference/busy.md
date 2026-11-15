@@ -7,7 +7,7 @@
 :::::panel
 
 :::: left
-Busy times are the periods during which users (or whole teams) cannot be booked. The Busy endpoint computes them on the fly from the same sources as the [Slots](./slots.md) endpoints: the users' [availabilities](./availabilities.md) (everything outside opening hours is busy, as are the periods excluded by minimum notice and booking horizon rules), the events of their connected [calendars](./calendars.md) and their Vyte [events](./events.md), with buffers applied. It is the raw material for drawing a calendar or scheduler view where unavailable periods are greyed out; to get directly bookable time ranges of a given duration, use [Slots](./slots.md) instead. Authentication, key scopes, error format, dates and timezones are described in [conventions.md](./README.md).
+Busy times are the periods during which users (or whole teams) cannot be booked. The Busy endpoint computes them on the fly from the same sources as the [Slots](/reference/slots/) endpoints: the users' [availabilities](/reference/availabilities/) (everything outside opening hours is busy, as are the periods excluded by minimum notice and booking horizon rules), the events of their connected [calendars](/reference/calendars/) and their Vyte [events](/reference/events/), with buffers applied. It is the raw material for drawing a calendar or scheduler view where unavailable periods are greyed out; to get directly bookable time ranges of a given duration, use [Slots](/reference/slots/) instead. Authentication, key scopes, error format, dates and timezones are described in [conventions.md](/reference/).
 
 ::::
 
@@ -58,7 +58,7 @@ How periods are built:
 
 Priority when several are sent: `event`, then `users`, then `team` / `teams`, then `emails`.
 
-`team` and `teams` follow the same syntax as on [Slots](./slots.md#targeting-modes): `teams=A.B` restricts team `A` to the members who also belong to `B`; `teams=A,B` targets several teams; `team=A,B` (historical parameter) is read as `teams=A.B`.
+`team` and `teams` follow the same syntax as on [Slots](/reference/slots/#targeting-modes): `teams=A.B` restricts team `A` to the members who also belong to `B`; `teams=A,B` targets several teams; `team=A,B` (historical parameter) is read as `teams=A.B`.
 
 ## Endpoints
 
@@ -74,7 +74,7 @@ Returns the busy periods of the target over the requested days. Read-only, no si
 
 What makes a period busy:
 
-- **Availability**: every time outside the opening hours of the user's applicable availability, the days outside its date ranges, and the times excluded by `past_as_busy`, `today_as_busy`, `hours_before_as_busy` (minimum notice) and `days_after_as_busy` (booking horizon). The applicable availability is the user's main one, or the one named `team_availability_name`, combined with or replaced by `availability_id` under the same rules as for [Slots](./slots.md#how-slots-are-computed).
+- **Availability**: every time outside the opening hours of the user's applicable availability, the days outside its date ranges, and the times excluded by `past_as_busy`, `today_as_busy`, `hours_before_as_busy` (minimum notice) and `days_after_as_busy` (booking horizon). The applicable availability is the user's main one, or the one named `team_availability_name`, combined with or replaced by `availability_id` under the same rules as for [Slots](/reference/slots/#how-slots-are-computed).
 - **Calendars and Vyte events**: every event marked busy in the calendars the user selected for conflict checking, and the user's Vyte events. All-day calendar events are returned as all-day periods (`start.date` / `end.date`); when the availability has `all_day_busy` enabled they are returned as timed periods covering the day instead.
 - **Buffers**: the availability's `buffer_before` / `buffer_after` and the buffers carried by existing bookings widen the busy periods around events (with `buffer_appointments_only`, only around bookings).
 - **Travel time**: with `address`, when the availability has travel time enabled, the travel time to and from located appointments is added around them.
@@ -98,13 +98,13 @@ None.
 | `to` | string | no | two weeks after the default `from` | Last day, included, `YYYY-MM-DD`. |
 | `next` | integer | no | none | Only used when `from` / `to` are not sent: return one single week, the one starting on the Monday `next` weeks after the current week (`0` = current week, `1` = next week). Without `from`, `to` and `next`, the current week and the following one are returned. |
 | `timezone` | string | no | none | IANA timezone name (for example `Europe/Paris`) or `UTC`, used to interpret `from` / `to` and to format the response. Strongly recommended: without it the offsets of the returned times are not guaranteed. |
-| `appointment_type` | string | no | none | Id of an [appointment type](./appointment-types.md). Fills, when not sent explicitly, `availability_id`, `team_availability_name`, `team` and `team_all_members` from the appointment type, and bookings of that appointment type count towards its `max_parallel_events` capacity. If the appointment type lets the booker choose a member and `users` is sent, the team is not applied. |
-| `availability_id` | string | no | none | Id of an [availability](./availabilities.md) to apply. |
+| `appointment_type` | string | no | none | Id of an [appointment type](/reference/appointment-types/). Fills, when not sent explicitly, `availability_id`, `team_availability_name`, `team` and `team_all_members` from the appointment type, and bookings of that appointment type count towards its `max_parallel_events` capacity. If the appointment type lets the booker choose a member and `users` is sent, the team is not applied. |
+| `availability_id` | string | no | none | Id of an [availability](/reference/availabilities/) to apply. |
 | `team_availability_name` | string | no | none | Name of the availability to use for each user instead of the main one (falls back to the main one). |
 | `start_slots_step` | number | no | `15` | Size in minutes of the time steps used to build periods. |
 | `dur` | number | no | none | Intended meeting duration in minutes. Only effect: when `start_slots_step` is not sent and `dur` is not a multiple of 15, the step becomes 5 minutes. |
 | `address` | string | no | none | Address of the appointment, to take travel time into account when configured. |
-| `event` | string | no | none | Id of an existing [event](./events.md): returns the busy periods of the participants of that event who have a Vyte account, computed for rescheduling that event: the availability the event was booked with is applied, and `hide` is never returned. This parameter requires the request to be additionally authenticated as a participant of that event; with an API key alone the answer is `401`. |
+| `event` | string | no | none | Id of an existing [event](/reference/events/): returns the busy periods of the participants of that event who have a Vyte account, computed for rescheduling that event: the availability the event was booked with is applied, and `hide` is never returned. This parameter requires the request to be additionally authenticated as a participant of that event; with an API key alone the answer is `401`. |
 
 **Request body**
 
@@ -220,5 +220,5 @@ curl "https://api.vyte.in/v2/busy?teams=5f1e9b2a8c4d3e00123456a1,5f1e9b2a8c4d3e0
 - **All-day periods are listed before timed ones** and use `date` instead of `dateTime`, with an exclusive `end.date`.
 - **`from` and `to` go together.** Sending only one silently falls back to the default range (current week and the next one).
 - **Unknown users are ignored**, they are not reported as busy. Compare `names` / `ids` with what you asked for if you need to detect them.
-- **Several teams separated by commas** are evaluated together (which teams have nobody free at each time); this mirrors the everyone-at-once behaviour of [Slots](./slots.md) for several teams.
+- **Several teams separated by commas** are evaluated together (which teams have nobody free at each time); this mirrors the everyone-at-once behaviour of [Slots](/reference/slots/) for several teams.
 - Results are computed live from connected calendars; keep the range short (a few weeks) for good response times.

@@ -7,9 +7,9 @@
 :::::panel
 
 :::: left
-A [user](./users.md) can connect a personal Webex account and a personal Zoom account to Vyte. Once an account is connected, Vyte can create an online meeting on it for the events organized by that user whose place is `Webex` or `Zoom`, and uses the meeting's join link as the address of the place (see [Events](./events.md)). A connection belongs to one user and one provider: a user has at most one Webex connection and at most one Zoom connection, and they are independent of each other.
+A [user](/reference/users/) can connect a personal Webex account and a personal Zoom account to Vyte. Once an account is connected, Vyte can create an online meeting on it for the events organized by that user whose place is `Webex` or `Zoom`, and uses the meeting's join link as the address of the place (see [Events](/reference/events/)). A connection belongs to one user and one provider: a user has at most one Webex connection and at most one Zoom connection, and they are independent of each other.
 
-Connecting an account requires the consent of the account owner on the provider's own website (OAuth 2.0). The API therefore cannot connect an account silently: it gives you a setup URL to open in the end user's browser, a status endpoint to check the result, and an endpoint to remove the connection. Both providers work the same way; the paths only differ by the provider name (`webex` or `zoom`). Authentication, key scopes and error format are described in [Conventions](./README.md).
+Connecting an account requires the consent of the account owner on the provider's own website (OAuth 2.0). The API therefore cannot connect an account silently: it gives you a setup URL to open in the end user's browser, a status endpoint to check the result, and an endpoint to remove the connection. Both providers work the same way; the paths only differ by the provider name (`webex` or `zoom`). Authentication, key scopes and error format are described in [Conventions](/reference/).
 
 ::::
 
@@ -31,7 +31,7 @@ Connecting an account requires the consent of the account owner on the provider'
 
 ## Connection flow
 
-1. **Start.** From your server, get a [user token](./users.md#get-a-token-to-authenticate-a-user) for the user (`GET /v2/users/:user_id/token`). Then send the end user's browser to the setup URL of the provider, `https://api.vyte.in/users/webex/setup?token=USER_TOKEN` or `https://api.vyte.in/users/zoom/setup?token=USER_TOKEN`, with an optional `callback` query parameter telling where the user must land at the end. It must be a full-page navigation of the end user's own browser (a link, a redirect or a new tab), with cookies enabled; it cannot be an XHR / fetch call, and it cannot be performed by your server on the user's behalf.
+1. **Start.** From your server, get a [user token](/reference/users/#get-a-token-to-authenticate-a-user) for the user (`GET /v2/users/:user_id/token`). Then send the end user's browser to the setup URL of the provider, `https://api.vyte.in/users/webex/setup?token=USER_TOKEN` or `https://api.vyte.in/users/zoom/setup?token=USER_TOKEN`, with an optional `callback` query parameter telling where the user must land at the end. It must be a full-page navigation of the end user's own browser (a link, a redirect or a new tab), with cookies enabled; it cannot be an XHR / fetch call, and it cannot be performed by your server on the user's behalf.
 2. **Redirect to the provider.** Vyte answers `302` and redirects the browser to the provider's sign-in and consent page (Webex or Zoom).
 3. **Consent.** The end user signs in to their Webex or Zoom account and authorizes Vyte. This is the only action required from the user.
 4. **Return.** The provider sends the browser back to Vyte, which stores the connection for the user and redirects the browser to the `callback` URL:
@@ -162,7 +162,7 @@ curl -i 'https://api.vyte.in/v2/users/5f1e9b2a8c4d3e0012345678/webex' \
 
 `GET /users/webex/setup`
 
-First step of the [connection flow](#connection-flow). **This path is not under `/v2` and is not authenticated with an API key**: it is opened by the end user's browser and authenticated with a [user token](./users.md#get-a-token-to-authenticate-a-user). Redirects to the Webex sign-in and consent page.
+First step of the [connection flow](#connection-flow). **This path is not under `/v2` and is not authenticated with an API key**: it is opened by the end user's browser and authenticated with a [user token](/reference/users/#get-a-token-to-authenticate-a-user). Redirects to the Webex sign-in and consent page.
 
 **Authentication:** a user token of the user whose account is being connected, in the `token` query parameter. Obtain it from your server with `GET /v2/users/:user_id/token` just before redirecting the user. Never put an API key in this URL.
 
@@ -174,7 +174,7 @@ None. The user is the one designated by the token.
 
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| `token` | string | yes | - | User token of the user, obtained with `GET /v2/users/:user_id/token` (see [Users](./users.md#get-a-token-to-authenticate-a-user)). |
+| `token` | string | yes | - | User token of the user, obtained with `GET /v2/users/:user_id/token` (see [Users](/reference/users/#get-a-token-to-authenticate-a-user)). |
 | `callback` | string | no | The user's `account.app_url` if set, otherwise the Vyte web application | Where the browser is sent at the end of the flow. Allowed values: a relative path starting with a single `/` (resolved against the user's `account.app_url` if set, otherwise against the Vyte web application), or an absolute `http(s)` URL located on a Vyte domain or on the same origin as the user's `account.app_url`. URLs containing credentials, whitespace or backslashes are refused. URL-encode the value. |
 
 **Request body**
@@ -307,7 +307,7 @@ curl -i 'https://api.vyte.in/v2/users/5f1e9b2a8c4d3e0012345678/zoom' \
 
 `GET /users/zoom/setup`
 
-First step of the [connection flow](#connection-flow). **This path is not under `/v2` and is not authenticated with an API key**: it is opened by the end user's browser and authenticated with a [user token](./users.md#get-a-token-to-authenticate-a-user). Redirects to the Zoom sign-in and consent page.
+First step of the [connection flow](#connection-flow). **This path is not under `/v2` and is not authenticated with an API key**: it is opened by the end user's browser and authenticated with a [user token](/reference/users/#get-a-token-to-authenticate-a-user). Redirects to the Zoom sign-in and consent page.
 
 **Authentication:** a user token of the user whose account is being connected, in the `token` query parameter. Obtain it from your server with `GET /v2/users/:user_id/token` just before redirecting the user. Never put an API key in this URL.
 
@@ -319,7 +319,7 @@ None. The user is the one designated by the token.
 
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| `token` | string | yes | - | User token of the user, obtained with `GET /v2/users/:user_id/token` (see [Users](./users.md#get-a-token-to-authenticate-a-user)). |
+| `token` | string | yes | - | User token of the user, obtained with `GET /v2/users/:user_id/token` (see [Users](/reference/users/#get-a-token-to-authenticate-a-user)). |
 | `callback` | string | no | The user's `account.app_url` if set, otherwise the Vyte web application | Where the browser is sent at the end of the flow. Allowed values: a relative path starting with a single `/` (resolved against the user's `account.app_url` if set, otherwise against the Vyte web application), or an absolute `http(s)` URL located on a Vyte domain or on the same origin as the user's `account.app_url`. URLs containing credentials, whitespace or backslashes are refused. URL-encode the value. |
 
 **Request body**
@@ -408,7 +408,7 @@ HTTP/1.1 204 No Content
 - The setup endpoints answer with a redirect, not JSON. HTTP clients that follow redirects automatically will fetch the provider's HTML consent page; that is expected and useless outside a browser.
 - The setup endpoints must be loaded by the end user's browser; a `Location` URL obtained by your server cannot be handed to the user, because the flow is tied to the browser that started it.
 - The flow must be finished within about 10 minutes, and each started flow can be completed only once.
-- `callback` must point to a Vyte domain or to the user's own `account.app_url` origin; arbitrary partner URLs are refused with `400`. To land on your own application, have the user's `account.app_url` set accordingly (see [Users](./users.md)).
+- `callback` must point to a Vyte domain or to the user's own `account.app_url` origin; arbitrary partner URLs are refused with `400`. To land on your own application, have the user's `account.app_url` set accordingly (see [Users](/reference/users/)).
 - Re-running the flow for a user who is already connected does not switch accounts. Call `DELETE` first, then start the flow again.
 - `DELETE` is idempotent and always answers `204`.
 - Connecting an account is a prerequisite for Vyte to create Webex or Zoom meetings for the events the user organizes; the meeting is created on the organizer's connected account.

@@ -10,18 +10,18 @@
 A locator is a "store locator" style public page for an organization: it lists the places where
 the organization can be met (shops, agencies, offices, coaches, advisors) and lets a visitor find
 the ones nearest to an address or to their current position, or search them by name. Each place
-is a [Location](./locations.md); each location carries a link, usually the path of a Vyte booking
-page of a team or of a user (see [Teams](./teams.md) and [Users](./users.md)), so the visitor first
+is a [Location](/reference/locations/); each location carries a link, usually the path of a Vyte booking
+page of a team or of a user (see [Teams](/reference/teams/) and [Users](/reference/users/)), so the visitor first
 picks a place and then books an appointment there. A locator belongs to exactly one organization
 and is identified publicly by its `handle`, which is part of the page address
 (`https://vyte.in/locator/{handle}`).
 
 The locator object holds the texts and the search settings of the page. The places themselves
-are managed with the [Locations](./locations.md) endpoints, or in bulk when creating the locator
+are managed with the [Locations](/reference/locations/) endpoints, or in bulk when creating the locator
 (see [Create or replace a locator](#create-or-replace-a-locator)).
 
 General rules (base URL, authentication, key scopes, ids, languages, errors) are described in
-[Conventions](./README.md).
+[Conventions](/reference/).
 
 ::::
 
@@ -51,7 +51,7 @@ General rules (base URL, authentication, key scopes, ids, languages, errors) are
 | `message` | string | yes | Introductory message displayed on the locator page. No default. |
 | `footer` | string | yes | Footer of the locator page. May contain HTML links. No default. |
 | `picture_url` | string (URL) | yes | Picture (logo or banner) displayed on the locator page. No default. |
-| `lang` | string | yes | Language of the locator page, as a two letter code (see [Conventions](./README.md#languages)). The value is stored as sent, without validation. No default is stored. |
+| `lang` | string | yes | Language of the locator page, as a two letter code (see [Conventions](/reference/#languages)). The value is stored as sent, without validation. No default is stored. |
 | `link_suffix` | string | yes | Text associated with the links of the locations of this locator (for example a query string to add to every booking link). Stored and returned as sent. No default. |
 | `no_results` | object | yes | What the page shows when a search returns no location. |
 | `no_results.message` | string | yes | Message displayed when no location is found. No default. |
@@ -111,7 +111,7 @@ locator page.
 | Searches by name | The locations whose `name` contains the typed text (case insensitive) are returned, sorted by name. |
 
 A location without coordinates can only be found by name or by direct address search; see
-[Locations](./locations.md).
+[Locations](/reference/locations/).
 
 ## Endpoints
 
@@ -132,7 +132,7 @@ position: with `GET` the last segment is the **handle**, with `PUT` and `DELETE`
 `GET /v2/locators`
 
 Returns every locator owned by the organization of the API key. The locations are not included;
-use [List the locations of a locator](./locations.md#list-the-locations-of-a-locator).
+use [List the locations of a locator](/reference/locations/#list-the-locations-of-a-locator).
 
 **Key scope:** organization. A `team` or `user` scoped key is answered with `403`.
 
@@ -235,13 +235,13 @@ None.
 | `address_postfix` | string | no | none | See [The Locator object](#the-locator-object). |
 | `address_region_bias` | string | no | none | See [The Locator object](#the-locator-object). |
 | `address_direct_search` | boolean | no | none | See [The Locator object](#the-locator-object). |
-| `locations` | array of objects | no | none | Complete list of the locations of the locator. Each item accepts the writable fields of the [Location object](./locations.md#the-location-object): `name`, `address`, `location.type`, `location.coordinates`, `picture_url`, `link`, `extid`. Give every item an `extid` so that a later call updates the location instead of recreating it. |
+| `locations` | array of objects | no | none | Complete list of the locations of the locator. Each item accepts the writable fields of the [Location object](/reference/locations/#the-location-object): `name`, `address`, `location.type`, `location.coordinates`, `picture_url`, `link`, `extid`. Give every item an `extid` so that a later call updates the location instead of recreating it. |
 
 **Response**
 
 `201 Created` with the [Locator object](#the-locator-object), both when the locator was created
 and when an existing one was updated. The locations are **not** included in the response; read
-them with [List the locations of a locator](./locations.md#list-the-locations-of-a-locator).
+them with [List the locations of a locator](/reference/locations/#list-the-locations-of-a-locator).
 
 **Errors**
 
@@ -386,7 +386,7 @@ update), with one caveat: the merge is done at the top level only, so an object 
 
 `handle`, `_id` and `org` are not updatable: do not send them. To change a handle, create a new
 locator and delete the old one. This endpoint does not accept a `locations` array; manage
-locations with the [Locations](./locations.md) endpoints or with
+locations with the [Locations](/reference/locations/) endpoints or with
 [Create or replace a locator](#create-or-replace-a-locator).
 
 **Key scope:** organization. A `team` or `user` scoped key is answered with `403`.
@@ -473,7 +473,7 @@ Deletes a locator of the organization. The locator page stops working immediatel
 becomes available again.
 
 The locations of the locator are **not** deleted with it. Delete them first with
-[Delete a location](./locations.md#delete-a-location) (they remain listable and deletable through
+[Delete a location](/reference/locations/#delete-a-location) (they remain listable and deletable through
 the Locations endpoints with the id of the deleted locator).
 
 **Key scope:** organization. A `team` or `user` scoped key is answered with `403`.

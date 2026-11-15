@@ -7,13 +7,13 @@
 :::::panel
 
 :::: left
-Team admin preferences define **which notifications the admins of a [team](./teams.md) receive about the events of the team's members**. There is at most one preferences object per team. It lets managers or assistants (the team's admins, including admin-only users) keep an eye on the bookings of the people they supervise without being invitees of those events.
+Team admin preferences define **which notifications the admins of a [team](/reference/teams/) receive about the events of the team's members**. There is at most one preferences object per team. It lets managers or assistants (the team's admins, including admin-only users) keep an eye on the bookings of the people they supervise without being invitees of those events.
 
 How it works:
 
-- An event "concerns" a team when one of its participants is a Vyte user who is in the team's `members` (see [Roles in a team](./teams.md#roles-in-a-team)).
+- An event "concerns" a team when one of its participants is a Vyte user who is in the team's `members` (see [Roles in a team](/reference/teams/#roles-in-a-team)).
 - Each time Vyte sends a notification email about such an event to that member, and the matching flag below is `true`, **every admin of the team receives a copy of that email** at their primary address.
-- The copy is sent whatever the member's own notification preferences are (see [Users](./users.md) for a user's own preferences): admin preferences are evaluated independently.
+- The copy is sent whatever the member's own notification preferences are (see [Users](/reference/users/) for a user's own preferences): admin preferences are evaluated independently.
 - An admin who administers several teams concerned by the same event receives each notification only once.
 - A team with no preferences object, or with all flags `false` (the default), sends nothing to its admins.
 
@@ -40,7 +40,7 @@ In the descriptions below, "the member" is the team member taking part in the ev
 
 | Field | Type | Writable | Description |
 | --- | --- | --- | --- |
-| `_id` | string | no | Unique identifier of the preferences object. This is the value of `admin_preference` in the [Team object](./teams.md#the-team-object). |
+| `_id` | string | no | Unique identifier of the preferences object. This is the value of `admin_preference` in the [Team object](/reference/teams/#the-team-object). |
 | `belongs_to` | string | no | `_id` of the team these preferences belong to. Always the team of the URL. |
 | `prefs` | object | yes | The preferences. |
 | `prefs.email` | object | yes | Email notifications copied to the team's admins. |
@@ -105,11 +105,11 @@ Example:
 | `POST` | `/v2/teams/:team_id/admin-preferences` | [Set the admin preferences of a team](#set-the-admin-preferences-of-a-team) | organization, team |
 | `PUT` | `/v2/teams/:team_id/admin-preferences` | [Set the admin preferences of a team](#set-the-admin-preferences-of-a-team) (alias of `POST`) | organization, team |
 
-Authentication, key scopes and the common error format are described in [Conventions](./README.md).
+Authentication, key scopes and the common error format are described in [Conventions](/reference/).
 
 With a `team` scoped key, `:team_id` must be one of the key's teams, otherwise the answer is `403`. `user` scoped keys are not meant to be used on these endpoints.
 
-The admin preferences can also be set while creating or updating a team, through the `admin_preference` field of [Create or update a team](./teams.md#create-or-update-a-team).
+The admin preferences can also be set while creating or updating a team, through the `admin_preference` field of [Create or update a team](/reference/teams/#create-or-update-a-team).
 
 ### Retrieve the admin preferences of a team
 
@@ -123,7 +123,7 @@ Returns the admin preferences of the team.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `team_id` | string | `_id` of the [team](./teams.md). |
+| `team_id` | string | `_id` of the [team](/reference/teams/). |
 
 **Query parameters**
 
@@ -204,7 +204,7 @@ Business rules:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `team_id` | string | `_id` of the [team](./teams.md). |
+| `team_id` | string | `_id` of the [team](/reference/teams/). |
 
 **Query parameters**
 
@@ -314,7 +314,7 @@ curl --request PUT 'https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e0012345678/admin-
 - **`POST` and `PUT` are the same upsert** and both answer `200`, never `201`. There is no `DELETE`: to stop all admin notifications, send a `prefs` object with every flag set to `false`.
 - **`GET` answers `404` until preferences have been set once**, even though the team exists. Treat this `404` as "all flags `false`".
 - **Send the complete `prefs` object on every write.** Do not rely on omitted flags keeping their previous value.
-- **One object per team, shared by all its admins.** Preferences cannot differ from one admin to another. Who receives the notifications is defined by the team's `admins` list (see [Teams](./teams.md#roles-in-a-team)).
+- **One object per team, shared by all its admins.** Preferences cannot differ from one admin to another. Who receives the notifications is defined by the team's `admins` list (see [Teams](/reference/teams/#roles-in-a-team)).
 - **Only events of `members` trigger notifications.** An admin-only user receives the team's notifications, but events in which only that user takes part do not notify the other admins.
 - **Admins are notified in addition to the member**, not instead of them. The member's own notification preferences are not affected.
 - **A team's preferences object survives changes of its members and admins**; it is only read at the time a notification is sent.

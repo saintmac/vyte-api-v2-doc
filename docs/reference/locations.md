@@ -7,17 +7,17 @@
 :::::panel
 
 :::: left
-A location is one place listed on a [Locator](./locators.md) page: a shop, an agency, an office, a
+A location is one place listed on a [Locator](/reference/locators/) page: a shop, an agency, an office, a
 coach, an advisor. It has a name, a postal address, geographic coordinates used to find the
 places nearest to a visitor, an optional picture and a `link`. The `link` is where the visitor is
 sent after choosing the place: in most cases the path of a Vyte booking page, that is the booking
-page of a team or of a user (see [Teams](./teams.md) and [Users](./users.md)), optionally followed by
+page of a team or of a user (see [Teams](/reference/teams/) and [Users](/reference/users/)), optionally followed by
 an appointment type. This is how a location is tied to the people who can be booked there: there
 is no team id or user id on a location, only this link. A location belongs to one organization
 and to one locator.
 
 General rules (base URL, authentication, key scopes, ids, errors) are described in
-[Conventions](./README.md).
+[Conventions](/reference/).
 
 ::::
 
@@ -42,7 +42,7 @@ General rules (base URL, authentication, key scopes, ids, errors) are described 
 |---|---|---|---|
 | `_id` | string (id) | no | Unique identifier of the location. Used as `:location_id` in the paths. |
 | `org` | string (id) | no | Identifier of the organization that owns the location. Set by Vyte from the API key. |
-| `locator` | string (id) | no | Identifier of the [Locator](./locators.md) the location is listed on. Set by Vyte from the `:locator_id` of the creation path. |
+| `locator` | string (id) | no | Identifier of the [Locator](/reference/locators/) the location is listed on. Set by Vyte from the `:locator_id` of the creation path. |
 | `extid` | string | create-only | Your own identifier for this place (for example the store code in your database). Optional but strongly recommended: it is the key that makes creation idempotent and it is required to update the location later. Must be unique within your organization (across all your locators). Cannot be changed after creation. |
 | `name` | string | yes | Name of the place, displayed on the locator page and used by the search by name. Leading and trailing spaces are removed. No default. |
 | `address` | string | yes | Postal address of the place, displayed on the locator page. Leading and trailing spaces are removed. When the location is saved without coordinates, Vyte converts this address to coordinates automatically. No default. |
@@ -86,7 +86,7 @@ notice and must not be relied upon.
 
 A location without `location` is never returned by a search by address or by position on the
 locator page; it can only be found by name (or by address text when the locator uses
-`address_direct_search`, see [Locators](./locators.md#how-a-search-on-the-locator-page-works)).
+`address_direct_search`, see [Locators](/reference/locators/#how-a-search-on-the-locator-page-works)).
 Sending explicit coordinates is the most reliable option.
 
 The automatic conversion only happens when the location has no coordinates. Changing the
@@ -106,7 +106,7 @@ The automatic conversion only happens when the location has no coordinates. Chan
 `:locator_id` is always the `_id` of the locator, never its handle.
 
 To write all the locations of a locator in one call, see
-[Create or replace a locator](./locators.md#create-or-replace-a-locator).
+[Create or replace a locator](/reference/locators/#create-or-replace-a-locator).
 
 ### List the locations of a locator
 
@@ -492,7 +492,7 @@ curl --request DELETE 'https://api.vyte.in/v2/locators/5f1e9b2a8c4d3e0012345678/
 - **Changing the address does not move the point.** Send new coordinates with the new address.
 - **Bulk synchronization.** `POST /v2/locators` with a `locations` array replaces the whole list
   of a locator in one call and deletes the locations missing from the array; see
-  [Create or replace a locator](./locators.md#create-or-replace-a-locator).
+  [Create or replace a locator](/reference/locators/#create-or-replace-a-locator).
 - **Deleting a locator does not delete its locations.** Delete them explicitly.
 - **`link` is not validated.** Vyte does not check that the path designates an existing booking
   page; a wrong path sends visitors to a page that does not exist.

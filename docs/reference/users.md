@@ -8,16 +8,16 @@
 
 :::: left
 A User is a person of your organization who can be booked on Vyte. A user owns
-[calendars](./calendars.md), [availabilities](./availabilities.md),
-[booking pages](./vytemes.md) and their [appointment types](./appointment-types.md), has
-[preferences](./user_preference.md), and can be a member or an administrator of
-[teams](./teams.md). The Users endpoints let a partner provision the members of its organization
+[calendars](/reference/calendars/), [availabilities](/reference/availabilities/),
+[booking pages](/reference/vytemes/) and their [appointment types](/reference/appointment-types/), has
+[preferences](/reference/user_preference/), and can be a member or an administrator of
+[teams](/reference/teams/). The Users endpoints let a partner provision the members of its organization
 (one by one or in batch), read them, update them, switch their product modules on and off,
 change their email address, remove them from the organization, and obtain a short-lived token
 that authenticates one user directly.
 
 Authentication, API key scopes, formats and the general error model are described in
-[Conventions](./README.md) and are not repeated here.
+[Conventions](/reference/) and are not repeated here.
 
 ::::
 
@@ -50,7 +50,7 @@ Authentication, API key scopes, formats and the general error model are describe
 | `last_name` | string | yes | Last name. Leading and trailing spaces are removed. |
 | `full_name` | string | no | Computed: `first_name` and `last_name` joined by a space (only one of them when the other is empty, an empty string when both are empty). |
 | `emails` | array of strings | yes (through `user.email`) | Email addresses of the user, lowercased. In practice it holds one address; `emails[0]` is the primary email, used for notifications and sign-in. It is written with the singular body field `user.email`. |
-| `language` | string | yes | Language of the user (ISO 639-1), used for emails and pages. Supported values: `de`, `en`, `es`, `fr`, `it`, `nl`, `pl`, `pt`, `ru`, `sv`. The value is stored as sent (not validated by these endpoints). No default is stored. See [Conventions](./README.md). |
+| `language` | string | yes | Language of the user (ISO 639-1), used for emails and pages. Supported values: `de`, `en`, `es`, `fr`, `it`, `nl`, `pl`, `pt`, `ru`, `sv`. The value is stored as sent (not validated by these endpoints). No default is stored. See [Conventions](/reference/). |
 | `timezone` | string | yes | Time zone of the user, as a TZ database name (for example `Europe/Paris`). Stored as sent. No default is stored. |
 | `phone` | string | yes | Phone number of the user. |
 | `phone_country` | string | yes | Country of the phone number, as a lowercase two-letter country code (for example `fr`). |
@@ -81,9 +81,9 @@ Authentication, API key scopes, formats and the general error model are describe
 | `created_by_org` | string (id) | no | Identifier of the organization that provisioned this user through the API. |
 | `createdAt` | string (ISO 8601 date-time) | no | Creation date. Note the camelCase spelling on this resource. |
 | `updatedAt` | string (ISO 8601 date-time) | no | Last modification date. Note the camelCase spelling on this resource. |
-| `nickname` | string | no | Only in [List users](#list-users) with `populatevyteme=true`, and only for users who have a booking page: nickname of the user's [booking page](./vytemes.md). |
+| `nickname` | string | no | Only in [List users](#list-users) with `populatevyteme=true`, and only for users who have a booking page: nickname of the user's [booking page](/reference/vytemes/). |
 | `pageActive` | boolean | no | Only in [List users](#list-users) with `populatevyteme=true`, and only for users who have a booking page: whether that booking page is active. |
-| `pagePlaces` | array of objects | no | Only in [List users](#list-users) with `populatevyteme=true`, and only for users who have a booking page: the fixed places configured on that booking page (see `custom.fixed_places` in [Booking pages](./vytemes.md)). |
+| `pagePlaces` | array of objects | no | Only in [List users](#list-users) with `populatevyteme=true`, and only for users who have a booking page: the fixed places configured on that booking page (see `custom.fixed_places` in [Booking pages](/reference/vytemes/)). |
 
 Responses may contain additional fields not listed here; they are internal, may change without
 notice and must not be relied upon.
@@ -178,7 +178,7 @@ None.
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `populatevyteme` | string | no | not set | When exactly `true`, each user who has a [booking page](./vytemes.md) gets three extra fields: `nickname`, `pageActive` and `pagePlaces`. Users without a booking page are returned unchanged. Any other value is ignored. |
+| `populatevyteme` | string | no | not set | When exactly `true`, each user who has a [booking page](/reference/vytemes/) gets three extra fields: `nickname`, `pageActive` and `pagePlaces`. Users without a booking page are returned unchanged. Any other value is ignored. |
 
 **Request body**
 
@@ -312,17 +312,17 @@ None.
 | `login` | object | no | - | Sets sign-in credentials for the user. |
 | `login.credentials.username` | string | no | the user's primary email | Sign-in identifier. |
 | `login.credentials.password` | string | yes when `login` is sent | - | Password. Write-only: it is never returned. |
-| `vyteme` | object | no | - | Booking page to create or update for the user. Fields are those of a [booking page](./vytemes.md) (`nickname`, `message`, `custom.*`, ...). `nickname` must not be used by any existing booking page. When your organization has a brand, it is applied to the page. |
-| `appointmentTypes` | array of objects | no | - | Appointment types to create or update on the booking page (only processed when a booking page is set by this call). Each entry must have a `handle`; an appointment type with the same `handle` on the page is updated, otherwise it is created. Other fields are those of an [appointment type](./appointment-types.md). Note the camelCase spelling. |
-| `availability` | object | no | - | Default availability of the user. Fields are those of an [availability](./availabilities.md) (`timezone`, `days`, `today_as_busy`, `past_as_busy`, `days_after_as_busy`, `hours_before_as_busy`, `buffer_before`, `buffer_after`, `all_day_busy`, ...). In `days.<weekday>.slots[]`, `start_time` and `end_time` are read as local times in `availability.timezone`; only the time of day matters. |
-| `user_preference` | object | no | - | Preferences to set on the user. Fields are those of [user preferences](./user_preference.md). |
+| `vyteme` | object | no | - | Booking page to create or update for the user. Fields are those of a [booking page](/reference/vytemes/) (`nickname`, `message`, `custom.*`, ...). `nickname` must not be used by any existing booking page. When your organization has a brand, it is applied to the page. |
+| `appointmentTypes` | array of objects | no | - | Appointment types to create or update on the booking page (only processed when a booking page is set by this call). Each entry must have a `handle`; an appointment type with the same `handle` on the page is updated, otherwise it is created. Other fields are those of an [appointment type](/reference/appointment-types/). Note the camelCase spelling. |
+| `availability` | object | no | - | Default availability of the user. Fields are those of an [availability](/reference/availabilities/) (`timezone`, `days`, `today_as_busy`, `past_as_busy`, `days_after_as_busy`, `hours_before_as_busy`, `buffer_before`, `buffer_after`, `all_day_busy`, ...). In `days.<weekday>.slots[]`, `start_time` and `end_time` are read as local times in `availability.timezone`; only the time of day matters. |
+| `user_preference` | object | no | - | Preferences to set on the user. Fields are those of [user preferences](/reference/user_preference/). |
 | `teams` | array of objects | no | - | Teams the user must belong to. |
 | `teams[].extid` | string | yes | - | Your identifier for the team. The team of your organization with this external id is used; it is created when it does not exist. |
 | `teams[].name` | string | yes | - | Name of the team. The name of an existing team is overwritten with this value. |
 | `teams[].admin` | boolean | no | `false` | `true`: the user becomes an administrator of the team. `false` or absent: the user is a plain member (and loses the administrator role on that team if it had it). |
 | `teams[].level_name` | string | no | - | Label of the kind of team (for example `Agency`). |
-| `teams[].private` | boolean | no | - | Privacy flag of the team, see [Teams](./teams.md). |
-| `teams[].tags` | array of strings | no | - | Tags of the team, see [Teams](./teams.md). |
+| `teams[].private` | boolean | no | - | Privacy flag of the team, see [Teams](/reference/teams/). |
+| `teams[].tags` | array of strings | no | - | Tags of the team, see [Teams](/reference/teams/). |
 | `form` | object | no | - | Profile form answers of the user. |
 | `form.form_template` | string (id) | yes when `form` is sent | - | Identifier of the form template. One form per user and form template: sending it again replaces `data`. |
 | `form.data` | object | no | - | Answers, keyed by the `key` of the fields of the form template. |
@@ -906,7 +906,7 @@ curl --request PUT 'https://api.vyte.in/v2/users/5f1e9b2a8c4d3e0012345678/module
   --data-raw '{ "modules": { "vyteme": true, "availabilities": true } }'
 ```
 
-```text
+```
 OK
 ```
 
@@ -964,7 +964,7 @@ curl 'https://api.vyte.in/v2/users/5f1e9b2a8c4d3e0012345678/email/update?new_ema
   --header 'Authorization: YOUR_API_KEY'
 ```
 
-```text
+```
 Email updated
 ```
 
@@ -1059,7 +1059,7 @@ curl 'https://api.vyte.in/v2/users/5f1e9b2a8c4d3e0012345678/token' \
   added member unless `opts.notify` is `false`.
 - **A booking page and an availability are not created implicitly.** They are created only when
   `vyteme` / `availability` (or a template) are part of the call. They can also be managed
-  later with [Booking pages](./vytemes.md) and [Availabilities](./availabilities.md).
+  later with [Booking pages](/reference/vytemes/) and [Availabilities](/reference/availabilities/).
 - **Booking page nicknames are global.** A nickname must be unique across all of Vyte, not only
   within your organization; prefix it with something specific to your organization. Resending
   an unchanged `vyteme.nickname` for an existing user is rejected with `422`.

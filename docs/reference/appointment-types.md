@@ -7,9 +7,9 @@
 :::::panel
 
 :::: left
-An **appointment type** is one kind of appointment that can be booked on a [booking page (Vyteme)](./vytemes.md): for example "First meeting - 30 min", "Phone call - 15 min" or "Store visit". Each appointment type belongs to exactly one booking page, is identified inside that page by its `handle`, has its own public URL, its own settings (duration, places, form, confirmation mode, notifications, redirection) and points at the [availability](./availabilities.md) that defines when it can be booked. Ad hoc booking pages are one-off invitation links created for an appointment type. The id of an appointment type can be passed to the slots and events endpoints (see [Slots](./slots.md) and [Events](./events.md)) so that its duration, availability and team are applied.
+An **appointment type** is one kind of appointment that can be booked on a [booking page (Vyteme)](/reference/vytemes/): for example "First meeting - 30 min", "Phone call - 15 min" or "Store visit". Each appointment type belongs to exactly one booking page, is identified inside that page by its `handle`, has its own public URL, its own settings (duration, places, form, confirmation mode, notifications, redirection) and points at the [availability](/reference/availabilities/) that defines when it can be booked. Ad hoc booking pages are one-off invitation links created for an appointment type. The id of an appointment type can be passed to the slots and events endpoints (see [Slots](/reference/slots/) and [Events](/reference/events/)) so that its duration, availability and team are applied.
 
-Authentication, key scopes, error format, dates and languages are described in [Conventions](./README.md).
+Authentication, key scopes, error format, dates and languages are described in [Conventions](/reference/).
 
 ::::
 
@@ -49,9 +49,9 @@ The API does not return the URL: build it from the two values. Changing the `han
 | Place, phone or video link | `custom.fixed_places[]`, `custom.hide_places`, `custom.forbid_add_places` |
 | Confirmation mode | `custom.auto_confirm` (`true` = booked immediately, otherwise a request to confirm) |
 | Visibility | `active` (bookable or not), `private` (hidden from the list of the page, bookable by direct URL) |
-| Weekly hours, date ranges, buffers before/after, minimum notice, booking horizon, slot step, parallel bookings | Not on the appointment type: they are properties of the [availability](./availabilities.md) referenced by `availability` |
+| Weekly hours, date ranges, buffers before/after, minimum notice, booking horizon, slot step, parallel bookings | Not on the appointment type: they are properties of the [availability](/reference/availabilities/) referenced by `availability` |
 | Custom questions | `custom.form_template_id` -> form template; built-in fields with `custom.ask_phone`, `custom.ask_company`, `custom.title_*` |
-| Team booking | `team`, `team_all_members`, `team_select_member` and the other `team_*` fields; see [Teams](./teams.md) |
+| Team booking | `team`, `team_all_members`, `team_select_member` and the other `team_*` fields; see [Teams](/reference/teams/) |
 | Group sessions | `session`, `session_max_spots` |
 | Payment | `paid`, `pay_to_book`, `payment_price`, `payment_currency` |
 | After booking | `custom.redirect_url`, `custom.redirect_delay` |
@@ -60,9 +60,9 @@ The API does not return the URL: build it from the two values. Changing the `han
 
 ### Availability of an appointment type
 
-Every appointment type references one [availability](./availabilities.md) through `availability`.
+Every appointment type references one [availability](/reference/availabilities/) through `availability`.
 
-- If you do not send `availability` when creating an appointment type, Vyte creates a **new private copy** of an availability and attaches it: the copy of the availability of the template appointment type when a `template` is given, otherwise a copy of the default availability of the page owner (which is created if the owner has none). The appointment type then has an availability of its own, which you can edit through the [availabilities](./availabilities.md) endpoints without affecting anything else.
+- If you do not send `availability` when creating an appointment type, Vyte creates a **new private copy** of an availability and attaches it: the copy of the availability of the template appointment type when a `template` is given, otherwise a copy of the default availability of the page owner (which is created if the owner has none). The appointment type then has an availability of its own, which you can edit through the [availabilities](/reference/availabilities/) endpoints without affecting anything else.
 - If you send `availability`, that availability is used as is. Several appointment types may share the same availability. It must exist and belong to a user the key can reach, otherwise the request is refused with `400`.
 
 ## The AppointmentType object
@@ -70,33 +70,33 @@ Every appointment type references one [availability](./availabilities.md) throug
 | Field | Type | Writable | Description |
 |---|---|---|---|
 | `_id` | string (id) | no | Identifier of the appointment type. This is the value expected by the `appointment_type` parameter of other endpoints. |
-| `vyteme` | string (id) | no | Id of the [booking page](./vytemes.md) the appointment type belongs to. |
+| `vyteme` | string (id) | no | Id of the [booking page](/reference/vytemes/) the appointment type belongs to. |
 | `name` | string | yes | Display name. Required. HTML is sanitized. |
 | `handle` | string | yes | Identifier of the appointment type inside its page, used in API paths and in the public URL. See [Handle rules](#handle-rules). |
 | `description` | string | yes | Description displayed on the booking page. HTML is sanitized. |
 | `message` | string | yes | Welcome text displayed on the appointment type page. HTML is sanitized. |
 | `active` | boolean | yes (update only) | Whether the appointment type can be booked. Default `true`; always `true` at creation. |
-| `private` | boolean | yes | When `true`, the appointment type is not listed on its page when the page is a [hub](./vytemes.md#hub); it remains bookable through its direct URL. Default `false`. |
+| `private` | boolean | yes | When `true`, the appointment type is not listed on its page when the page is a [hub](/reference/vytemes/#hub); it remains bookable through its direct URL. Default `false`. |
 | `public` | boolean | yes | Deprecated, use `private`. Default `true`; forced to `false` at creation when `private` is `true`. |
-| `availability` | string (id) | yes | Id of the [availability](./availabilities.md) that defines when the appointment type can be booked. See [Availability of an appointment type](#availability-of-an-appointment-type). |
+| `availability` | string (id) | yes | Id of the [availability](/reference/availabilities/) that defines when the appointment type can be booked. See [Availability of an appointment type](#availability-of-an-appointment-type). |
 | `group` | string | yes | Free label used to group appointment types. |
 | `urls[]` | array of strings | yes | Links displayed on the page. Default `[]`. |
 | `brand` | string (id) | yes | Id of the brand (logo, colours) applied. At creation defaults to the brand of the template, else of the page. |
-| `team` | string (id) | yes | Id of the [team](./teams.md) the appointment type books for. |
+| `team` | string (id) | yes | Id of the [team](/reference/teams/) the appointment type books for. |
 | `team_all_members` | boolean | yes | Team booking: a slot is offered only if all members of the team are free at the same time. |
 | `team_select_member` | boolean | yes | Team booking: the visitor can select the team member to book. |
 | `team_select_member_title` | string | yes | Title of the member selector. HTML is sanitized. |
 | `team_select_member_default_option_label` | string | yes | Label of the default option of the member selector. HTML is sanitized. |
 | `team_select_member_without_preference` | string | yes | Label of the "no preference" option of the member selector. HTML is sanitized. |
 | `team_select_member_force_selection` | boolean | yes | The visitor must select a member. Default `false`. |
-| `team_availability_name` | string | yes (update only) | Team booking: name of the [availability](./availabilities.md) to use for each team member (the availability of each member carrying this name). HTML is sanitized. |
+| `team_availability_name` | string | yes (update only) | Team booking: name of the [availability](/reference/availabilities/) to use for each team member (the availability of each member carrying this name). HTML is sanitized. |
 | `session` | boolean | yes | When `true`, the appointment type is a group session: several bookers can book the same slot. |
 | `session_max_spots` | number | yes | Maximum number of participants of a session. |
 | `paid` | boolean | yes | Whether the appointment is a paid one. |
 | `pay_to_book` | boolean | yes | When `true` (together with `paid`), the booker has to pay online to book. |
 | `payment_price` | number | yes | Price, in units of the currency (e.g. `49.9`). |
 | `payment_currency` | string | yes | Currency code of the price. |
-| `custom` | object | yes | Texts, display options and booking rules of the appointment type. Same keys as [the `custom` object of a booking page](./vytemes.md#the-custom-object); the most used ones are listed [below](#most-used-custom-keys). |
+| `custom` | object | yes | Texts, display options and booking rules of the appointment type. Same keys as [the `custom` object of a booking page](/reference/vytemes/#the-custom-object); the most used ones are listed [below](#most-used-custom-keys). |
 | `translations` | object | yes | Per-language overrides of the texts, keyed by language code. Each language may carry text overrides such as `message` and a `custom` object holding overrides of `custom` text keys, e.g. <code v-pre>{"fr": {"message": "Bienvenue", "custom": {"title_label": "Sujet"}}}</code>. |
 | `tag` | string | yes (update only) | Free label you can use to recognise an appointment type even after its `handle` or `name` changed. HTML is sanitized. |
 | `version` | number | yes (update only) | Free version number you can use to track your own roll-outs of settings. |
@@ -117,7 +117,7 @@ Responses may contain additional fields not listed here; they are internal, may 
 
 ### Most used `custom` keys
 
-The complete list (types, defaults, allowed values) is in [the `custom` object](./vytemes.md#the-custom-object). All its keys apply to appointment types.
+The complete list (types, defaults, allowed values) is in [the `custom` object](/reference/vytemes/#the-custom-object). All its keys apply to appointment types.
 
 | Field | Type | Default | Description |
 |---|---|---|---|
@@ -134,7 +134,7 @@ The complete list (types, defaults, allowed values) is in [the `custom` object](
 | `custom.redirect_url`, `custom.redirect_delay` | string, number | none | Redirection after booking and its delay in seconds. |
 | `custom.reminders[]` | array of strings (ids) | none | Reminders attached to the booked events. Duplicate ids are removed. |
 | `custom.sms_confirmation`, `custom.sms_confirmation_message` | boolean, string | none | Confirmation SMS. |
-| `custom.metadata` | object | none | Key/value pairs copied into the `metadata` of the booked [events](./events.md). |
+| `custom.metadata` | object | none | Key/value pairs copied into the `metadata` of the booked [events](/reference/events/). |
 
 ### Example
 
@@ -207,7 +207,7 @@ The complete list (types, defaults, allowed values) is in [the `custom` object](
 | `DELETE` | `/v2/vytemes/:nickname/types/:handle` | Delete an appointment type | organization, team, user |
 | `POST` | `/v2/appointmenttypes/update/batch` | Apply the same changes to all appointment types sharing a handle | organization, team, user |
 
-For every endpoint, the booking pages a key can reach are those owned by the users the key can reach: all members of the organization for an `organization` key, the members of the key's teams for a `team` key, the key's own user for a `user` key (see [API key scopes](./README.md#api-key-scopes)). A page owned by any other user answers `404`.
+For every endpoint, the booking pages a key can reach are those owned by the users the key can reach: all members of the organization for an `organization` key, the members of the key's teams for a `team` key, the key's own user for a `user` key (see [API key scopes](/reference/#api-key-scopes)). A page owned by any other user answers `404`.
 
 ### List appointment types
 
@@ -221,7 +221,7 @@ Returns all appointment types of the booking page: active and inactive, private 
 
 | Name | Type | Description |
 |---|---|---|
-| `nickname` | string | Nickname of the [booking page](./vytemes.md), in lowercase. |
+| `nickname` | string | Nickname of the [booking page](/reference/vytemes/), in lowercase. |
 
 **Query parameters**
 
@@ -315,7 +315,7 @@ Business rules:
 
 | Name | Type | Description |
 |---|---|---|
-| `nickname` | string | Nickname of the [booking page](./vytemes.md), in lowercase. |
+| `nickname` | string | Nickname of the [booking page](/reference/vytemes/), in lowercase. |
 
 **Query parameters**
 
@@ -328,12 +328,12 @@ None.
 | `name` | string | yes | - | Display name. |
 | `handle` | string | no | generated from `name` | See [Handle rules](#handle-rules). |
 | `template` | string | no | `/<nickname>` (the page itself) | What to copy the settings from: `/<nickname>` for the page, or `/<nickname>/<handle>` for an existing appointment type of the **same** page. `<nickname>` must be the nickname of the path. |
-| `availability` | string (id) | no | a new copy (see above) | Existing [availability](./availabilities.md) to use as is. Must belong to a user the key can reach. |
+| `availability` | string (id) | no | a new copy (see above) | Existing [availability](/reference/availabilities/) to use as is. Must belong to a user the key can reach. |
 | `description` | string | no | template value | Description. |
 | `message` | string | no | template value | Welcome text. |
 | `private` | boolean | no | template value, else `false` | Hide from the hub list of the page. |
 | `public` | boolean | no | template value, else `true` | Deprecated. |
-| `custom` | object | no | copy of the template `custom` | Keys of [the `custom` object](./vytemes.md#the-custom-object). Applied on top of the template's `custom` (key by key). |
+| `custom` | object | no | copy of the template `custom` | Keys of [the `custom` object](/reference/vytemes/#the-custom-object). Applied on top of the template's `custom` (key by key). |
 | `translations` | object | no | template value | Per-language text overrides. Languages of the body replace the same languages of the template; other languages of the template are kept. |
 | `urls` | array of strings | no | template value | Used only when not empty. |
 | `brand` | string (id) | no | template value | Body value, else template value (truthy). |
@@ -448,7 +448,7 @@ Returns one appointment type of the booking page, active or not.
 
 | Name | Type | Description |
 |---|---|---|
-| `nickname` | string | Nickname of the [booking page](./vytemes.md), in lowercase. |
+| `nickname` | string | Nickname of the [booking page](/reference/vytemes/), in lowercase. |
 | `handle` | string | Handle of the appointment type, in lowercase. |
 
 **Query parameters**
@@ -493,7 +493,7 @@ Business rules:
 - Body fields whose name starts with `_` are ignored (so you can send back an object you read, including its `_id`).
 - `availability`: when it differs from the current one, it must exist and belong to a user the key can reach, otherwise `400`. Sending the current value back is always accepted.
 - Changing `handle` changes the path of the appointment type in the API and its public URL. The new handle must respect the [Handle rules](#handle-rules).
-- If the update leaves the page without any active appointment type, the `hub` mode of the page is switched off (see [Hub](./vytemes.md#hub)).
+- If the update leaves the page without any active appointment type, the `hub` mode of the page is switched off (see [Hub](/reference/vytemes/#hub)).
 
 **Key scope:** organization, team, user.
 
@@ -501,7 +501,7 @@ Business rules:
 
 | Name | Type | Description |
 |---|---|---|
-| `nickname` | string | Nickname of the [booking page](./vytemes.md), in lowercase. |
+| `nickname` | string | Nickname of the [booking page](/reference/vytemes/), in lowercase. |
 | `handle` | string | Current handle of the appointment type, in lowercase. |
 
 **Query parameters**
@@ -521,7 +521,7 @@ Any writable field of [the AppointmentType object](#the-appointmenttype-object).
 | `active` | boolean | no | unchanged | Bookable or not. |
 | `private` | boolean | no | unchanged | Hidden from the hub list of the page. |
 | `public` | boolean | no | unchanged | Deprecated. |
-| `availability` | string (id) | no | unchanged | [Availability](./availabilities.md) to use. |
+| `availability` | string (id) | no | unchanged | [Availability](/reference/availabilities/) to use. |
 | `group` | string | no | unchanged | Grouping label. |
 | `urls` | array of strings | no | unchanged | Replaces the list. |
 | `brand` | string (id) | no | unchanged | Brand applied. |
@@ -539,7 +539,7 @@ Any writable field of [the AppointmentType object](#the-appointmenttype-object).
 | `pay_to_book` | boolean | no | unchanged | Online payment required to book. |
 | `payment_price` | number | no | unchanged | Price. |
 | `payment_currency` | string | no | unchanged | Currency code. |
-| `custom` | object | no | unchanged | Keys of [the `custom` object](./vytemes.md#the-custom-object) to change. Merged key by key. |
+| `custom` | object | no | unchanged | Keys of [the `custom` object](/reference/vytemes/#the-custom-object) to change. Merged key by key. |
 | `translations` | object | no | unchanged | Replaces all translations. |
 | `tag` | string | no | unchanged | Free label. |
 | `version` | number | no | unchanged | Free version number. |
@@ -607,7 +607,7 @@ curl --request PUT 'https://api.vyte.in/v2/vytemes/john-doe-acme/types/first-mee
 
 `DELETE /v2/vytemes/:nickname/types/:handle`
 
-Permanently deletes the appointment type. Its public URL stops working. Events already booked are not affected. If the page is left without any active appointment type, its `hub` mode is switched off (see [Hub](./vytemes.md#hub)).
+Permanently deletes the appointment type. Its public URL stops working. Events already booked are not affected. If the page is left without any active appointment type, its `hub` mode is switched off (see [Hub](/reference/vytemes/#hub)).
 
 **Key scope:** organization, team, user.
 
@@ -615,7 +615,7 @@ Permanently deletes the appointment type. Its public URL stops working. Events a
 
 | Name | Type | Description |
 |---|---|---|
-| `nickname` | string | Nickname of the [booking page](./vytemes.md), in lowercase. |
+| `nickname` | string | Nickname of the [booking page](/reference/vytemes/), in lowercase. |
 | `handle` | string | Handle of the appointment type, in lowercase. |
 
 **Query parameters**
@@ -673,7 +673,7 @@ How the data is applied to each targeted appointment type:
 | `custom` object | Merged key by key: keys present replace the stored keys, keys set to `null` are reset to their default or removed, other stored keys are kept. |
 | `custom` set to `null` | Every `custom` key is reset to its default or removed. |
 | `vyteme`, fields starting with `_`, unknown fields | Ignored. |
-| `availability` | Must be an id string of an [availability](./availabilities.md) that belongs to a user the key can reach. It is checked once, before anything is changed; if invalid the whole request is refused with `400`. All targeted appointment types then share that availability. |
+| `availability` | Must be an id string of an [availability](/reference/availabilities/) that belongs to a user the key can reach. It is checked once, before anything is changed; if invalid the whole request is refused with `400`. All targeted appointment types then share that availability. |
 
 The update is **not atomic**: every targeted appointment type is attempted independently. Those that succeed are saved and returned in `updated`; those that fail are left unchanged and reported in `errors`. The same validation as a single update applies to each one (for example, changing `handle` fails with `409` on a page that already has an appointment type with the new handle).
 
@@ -842,7 +842,7 @@ Example of a partial failure (renaming the handle, one page already has the new 
 - **`custom` is always merged, never replaced**, by `PUT` and by the batch update. To remove a `custom` key, use the batch update with that key set to `null`.
 - **The batch update can partially succeed** and still answer `400`, `409` or `500`. Always read `updated` and `errors`.
 - **The batch update is scoped by the API key**, not by the body: use a `team` scoped key to limit it to the members of given teams.
-- **Buffers, minimum notice, booking horizon and opening hours** are properties of the [availability](./availabilities.md), not of the appointment type. When no `availability` is given at creation, the appointment type gets its own copy, so editing that copy affects only this appointment type. An availability explicitly shared between appointment types is edited for all of them at once.
+- **Buffers, minimum notice, booking horizon and opening hours** are properties of the [availability](/reference/availabilities/), not of the appointment type. When no `availability` is given at creation, the appointment type gets its own copy, so editing that copy affects only this appointment type. An availability explicitly shared between appointment types is edited for all of them at once.
 - **Deleting an appointment type does not delete its availability.**
 - **Lists are not ordered and not paginated.** There is no position field.
 - **Timestamps are `createdAt` / `updatedAt`** (camelCase) on appointment types.

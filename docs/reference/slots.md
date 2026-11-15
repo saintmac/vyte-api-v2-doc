@@ -7,7 +7,7 @@
 :::::panel
 
 :::: left
-A slot is a bookable time range: a start and an end during which the targeted people are free. The Slots endpoints compute, on the fly, the free slots of one user, of several users together, or of one or several teams, by combining their [availabilities](./availabilities.md) (working hours, buffers, minimum notice), the events of their connected [calendars](./calendars.md) and their existing Vyte [events](./events.md). Slots are never stored: each call recomputes them. Use these endpoints to show a slot picker, then create the booking with the [Events](./events.md) endpoints. The reverse view (when people are busy) is given by [Busy](./busy.md). Authentication, key scopes, error format, dates and timezones are described in [conventions.md](./README.md).
+A slot is a bookable time range: a start and an end during which the targeted people are free. The Slots endpoints compute, on the fly, the free slots of one user, of several users together, or of one or several teams, by combining their [availabilities](/reference/availabilities/) (working hours, buffers, minimum notice), the events of their connected [calendars](/reference/calendars/) and their existing Vyte [events](/reference/events/). Slots are never stored: each call recomputes them. Use these endpoints to show a slot picker, then create the booking with the [Events](/reference/events/) endpoints. The reverse view (when people are busy) is given by [Busy](/reference/busy/). Authentication, key scopes, error format, dates and timezones are described in [conventions.md](/reference/).
 
 ::::
 
@@ -122,11 +122,11 @@ These parameters are shared by the endpoints below; each endpoint lists which of
 | `showUsers` | string | no | not set | Any non-empty value (send `true`): in team "any member" (`parallel`) mode, add `users[]` to each slot. |
 | `duration` | number | no | `60` | Slot length in minutes, from `5` to `1440`. A missing, non numeric or out of range value is silently replaced by `60` (no error). When `appointment_type` is sent without `duration`, the appointment type's duration is used. |
 | `timezone` | string | no | timezone of the applicable availability, else `Europe/Paris` | IANA timezone name (example `America/New_York`) used to interpret `from` / `to` and to format the response. |
-| `appointment_type` | string | no | none | Id of an [appointment type](./appointment-types.md) (booking page). Fills, when not already sent explicitly: `availability_id`, `team_availability_name`, `duration`, `team` and `team_all_members` from the appointment type. If the appointment type lets the booker choose a team member and `users` is sent, the team is not applied and the slots are those of the chosen user. Bookings of the same appointment type count towards its `max_parallel_events` capacity. |
-| `availability_id` | string | no | none | Id of an [availability](./availabilities.md) to use (see step 2 above). |
+| `appointment_type` | string | no | none | Id of an [appointment type](/reference/appointment-types/) (booking page). Fills, when not already sent explicitly: `availability_id`, `team_availability_name`, `duration`, `team` and `team_all_members` from the appointment type. If the appointment type lets the booker choose a team member and `users` is sent, the team is not applied and the slots are those of the chosen user. Bookings of the same appointment type count towards its `max_parallel_events` capacity. |
+| `availability_id` | string | no | none | Id of an [availability](/reference/availabilities/) to use (see step 2 above). |
 | `team_availability_name` | string | no | none | Name of the availability to pick for each user instead of the main one. |
 | `address` | string | no | none | Address of the appointment, enables [travel time](#travel-time) when configured. |
-| `event` | string | no | none | Id of an existing [event](./events.md) being rescheduled: the event's own availability and team availability name are applied (unless `availability_id` / `team_availability_name` are sent), so the slots match the rules used when it was booked. This parameter requires the request to be additionally authenticated as a participant of that event; with an API key alone the answer is `401`. |
+| `event` | string | no | none | Id of an existing [event](/reference/events/) being rescheduled: the event's own availability and team availability name are applied (unless `availability_id` / `team_availability_name` are sent), so the slots match the rules used when it was booked. This parameter requires the request to be additionally authenticated as a participant of that event; with an API key alone the answer is `401`. |
 
 ## Endpoints
 
@@ -453,6 +453,6 @@ curl "https://api.vyte.in/v2/slots/next?team=5f1e9b2a8c4d3e0012345678&duration=3
 - **`nextAvailability` is not always present** on empty results: it is omitted when no slot exists in the following 120 days, when `noNextAvailability` is sent, when a user is unknown, and for a team without members. On `/v2/slots/next`, test `nextAvailability.availableSlot` rather than the mere presence of `nextAvailability`.
 - **Always send `timezone`** when targeting `users` / `emails`: otherwise the response has no `timezone` field and the days are interpreted in the availability's timezone.
 - **Several teams separated by commas means everyone-at-once**, not "any of these teams". To offer the slots of any member of several teams, call the endpoint once per team and merge on your side.
-- **Slots are not reserved**: a slot can be taken between the listing and the booking. The booking endpoints of [Events](./events.md) check the slot again.
+- **Slots are not reserved**: a slot can be taken between the listing and the booking. The booking endpoints of [Events](/reference/events/) check the slot again.
 - **Slot start times** depend on each person's free ranges (slots are cut from the start of each free range), so two members of the same team may offer slots on different minute offsets.
 - Results are computed live from connected calendars; response time grows with the number of people and the length of the range. Prefer short ranges and `noNextAvailability=true` when you do not need the fallback.

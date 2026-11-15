@@ -7,9 +7,9 @@
 :::::panel
 
 :::: left
-An **availability** is a set of rules describing *when a user can be booked*: weekly opening hours (`days`), optional date ranges (`dates`), a timezone, buffers around meetings, minimum notice and booking horizon, and a few slot-generation settings. Vyte combines these rules with the busy times of the user's connected calendars to compute bookable slots (see [Slots](./slots.md)). An availability belongs to a [user](./users.md) (`belongs_to`) or, more rarely, only to the organization. [Appointment types](./appointment-types.md) reference an availability by id through their `availability` field, and the batch endpoints of this page update the availabilities of all the appointment types sharing the same handle across a [team](./teams.md) or the whole organization.
+An **availability** is a set of rules describing *when a user can be booked*: weekly opening hours (`days`), optional date ranges (`dates`), a timezone, buffers around meetings, minimum notice and booking horizon, and a few slot-generation settings. Vyte combines these rules with the busy times of the user's connected calendars to compute bookable slots (see [Slots](/reference/slots/)). An availability belongs to a [user](/reference/users/) (`belongs_to`) or, more rarely, only to the organization. [Appointment types](/reference/appointment-types/) reference an availability by id through their `availability` field, and the batch endpoints of this page update the availabilities of all the appointment types sharing the same handle across a [team](/reference/teams/) or the whole organization.
 
-General rules (authentication, key scopes, error format, dates, timezones) are described in [Conventions](./README.md).
+General rules (authentication, key scopes, error format, dates, timezones) are described in [Conventions](/reference/).
 
 ::::
 
@@ -48,25 +48,25 @@ A user can own several availabilities. They are told apart by the `secondary` fi
 |---|---|---|
 | `secondary` value | absent (or `false`) | `true` |
 | How many per user | One. The endpoints without an `:availability_id` always address it. | Any number. |
-| Created by | `POST` or `PUT /v2/users/:user_id/availabilities` (created if missing). Also created automatically by Vyte when the availabilities module of the user is switched on (see [Users](./users.md)) or when an appointment type is created for a user who has none. | `POST /v2/users/:user_id/availabilities/secondary`. Also created automatically as a copy of the primary one when an appointment type is created without an explicit `availability` (see [Appointment types](./appointment-types.md)). |
+| Created by | `POST` or `PUT /v2/users/:user_id/availabilities` (created if missing). Also created automatically by Vyte when the availabilities module of the user is switched on (see [Users](/reference/users/)) or when an appointment type is created for a user who has none. | `POST /v2/users/:user_id/availabilities/secondary`. Also created automatically as a copy of the primary one when an appointment type is created without an explicit `availability` (see [Appointment types](/reference/appointment-types/)). |
 | Addressed by | `/v2/users/:user_id/availabilities` or `/v2/users/:user_id/availabilities/:availability_id` | `/v2/users/:user_id/availabilities/:availability_id` only |
 | Used for | The user's general bookability: bookings that are not tied to a specific availability, and the user's own constraints when the user is booked as a member of a team. | The specific rules of the appointment type(s) that reference it. |
 
 The `secondary` flag is fixed at creation: it cannot be changed by any endpoint.
 
-The primary availability is only taken into account when the user's `modules.availabilities` flag is `true` (see [Users](./users.md)). Creating the primary availability through `POST` or `PUT /v2/users/:user_id/availabilities` switches this flag on automatically. Updating or deleting an availability never changes the flag.
+The primary availability is only taken into account when the user's `modules.availabilities` flag is `true` (see [Users](/reference/users/)). Creating the primary availability through `POST` or `PUT /v2/users/:user_id/availabilities` switches this flag on automatically. Updating or deleting an availability never changes the flag.
 
 When Vyte creates a primary availability automatically, its content is: `timezone` = the user's timezone (or the platform default), Monday to Friday enabled with one slot `11:00`-`21:00` each, Saturday and Sunday disabled, `buffer_disable_at_edges: true`, `buffer_appointments_only: true`, and the defaults listed in the object table for every other field.
 
 ### How appointment types use an availability
 
-An appointment type holds the id of one availability in its `availability` field (see [Appointment types](./appointment-types.md)).
+An appointment type holds the id of one availability in its `availability` field (see [Appointment types](/reference/appointment-types/)).
 
 - The referenced availability must exist and must be owned (`belongs_to`) by a user reachable by the API key. Otherwise the appointment type request is rejected.
 - Several appointment types may reference the same availability. They then share its rules, and its `max_parallel_events` capacity.
 - If an appointment type is created without `availability`, Vyte gives it its own new secondary availability, copied from the primary availability of the booking page owner.
 - When slots are computed for an appointment type of a **single user**, only the appointment type's availability is applied (the user's primary availability is not).
-- When slots are computed for a **team** or for **several users**, each member's primary availability is applied *and* the appointment type's availability is applied on top as a common constraint (a slot must satisfy both). The buffers used are the largest of the values involved. A team appointment type may also designate, by `name`, which availability of each member to use instead of the primary one (see `team_availability_name` in [Appointment types](./appointment-types.md)); members who have no availability with that name fall back to their primary one.
+- When slots are computed for a **team** or for **several users**, each member's primary availability is applied *and* the appointment type's availability is applied on top as a common constraint (a slot must satisfy both). The buffers used are the largest of the values involved. A team appointment type may also designate, by `name`, which availability of each member to use instead of the primary one (see `team_availability_name` in [Appointment types](/reference/appointment-types/)); members who have no availability with that name fall back to their primary one.
 
 ### Organization-level availabilities
 
@@ -494,7 +494,7 @@ OK
 
 `POST /v2/users/:user_id/availabilities/secondary`
 
-Always creates a new availability owned by `:user_id` with `secondary: true`. The primary availability of the user is not modified and the user's `modules.availabilities` flag is not changed. The returned `_id` is what you put in the `availability` field of an [appointment type](./appointment-types.md). Keep it: there is no endpoint listing the secondary availabilities of a user (see [Notes and caveats](#notes-and-caveats)).
+Always creates a new availability owned by `:user_id` with `secondary: true`. The primary availability of the user is not modified and the user's `modules.availabilities` flag is not changed. The returned `_id` is what you put in the `availability` field of an [appointment type](/reference/appointment-types/). Keep it: there is no endpoint listing the secondary availabilities of a user (see [Notes and caveats](#notes-and-caveats)).
 
 **Key scope:** organization, team, user
 
@@ -740,7 +740,7 @@ curl -X PUT 'https://api.vyte.in/v2/users/5f1e9b2a8c4d3e00123456aa/availabilitie
 
 `DELETE /v2/users/:user_id/availabilities/:availability_id`
 
-Deletes the availability with that id if it is owned by `:user_id` (primary or secondary). The call succeeds even when nothing matches. Appointment types referencing the availability are **not** checked nor updated: point them to another availability first (see [Appointment types](./appointment-types.md)).
+Deletes the availability with that id if it is owned by `:user_id` (primary or secondary). The call succeeds even when nothing matches. Appointment types referencing the availability are **not** checked nor updated: point them to another availability first (see [Appointment types](/reference/appointment-types/)).
 
 **Key scope:** organization, team, user
 
@@ -1358,7 +1358,7 @@ curl -X POST 'https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e00123456ee/availabiliti
 ## Notes and caveats
 
 - **Singular resource behind a plural path.** `GET /v2/users/:user_id/availabilities` returns one object (the primary availability), not an array. Only `GET /v2/availabilities` returns an array.
-- **No listing of a user's secondary availabilities.** Keep the `_id` returned by `POST /v2/users/:user_id/availabilities/secondary`, or read the `availability` field of the user's [appointment types](./appointment-types.md).
+- **No listing of a user's secondary availabilities.** Keep the `_id` returned by `POST /v2/users/:user_id/availabilities/secondary`, or read the `availability` field of the user's [appointment types](/reference/appointment-types/).
 - **`POST` on the user path is an upsert answering `200`.** `POST /v2/users/:user_id/availabilities` and `PUT /v2/users/:user_id/availabilities` are the same operation; neither answers `201`. Only `POST /v2/users/:user_id/availabilities/secondary` and `POST /v2/availabilities` answer `201`. Calling the upsert twice never creates a second primary availability.
 - **`POST .../secondary` is not idempotent.** Each call creates a new secondary availability.
 - **`DELETE` returns a plain-text `OK`**, with status `200` even when nothing was deleted. It is safe to repeat.
@@ -1371,6 +1371,6 @@ curl -X POST 'https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e00123456ee/availabiliti
 - **Validation failures are answered `500`**, not `400`, on the single-availability endpoints and inside the batch endpoints (invalid slot, invalid or overlapping date ranges, wrong value type, unknown `travel_time_mode`).
 - **Malformed ids are answered `500`**, not `404`.
 - **Timestamps are `createdAt` / `updatedAt`** (camelCase) on this resource.
-- **The primary availability needs the user's availabilities module.** It is ignored while the user's `modules.availabilities` is `false`. The upsert endpoint switches the module on only when it creates the availability; if the module was switched off afterwards, switch it back on through the [Users](./users.md) API.
+- **The primary availability needs the user's availabilities module.** It is ignored while the user's `modules.availabilities` is `false`. The upsert endpoint switches the module on only when it creates the availability; if the module was switched off afterwards, switch it back on through the [Users](/reference/users/) API.
 - **Batch updates are not atomic.** Availabilities are updated one after the other; on a `500` some may already be updated. Re-sending the same request is safe.
 - **Batch endpoints may create availabilities** (for selected appointment types that had none) even when the request finally answers `404`.

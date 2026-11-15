@@ -9,7 +9,7 @@
 :::: left
 We provide a full [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer) to allow developers to integrate Vyte into their application: provision the users and teams of an organization, configure their availability and booking pages, compute free slots, create and manage bookings, and be notified of changes through webhooks.
 
-Each page of this reference covers one resource: the object model first, then every endpoint with its parameters, responses, errors and an example. The rules on this page (authentication, API key scopes, formats) apply to every endpoint and are not repeated in the resource pages. Errors are described in [Errors](./errors.md), and [Endpoint index](./endpoints.md) lists every endpoint with the key scopes it accepts.
+Each page of this reference covers one resource: the object model first, then every endpoint with its parameters, responses, errors and an example. The rules on this page (authentication, API key scopes, formats) apply to every endpoint and are not repeated in the resource pages. Errors are described in [Errors](/reference/errors/), and [Endpoint index](/reference/endpoints/) lists every endpoint with the key scopes it accepts.
 
 ::: warning
 The V2 of the API is in beta mode. Feel free to contact us via <intercom-button /> or via email at [support@vyte.in](mailto:support@vyte.in) if you find a problem or have any suggestions.
@@ -46,18 +46,18 @@ curl 'https://api.vyte.in/v2/slots?duration=30&users=USER_ID&from=2026-11-20&to=
 
 | Concept | Meaning | Reference |
 |---|---|---|
-| Organization | The account of a company on Vyte. An API key belongs to one organization and only reaches its data. | [Conventions](./README.md) |
-| User | A person of the organization who can be booked and who owns calendars, availabilities and booking pages. | [Users](./users.md) |
-| Team | A group of users of the organization. A team can have its own booking page where a booking is assigned to one of its members. | [Teams](./teams.md) |
-| Availability | The weekly opening hours and booking rules of a user (when they accept to be booked). | [Availabilities](./availabilities.md) |
-| Calendars | The external calendars (Google, Microsoft, ...) connected by a user. Their events make the user busy, and bookings are written to them. | [Calendars](./calendars.md) |
-| Booking page ("Vyteme") | A public page, identified by a `nickname`, where visitors book a user or a team. | [Booking pages](./vytemes.md) |
-| Appointment type | A kind of meeting offered on a booking page (duration, place, questions, rules), identified by a `handle`. | [Appointment types](./appointment-types.md) |
-| Slot | A period during which the requested user(s) or team are free and bookable. | [Slots](./slots.md) |
-| Event | A meeting: either a booking made through a booking page, or a group-scheduling poll. | [Events](./events.md) |
+| Organization | The account of a company on Vyte. An API key belongs to one organization and only reaches its data. | [Conventions](/reference/) |
+| User | A person of the organization who can be booked and who owns calendars, availabilities and booking pages. | [Users](/reference/users/) |
+| Team | A group of users of the organization. A team can have its own booking page where a booking is assigned to one of its members. | [Teams](/reference/teams/) |
+| Availability | The weekly opening hours and booking rules of a user (when they accept to be booked). | [Availabilities](/reference/availabilities/) |
+| Calendars | The external calendars (Google, Microsoft, ...) connected by a user. Their events make the user busy, and bookings are written to them. | [Calendars](/reference/calendars/) |
+| Booking page ("Vyteme") | A public page, identified by a `nickname`, where visitors book a user or a team. | [Booking pages](/reference/vytemes/) |
+| Appointment type | A kind of meeting offered on a booking page (duration, place, questions, rules), identified by a `handle`. | [Appointment types](/reference/appointment-types/) |
+| Slot | A period during which the requested user(s) or team are free and bookable. | [Slots](/reference/slots/) |
+| Event | A meeting: either a booking made through a booking page, or a group-scheduling poll. | [Events](/reference/events/) |
 | Form template / Form | The questions asked when booking / the answers given for one event. | Form templates, Forms |
-| Locator / Location | A "find a place near me" page listing the physical locations of an organization, each leading to a booking page. | [Locators](./locators.md), [Locations](./locations.md) |
-| Webhook | An HTTPS callback fired by Vyte when something happens (event created, confirmed, cancelled, ...). | [Webhooks](./webhooks.md) |
+| Locator / Location | A "find a place near me" page listing the physical locations of an organization, each leading to a booking page. | [Locators](/reference/locators/), [Locations](/reference/locations/) |
+| Webhook | An HTTPS callback fired by Vyte when something happens (event created, confirmed, cancelled, ...). | [Webhooks](/reference/webhooks/) |
 
 See also [Vyteme or not Vyteme ?](#vyteme-or-not-vyteme) below for the two kinds of events.
 
@@ -65,24 +65,24 @@ See also [Vyteme or not Vyteme ?](#vyteme-or-not-vyteme) below for the two kinds
 
 **Provision an organization**
 
-1. Create users: [`POST /v2/users`](./users.md) or the batch variant.
-2. Group them: [`POST /v2/teams`](./teams.md), then add members.
-3. Set opening hours: [Availabilities](./availabilities.md).
-4. Configure what can be booked: [Booking pages](./vytemes.md) and
-   [Appointment types](./appointment-types.md).
+1. Create users: [`POST /v2/users`](/reference/users/) or the batch variant.
+2. Group them: [`POST /v2/teams`](/reference/teams/), then add members.
+3. Set opening hours: [Availabilities](/reference/availabilities/).
+4. Configure what can be booked: [Booking pages](/reference/vytemes/) and
+   [Appointment types](/reference/appointment-types/).
 
 **Book a meeting from your own interface**
 
-1. Fetch free slots: [`GET /v2/slots`](./slots.md) for a user, several users or a team.
-2. Create the booking: [`POST /v2/events`](./events.md) (one user) or
-   [`POST /v2/teams/:team_id/events`](./events.md) (a team member is assigned).
-3. Follow changes with [Webhooks](./webhooks.md); reschedule or cancel through
-   [Events](./events.md).
+1. Fetch free slots: [`GET /v2/slots`](/reference/slots/) for a user, several users or a team.
+2. Create the booking: [`POST /v2/events`](/reference/events/) (one user) or
+   [`POST /v2/teams/:team_id/events`](/reference/events/) (a team member is assigned).
+3. Follow changes with [Webhooks](/reference/webhooks/); reschedule or cancel through
+   [Events](/reference/events/).
 
 **Keep your system in sync**
 
-Register [Webhooks](./webhooks.md) for event creation, confirmation, update and cancellation
-instead of polling [`GET /v2/events`](./events.md).
+Register [Webhooks](/reference/webhooks/) for event creation, confirmation, update and cancellation
+instead of polling [`GET /v2/events`](/reference/events/).
 
 ## Base URL and versioning
 
@@ -93,7 +93,7 @@ https://api.vyte.in/v2
 - All endpoints documented here are served under the `/v2` prefix, over HTTPS only.
 - The only exception is the browser redirect used to connect a Webex or Zoom account, which is
   not under `/v2` and is authenticated with a user token; see
-  [Video conferencing](./video-conferencing.md).
+  [Video conferencing](/reference/video-conferencing/).
 - Paths are case sensitive. Do not add a trailing slash.
 
 ## Authentication
@@ -270,7 +270,7 @@ Most resources carry two read-only fields maintained by Vyte. Note the camelCase
 |---|---|---|
 | Instant (date and time) | ISO 8601 with a UTC designator or an offset. Responses use UTC with milliseconds. | `2026-11-20T14:30:00.000Z`, `2026-11-20T15:30:00+01:00` |
 | Calendar day (date only, as used by `from` / `to` query parameters) | `YYYY-MM-DD`, interpreted in the time zone given by the `timezone` parameter of the same request | `2026-11-20` |
-| Time of day (weekly availability slots) | Documented per resource; see [Availabilities](./availabilities.md) | |
+| Time of day (weekly availability slots) | Documented per resource; see [Availabilities](/reference/availabilities/) | |
 | Duration | Integer number of **minutes**, unless stated otherwise | `30` |
 | Time zone | IANA time zone name | `Europe/Paris`, `America/New_York`, `UTC` |
 
@@ -305,9 +305,9 @@ whole collection.
 ## Fair use
 
 Keep request rates reasonable: run batch jobs sequentially or with low concurrency, prefer the
-batch endpoints ([Users](./users.md), [Teams](./teams.md), [Availabilities](./availabilities.md),
-[Appointment types](./appointment-types.md)) to loops of single calls, and use
-[Webhooks](./webhooks.md) rather than polling to follow events.
+batch endpoints ([Users](/reference/users/), [Teams](/reference/teams/), [Availabilities](/reference/availabilities/),
+[Appointment types](/reference/appointment-types/)) to loops of single calls, and use
+[Webhooks](/reference/webhooks/) rather than polling to follow events.
 
 ## Cross-origin requests
 

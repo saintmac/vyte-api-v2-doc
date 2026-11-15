@@ -1,6 +1,6 @@
 # Create and manage booking pages
 
-You should now be able to access the API with your API key, but if you aren't, read our [Get started guide](../guides/getting-started.md).
+You should now be able to access the API with your API key, but if you aren't, read our [Get started guide](/guides/getting-started/).
 
 Let's see how you can use Vyte API to automate your scheduling workflow.
 
@@ -141,7 +141,7 @@ We have created our first user with Vyte API :clap:
 
 Now that our user is created, we will go further and create his Vyte Page. To sum up, we will use the API to create the Vyte Page as we would do directly on the [Vyte dashboard](https://www.vyte.in/pages?lang=en).
 
-To create and set up the Vyte Page, we will first set our user's availabilities thanks to the [Availabilities API](../reference/availabilities.md). Then, we will create his Vyte Page with the [Vyteme API](../reference/vytemes.md).
+To create and set up the Vyte Page, we will first set our user's availabilities thanks to the [Availabilities API](/reference/availabilities/). Then, we will create his Vyte Page with the [Vyteme API](/reference/vytemes/).
 
 ### Set up availabilities
 
@@ -516,7 +516,7 @@ Id of the place in your own database/source.
 </attribute>
 </attributes>
 
-With all these information, we can perform this example request to set up our first Vyte Page. If you need more information, have a look at the [Vyteme reference](../reference/vytemes.md).
+With all these information, we can perform this example request to set up our first Vyte Page. If you need more information, have a look at the [Vyteme reference](/reference/vytemes/).
 
 ::: warning
 Remember that the namespace for the Vyte Page nickname is global. So, in the following request, please replace the nickname with a new one.

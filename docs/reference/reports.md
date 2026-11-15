@@ -9,15 +9,15 @@
 :::: left
 Reports are read-only CSV exports of the activity and configuration of an organization: the
 events booked with its users, the bookable slots of its users for the coming week, the
-availability settings of its users, the composition of its [teams](./teams.md) and the
+availability settings of its users, the composition of its [teams](/reference/teams/) and the
 appointment types of its teams. They are meant to be opened in a spreadsheet or loaded into a
 BI tool. Every report exists in two variants: an organization-wide path (`/v2/reports/...`) and
 a team path (`/v2/teams/:team_id/reports/...`).
 
 Authentication, key scopes, error format and languages are described in
-[conventions.md](./README.md). Related resources: [Users](./users.md), [Teams](./teams.md),
-[Events](./events.md), [Availabilities](./availabilities.md),
-[Appointment types](./appointment-types.md), [Booking pages](./vytemes.md).
+[conventions.md](/reference/). Related resources: [Users](/reference/users/), [Teams](/reference/teams/),
+[Events](/reference/events/), [Availabilities](/reference/availabilities/),
+[Appointment types](/reference/appointment-types/), [Booking pages](/reference/vytemes/).
 
 ::::
 
@@ -192,7 +192,7 @@ Meaning of each column:
 
 Metadata columns: after the columns of the layout, the file has one extra column per distinct
 metadata key found on the events of the date range (see event `metadata` in
-[Events](./events.md)). The header of such a column is the metadata key itself (a few keys have a
+[Events](/reference/events/)). The header of such a column is the metadata key itself (a few keys have a
 predefined human-readable header) and the cell is the value for that event, empty when the event
 does not carry the key. The set and order of these columns therefore changes from one export to
 another: always locate columns by header, never by position. With the `b2b` layout, a metadata
@@ -227,7 +227,7 @@ HTTP/1.1 200 OK
 Content-Type: text/csv
 ```
 
-```csv
+```
 #;Booking Date;Booking time;Place;Appointment Date;Appointment Time;Timezone;Appointment Type ID;Appointment Type Name;Team ID;Team Name;Name;Email;Phone;Confirmed;Cancelled;Cancelled by;Cancellation date;Cancellation time;Cancellation reason;customer_ref
 1;2026-04-02;09:14;Paris office;2026-04-09;14:00;Europe/Paris;5f1e9b2a8c4d3e0012345678;Discovery call;5f1e9b2a8c4d3e00123456aa;Sales;Jane Doe;jane.doe@example.com;+33100000000;yes;;;;;;A-1042
 2;2026-04-03;16:40;;2026-04-10;10:30;Europe/Paris;5f1e9b2a8c4d3e0012345678;Discovery call;;;John Smith;john.smith@example.com;;yes;yes;External;2026-04-05;08:12;No longer available;
@@ -244,7 +244,7 @@ one column per day of the week. The slots are derived from the availability sett
 opening hours that apply to each date (weekly hours and date-specific ranges) are cut into
 consecutive slots of the booking duration, taking the buffers configured on the availability
 into account. Calendar events, existing bookings, minimum notice and other booking rules are
-**not** taken into account: for real free slots use [Slots](./slots.md).
+**not** taken into account: for real free slots use [Slots](/reference/slots/).
 
 Without `at`, the report uses the default availability of each user and the duration of the
 user's booking page (60 minutes when the page defines none). With `at`, it uses the own
@@ -332,7 +332,7 @@ curl -H "Authorization: YOUR_API_KEY" \
 
 Response generated on Wednesday 15 April 2026 (cells shortened to two slots for readability):
 
-```csv
+```
 Compte;Email;Lien Vyte;Lundi;Mardi;Mercredi;Jeudi;Vendredi;Samedi;Dimanche
  ; ; ;20/04;21/04;15/04;16/04;17/04;18/04;19/04
 Jane Doe;jane.doe@example.com;https://acme.vyte.in/jane-doe/discovery-call;"09:00 - 10:00;
@@ -386,7 +386,7 @@ key), every character other than `a-z`, `A-Z`, `0-9`, `_` and `-` being replaced
 | # | Header (`en`) | Header (`fr`) | Format | Meaning |
 | --- | --- | --- | --- | --- |
 | 1 | `ID` | `ID` | id | Id of the user. |
-| 2 | `External ID` | `ID externe` | text | External id of the user in the organization (see [Users](./users.md)). Empty when none. |
+| 2 | `External ID` | `ID externe` | text | External id of the user in the organization (see [Users](/reference/users/)). Empty when none. |
 | 3 | `First name` | `Prénom` | text | First name of the user. |
 | 4 | `Last name` | `Nom` | text | Last name of the user. |
 | 5 | `Email` | `Email` | email | First email address of the user. |
@@ -424,7 +424,7 @@ curl -H "Authorization: YOUR_API_KEY" \
   "https://api.vyte.in/v2/reports/availability-settings?lang=en"
 ```
 
-```csv
+```
 ID;External ID;First name;Last name;Email;Availability;Timezone;Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday;Working days;Same hours every working day;Start step (min);Starts on the hour;Has date-specific overrides
 5f1e9b2a8c4d3e0012345601;EMP-001;Jane;Doe;jane.doe@example.com;Default;Europe/Paris;"09:00 - 12:00
 14:00 - 18:00";"09:00 - 12:00
@@ -482,7 +482,7 @@ File name: `team_members_<name>_export.csv` where `<name>` is the team name on t
 | # | Header (`en`) | Header (`fr`) | Format | Meaning |
 | --- | --- | --- | --- | --- |
 | 1 | `Team ID` | `ID de l'équipe` | id | Id of the team. |
-| 2 | `Team external ID` | `ID externe de l'équipe` | text | External id of the team (see [Teams](./teams.md)). Empty when none. |
+| 2 | `Team external ID` | `ID externe de l'équipe` | text | External id of the team (see [Teams](/reference/teams/)). Empty when none. |
 | 3 | `Team name` | `Nom de l'équipe` | text | Name of the team. |
 | 4 | `ID` | `ID` | id | Id of the user. |
 | 5 | `External ID` | `ID externe` | text | External id of the user in the organization. Empty when none. |
@@ -514,7 +514,7 @@ curl -H "Authorization: YOUR_API_KEY" \
   "https://api.vyte.in/v2/reports/team-members"
 ```
 
-```csv
+```
 Team ID;Team external ID;Team name;ID;External ID;First name;Last name;Email;Role in team;Organization admin
 5f1e9b2a8c4d3e00123456aa;AG-PARIS;Paris agency;5f1e9b2a8c4d3e0012345601;EMP-001;Jane;Doe;jane.doe@example.com;Admin;Yes
 5f1e9b2a8c4d3e00123456aa;AG-PARIS;Paris agency;5f1e9b2a8c4d3e0012345602;;John;Smith;john.smith@example.com;Member;No
@@ -610,7 +610,7 @@ curl -H "Authorization: YOUR_API_KEY" \
   "https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e00123456aa/reports/team-appointment-types?subdomain=acme"
 ```
 
-```csv
+```
 Team ID;Team name;Appointment type ID;Appointment type name;Appointment type URL;Active;Private;Team availability name;Timezone;Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday;Working days;Same hours every working day;Start step (min);Starts on the hour;Has date-specific overrides
 5f1e9b2a8c4d3e00123456aa;Paris agency;5f1e9b2a8c4d3e0012345678;Discovery call;https://acme.vyte.in/paris-agency/discovery-call;Yes;No;;Europe/Paris;09:00 - 17:00;09:00 - 17:00;09:00 - 17:00;09:00 - 17:00;09:00 - 17:00;;;Mon, Tue, Wed, Thu, Fri;Yes;60;Yes;No
 5f1e9b2a8c4d3e00123456aa;Paris agency;5f1e9b2a8c4d3e0012345679;Showroom visit;https://acme.vyte.in/paris-agency/showroom-visit;No;Yes;Showroom;;;;;;;;;;;;;

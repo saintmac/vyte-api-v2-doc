@@ -9,8 +9,8 @@
 :::: left
 A webhook is a subscription that asks Vyte to call one of your HTTPS endpoints (the
 `target_url`) each time a given **action** happens on a resource you have access to: an
-[Event](./events.md) is created, confirmed, updated or cancelled, an invitee answers, a
-[User](./users.md) joins your organization, a [booking page](./vytemes.md) is modified. Webhooks
+[Event](/reference/events/) is created, confirmed, updated or cancelled, an invitee answers, a
+[User](/reference/users/) joins your organization, a [booking page](/reference/vytemes/) is modified. Webhooks
 replace polling: instead of repeatedly reading events, you are notified shortly after each change.
 
 Vocabulary: what most webhook systems call an "event" is called an **action** in Vyte, because
@@ -21,7 +21,7 @@ One webhook subscribes to exactly one action and one target URL. To follow sever
 create one webhook per action (they may share the same `target_url`).
 
 Authentication, key scopes, id and date formats and the general error format are described in
-[Conventions](./README.md).
+[Conventions](/reference/).
 
 ::::
 
@@ -51,7 +51,7 @@ Authentication, key scopes, id and date formats and the general error format are
 | `scope` | string | no | `organization`, `team` or `user`. Set by Vyte from the API key used at creation and from `team_id` (see [Scope of a webhook](#scope-of-a-webhook)). |
 | `organization` | string | no | Id of the organization owning the webhook. Present when `scope` is `organization` or `team`. |
 | `user` | string | no | Id of the user owning the webhook. Present when `scope` is `user`. |
-| `team_id` | string | yes | Id of the [Team](./teams.md) the webhook is restricted to. Sending it makes the webhook a `team` scoped webhook. |
+| `team_id` | string | yes | Id of the [Team](/reference/teams/) the webhook is restricted to. Sending it makes the webhook a `team` scoped webhook. |
 | `team` | string | no | Id of the team of a `team` scoped webhook (same value as `team_id`). |
 | `headers` | object | yes | Custom HTTP headers (name -> string value) that Vyte adds to every call to `target_url`. Use it to authenticate Vyte's calls on your side. `Content-Type` is always forced to `application/json`. Not set by default. |
 | `token` | string | yes | Convenience for bearer authentication: when set, Vyte adds the header `Authorization: Bearer <token>` to `headers`. |
@@ -97,7 +97,7 @@ Complete list of the action names accepted in `action`. Any other value is refus
 
 ### Event actions
 
-For every event action, `resource` in the delivered body is the [Event](./events.md) object.
+For every event action, `resource` in the delivered body is the [Event](/reference/events/) object.
 "Organizer" means the user designated by the event's `created_by` (for a booking made on a
 booking page this is the **booked** user, not the visitor).
 
@@ -106,7 +106,7 @@ booking page this is the **booked** user, not the visitor).
 | `event.created` | An event is created. This covers events created unconfirmed (group scheduling poll, booking awaiting confirmation) and events created already confirmed (typical booking page booking). An event created already confirmed fires both `event.created` and `event.confirmed`. Exception: an event created already confirmed whose `invitees` list has at most one entry fires nothing. | Unconfirmed creation: no `payload`. Confirmed creation: `date` (string, human readable confirmed date, present when a date is confirmed), `place` (string, name of the confirmed place, present when a place is confirmed). |
 | `event.confirmed` | A final date and/or place is set on an event: either an existing event gets confirmed, or the event is created already confirmed (see above). An event confirmed on several dates at once (multi-date confirmation) does not fire this action. | `date` (string, human readable confirmed date, when there is one), `place` (string, name of the confirmed place, when there is one). |
 | `event.updated` | An event that had been confirmed, then edited (which un-confirms it), is confirmed again. Usually the date and/or place changed, without guarantee. `event.confirmed` is delivered as well for the same change. Not fired when the event is in the past. | No `payload`. |
-| `event.cancelled` | An event, confirmed or not, is cancelled (for instance through `POST /v2/events/:event_id/cancel`, see [Events](./events.md)). Cancelling an already cancelled event fires nothing. | No `payload`. |
+| `event.cancelled` | An event, confirmed or not, is cancelled (for instance through `POST /v2/events/:event_id/cancel`, see [Events](/reference/events/)). Cancelling an already cancelled event fires nothing. | No `payload`. |
 | `event.invitees.added` | Invitees are added to an existing event. | `users` (array, references to the users of the added invitees), `inviter` (string, name or email of the invitee who performed the addition, when identified), and when the event is confirmed `date` (string, human readable) and `place` (string, place name). |
 | `event.invitees.voted` | An invitee other than the organizer votes on the proposed dates/places of an event that is **not** confirmed. Not fired when that vote automatically confirms the event (then `event.confirmed` fires). | `voter` (string, full name or email of the voter), `user_id` (string, user id of the voter), `title` (string, event title), `dates[]` (one entry per proposed date: `_id`, `all_day` boolean, `start_date` ISO date-time, `end_date` ISO date-time when the date has an end, `vote` = `"yes"` or `"no"`), `places[]` (one entry per proposed place: `_id`, `name`, `address`, `vote` = `"yes"` or `"no"`). |
 | `event.invitees.attending` | An invitee other than the organizer accepts (answers without declining) an event that **is** confirmed. | `voter`, `user_id`, `title` as above, `start_date` (ISO date-time of the confirmed date) and `end_date` (ISO date-time, when the confirmed date has an end). |
@@ -121,7 +121,7 @@ minutes) produce a single delivery reflecting the final state.
 
 ### User actions
 
-For user actions, `resource` is the [User](./users.md) object concerned (without its calendar
+For user actions, `resource` is the [User](/reference/users/) object concerned (without its calendar
 provider account details).
 
 | Action | Fires when | Content of `payload` |
@@ -133,7 +133,7 @@ provider account details).
 
 | Action | Fires when | Delivered content |
 |---|---|---|
-| `vyteme.updated` | A [booking page](./vytemes.md) of a member of your organization is created or modified. | `resource` is the booking page object; the notification also carries `user`, the [User](./users.md) object owning the page. No `payload`. |
+| `vyteme.updated` | A [booking page](/reference/vytemes/) of a member of your organization is created or modified. | `resource` is the booking page object; the notification also carries `user`, the [User](/reference/users/) object owning the page. No `payload`. |
 
 ## Scope of a webhook
 
@@ -183,14 +183,14 @@ Notification object:
 | Property | Type | Present | Description |
 |---|---|---|---|
 | `action` | string | always | The action of the webhook, for instance `event.cancelled`. |
-| `resource` | object | always | The resource the action happened on: an [Event](./events.md) object for `event.*`, a [User](./users.md) object for `user.*`, a [booking page](./vytemes.md) object for `vyteme.updated`. It is the full resource as it was when Vyte processed the action. It may contain fields that are not part of the documented resource; they are internal, may change without notice and must not be relied upon. |
+| `resource` | object | always | The resource the action happened on: an [Event](/reference/events/) object for `event.*`, a [User](/reference/users/) object for `user.*`, a [booking page](/reference/vytemes/) object for `vyteme.updated`. It is the full resource as it was when Vyte processed the action. It may contain fields that are not part of the documented resource; they are internal, may change without notice and must not be relied upon. |
 | `payload` | object | for some actions | Small action specific summary, see the "Content of `payload`" columns above. Its `date` values are display strings whose format is not guaranteed: read dates from `resource`. |
 | `organization` | string | `organization` and `team` scoped webhooks | Id of the organization owning the webhook. |
 | `team` | string | `team` scoped webhooks | Present for `team` scoped webhooks. It currently carries the id of the **organization**, not the id of the team: do not use it to identify the team (give each team webhook a distinct `target_url` or custom header instead). |
 | `user` | string or object | `user` scoped webhooks; `vyteme.updated` | For a `user` scoped webhook: id of the user owning the webhook. For `vyteme.updated`: the User object owning the booking page. |
 
 Example: default delivery of `event.cancelled` to an `organization` scoped webhook (the
-`resource` is shortened here; see [Events](./events.md) for the full object).
+`resource` is shortened here; see [Events](/reference/events/) for the full object).
 
 ```http
 POST /vyte/hooks?source=vyte HTTP/1.1
@@ -277,7 +277,7 @@ Answer quickly (acknowledge, then process asynchronously on your side).
   The debounced invitee actions listed above are delivered later (in the order of minutes).
 - **No guaranteed retry.** A failed call must be considered lost: do not rely on Vyte calling
   again for the same occurrence. If you must not miss a change, reconcile periodically by
-  reading the resources ([Events](./events.md)).
+  reading the resources ([Events](/reference/events/)).
 - **No ordering guarantee.** Calls for different actions are independent: for an event created
   already confirmed, `event.created` and `event.confirmed` may arrive in any order, as may
   `event.confirmed` and `event.updated`. Use the content of `resource` (and re-read the resource
@@ -418,7 +418,7 @@ de-duplication.
 | `action` | string | yes (unless `event` is sent) | - | Action to subscribe to, see [Actions](#actions). |
 | `event` | string | no | - | Alias of `action`. When present it is used as the action. |
 | `target_url` | string | yes | - | HTTPS URL to call. See the allowed characters in [The Webhook object](#the-webhook-object). |
-| `team_id` | string | no (yes in practice with a `team` scoped key) | - | Id of a [Team](./teams.md). Makes the webhook `team` scoped. With a `team` scoped key it must be one of the key's teams. Send the id of a team of your organization. |
+| `team_id` | string | no (yes in practice with a `team` scoped key) | - | Id of a [Team](/reference/teams/). Makes the webhook `team` scoped. With a `team` scoped key it must be one of the key's teams. Send the id of a team of your organization. |
 | `headers` | object | no | none | Custom headers (name -> string value) added to each call. |
 | `token` | string | no | none | Bearer token; adds `Authorization: Bearer <token>` to `headers`. |
 | `object_root` | boolean | no | `false` | `true` to receive a JSON object instead of an array of one object. |
@@ -537,7 +537,7 @@ object `{}` is enough).
 |---|---|---|---|---|
 | `action` | string | no | unchanged | New action, see [Actions](#actions). |
 | `target_url` | string | no | unchanged | New HTTPS URL. |
-| `team_id` | string | no | unchanged | Id of a [Team](./teams.md) of your organization; the webhook becomes (or stays) `team` scoped on that team. With a `team` scoped key it must be one of the key's teams. |
+| `team_id` | string | no | unchanged | Id of a [Team](/reference/teams/) of your organization; the webhook becomes (or stays) `team` scoped on that team. With a `team` scoped key it must be one of the key's teams. |
 | `headers` | object | no | unchanged | Replaces the whole custom headers object. |
 | `token` | string | no | unchanged | New bearer token; `Authorization: Bearer <token>` is written into `headers`. Removing a token does not remove a previously written `Authorization` header: send `headers` without it to remove it. |
 | `object_root` | boolean | no | unchanged | Body shape, see [The Webhook object](#the-webhook-object). |

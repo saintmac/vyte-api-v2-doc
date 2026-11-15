@@ -7,7 +7,7 @@
 :::::panel
 
 :::: left
-An assistant access lets a trusted third person (for example an executive assistant) manage the Vyte account of a [user](./users.md) without knowing the user's own credentials. The user (or a partner on the user's behalf) defines a dedicated assistant password; the assistant then signs in to the Vyte web application with the user's primary email address and that password, and acts on the user's account. Each user has at most one assistant access. Creating or changing it requires the `assistant` module to be enabled on the user (see `PUT /v2/users/:user_id/modules` in [Users](./users.md)). Authentication, key scopes and error format are described in [Conventions](./README.md).
+An assistant access lets a trusted third person (for example an executive assistant) manage the Vyte account of a [user](/reference/users/) without knowing the user's own credentials. The user (or a partner on the user's behalf) defines a dedicated assistant password; the assistant then signs in to the Vyte web application with the user's primary email address and that password, and acts on the user's account. Each user has at most one assistant access. Creating or changing it requires the `assistant` module to be enabled on the user (see `PUT /v2/users/:user_id/modules` in [Users](/reference/users/)). Authentication, key scopes and error format are described in [Conventions](/reference/).
 
 ::::
 
@@ -31,7 +31,7 @@ The assistant access is never returned by the API: there is no JSON representati
 | --- | --- | --- | --- |
 | `psw` | string | yes (write-only) | The assistant password. Never returned. |
 
-The email address used by the assistant to sign in is the first email address of the user (`emails[0]` of the [User object](./users.md)) at the time of the last `PUT`. It cannot be chosen.
+The email address used by the assistant to sign in is the first email address of the user (`emails[0]` of the [User object](/reference/users/)) at the time of the last `PUT`. It cannot be chosen.
 
 ## Endpoints
 
@@ -94,7 +94,7 @@ OK
 
 Sets the assistant password. If the user has no assistant access yet, it is created (`201`); otherwise its password is replaced (`200`). In both cases the sign-in email of the assistant is set to the user's current first email address, and any assistant session opened with the previous password stops working: the assistant has to sign in again with the new password. No email is sent to the user or to the assistant: transmit the password to the assistant yourself, over a secure channel.
 
-The user must have the `assistant` module enabled, otherwise the request is refused with `403`. Enable it first with `PUT /v2/users/:user_id/modules` (see [Users](./users.md)).
+The user must have the `assistant` module enabled, otherwise the request is refused with `403`. Enable it first with `PUT /v2/users/:user_id/modules` (see [Users](/reference/users/)).
 
 **Key scope:** organization, user (only for the key's own user). Use one of these two scopes; `team` keys are not supported on this endpoint.
 
@@ -151,7 +151,7 @@ Created
 - Neither endpoint returns JSON on success: the body is the plain-text status phrase (`OK`, `Created`). Rely on the status code.
 - `PUT` is an upsert: `201` the first time, `200` afterwards. Every call replaces the password and signs the assistant out, even when the same password is sent again.
 - There is no endpoint to read the password or to delete the assistant access through the API v2.
-- Order of operations for a new user: create the user, enable the `assistant` module ([Users](./users.md)), then call `PUT /v2/users/:user_id/assistant`.
+- Order of operations for a new user: create the user, enable the `assistant` module ([Users](/reference/users/)), then call `PUT /v2/users/:user_id/assistant`.
 - `GET` only reports that an assistant access has been set up. It does not tell whether the `assistant` module is still enabled on the user.
 - The assistant signs in with the user's first email address as it was when `PUT` was last called. If that address changes later, call `PUT` again so that the assistant can sign in with the new address.
 - A `403` on `PUT` has several possible causes (module missing, user outside the organization, wrong key scope) and the response does not say which one: check the user's `modules.assistant` first.

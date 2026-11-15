@@ -1,6 +1,6 @@
 # Set up team booking
 
-Thanks to the API, you are able to group your user by team. The [team API](../reference/teams.md) is really versatile so that you can represent all types of organizational structure, from hierarchical to matrix structure.
+Thanks to the API, you are able to group your user by team. The [team API](/reference/teams/) is really versatile so that you can represent all types of organizational structure, from hierarchical to matrix structure.
 
 Here we will learn how to create and manage our first team. At the end, we will see how to book a team event.
 

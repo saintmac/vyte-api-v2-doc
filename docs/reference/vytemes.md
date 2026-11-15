@@ -7,9 +7,9 @@
 :::::panel
 
 :::: left
-A **Vyteme** is a public booking page: the page on which people outside your organization pick a time slot and book an appointment with one of your [users](./users.md) or with a [team](./teams.md). Every booking page belongs to one user (its owner, `belongs_to`) and is reachable under a globally unique `nickname`. A page carries the texts, display options and booking rules (`custom`) applied to the bookings made on it, and it is the container of [appointment types](./appointment-types.md) (the different kinds of appointments that can be booked on the page, each with its own settings and its own URL). One-off invitation links for a given appointment type are described in Ad hoc booking pages. The time slots offered on a page come from the owner's [availabilities](./availabilities.md).
+A **Vyteme** is a public booking page: the page on which people outside your organization pick a time slot and book an appointment with one of your [users](/reference/users/) or with a [team](/reference/teams/). Every booking page belongs to one user (its owner, `belongs_to`) and is reachable under a globally unique `nickname`. A page carries the texts, display options and booking rules (`custom`) applied to the bookings made on it, and it is the container of [appointment types](/reference/appointment-types/) (the different kinds of appointments that can be booked on the page, each with its own settings and its own URL). One-off invitation links for a given appointment type are described in Ad hoc booking pages. The time slots offered on a page come from the owner's [availabilities](/reference/availabilities/).
 
-Authentication, key scopes, error format, dates and languages are described in [Conventions](./README.md).
+Authentication, key scopes, error format, dates and languages are described in [Conventions](/reference/).
 
 ::::
 
@@ -38,7 +38,7 @@ The path of a booking page on the Vyte web app is derived from its nickname, and
 | Resource | Path | Example |
 |---|---|---|
 | Booking page | `/<nickname>` | `https://www.vyte.in/john-doe-acme` |
-| [Appointment type](./appointment-types.md) of the page | `/<nickname>/<handle>` | `https://www.vyte.in/john-doe-acme/first-meeting` |
+| [Appointment type](/reference/appointment-types/) of the page | `/<nickname>/<handle>` | `https://www.vyte.in/john-doe-acme/first-meeting` |
 
 The API does not return the full URL: build it from these two values. Only pages with `active: true` are served publicly; an inactive page (or an inactive appointment type) answers "not found" to visitors.
 
@@ -47,7 +47,7 @@ The API does not return the full URL: build it from these two values. Only pages
 | Kind | How to recognise it | Slots offered |
 |---|---|---|
 | User page | `team` is not set | The free slots of the owner (`belongs_to`). |
-| Team page | `team` holds the id of a [team](./teams.md) | The free slots of the members of the team. By default a slot is offered when at least one member is free; with `team_all_members: true` a slot is offered only when all members are free at the same time. With `team_select_member: true` the visitor can choose the member to meet. |
+| Team page | `team` holds the id of a [team](/reference/teams/) | The free slots of the members of the team. By default a slot is offered when at least one member is free; with `team_all_members: true` a slot is offered only when all members are free at the same time. With `team_select_member: true` the visitor can choose the member to meet. |
 
 A team page still has an owner (`belongs_to`): the user the page is attached to and whose plan and brand apply.
 
@@ -61,7 +61,7 @@ A user has one **primary** page (`secondary` is not `true`) and may have additio
 
 ### Hub
 
-When `hub` is `true`, the public page displays the list of its active, non-private [appointment types](./appointment-types.md) (titled with `hub_list_title`) and the visitor picks one. Vyte automatically sets `hub` back to `false` when the page is left without any active appointment type (after an appointment type is deleted or deactivated).
+When `hub` is `true`, the public page displays the list of its active, non-private [appointment types](/reference/appointment-types/) (titled with `hub_list_title`) and the visitor picks one. Vyte automatically sets `hub` back to `false` when the page is left without any active appointment type (after an appointment type is deleted or deactivated).
 
 ## The Vyteme object
 
@@ -69,7 +69,7 @@ When `hub` is `true`, the public page displays the list of its active, non-priva
 |---|---|---|---|
 | `_id` | string (id) | no | Identifier of the booking page. |
 | `nickname` | string | yes | Public handle of the page and identifier used in the API paths. Globally unique across Vyte. See [Nickname rules](#nickname-rules). |
-| `belongs_to` | string (id) | create-only | Id of the [user](./users.md) who owns the page. |
+| `belongs_to` | string (id) | create-only | Id of the [user](/reference/users/) who owns the page. |
 | `active` | boolean | yes (update only) | Whether the page is publicly available. Default `true`. |
 | `secondary` | boolean | no | `true` for an additional page of the user. Absent or `false` for the primary page. |
 | `message` | string | yes | Welcome text displayed on the booking page. HTML is sanitized. |
@@ -77,16 +77,16 @@ When `hub` is `true`, the public page displays the list of its active, non-priva
 | `hub` | boolean | yes | Whether the page lists its appointment types. Default `false`. See [Hub](#hub). |
 | `hub_list_title` | string | yes | Title displayed above the list of appointment types of a hub page. HTML is sanitized. |
 | `brand` | string (id) | yes (update only) | Id of the brand (logo, colours) applied to the page. At creation it is set automatically to the owner's active brand or, failing that, to the brand of the owner's organization. Must be a brand of the owner or of the owner's organization. |
-| `team` | string (id) | yes (update only) | Id of the [team](./teams.md) the page books for. Makes the page a team page. |
+| `team` | string (id) | yes (update only) | Id of the [team](/reference/teams/) the page books for. Makes the page a team page. |
 | `team_all_members` | boolean | yes (update only) | Team page: when `true`, a slot is offered only if all members of the team are free at the same time. |
 | `team_select_member` | boolean | yes (update only) | Team page: when `true`, the visitor can select the team member to book. |
 | `team_select_member_title` | string | yes (update only) | Team page: title of the member selector. HTML is sanitized. |
 | `team_select_member_default_option_label` | string | yes (update only) | Team page: label of the default option of the member selector. HTML is sanitized. |
 | `team_select_member_without_preference` | string | yes (update only) | Team page: label of the "no preference" option of the member selector. HTML is sanitized. |
 | `team_select_member_force_selection` | boolean | yes (update only) | Team page: when `true`, the visitor must select a member. Default `false`. |
-| `team_availability_name` | string | yes (update only) | Team page: name of the [availability](./availabilities.md) to use for each team member (the availability of each member carrying this name) instead of their default one. HTML is sanitized. |
+| `team_availability_name` | string | yes (update only) | Team page: name of the [availability](/reference/availabilities/) to use for each team member (the availability of each member carrying this name) instead of their default one. HTML is sanitized. |
 | `custom` | object | yes | Texts, display options and booking rules. See [The `custom` object](#the-custom-object). |
-| `translations` | object | no | Per-language overrides of the texts, keyed by language code, e.g. <code v-pre>{"fr": {"custom": {"phone_placeholder": "Votre numéro"}}}</code>. Returned when present; not writable through the booking page endpoints (it is writable on [appointment types](./appointment-types.md)). |
+| `translations` | object | no | Per-language overrides of the texts, keyed by language code, e.g. <code v-pre>{"fr": {"custom": {"phone_placeholder": "Votre numéro"}}}</code>. Returned when present; not writable through the booking page endpoints (it is writable on [appointment types](/reference/appointment-types/)). |
 | `tag` | string | no | Free label carried by the page. Returned when present. |
 | `version` | number | no | Free version number carried by the page. Returned when present. |
 | `createdAt` | string (date-time) | no | Creation date. Note the camelCase name on this resource. |
@@ -106,7 +106,7 @@ Responses may contain additional fields not listed here; they are internal, may 
 
 ### The `custom` object
 
-`custom` groups the settings applied to the booking page and to the events booked through it. The same object, with the same keys, exists on [appointment types](./appointment-types.md); a new appointment type starts from a copy of the `custom` object of its page.
+`custom` groups the settings applied to the booking page and to the events booked through it. The same object, with the same keys, exists on [appointment types](/reference/appointment-types/); a new appointment type starts from a copy of the `custom` object of its page.
 
 All keys are optional and writable. Unless a default is stated, a key is absent until set. Text values are sanitized (HTML is escaped or stripped).
 
@@ -129,7 +129,7 @@ All keys are optional and writable. Unless a default is stated, a key is absent 
 | Field | Type | Default | Description |
 |---|---|---|---|
 | `custom.set_lang` | boolean | `false` | When `true`, the page is forced to the language `custom.fixed_lang`. Use it if you accept bookings in one language only. |
-| `custom.fixed_lang` | string | none | Language code used when `custom.set_lang` is `true`. See [Languages](./README.md#languages). |
+| `custom.fixed_lang` | string | none | Language code used when `custom.set_lang` is `true`. See [Languages](/reference/#languages). |
 | `custom.langs[]` | array of strings | none | Languages supported by the page, e.g. `["en", "fr"]`. |
 | `custom.set_timezone` | boolean | `false` | When `true`, the page is forced to the time zone `custom.fixed_timezone`, and events booked without a time zone get that one. Use it if bookers are all in your own time zone. |
 | `custom.fixed_timezone` | string | none | IANA time zone name (e.g. `Europe/London`) used when `custom.set_timezone` is `true`. |
@@ -172,7 +172,7 @@ All keys are optional and writable. Unless a default is stated, a key is absent 
 | `custom.title_mandatory` | boolean | none | Make the title field mandatory. |
 | `custom.hide_message_section` | boolean | none | Hide the message field of the booking form. |
 | `custom.form_template_id` | string (id) | none | Id of the form template (custom questions) the booker has to fill in. |
-| `custom.metadata` | object | none | Free key/value pairs copied into the `metadata` of every [event](./events.md) booked on the page (a key already set on the event is kept). |
+| `custom.metadata` | object | none | Free key/value pairs copied into the `metadata` of every [event](/reference/events/) booked on the page (a key already set on the event is kept). |
 
 **Places**
 
@@ -190,8 +190,8 @@ All keys are optional and writable. Unless a default is stated, a key is absent 
 | `custom.forbid_add_places` | boolean | none | Forbid participants to suggest other places. |
 | `custom.auto_set_creator_place` | boolean | none | When `true`, the place of the event is the first `fixed_places` entry of the primary booking page of the event organizer, instead of the first `fixed_places` entry of this page. |
 | `custom.auto_set_invitee_place` | boolean | none | When `true`, for each invitee of the booking that is flagged as a place, the first `fixed_places` entry of that invitee's primary booking page is added to the places of the event. |
-| `custom.locator` | string (id) | none | Id of the [locator](./locators.md) (store/branch finder) the page is listed in. Must belong to the organization of the page owner. When the page is active and has exactly one `fixed_places` entry with an address, Vyte keeps a matching [location](./locations.md) in that locator. |
-| `custom.location` | string (id) | none | Read-only. Id of the [location](./locations.md) maintained by Vyte for this page in `custom.locator`. |
+| `custom.locator` | string (id) | none | Id of the [locator](/reference/locators/) (store/branch finder) the page is listed in. Must belong to the organization of the page owner. When the page is active and has exactly one `fixed_places` entry with an address, Vyte keeps a matching [location](/reference/locations/) in that locator. |
+| `custom.location` | string (id) | none | Read-only. Id of the [location](/reference/locations/) maintained by Vyte for this page in `custom.locator`. |
 
 **Event page options** (applied to the events booked on the page)
 
@@ -318,7 +318,7 @@ All keys are optional and writable. Unless a default is stated, a key is absent 
 | `GET` | `/v2/users/:user_id/vyteme` | Retrieve the primary booking page of a user | organization, team, user |
 | `GET` | `/v2/users/:user_id/vytemes` | List all booking pages of a user | organization, team, user |
 
-For every endpoint, the pages that a key can reach are the pages owned by the users the key can reach: all members of the organization for an `organization` key, the members of the key's teams for a `team` key, the key's own user for a `user` key (see [API key scopes](./README.md#api-key-scopes)). A page owned by any other user is treated as not found (`404`) or forbidden (`403`), as detailed per endpoint.
+For every endpoint, the pages that a key can reach are the pages owned by the users the key can reach: all members of the organization for an `organization` key, the members of the key's teams for a `team` key, the key's own user for a `user` key (see [API key scopes](/reference/#api-key-scopes)). A page owned by any other user is treated as not found (`404`) or forbidden (`403`), as detailed per endpoint.
 
 ### Create a booking page
 
@@ -333,7 +333,7 @@ Business rules:
 - The brand of the new page is set automatically (owner's active brand, else the brand of the owner's organization).
 - Sending `custom` turns on the advanced booking page customization feature for the owner. It requires a plan that includes that feature, otherwise the request is refused with `403`.
 - The response has **no JSON body**. Retrieve the page with `GET /v2/vytemes/:nickname` to read it.
-- A `vyteme_updated` [webhook](./webhooks.md) is sent to the organization(s) of the owner.
+- A `vyteme_updated` [webhook](/reference/webhooks/) is sent to the organization(s) of the owner.
 
 **Key scope:** organization, team, user. `belongs_to` must be a user the key can reach.
 
@@ -502,7 +502,7 @@ To avoid clearing fields unintentionally, read the page first and send back the 
 Side effects:
 
 - Sending `custom` turns on the advanced booking page customization feature for the owner; sending `active` turns the booking page feature of the owner on or off accordingly (which also applies the same `active` value to the owner's primary page). Both require a plan that includes the feature, otherwise the request is refused with `403`.
-- A `vyteme_updated` [webhook](./webhooks.md) is sent to the organization(s) of the owner.
+- A `vyteme_updated` [webhook](/reference/webhooks/) is sent to the organization(s) of the owner.
 - The response has **no JSON body**.
 
 **Key scope:** organization, team, user. The page must be owned by a user the key can reach.
@@ -583,7 +583,7 @@ OK
 
 Permanently deletes the booking page. Its public URL stops working immediately.
 
-The [appointment types](./appointment-types.md) of the page are **not** deleted by this call. Delete them first with `DELETE /v2/vytemes/:nickname/types/:handle`: once the page is gone they can no longer be reached through the API. Events already booked are not affected.
+The [appointment types](/reference/appointment-types/) of the page are **not** deleted by this call. Delete them first with `DELETE /v2/vytemes/:nickname/types/:handle`: once the page is gone they can no longer be reached through the API. Events already booked are not affected.
 
 **Key scope:** organization, team, user. The page must be owned by a user the key can reach.
 
@@ -642,7 +642,7 @@ The `nickname` field is omitted from the response when the page was generated au
 
 | Name | Type | Description |
 |---|---|---|
-| `user_id` | string (id) | Id of the [user](./users.md). |
+| `user_id` | string (id) | Id of the [user](/reference/users/). |
 
 **Query parameters**
 
@@ -715,7 +715,7 @@ Returns all booking pages owned by the user: the primary page and the additional
 
 | Name | Type | Description |
 |---|---|---|
-| `user_id` | string (id) | Id of the [user](./users.md). |
+| `user_id` | string (id) | Id of the [user](/reference/users/). |
 
 **Query parameters**
 
@@ -799,4 +799,4 @@ curl --request GET 'https://api.vyte.in/v2/users/5f1e9b2a8c4d3e0012345601/vyteme
 - **Timestamps are `createdAt` / `updatedAt`** (camelCase) on booking pages.
 - **Deleting a page does not delete its appointment types.** Delete them first.
 - **Inactive pages are returned by the API** (all `GET` endpoints) but are not served publicly.
-- New [appointment types](./appointment-types.md) copy the settings of their page at creation time; later changes to the page are not propagated to existing appointment types. To change many appointment types at once, use the [batch update](./appointment-types.md#batch-update-appointment-types).
+- New [appointment types](/reference/appointment-types/) copy the settings of their page at creation time; later changes to the page are not propagated to existing appointment types. To change many appointment types at once, use the [batch update](/reference/appointment-types/#batch-update-appointment-types).

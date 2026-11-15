@@ -7,7 +7,7 @@
 :::::panel
 
 :::: left
-Group Pro is the set of advanced options for group events (events with several invitees, typically polls where invitees vote for dates and places). The Group Pro resource of a [user](./users.md) stores that user's default values for these options: whether invitees may suggest new dates or places or add other invitees, whether the invitee list is hidden, whether email replies go to the organizer, and a default message. Each user has exactly one Group Pro object. The Vyte applications use it to pre-fill the options of a new group event created by the user. The corresponding options of an event are its `settings` (see [Events](./events.md)); the user-level switch that enables the feature is the `group_pro` module (see `PUT /v2/users/:user_id/modules` in [Users](./users.md)). Authentication, key scopes and error format are described in [Conventions](./README.md).
+Group Pro is the set of advanced options for group events (events with several invitees, typically polls where invitees vote for dates and places). The Group Pro resource of a [user](/reference/users/) stores that user's default values for these options: whether invitees may suggest new dates or places or add other invitees, whether the invitee list is hidden, whether email replies go to the organizer, and a default message. Each user has exactly one Group Pro object. The Vyte applications use it to pre-fill the options of a new group event created by the user. The corresponding options of an event are its `settings` (see [Events](/reference/events/)); the user-level switch that enables the feature is the `group_pro` module (see `PUT /v2/users/:user_id/modules` in [Users](/reference/users/)). Authentication, key scopes and error format are described in [Conventions](/reference/).
 
 ::::
 
@@ -28,7 +28,7 @@ Group Pro is the set of advanced options for group events (events with several i
 | Field | Type | Writable | Description |
 | --- | --- | --- | --- |
 | `_id` | string | no | Id of the Group Pro object. Only stable once it has been saved by a first `PUT` (see [Notes and caveats](#notes-and-caveats)). |
-| `belongs_to` | string | no | Id of the [user](./users.md) these defaults belong to. |
+| `belongs_to` | string | no | Id of the [user](/reference/users/) these defaults belong to. |
 | `defaults` | object | yes | The default options. |
 | `defaults.settings` | object | yes | Default event settings. |
 | `defaults.settings.block_new` | object | yes | What invitees are prevented from adding to the user's group events. |
@@ -213,8 +213,8 @@ OK
 
 - `PUT` returns the plain text `OK`, not the saved object.
 - `GET` never creates anything. Until the first `PUT`, the returned `_id` is a placeholder that differs on every call and `createdAt` / `updatedAt` are absent. Do not store that `_id`.
-- These values are defaults for the Vyte applications. They are not applied automatically to events created through the API: when you create an event with the API, pass the wanted options explicitly in the event's `settings` (see [Events](./events.md)).
+- These values are defaults for the Vyte applications. They are not applied automatically to events created through the API: when you create an event with the API, pass the wanted options explicitly in the event's `settings` (see [Events](/reference/events/)).
 - Changing the defaults never changes events that already exist.
-- These endpoints do not check the `group_pro` module of the user: the defaults can be read and written even when the module is disabled. They only take effect for users who have the module (see [Users](./users.md)).
+- These endpoints do not check the `group_pro` module of the user: the defaults can be read and written even when the module is disabled. They only take effect for users who have the module (see [Users](/reference/users/)).
 - `defaults.message` may come back different from what was sent, because HTML is sanitized on save.
 - Wrong value types are answered with `500`, not `400`.

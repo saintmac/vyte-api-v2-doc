@@ -4,13 +4,13 @@
 
 # Endpoint index
 
-Flat list of every endpoint of the Vyte API v2, grouped by resource. The "Key scope" column lists the API key scopes accepted (see [Conventions](./README.md#api-key-scopes)). Follow the resource link for parameters, responses and errors.
+Flat list of every endpoint of the Vyte API v2, grouped by resource. The "Key scope" column lists the API key scopes accepted (see [Conventions](/reference/#api-key-scopes)). Follow the resource link for parameters, responses and errors.
 
 All paths are relative to `https://api.vyte.in`.
 
 ## Authentication
 
-Documented in [Conventions](./README.md).
+Documented in [Conventions](/reference/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -19,7 +19,7 @@ Documented in [Conventions](./README.md).
 
 ## Users
 
-Documented in [Users](./users.md).
+Documented in [Users](/reference/users/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -36,7 +36,7 @@ Documented in [Users](./users.md).
 
 ## User preferences
 
-Documented in [User preferences](./user_preference.md).
+Documented in [User preferences](/reference/user_preference/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -45,7 +45,7 @@ Documented in [User preferences](./user_preference.md).
 
 ## Assistant
 
-Documented in [Assistant](./assistant.md).
+Documented in [Assistant](/reference/assistant/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -54,7 +54,7 @@ Documented in [Assistant](./assistant.md).
 
 ## Group scheduling options
 
-Documented in [Group Pro](./group-pro.md).
+Documented in [Group Pro](/reference/group-pro/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -63,7 +63,7 @@ Documented in [Group Pro](./group-pro.md).
 
 ## Video conferencing
 
-Documented in [Video conferencing (Webex and Zoom)](./video-conferencing.md).
+Documented in [Video conferencing (Webex and Zoom)](/reference/video-conferencing/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -76,7 +76,7 @@ Documented in [Video conferencing (Webex and Zoom)](./video-conferencing.md).
 
 ## Calendars
 
-Documented in [Calendars](./calendars.md).
+Documented in [Calendars](/reference/calendars/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -87,7 +87,7 @@ Documented in [Calendars](./calendars.md).
 
 ## Calendars of interest
 
-Documented in [Calendars of interest](./calendar-of-interests.md).
+Documented in [Calendars of interest](/reference/calendar-of-interests/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -110,7 +110,7 @@ Documented in [Calendars of interest](./calendar-of-interests.md).
 
 ## Availabilities
 
-Documented in [Availabilities](./availabilities.md).
+Documented in [Availabilities](/reference/availabilities/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -132,7 +132,7 @@ Documented in [Availabilities](./availabilities.md).
 
 ## Booking pages (Vytemes)
 
-Documented in [Booking pages (Vytemes)](./vytemes.md).
+Documented in [Booking pages (Vytemes)](/reference/vytemes/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -145,7 +145,7 @@ Documented in [Booking pages (Vytemes)](./vytemes.md).
 
 ## Appointment types
 
-Documented in [Appointment types](./appointment-types.md).
+Documented in [Appointment types](/reference/appointment-types/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -158,7 +158,7 @@ Documented in [Appointment types](./appointment-types.md).
 
 ## Slots
 
-Documented in [Slots](./slots.md).
+Documented in [Slots](/reference/slots/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -170,7 +170,7 @@ Documented in [Slots](./slots.md).
 
 ## Busy times
 
-Documented in [Busy](./busy.md).
+Documented in [Busy](/reference/busy/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -178,7 +178,7 @@ Documented in [Busy](./busy.md).
 
 ## Events
 
-Documented in [Events](./events.md).
+Documented in [Events](/reference/events/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -202,7 +202,7 @@ Documented in [Events](./events.md).
 
 ## Teams
 
-Documented in [Teams](./teams.md).
+Documented in [Teams](/reference/teams/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -222,7 +222,7 @@ Documented in [Teams](./teams.md).
 
 ## Team admin preferences
 
-Documented in [Team admin preferences](./team_admin_preferences.md).
+Documented in [Team admin preferences](/reference/team_admin_preferences/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -232,7 +232,7 @@ Documented in [Team admin preferences](./team_admin_preferences.md).
 
 ## Locators
 
-Documented in [Locators](./locators.md).
+Documented in [Locators](/reference/locators/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -244,7 +244,7 @@ Documented in [Locators](./locators.md).
 
 ## Locations
 
-Documented in [Locations](./locations.md).
+Documented in [Locations](/reference/locations/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -256,7 +256,7 @@ Documented in [Locations](./locations.md).
 
 ## Webhooks
 
-Documented in [Webhooks](./webhooks.md).
+Documented in [Webhooks](/reference/webhooks/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|
@@ -268,7 +268,7 @@ Documented in [Webhooks](./webhooks.md).
 
 ## Reports
 
-Documented in [Reports](./reports.md).
+Documented in [Reports](/reference/reports/).
 
 | Method | Path | Description | Key scope |
 |---|---|---|---|

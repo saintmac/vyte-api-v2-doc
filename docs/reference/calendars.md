@@ -7,9 +7,9 @@
 :::::panel
 
 :::: left
-Every Vyte [user](./users.md) has exactly one **calendar list**. It groups the user's **calendars** (one per connected calendar account: Google, Office 365, Exchange, CalDAV, iCloud, ICS feed, plus the built-in Vyte calendar and any [calendar of interest](./calendar-of-interests.md) added to the user). Each calendar contains **sub-calendars** (the individual agendas of that account, for example "Work" and "Personal"). The calendar list tells Vyte which sub-calendars make the user busy when availability is computed, which ones are displayed, and in which sub-calendar Vyte writes the events it creates. The Calendar events endpoint returns the content of the displayed sub-calendars over a period.
+Every Vyte [user](/reference/users/) has exactly one **calendar list**. It groups the user's **calendars** (one per connected calendar account: Google, Office 365, Exchange, CalDAV, iCloud, ICS feed, plus the built-in Vyte calendar and any [calendar of interest](/reference/calendar-of-interests/) added to the user). Each calendar contains **sub-calendars** (the individual agendas of that account, for example "Work" and "Personal"). The calendar list tells Vyte which sub-calendars make the user busy when availability is computed, which ones are displayed, and in which sub-calendar Vyte writes the events it creates. The Calendar events endpoint returns the content of the displayed sub-calendars over a period.
 
-Authentication, key scopes, error format, dates and timezones are described in [conventions.md](./README.md).
+Authentication, key scopes, error format, dates and timezones are described in [conventions.md](/reference/).
 
 Calendar accounts are connected by the user from Vyte (the provider's own consent / sign-in flow). The endpoints below read and configure calendars that are already connected; they do not connect a new account.
 
@@ -101,7 +101,7 @@ A sub-calendar discovered on an account that already had sub-calendars starts wi
 | `vyte_user_suggestions` | sub-calendar | Sub-calendar of the Vyte calendar (`"My Events OPTIONS"`): the proposed dates of the user's unconfirmed Vyte events. |
 | `vyte_aptype` | sub-calendar | Sub-calendar of the Vyte calendar: the events booked on one of the user's appointment types (`source_id` is the appointment type id). |
 | `vyte_team` | calendar, sub-calendar | Built-in calendar showing the events of the teams the user administers (`source_id` of a sub-calendar is the team id). Display only: `busy` cannot be set. |
-| `vyte_calendar_of_interest` | calendar, sub-calendar | A [calendar of interest](./calendar-of-interests.md) added to the user (`source_id` of the calendar is the calendar of interest id; `source_id` of a sub-calendar is the id of the sub-calendar of interest). Read-only. |
+| `vyte_calendar_of_interest` | calendar, sub-calendar | A [calendar of interest](/reference/calendar-of-interests/) added to the user (`source_id` of the calendar is the calendar of interest id; `source_id` of a sub-calendar is the id of the sub-calendar of interest). Read-only. |
 
 Treat any other value as an external calendar account.
 
@@ -282,7 +282,7 @@ Side effects an integrator must know:
 - If the user has no calendar list yet, it is created by this call (with the built-in Vyte calendar, plus the calendar of the account the user signs in with when there is one).
 - Every call refreshes the list from the calendar providers: sub-calendars are re-read (new ones are added, removed ones disappear, names and colors are updated) and `default_calendar` / `default_suggestions_calendar` are re-validated and re-chosen when they no longer point to a writable sub-calendar. The call can therefore take a few seconds.
 - If a provider reports that access was revoked, the calendar gets `access_broken: true` and the user is notified that the calendar is disconnected. A temporary provider failure leaves the calendar and its sub-calendars unchanged.
-- The sub-calendars of a [calendar of interest](./calendar-of-interests.md) that was just added to the user appear after this refresh.
+- The sub-calendars of a [calendar of interest](/reference/calendar-of-interests/) that was just added to the user appear after this refresh.
 
 **Key scope:** organization, team, user
 

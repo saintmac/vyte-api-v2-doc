@@ -7,12 +7,12 @@
 :::::panel
 
 :::: left
-A team is a named group of [users](./users.md) of your organization. Teams are used to:
+A team is a named group of [users](/reference/users/) of your organization. Teams are used to:
 
-- take **team bookings**: an appointment is booked "with the team" and Vyte assigns it to one of the team's members (see [Events](./events.md), `POST /v2/teams/:team_id/events`);
-- compute availability, list events and build reports for a group of users at once (see [Availabilities](./availabilities.md), [Events](./events.md), [Reports](./reports.md));
-- give some users (the team's **admins**) oversight of the team's members: admins can be notified of what happens on the members' events (see [Team admin preferences](./team_admin_preferences.md));
-- delimit what a `team` scoped API key can reach (see [Conventions](./README.md)).
+- take **team bookings**: an appointment is booked "with the team" and Vyte assigns it to one of the team's members (see [Events](/reference/events/), `POST /v2/teams/:team_id/events`);
+- compute availability, list events and build reports for a group of users at once (see [Availabilities](/reference/availabilities/), [Events](/reference/events/), [Reports](/reference/reports/));
+- give some users (the team's **admins**) oversight of the team's members: admins can be notified of what happens on the members' events (see [Team admin preferences](/reference/team_admin_preferences/));
+- delimit what a `team` scoped API key can reach (see [Conventions](/reference/)).
 
 A team always belongs to exactly one organization: the organization of the API key that created it.
 
@@ -58,14 +58,14 @@ What each list implies:
 | Team bookings | Team bookings are assigned to members only. An admin-only user is never assigned a team booking. | No effect by itself. |
 | Team availability, team events listing, team reports | Computed over the members only. An admin-only user is not included. | No effect by itself. |
 | Reach of a `team` scoped API key | The users reachable with the key are the members of the key's teams. | A `team` scoped key covers the teams administered by the user it was issued for. |
-| Notifications | Events in which a member takes part are the ones that trigger the team's admin notifications. Members keep receiving their own notifications according to their own preferences. | Each admin receives a copy of the notification emails enabled in the [team admin preferences](./team_admin_preferences.md) for the events of the team's members. An admin of several teams concerned by the same event is notified only once per notification. |
+| Notifications | Events in which a member takes part are the ones that trigger the team's admin notifications. Members keep receiving their own notifications according to their own preferences. | Each admin receives a copy of the notification emails enabled in the [team admin preferences](/reference/team_admin_preferences/) for the events of the team's members. An admin of several teams concerned by the same event is notified only once per notification. |
 | Calendar | - | Admins get a Vyte team calendar in their calendar list. When the `calendar.blocker` admin preference is on, confirmed events of the members are also blocked in the admins' calendars. |
 
 Rules enforced by the API:
 
 - Only users who are members of the organization can be put in `members` or `admins` through the team create/update/add-members endpoints. References to anyone else are silently ignored (no error).
 - A team always has at least one admin: when a team is saved with an empty `admins` list, the first administrator of the organization is automatically set as its admin.
-- With no [team admin preferences](./team_admin_preferences.md) defined, or with all flags `false` (the default), admins receive no notification.
+- With no [team admin preferences](/reference/team_admin_preferences/) defined, or with all flags `false` (the default), admins receive no notification.
 
 ## The Team object
 
@@ -81,7 +81,7 @@ Rules enforced by the API:
 | `public` | boolean | no | When `true`, the name of the team and the first name, last name and picture of its members can be read without authentication through [Retrieve the public view of a team](#retrieve-the-public-view-of-a-team). Default `false`. Cannot be changed through the v2 API; it is set from the Vyte application. |
 | `members[]` | array of string, or array of [Team user](#the-team-user-object) | yes | The bookable users of the team. User `_id`s in most responses; expanded to Team user objects in the responses that say so. Default `[]`. |
 | `admins[]` | array of string, or array of [Team user](#the-team-user-object) | yes | The users administering the team. Same representation as `members`. See [Roles in a team](#roles-in-a-team). |
-| `admin_preference` | string | yes (as an object, see below) | `_id` of the team's [Team admin preferences](./team_admin_preferences.md) object. Absent while no preferences have been defined. In requests, you pass an object (<code v-pre>{"prefs": {...}}</code>), in responses you get the id. |
+| `admin_preference` | string | yes (as an object, see below) | `_id` of the team's [Team admin preferences](/reference/team_admin_preferences/) object. Absent while no preferences have been defined. In requests, you pass an object (<code v-pre>{"prefs": {...}}</code>), in responses you get the id. |
 | `createdAt` | string (ISO 8601 date-time) | no | Creation date. |
 | `updatedAt` | string (ISO 8601 date-time) | no | Last modification date. |
 
@@ -112,7 +112,7 @@ In the responses of [Retrieve a team](#retrieve-a-team) and of the member / admi
 
 | Field | Type | Writable | Description |
 | --- | --- | --- | --- |
-| `_id` | string | no | `_id` of the [user](./users.md). |
+| `_id` | string | no | `_id` of the [user](/reference/users/). |
 | `full_name` | string | no | Full name of the user. |
 | `emails[]` | array of string | no | Email addresses of the user. The first one is the primary address. |
 | `picture_url` | string | no | URL of the user's picture, when set. |
@@ -173,7 +173,7 @@ Wherever a request accepts a list of users (`members`, `admins`), each entry of 
 | Form | Example | Resolves to |
 | --- | --- | --- |
 | Object with `email` | `{"email": "jane.doe@example.com"}` | The user owning this email address. |
-| Object with `extid` | `{"extid": "employee-42"}` | The user whose external id (the `extid` you gave the user in your organization, see [Users](./users.md)) has this value. |
+| Object with `extid` | `{"extid": "employee-42"}` | The user whose external id (the `extid` you gave the user in your organization, see [Users](/reference/users/)) has this value. |
 | Object with `_id` | `{"_id": "5f1e9b2a8c4d3e0012345601"}` | The user with this `_id`. |
 | Object with `member_id` | `{"member_id": "5f1e9b2a8c4d3e0012345601"}` | The user with this `_id` (alias of the `_id` form). |
 | String holding an id | `"5f1e9b2a8c4d3e0012345601"` | The user with this `_id`. |
@@ -184,7 +184,7 @@ Rules:
 - When an object carries several of these keys, only one is used, in this order of precedence: `email`, `extid`, `_id`, `member_id`.
 - `_id` and `member_id` values must be valid ids (24 hex characters).
 - A reference that matches no user, or matches a user who is not a member of the organization, is **silently dropped**: the request succeeds and the user is simply not in the resulting list. Always check the returned `members` / `admins`.
-- Users are never created by team endpoints. Create them first (see [Users](./users.md)).
+- Users are never created by team endpoints. Create them first (see [Users](/reference/users/)).
 
 ## Endpoints
 
@@ -208,12 +208,12 @@ Related endpoints documented elsewhere:
 
 | Method | Path | Documented in |
 | --- | --- | --- |
-| `GET`, `POST`, `PUT` | `/v2/teams/:team_id/admin-preferences` | [Team admin preferences](./team_admin_preferences.md) |
-| `GET`, `POST` | `/v2/teams/:team_id/events` | [Events](./events.md) |
-| `POST` | `/v2/teams/:team_id/availabilities/batch` | [Availabilities](./availabilities.md) |
-| `GET` | `/v2/teams/:team_id/reports/...` | [Reports](./reports.md) |
+| `GET`, `POST`, `PUT` | `/v2/teams/:team_id/admin-preferences` | [Team admin preferences](/reference/team_admin_preferences/) |
+| `GET`, `POST` | `/v2/teams/:team_id/events` | [Events](/reference/events/) |
+| `POST` | `/v2/teams/:team_id/availabilities/batch` | [Availabilities](/reference/availabilities/) |
+| `GET` | `/v2/teams/:team_id/reports/...` | [Reports](/reference/reports/) |
 
-Authentication, key scopes and the common error format are described in [Conventions](./README.md). In addition to the errors listed for each endpoint, every authenticated endpoint answers `401` when the API key is missing, unknown or deactivated.
+Authentication, key scopes and the common error format are described in [Conventions](/reference/). In addition to the errors listed for each endpoint, every authenticated endpoint answers `401` when the API key is missing, unknown or deactivated.
 
 How a `team` scoped key is restricted on the endpoints that accept it:
 
@@ -293,7 +293,7 @@ Business rules:
 - `members` and `admins` are given as [user references](#user-references). Each list, when present, **replaces** the corresponding list of an existing team; when absent, the existing list is kept.
 - Putting a user in `admins` does not put them in `members`: list a user in both to make them an admin who is also bookable, in `admins` only to make them admin-only (see [Roles in a team](#roles-in-a-team)).
 - If the resulting `admins` list is empty, the first administrator of the organization becomes the team's admin.
-- `admin_preference`, when present, creates the team's [admin preferences](./team_admin_preferences.md) or replaces the existing ones.
+- `admin_preference`, when present, creates the team's [admin preferences](/reference/team_admin_preferences/) or replaces the existing ones.
 - No email is sent to the users added to the team.
 
 **Key scope:** organization
@@ -318,7 +318,7 @@ None.
 | `members` | array of [user references](#user-references) | no | `[]` (existing list kept) | Bookable users of the team. Replaces the existing list. |
 | `admins` | array of [user references](#user-references) | no | first administrator of the organization (existing list kept) | Users administering the team. Replaces the existing list. |
 | `admin_preference` | object | no | none | Admin notification preferences of the team. |
-| `admin_preference.prefs` | object | no | all flags `false` | Same structure as `prefs` in the [Team admin preferences object](./team_admin_preferences.md#the-team-admin-preferences-object). On an existing team that already has preferences, the whole `prefs` object is replaced: flags you omit go back to `false`. |
+| `admin_preference.prefs` | object | no | all flags `false` | Same structure as `prefs` in the [Team admin preferences object](/reference/team_admin_preferences/#the-team-admin-preferences-object). On an existing team that already has preferences, the whole `prefs` object is replaced: flags you omit go back to `false`. |
 
 The team is always created in the organization of the API key; the organization cannot be chosen in the body.
 
@@ -586,7 +586,7 @@ None.
 | `booking_page_path` | string | no | current value | New booking page path. |
 | `members` | array of [user references](#user-references) | no | current list | New list of bookable users. Replaces the existing list. |
 | `admins` | array of [user references](#user-references) | no | current list | New list of admins. Replaces the existing list. |
-| `admin_preference` | object | no | current preferences | <code v-pre>{"prefs": {...}}</code>, same structure as in [Create or update a team](#create-or-update-a-team). To change the preferences of an existing team, prefer the dedicated [Team admin preferences](./team_admin_preferences.md) endpoints. |
+| `admin_preference` | object | no | current preferences | <code v-pre>{"prefs": {...}}</code>, same structure as in [Create or update a team](#create-or-update-a-team). To change the preferences of an existing team, prefer the dedicated [Team admin preferences](/reference/team_admin_preferences/) endpoints. |
 
 **Response**
 
@@ -677,7 +677,7 @@ curl --request DELETE 'https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e0012345678' \
   --header 'Authorization: YOUR_API_KEY'
 ```
 
-```text
+```
 OK
 ```
 
@@ -773,7 +773,7 @@ If this leaves the team without any admin, the first administrator of the organi
 | Name | Type | Description |
 | --- | --- | --- |
 | `team_id` | string | `_id` of the team. |
-| `member_id` | string | `_id` of the [user](./users.md) to remove. This is a user id; there is no separate "member" identifier. |
+| `member_id` | string | `_id` of the [user](/reference/users/) to remove. This is a user id; there is no separate "member" identifier. |
 
 **Query parameters**
 
@@ -839,7 +839,7 @@ The call is idempotent. A Vyte team calendar is added to the user's calendar lis
 | Name | Type | Description |
 | --- | --- | --- |
 | `team_id` | string | `_id` of the team. |
-| `member_id` | string | `_id` of the [user](./users.md) to make admin. The user does not need to be a member of the team beforehand. |
+| `member_id` | string | `_id` of the [user](/reference/users/) to make admin. The user does not need to be a member of the team beforehand. |
 
 **Query parameters**
 
@@ -912,7 +912,7 @@ The call is idempotent: it succeeds even when the user is not an admin of the te
 | Name | Type | Description |
 | --- | --- | --- |
 | `team_id` | string | `_id` of the team. |
-| `member_id` | string | `_id` of the [user](./users.md) losing the admin role. |
+| `member_id` | string | `_id` of the [user](/reference/users/) losing the admin role. |
 
 **Query parameters**
 
@@ -979,7 +979,7 @@ The call is idempotent. No email is sent.
 | Name | Type | Description |
 | --- | --- | --- |
 | `team_id` | string | `_id` of the team. |
-| `member_id` | string | `_id` of the [user](./users.md) to make admin-only. The user does not need to be a member of the team beforehand. |
+| `member_id` | string | `_id` of the [user](/reference/users/) to make admin-only. The user does not need to be a member of the team beforehand. |
 
 **Query parameters**
 
@@ -1118,4 +1118,4 @@ curl --request GET 'https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e0012345678/public
 - **System-managed teams.** The list of teams can contain teams that Vyte created automatically for your organization. Do not update or delete teams you did not create.
 - **No pagination** on `GET /v2/teams`.
 - **Deleting a team deactivates its booking pages.** Detach or reassign them beforehand if they must stay online.
-- **Team-wide operations** (book with a team, list the events of the members, set the availabilities of the members, reports) are documented in [Events](./events.md), [Availabilities](./availabilities.md) and [Reports](./reports.md).
+- **Team-wide operations** (book with a team, list the events of the members, set the availabilities of the members, reports) are documented in [Events](/reference/events/), [Availabilities](/reference/availabilities/) and [Reports](/reference/reports/).

@@ -7,7 +7,7 @@
 :::::panel
 
 :::: left
-The preferences of a user decide which notifications Vyte sends to that user, per channel: `email` (notification emails) and `push` (push notifications of the Vyte mobile app). Each user has exactly one preferences object. It is an extension of the [User](./users.md) resource, which is why its paths start with `/v2/users/:user_id/`. Preferences only concern notifications sent to the user as a Vyte account holder; for the notifications sent to the administrators of a team, see [Team admin preferences](./team_admin_preferences.md). Authentication, key scopes and error format are described in [Conventions](./README.md).
+The preferences of a user decide which notifications Vyte sends to that user, per channel: `email` (notification emails) and `push` (push notifications of the Vyte mobile app). Each user has exactly one preferences object. It is an extension of the [User](/reference/users/) resource, which is why its paths start with `/v2/users/:user_id/`. Preferences only concern notifications sent to the user as a Vyte account holder; for the notifications sent to the administrators of a team, see [Team admin preferences](/reference/team_admin_preferences/). Authentication, key scopes and error format are described in [Conventions](/reference/).
 
 ::::
 
@@ -28,7 +28,7 @@ The preferences of a user decide which notifications Vyte sends to that user, pe
 | Field | Type | Writable | Description |
 | --- | --- | --- | --- |
 | `_id` | string | no | Id of the preferences object. Only stable once the preferences have been saved by a first `PUT` (see [Notes and caveats](#notes-and-caveats)). |
-| `belongs_to` | string | no | Id of the [user](./users.md) these preferences belong to. |
+| `belongs_to` | string | no | Id of the [user](/reference/users/) these preferences belong to. |
 | `prefs` | object | yes | The notification switches, grouped by channel. |
 | `prefs.email` | object | yes | Switches for notification emails. |
 | `prefs.email.attending` | boolean | yes | Email when an invitee accepts an event the user created. Default `true`. |

@@ -7,9 +7,9 @@
 :::::panel
 
 :::: left
-An Event is a meeting managed by Vyte. It is the central resource of the API: it holds the proposed dates and places, the people involved (one organizer and the invitees), the conversation, and the state of the meeting (pending, confirmed, cancelled). An event is either a **booking** (`vyteme: true`: a visitor books a [User](./users.md) or a [Team](./teams.md), usually through a [Booking page](./vytemes.md) and an [Appointment type](./appointment-types.md), on a free [Slot](./slots.md)) or a **group-scheduling event** (`vyteme: false`: an organizer proposes several dates and/or places and the invitees vote before the organizer confirms one). Creating, confirming and cancelling events writes to the connected [Calendars](./calendars.md) of the participants, sends emails, and fires [Webhooks](./webhooks.md). Answers to booking questions come from Forms.
+An Event is a meeting managed by Vyte. It is the central resource of the API: it holds the proposed dates and places, the people involved (one organizer and the invitees), the conversation, and the state of the meeting (pending, confirmed, cancelled). An event is either a **booking** (`vyteme: true`: a visitor books a [User](/reference/users/) or a [Team](/reference/teams/), usually through a [Booking page](/reference/vytemes/) and an [Appointment type](/reference/appointment-types/), on a free [Slot](/reference/slots/)) or a **group-scheduling event** (`vyteme: false`: an organizer proposes several dates and/or places and the invitees vote before the organizer confirms one). Creating, confirming and cancelling events writes to the connected [Calendars](/reference/calendars/) of the participants, sends emails, and fires [Webhooks](/reference/webhooks/). Answers to booking questions come from Forms.
 
-Authentication, API key scopes, date formats, languages and error conventions are described in [Conventions](./README.md) and are not repeated here.
+Authentication, API key scopes, date formats, languages and error conventions are described in [Conventions](/reference/) and are not repeated here.
 
 ::::
 
@@ -93,7 +93,7 @@ There is no endpoint to delete an event, to un-confirm it or to un-cancel it. Us
 | `title` | string | yes | Title of the meeting. Leading and trailing spaces are removed and HTML is sanitized. Required at creation for group-scheduling events, optional for bookings (see [title placeholders](#title-placeholders)). Changed with `POST /v2/events/:event_id/title`. |
 | `vyteme` | boolean | create-only | `true` for a booking, `false` or absent for a group-scheduling event. Forced to `true` when `appointment_type` or `vyteme_page` is set. See [the `vyteme` flag](#booking-or-group-scheduling-the-vyteme-flag). |
 | `created_by` | object | yes | The organizer of the event. Changed with `POST /v2/events/:event_id/admin`. |
-| `created_by.user` | string | yes | Id of the organizer [User](./users.md). At creation, send `created_by.user` or `created_by.email`. |
+| `created_by.user` | string | yes | Id of the organizer [User](/reference/users/). At creation, send `created_by.user` or `created_by.email`. |
 | `created_by.email` | string | yes | Email of the organizer (lowercased, trimmed). When only the email is sent at creation it must be the email of an existing user. Filled from the user when only `user` is sent. |
 | `created_by.full_name` | string | no | Full name of the organizer, copied from the user. |
 | `created_by.picture_url` | string | no | Picture of the organizer, when there is one. |
@@ -112,10 +112,10 @@ There is no endpoint to delete an event, to un-confirm it or to un-cancel it. Us
 | `timezone` | string | create-only | IANA timezone of the event (for example `Europe/Paris`), used to render dates in emails, in calendar entries and on the event page. Default at creation: the timezone fixed by the booking page or appointment type when it fixes one, else the timezone of the organizer's main availability, else the organizer's timezone, else `Europe/Paris`. |
 | `lang` | string | create-only | Language of the emails and of the event page: two-letter code (only the first two characters are kept, so `fr-FR` becomes `fr`). Supported: `de`, `en`, `es`, `fr`, `it`, `nl`, `pl`, `pt`, `sv`, `ru`. Default `en`. A booking page or appointment type that fixes a language overrides the value sent. |
 | `locale` | string | create-only | Locale used to format dates and times: two-letter code (truncated like `lang`). Default: the value of `lang`. |
-| `appointment_type` | string | create-only | Id of the [Appointment type](./appointment-types.md) booked. Makes the event a booking, fills `appointment_type_name` and `vyteme_page`, and applies the options of the appointment type (automatic confirmation, default place, automatic message, reminders, email options, default metadata). |
+| `appointment_type` | string | create-only | Id of the [Appointment type](/reference/appointment-types/) booked. Makes the event a booking, fills `appointment_type_name` and `vyteme_page`, and applies the options of the appointment type (automatic confirmation, default place, automatic message, reminders, email options, default metadata). |
 | `appointment_type_name` | string | no | Name of the appointment type at the time of the booking. |
-| `vyteme_page` | string | create-only | Id of the [Booking page](./vytemes.md) the booking belongs to. Makes the event a booking and applies the options of the page when no appointment type is given. Filled automatically from `appointment_type`. |
-| `availability` | string | create-only | Id of the [Availability](./availabilities.md) the booking is made on. Used by the availability check; default: the availability of the appointment type, else of the booking page. |
+| `vyteme_page` | string | create-only | Id of the [Booking page](/reference/vytemes/) the booking belongs to. Makes the event a booking and applies the options of the page when no appointment type is given. Filled automatically from `appointment_type`. |
+| `availability` | string | create-only | Id of the [Availability](/reference/availabilities/) the booking is made on. Used by the availability check; default: the availability of the appointment type, else of the booking page. |
 | `team_availability_name` | string | create-only | For team bookings: name of the availability to use for every team member. Default: the one of the appointment type. |
 | `buffer_before` | number | no | Minutes kept free before the meeting, copied from the availability at booking time. |
 | `buffer_after` | number | no | Minutes kept free after the meeting, copied from the availability at booking time. |
@@ -226,8 +226,8 @@ When the **confirmed** place designates a video-conference provider and has an e
 
 | Provider | How the place designates it | Requirement |
 |---|---|---|
-| Zoom | `source` or `name` equal to `Zoom` | The organizer has connected a Zoom account. See [Video conferencing](./video-conferencing.md). |
-| Webex | `source` or `name` equal to `Webex` | The organizer has connected a Webex account. See [Video conferencing](./video-conferencing.md). |
+| Zoom | `source` or `name` equal to `Zoom` | The organizer has connected a Zoom account. See [Video conferencing](/reference/video-conferencing/). |
+| Webex | `source` or `name` equal to `Webex` | The organizer has connected a Webex account. See [Video conferencing](/reference/video-conferencing/). |
 | Google Meet | `source` or `name` containing `Google Meet` or `Hangouts` (case-insensitive) | The organizer has a connected Google calendar. The link is created with the calendar entry. |
 | Microsoft Teams | `source` or `name` containing `Teams` or `Office365` (case-insensitive) | The organizer has a connected Microsoft calendar or a Microsoft Teams connection. |
 | kMeet | `source` equal to `kMeet`, or `name` containing `kmeet` (case-insensitive) | None. A room is generated. |
@@ -484,7 +484,7 @@ None.
 | `group_ids` | string | no | none | Comma-separated values. Keeps the events whose `third_party.group_ids` contains **all** of them. |
 | `includeInviteesLinks` | string | no | `false` | When exactly `true`, each event carries `links`: an object mapping each invitee's user id to that invitee's personal event-page URL (see [Get the invitees' event-page links](#get-the-invitees-event-page-links)). |
 
-There is no date-range parameter (`from` / `to`) on this endpoint. Use `filter` for "not finished yet", or the [event reports](./reports.md) for a period.
+There is no date-range parameter (`from` / `to`) on this endpoint. Use `filter` for "not finished yet", or the [event reports](/reference/reports/) for a period.
 
 Values of `filter`. "Not finished" means: the event has no date at all, or its `last_end_date` is in the future.
 
@@ -502,7 +502,7 @@ Values of `filter`. "Not finished" means: the event has no date at all, or its `
 | `confirmed`, `upcoming` | `first_start_date` ascending (soonest first). |
 | any other value, or absent | `updatedAt` descending (most recently modified first). |
 
-The order cannot be changed. Only `limit` exists; there is no way to request "the next page". To work on large volumes, narrow the request with the filters above, and prefer [Webhooks](./webhooks.md) to polling.
+The order cannot be changed. Only `limit` exists; there is no way to request "the next page". To work on large volumes, narrow the request with the filters above, and prefer [Webhooks](/reference/webhooks/) to polling.
 
 **Response**
 
@@ -577,7 +577,7 @@ When `confirmed.flag` is `true` and several dates (or places) are sent, the earl
 
 The check runs only when the body contains **`vyteme: true` and a non-empty `dates` array**. Send `vyteme: true` explicitly even when `appointment_type` or `vyteme_page` is present, and identify the organizer with `created_by.user` (the id), otherwise the booking is not checked.
 
-- Each element of `dates` is compared with the busy periods of the organizer between the earliest `date` and the latest `end_date`, computed in `timezone` with the same rules as the [Slots](./slots.md) endpoints: events of the organizer's connected calendars, existing Vyte bookings and tentative holds, buffers, and the opening hours and rules of the availability.
+- Each element of `dates` is compared with the busy periods of the organizer between the earliest `date` and the latest `end_date`, computed in `timezone` with the same rules as the [Slots](/reference/slots/) endpoints: events of the organizer's connected calendars, existing Vyte bookings and tentative holds, buffers, and the opening hours and rules of the availability.
 - The availability used is, in order: the query parameter `availability_id`, the body field `availability`, the availability of `appointment_type`. `team_availability_name` (body, else the one of the appointment type) is applied when present.
 - If at least one date overlaps a busy period, nothing is created and the answer is **`410 Gone`** with a JSON array containing the conflicting elements of `dates`, exactly as you sent them:
 
@@ -587,7 +587,7 @@ The check runs only when the body contains **`vyteme: true` and a non-empty `dat
 ]
 ```
 
-On `410`, fetch fresh [slots](./slots.md) and let the visitor choose again. Group-scheduling events (`vyteme` absent or `false`) are never checked.
+On `410`, fetch fresh [slots](/reference/slots/) and let the visitor choose again. Group-scheduling events (`vyteme` absent or `false`) are never checked.
 
 The check and the creation are two successive steps of the same request, not one atomic operation: two simultaneous requests for the same organizer and the same slot can both succeed. Use `alias` to protect against your own retries, and see [Concurrency](#concurrency).
 
@@ -609,7 +609,7 @@ This makes a creation safe to retry after a timeout: generate one `alias` per bo
 | Confirmed, with at least one invitee besides the organizer | Confirmation email with an iCalendar invitation to the participants. Not sent when `settings.no_emails` is set; restricted to the organizer when `settings.email_only_admin` is set. | The meeting is written in the organizer's connected calendar. | `event.created` then `event.confirmed` | SMS confirmation when enabled on the booking page / appointment type; reminders are scheduled for the invitees; the connected CRM, if any, is updated; the video-conference is created (see [Video-conference places](#video-conference-places)). |
 | Confirmed, with the organizer as only participant | None. | The meeting is written in the organizer's connected calendar. | None. | None. |
 
-Each recipient's own notification preferences (see [User preferences](./user_preference.md)) are honoured on top of the event settings. Emails and calendar writes are asynchronous: they happen shortly after the response.
+Each recipient's own notification preferences (see [User preferences](/reference/user_preference/)) are honoured on top of the event settings. Emails and calendar writes are asynchronous: they happen shortly after the response.
 
 **Key scope:** organization, team, user. The organizer designated by `created_by` must be a member of the key's organization (organization key), a member of one of the key's teams (team key), or the key's own user (user key).
 
@@ -621,7 +621,7 @@ None.
 
 | Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `availability_id` | string | no | none | Id of the [Availability](./availabilities.md) to use for the availability check. Takes precedence over the body field `availability`. |
+| `availability_id` | string | no | none | Id of the [Availability](/reference/availabilities/) to use for the availability check. Takes precedence over the body field `availability`. |
 
 **Request body**
 
@@ -1067,7 +1067,7 @@ Transfers the event to another organizer: `created_by` becomes the new user, who
 - With `keep_as_invitee` absent or `false`, the previous organizer is removed from the invitees, their votes are removed, and the dates, places, invitees and messages they had created are attributed to the new organizer.
 - With `keep_as_invitee: true`, the previous organizer stays as a plain invitee.
 - The state of the event (pending / confirmed / cancelled), its dates and places are unchanged. `reassigned` becomes `true`.
-- No availability check is made on the new organizer: check their [slots](./slots.md) first if needed.
+- No availability check is made on the new organizer: check their [slots](/reference/slots/) first if needed.
 - The new organizer should be a user of your organization. After a transfer to a user that your key cannot reach, the event is no longer reachable by your key.
 
 **Side effects**
@@ -1599,7 +1599,7 @@ Same as [List events](#list-events) - same query parameters, same filters, same 
 
 | Name | Type | Description |
 |---|---|---|
-| `team_id` | string | Id of a [Team](./teams.md) of the organization, or `all`. |
+| `team_id` | string | Id of a [Team](/reference/teams/) of the organization, or `all`. |
 
 **Query parameters**
 
@@ -1652,7 +1652,7 @@ Default mode (no `team_all_members`):
 
 1. **Who is free.** Every member of the team is checked for the requested slot with the same rules as the [availability check](#availability-check-on-creation), each against their own calendars, bookings and availability. `availability_id` / `availability` and `team_availability_name` select which availability of each member applies; with `appointment_type`, those of the appointment type are used by default.
 2. **Who gets it (round-robin).** Among the free members, the one who received the **fewest bookings through this team** in the 30 days around the slot (15 days before to 15 days after the date of the slot) is chosen.
-3. **Tie-break.** When several members are tied, the first one in the order of the team's `members` list is chosen. Ordering the members of the [Team](./teams.md) is thus the way to express a priority.
+3. **Tie-break.** When several members are tied, the first one in the order of the team's `members` list is chosen. Ordering the members of the [Team](/reference/teams/) is thus the way to express a priority.
 4. If nobody is free, nothing is created and the answer is `410` with the `dates` array you sent.
 
 The chosen member becomes `created_by` of the event; any `created_by` sent in the body is ignored in this mode. Read `created_by` in the response to know who was assigned.
@@ -1661,7 +1661,7 @@ Variants you can select:
 
 | Variant | How to select it | Behaviour |
 |---|---|---|
-| Nearest member | Query parameter `address`, or a `places[]` element with a physical `address` (a place designating a video-conference is ignored). Applies only when travel time is enabled on the availability used. | The free member with the shortest travel time to the address is chosen, instead of the round-robin. When travel time is not enabled the default mode applies. See [Slots: travel time](./slots.md#travel-time). |
+| Nearest member | Query parameter `address`, or a `places[]` element with a physical `address` (a place designating a video-conference is ignored). Applies only when travel time is enabled on the availability used. | The free member with the shortest travel time to the address is chosen, instead of the round-robin. When travel time is not enabled the default mode applies. See [Slots: travel time](/reference/slots/#travel-time). |
 | All members together | Query parameter `team_all_members=true` | Nobody is "picked": **every** member of the team is added to `invitees`, and one of them is designated organizer: going through the team's `members` in order, the first member who is either the user designated by `created_by` (or, without `created_by`, the owner of the booking page `vyteme_page`) or an admin of the team; if there is none, the first member of the team. The availability check then applies to that organizer. |
 | Members common to several teams | `team_id` = `<A>.<B>` (ids separated by dots) | The candidates are the members of team `A` who also belong to every other listed team. |
 | One member per team | `team_id` = `<A>,<B>` (ids separated by commas) | One member is assigned in each team, independently, with the rules above. The member of the first team is the organizer; the members of the other teams are added to `invitees`. If any team has nobody free the answer is `410`. With `team_all_members=true`, the members of all listed teams are invited and the organizer is designated within the first team. |
@@ -1674,7 +1674,7 @@ Other assignment strategies (for example random choice among the free members, o
 
 | Name | Type | Description |
 |---|---|---|
-| `team_id` | string | Id of the [Team](./teams.md), or a multi-team expression (see the table above). |
+| `team_id` | string | Id of the [Team](/reference/teams/), or a multi-team expression (see the table above). |
 
 **Query parameters**
 
@@ -1855,9 +1855,9 @@ OK
 ### Emails, calendars and webhooks
 
 - All side effects are asynchronous. The response of the API reflects the stored event; emails, calendar entries, video-conference links written by the calendar provider (Google Meet, Microsoft Teams) and webhooks follow within seconds. A Google Meet / Microsoft Teams link may therefore appear in `places[].address` slightly after the confirmation response: retrieve the event again or listen to the `event.confirmed` webhook.
-- Parameters that control emails: `settings.no_emails` (nothing is sent), `settings.no_invitation_email` (no initial invitation for a pending event), `settings.email_only_admin` (only the organizer), and the corresponding options of the [Booking page](./vytemes.md) / [Appointment type](./appointment-types.md), which are copied to the event at creation. They cannot be changed after creation through this API.
+- Parameters that control emails: `settings.no_emails` (nothing is sent), `settings.no_invitation_email` (no initial invitation for a pending event), `settings.email_only_admin` (only the organizer), and the corresponding options of the [Booking page](/reference/vytemes/) / [Appointment type](/reference/appointment-types/), which are copied to the event at creation. They cannot be changed after creation through this API.
 - `settings.calendar_send_updates` controls whether Google Calendar sends its own notifications in addition to Vyte's emails. Leave it unset to avoid duplicates.
-- Webhooks fired by the endpoints of this file: `event.created`, `event.confirmed`, `event.cancelled`, `event.invitees.added`, `event.messages.created`. See [Webhooks](./webhooks.md). Updating dates/places, changing the title, changing the organizer and removing an invitee fire no webhook.
+- Webhooks fired by the endpoints of this file: `event.created`, `event.confirmed`, `event.cancelled`, `event.invitees.added`, `event.messages.created`. See [Webhooks](/reference/webhooks/). Updating dates/places, changing the title, changing the organizer and removing an invitee fire no webhook.
 - Creating an invitee with an unknown email creates a user record for that email in Vyte (not a member of your organization). This is how invitees get an id in `invitees[].user`.
 
 ### Identifiers
