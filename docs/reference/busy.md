@@ -7,7 +7,7 @@
 :::::panel
 
 :::: left
-Busy times are the periods during which users (or whole teams) cannot be booked. The Busy endpoint computes them on the fly from the same sources as the [Slots](/reference/slots/) endpoints: the users' [availabilities](/reference/availabilities/) (everything outside opening hours is busy, as are the periods excluded by minimum notice and booking horizon rules), the events of their connected [calendars](/reference/calendars/) and their Vyte [events](/reference/events/), with buffers applied. It is the raw material for drawing a calendar or scheduler view where unavailable periods are greyed out; to get directly bookable time ranges of a given duration, use [Slots](/reference/slots/) instead. Authentication, key scopes, error format, dates and timezones are described in [conventions.md](/reference/).
+Busy times are the periods during which users (or whole teams) cannot be booked. The Busy endpoint computes them on the fly from the same sources as the [Slots](/reference/slots/) endpoints: the users' [availabilities](/reference/availabilities/) (everything outside opening hours is busy, as are the periods excluded by minimum notice and booking horizon rules), the events of their connected [calendars](/reference/calendars/) and their Vyte [events](/reference/events/), with buffers applied. It is the raw material for drawing a calendar or scheduler view where unavailable periods are greyed out; to get directly bookable time ranges of a given duration, use [Slots](/reference/slots/) instead. Authentication, key scopes, error format, dates and timezones are described in [Conventions](/reference/).
 
 ::::
 

@@ -7,7 +7,7 @@
 :::::panel
 
 :::: left
-A slot is a bookable time range: a start and an end during which the targeted people are free. The Slots endpoints compute, on the fly, the free slots of one user, of several users together, or of one or several teams, by combining their [availabilities](/reference/availabilities/) (working hours, buffers, minimum notice), the events of their connected [calendars](/reference/calendars/) and their existing Vyte [events](/reference/events/). Slots are never stored: each call recomputes them. Use these endpoints to show a slot picker, then create the booking with the [Events](/reference/events/) endpoints. The reverse view (when people are busy) is given by [Busy](/reference/busy/). Authentication, key scopes, error format, dates and timezones are described in [conventions.md](/reference/).
+A slot is a bookable time range: a start and an end during which the targeted people are free. The Slots endpoints compute, on the fly, the free slots of one user, of several users together, or of one or several teams, by combining their [availabilities](/reference/availabilities/) (working hours, buffers, minimum notice), the events of their connected [calendars](/reference/calendars/) and their existing Vyte [events](/reference/events/). Slots are never stored: each call recomputes them. Use these endpoints to show a slot picker, then create the booking with the [Events](/reference/events/) endpoints. The reverse view (when people are busy) is given by [Busy](/reference/busy/). Authentication, key scopes, error format, dates and timezones are described in [Conventions](/reference/).
 
 ::::
 

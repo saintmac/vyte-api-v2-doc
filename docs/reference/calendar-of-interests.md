@@ -13,7 +13,7 @@ A **calendar of interest** is a shared, read-only calendar that an organization 
 - A **rule** describes one recurring or one-off date in business terms ("December 25 every year", "the 4th Thursday of November", "the last Monday of May", "August 3 to August 14, 2026") and is attached to one or more sub-calendars of the calendar. Vyte turns each rule into concrete calendar entries (its **occurrences**), generated in the background for the coming years.
 - Once a calendar of interest is **added to** a user (individually, by team, or for the whole organization), it appears in that user's [calendar list](/reference/calendars/) as a calendar whose `source` is `vyte_calendar_of_interest`, with one sub-calendar per sub-calendar of interest. Each of these sub-calendars has the usual `display` and `busy` flags: with `busy: true` the generated entries make the user unavailable for bookings (for example nobody can book the user on a public holiday); with `display: true` they are shown in the user's calendar.
 
-Authentication, key scopes, error format, dates and timezones are described in [conventions.md](/reference/).
+Authentication, key scopes, error format, dates and timezones are described in [Conventions](/reference/).
 
 ::::
 

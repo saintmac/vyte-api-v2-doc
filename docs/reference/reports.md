@@ -15,7 +15,7 @@ BI tool. Every report exists in two variants: an organization-wide path (`/v2/re
 a team path (`/v2/teams/:team_id/reports/...`).
 
 Authentication, key scopes, error format and languages are described in
-[conventions.md](/reference/). Related resources: [Users](/reference/users/), [Teams](/reference/teams/),
+[Conventions](/reference/). Related resources: [Users](/reference/users/), [Teams](/reference/teams/),
 [Events](/reference/events/), [Availabilities](/reference/availabilities/),
 [Appointment types](/reference/appointment-types/), [Booking pages](/reference/vytemes/).
 

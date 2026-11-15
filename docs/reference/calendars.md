@@ -9,7 +9,7 @@
 :::: left
 Every Vyte [user](/reference/users/) has exactly one **calendar list**. It groups the user's **calendars** (one per connected calendar account: Google, Office 365, Exchange, CalDAV, iCloud, ICS feed, plus the built-in Vyte calendar and any [calendar of interest](/reference/calendar-of-interests/) added to the user). Each calendar contains **sub-calendars** (the individual agendas of that account, for example "Work" and "Personal"). The calendar list tells Vyte which sub-calendars make the user busy when availability is computed, which ones are displayed, and in which sub-calendar Vyte writes the events it creates. The Calendar events endpoint returns the content of the displayed sub-calendars over a period.
 
-Authentication, key scopes, error format, dates and timezones are described in [conventions.md](/reference/).
+Authentication, key scopes, error format, dates and timezones are described in [Conventions](/reference/).
 
 Calendar accounts are connected by the user from Vyte (the provider's own consent / sign-in flow). The endpoints below read and configure calendars that are already connected; they do not connect a new account.
 
