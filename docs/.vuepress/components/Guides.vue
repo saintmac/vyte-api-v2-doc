@@ -3,7 +3,7 @@
     <div v-for="(guide, index) in data.guides" :key="index" class="guide">
       <img
         :src="$withBase(`/assets/img/${guide.image}.svg`)"
-        alt="Vyte API - Webhooks"
+        :alt="guide.title"
       />
       <h2>{{ guide.title }}</h2>
       <p>{{ guide.details }}</p>
