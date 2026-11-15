@@ -32,7 +32,7 @@ General rules (base URL, authentication, key scopes, ids, languages, errors) are
 <endpoints>
   <endpoint method="get" path="/v2/locators" href="#list-locators"></endpoint>
   <endpoint method="post" path="/v2/locators" href="#create-or-replace-a-locator"></endpoint>
-  <endpoint method="get" path="/v2/locators/:handle" href="#endpoints"></endpoint>
+  <endpoint method="get" path="/v2/locators/:handle" href="#retrieve-a-locator-by-handle-public"></endpoint>
   <endpoint method="put" path="/v2/locators/:locator_id" href="#update-a-locator"></endpoint>
   <endpoint method="delete" path="/v2/locators/:locator_id" href="#delete-a-locator"></endpoint>
 </endpoints>

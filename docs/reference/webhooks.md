@@ -30,7 +30,7 @@ Authentication, key scopes, id and date formats and the general error format are
 > ENDPOINTS
 
 <endpoints>
-  <endpoint method="get" path="/v2/hooks" href="#automatic-deactivation"></endpoint>
+  <endpoint method="get" path="/v2/hooks" href="#list-webhooks"></endpoint>
   <endpoint method="post" path="/v2/hooks" href="#create-a-webhook"></endpoint>
   <endpoint method="get" path="/v2/hooks/:hook_id" href="#retrieve-a-webhook"></endpoint>
   <endpoint method="put" path="/v2/hooks/:hook_id" href="#update-a-webhook"></endpoint>
