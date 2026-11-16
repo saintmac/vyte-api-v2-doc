@@ -1,6 +1,18 @@
 const { description } = require("../../package");
 
+// VuePress requires `base` to start and end with a slash: accept a DEPLOY_BASE
+// given without them (e.g. "pr-preview/pr-42").
+const base = `/${process.env.DEPLOY_BASE || ""}/`.replace(/\/{2,}/g, "/");
+
 module.exports = {
+  /**
+   * Base public path. Defaults to "/" for the production site served at the
+   * domain root. PR preview builds set DEPLOY_BASE (e.g. "/pr-preview/pr-42/")
+   * so absolute asset URLs (/logo.svg, /assets/...) resolve under the subpath.
+   * ref：https://v1.vuepress.vuejs.org/config/#base
+   */
+  base,
+
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */

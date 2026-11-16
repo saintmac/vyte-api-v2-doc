@@ -2,19 +2,44 @@ name: Build and Deploy
 on:
   push:
     branches: [master]
+
+# Allow the deploy to push to the gh-pages branch via GITHUB_TOKEN.
+permissions:
+  contents: write
+
+# Avoid overlapping production deploys clobbering each other.
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
 
-      - name: vuepress-deploy
-        uses: jenkey2011/vuepress-deploy@c125854a55a2d3fbe1847e0fc25a4aa662582520
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          TARGET_REPO: saintmac/vyte-api-v2-doc
-          TARGET_BRANCH: gh-pages
-          BUILD_SCRIPT: yarn && yarn build
-          BUILD_DIR: docs/.vuepress/dist/
-          CNAME: developer.vyte.in
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          # node-sass@4.14.1 (transitive VuePress 1.x dep) only ships prebuilt
+          # binaries through Node 14; newer Node tries to compile from source
+          # and fails on the runner. Node 14 also avoids needing
+          # --openssl-legacy-provider (that flag only exists on Node 17+).
+          node-version: 14
+          cache: yarn
+
+      - name: Install & build
+        run: |
+          yarn install
+          yarn build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          # Preserve PR preview folders published by pr-preview.yml; the deploy
+          # otherwise cleans files on gh-pages that aren't in the new build.
+          # The CNAME lives in docs/.vuepress/public/CNAME so it ships in the build.
+          clean-exclude: pr-preview/
