@@ -14,7 +14,7 @@ This guide will teach you how to completely dispense with the Vyte interface and
 
 When someone wants an appointment with a user, the first thing we have to do is to retrieve when this user is available (to draw a parallel with the Vyte Page, we want to retrieve what is shown in the slot picker).
 
-To achieve this, we will use the [Slots API](../reference/slots.md). We will perform a `GET` request to the `/v2/slots` endpoint. Here is a little reminder of the available query params :
+To achieve this, we will use the [Slots API](/reference/slots/). We will perform a `GET` request to the `/v2/slots` endpoint. Here is a little reminder of the available query params :
 
 <attributes title="Query parameters">
   <attribute name="duration" type="number" :required=true>
@@ -117,11 +117,11 @@ _We will consider here that September 2 from 10:00 to 11:00 a.m. is a good choic
 
 ### (Optional) Using our web component
 
-We provide a useful slot picker as a Vue.js component to easily let your users choose a slot. For more information, please check [this guide](../guides/use-our-web-components.md).
+We provide a useful slot picker as a Vue.js component to easily let your users choose a slot. For more information, please check [this guide](/guides/use-our-web-components/).
 
 ## Create a new event
 
-Let's create a new meeting request to John Doe for the chosen date. To achieve this, we have to create a new event using the [Events API](../reference/events.md).
+Let's create a new meeting request to John Doe for the chosen date. To achieve this, we have to create a new event using the [Events API](/reference/events/).
 
 So, we will do this by making this `POST` request :
 
@@ -160,7 +160,7 @@ curl --request POST 'https://api.vyte.in/v2/events' \
 }'
 ```
 
-> Note that it's important for this use case to set the param `vyteme` to true. If you need more information, please refere to [this part](../reference/README.md#vyteme-or-not-vyteme).
+> Note that it's important for this use case to set the param `vyteme` to true. If you need more information, please refere to [this part](/reference/#vyteme-or-not-vyteme).
 
 Congrats :clap:  
 We created our first booking request by using only the API.
