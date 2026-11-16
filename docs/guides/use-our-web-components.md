@@ -6,12 +6,12 @@ We provide a web component to integrate the Vyte slot picker directly in your we
 
 <attribute name="emails" type="string" :required=true details="if no users is passed">
 
-Email of the person whose availabilities you want to show (Vyte account required). You can pass a list of emails by comma separating them. Slots returned will be slots when all of those users are available.
+Email of the person whose availabilities you want to show (Vyte account required). You can pass a list of emails separated by commas. The slots returned are the slots when all of those users are available.
 
 </attribute>
 <attribute name="users" type="string" :required=true details="if no emails is passed">
 
-Vyte `user._id` of the person whose availabilities you want to show (Vyte account required). You can pass a list of user_ids by comma separating them. Slots returned will be slots when all of those users are available.
+Vyte `user._id` of the person whose availabilities you want to show (Vyte account required). You can pass a list of ids separated by commas. The slots returned are the slots when all of those users are available.
 
 </attribute>
 <attribute name="availability" type="string" :required=false>
@@ -36,7 +36,7 @@ Duration in minutes.
 </attribute>
 <attribute name="lang" type="string" details="default is english">
 
-Language and locale of the component. It is expressed according to [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
+Language and locale of the component. It is expressed according to [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and the available languages are : `fr`, `en`, `es`, `it`, `pt`, `de`, `sv`, `nl`.
 
 </attribute>
 <attribute name="one-column" type="boolean" details="default is false">
@@ -46,12 +46,12 @@ If you want the slots to be displayed on 1 column (vs 1 column per day).
 </attribute>
 <attribute name="start" type="date" details="defaults to today">
 
-Start date expressed according to [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601).
+Start date expressed according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
 
 </attribute>
 <attribute name="start-at-first-availability" type="boolean" details="default is false">
 
-If you want the first date to jump to the first day that has an available slot..
+If you want the first date to jump to the first day that has an available slot.
 
 </attribute>
 <attribute name="nslots" type="number">
@@ -60,6 +60,8 @@ Number of slots max shown per day by default. The user can then click on a "view
 
 </attribute>
 </attributes>
+
+The slots displayed by the component are computed with the same rules as the [Slots API](/reference/slots/). Once a slot is selected, you can create the booking with the [Events API](/reference/events/#create-an-event), as explained in [this guide](/guides/scheduling-api-for-1-to-1-bookings/).
 
 The following code shows you how to integrate our web component easily:
 
@@ -76,7 +78,7 @@ The following code shows you how to integrate our web component easily:
 
 <vyte-slot-picker
   id="vyte-slot-picker"
-  emails="martin@vytein.com"
+  emails="jane.doe@example.com"
   :ndays="5"
   timezone="Europe/Paris"
   lang="en"

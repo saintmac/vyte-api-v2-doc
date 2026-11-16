@@ -1,7 +1,7 @@
 # Set up booking parameters in the link
 
-In Vyte you can create your own booking page to send to other people the link like 'vyte.in/yourname'. Pretty cool, right? :smirk:
-But you also can add some parameters of you meeting directly to the link. Let's have a look :point_down:.
+In Vyte you can create your own booking page and send its link, like `vyte.in/yourname`, to other people. Pretty cool, right? :smirk:
+But you can also add some parameters of your meeting directly to the link. Let's have a look :point_down:.
 
 [[toc]]
 
@@ -15,9 +15,9 @@ Just add the following line of code to your website:
 ```
 where `/demovyte` is the path of your Vyte booking Page.
 
-As you may have noticed there is a `?embed` query paramater, make sure to keep it if you add other query parameters to ensure that the booking page is optimized for iframe embeds.
+As you may have noticed, there is an `?embed` query parameter. Make sure to keep it if you add other query parameters, to ensure that the booking page is optimized for iframe embeds.
 
-You can also get this line of code, customized for a specific user from [that user account settings](https://www.vyte.in/pages/1#share)
+You can also get this line of code, customized for a specific user, from [that user's account settings](https://www.vyte.in/pages/1#share).
 
 ## Getting started
 
@@ -36,8 +36,9 @@ You can set the duration (in minutes) of an appointment directly in the URL as s
 
 ## URL parameters
 
-You can use those parameters with the URL of your Vyte page (ex: https://vyte.in/yourname).
-> Make sure to urlEncode white spaces in your content (replace them by %20), otherwise it could break the URL.
+You can use these parameters with the URL of your Vyte page (ex: `https://vyte.in/yourname`).
+
+> Make sure to URL-encode white spaces in your content (replace them with `%20`), otherwise it could break the URL.
 
 <attributes title="Query parameters">
 
@@ -46,7 +47,7 @@ Creator name: useful to auto set a title with the name of all the participants.
   </attribute>
 
   <attribute name="cm" type="string" :required=false>
-Creator e-mail: if you set cn your invitees won't be prompted to put their name and emails or to login with Google to book you. We highly recommend to populate cm along.
+Creator e-mail: if you set `cn`, your invitees won't be prompted to enter their name and email or to log in with Google to book you. We highly recommend populating `cm` along with it.
   </attribute>
 
   <attribute name="cc" type="string" :required=false>
@@ -70,7 +71,7 @@ Event places: place name and address separated by a single pipe (|) and several 
   </attribute>
 
   <attribute name="aid" type="string" :required=true>
-App ID: your app ID for Vyte. You get it when you register your app with GET /thirdparties/new.
+App ID: your app ID for Vyte. You get it when you register your app with `POST /v2/third_parties` (see [this guide](/guides/add-scheduling-features-to-your-app-or-platform/#register-your-app)).
   </attribute>
 
   <attribute name="agid" type="string" :required=false>
@@ -80,19 +81,19 @@ App Group ID: this is an id you will provide to Vyte, that you will use to ident
 </attributes>
 
 ### Example
-With some of these parameters set the URL to your booking page will look like:
+With some of these parameters set, the URL of your booking page will look like:
 
 ```jsonp light-code
 
-https://www.vyte.in/john/20?et=Meeting%20%7B%7Binvitee%7D%7D&cm=john.doe@domain.com&cn=John%20Doe&places=Skype%7Cjohn%7C%7CGoogle%20Hangouts%7Cjoh.doe@domain.com&em=Hello
+https://www.vyte.in/john/20?et=Meeting%20%7B%7Binvitee%7D%7D&cm=john.doe@example.com&cn=John%20Doe&places=Skype%7Cjohn%7C%7CGoogle%20Hangouts%7Cjohn.doe@example.com&em=Hello
 
 ```
 Here we see that:
 - the page belongs to `John`
 - event title is `Meeting <invitee name>`
-- John's email is `john.doe@domain.com`
+- John's email is `john.doe@example.com`
 - John's name is `John Doe`
-- John has two places for meetings: Skype and Google Hangouts
-- Event message is set to `Hello`
+- John proposes two places for the meeting: Skype and Google Hangouts
+- the event message is set to `Hello`
 
-Presetting some parameters will save your time and help to avoid accidental mistakes.
+Presetting some parameters will save time and help to avoid accidental mistakes.

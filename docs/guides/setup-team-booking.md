@@ -1,334 +1,284 @@
 # Set up team booking
 
-Thanks to the API, you are able to group your user by team. The [team API](/reference/teams/) is really versatile so that you can represent all types of organizational structure, from hierarchical to matrix structure.
+Thanks to the API, you are able to group your users by team. The [Teams API](/reference/teams/) is versatile, so that you can represent all types of organizational structure, from hierarchical to matrix structures.
 
 Here we will learn how to create and manage our first team. At the end, we will see how to book a team event.
 
-> NB: a team event isn't an event between the members of a team. A team event allows you to book an appointment with a member of the team. For instance, you can create an event with the Sales team, and it will automatically assign the event to someone of the sales team (based on some parameters you can set up).
+> NB: a team event isn't an event between the members of a team. A team event allows you to book an appointment with one member of the team. For instance, you can create an event with the Sales team, and it will automatically be assigned to someone of the sales team.
 
 [[toc]]
 
 ## Create your first team
 
-Let's create our first team. A team is composed of admins and members. But don't forget that **the admins are not member of the team by default**. If you want an admin to be part of the team, you have to add him as a member too.
+Let's create our first team. A team holds two independent lists of users: `members` (the bookable people of the team) and `admins` (the people who administer it). **The admins are not members of the team by default**: if you want an admin to be bookable in the team, you have to list them in `members` too.
 
-So, for this guide, we will create a Sales team with 1 admin (who is also member of the team) and an other member. Note that all the `ids` are fake and are here only for the purpose of the example.
+So, for this guide, we will create a Sales team with 1 admin (who is also a member of the team) and another member. Note that all the ids are placeholders and are here only for the purpose of the example.
 
-To create our first team, let's just make a `POST` request at `/v2/teams` :
+To create our first team, let's make a `POST` request to `/v2/teams`. `name` and `extid` (your own identifier for the team) are required:
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522admins%2522%253A%2520%255B%250A%2520%2520%2520%2520%25225eecc40bb2181073ac6ff375%2522%250A%2520%2520%255D%252C%250A%2520%2520%2522members%2522%253A%2520%255B%250A%2520%2520%2520%2520%25225eecc40bb2181073ac6ff375%2522%252C%250A%2520%2520%2520%2520%25225f198d23c1ac5d0bcafc00ee%2522%250A%2520%2520%255D%252C%250A%2520%2520%2522extid%2522%253A%2520%25221%2522%252C%250A%2520%2520%2522name%2522%253A%2520%2522sales%2522%252C%250A%2520%2520%2522level_name%2522%253A%2520%2522company%2522%250A%257D%27"
-  style="width: 100%; height: 530px; border:0; transform: scale(1); overflow:hidden;"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%27%2520%255C%250A--header%2520%27Authorization%253A%2520YOUR_API_KEY%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522name%2522%253A%2520%2522Sales%2522%252C%250A%2520%2520%2522extid%2522%253A%2520%2522sales%2522%252C%250A%2520%2520%2522level_name%2522%253A%2520%2522department%2522%252C%250A%2520%2520%2522admins%2522%253A%2520%255B%250A%2520%2520%2520%2520%25225f1e9b2a8c4d3e0012345601%2522%250A%2520%2520%255D%252C%250A%2520%2520%2522members%2522%253A%2520%255B%250A%2520%2520%2520%2520%25225f1e9b2a8c4d3e0012345601%2522%252C%250A%2520%2520%2520%2520%25225f1e9b2a8c4d3e0012345602%2522%250A%2520%2520%255D%250A%257D%27"
+  style="width: 100%; height: 520px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
 ```shell screen-hidden
 curl --request POST 'https://api.vyte.in/v2/teams' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+--header 'Authorization: YOUR_API_KEY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "admins": [
-    "5eecc40bb2181073ac6ff375"
-  ],
-  "members": [
-    "5eecc40bb2181073ac6ff375",
-    "5f198d23c1ac5d0bcafc00ee"
-  ],
-  "extid": "1",
-  "name": "sales",
-  "level_name": "company"
-}'
-```
-
-Our first team is now created :clap:
-
-```json light-code
-{
-  "admins": ["5eecc40bb2181073ac6ff375"],
-  "members": ["5eecc40bb2181073ac6ff375", "5f198d23c1ac5d0bcafc00ee"],
-  "_id": "5f47af4d2285550793c632c4",
-  "organization": "5f198da1c1ac5d1a30fc00f3",
-  "extid": "1",
-  "name": "sales",
+  "name": "Sales",
+  "extid": "sales",
   "level_name": "department",
-  "updatedAt": "2020-08-27T13:06:28.430Z",
-  "createdAt": "2020-08-27T13:04:13.588Z",
-  "__v": 2
-}
-```
-
-## Manage your team
-
-Oh! Someone new was just hired in the sales team. We have to add him to the sales team.
-
-As there is no dedicated endpoint to add or remove members for a team, we will use the update team's endpoint and modify the `members` array.
-
-Let's make a `PUT` request at `/v2/team/5f47af4d2285550793c632c4` :
-
-<iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--location%2520--request%2520PUT%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f47af4d2285550793c632c4%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522members%2522%253A%2520%255B%250A%2520%2520%2520%2520%2520%2520%25225eecc40bb2181073ac6ff375%2522%252C%250A%2520%2520%2520%2520%2520%2520%25225f198d23c1ac5d0bcafc00ee%2522%252C%250A%2520%2520%2520%2520%2520%2520%25225f2809b0f678a7a0227f94ac%2522%250A%2520%2520%255D%250A%257D%27"
-  style="width: 100%; height: 450px; border:0; transform: scale(1); overflow:hidden;"
-  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
-</iframe>
-
-```shell screen-hidden
-curl --location --request PUT 'https://api.vyte.in/v2/teams/5f47af4d2285550793c632c4' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
---header 'Content-Type: application/json' \
---data-raw '{
+  "admins": [
+    "5f1e9b2a8c4d3e0012345601"
+  ],
   "members": [
-      "5eecc40bb2181073ac6ff375",
-      "5f198d23c1ac5d0bcafc00ee",
-      "5f2809b0f678a7a0227f94ac"
+    "5f1e9b2a8c4d3e0012345601",
+    "5f1e9b2a8c4d3e0012345602"
   ]
 }'
 ```
 
-And now our new Sales is part of the team.
+Our first team is now created :clap: The answer is `201` with the team:
 
+```json light-code
+{
+  "_id": "5f1e9b2a8c4d3e0012345678",
+  "name": "Sales",
+  "extid": "sales",
+  "organization": "5f1e9b2a8c4d3e0012340000",
+  "level_name": "department",
+  "tags": [],
+  "public": false,
+  "members": ["5f1e9b2a8c4d3e0012345601", "5f1e9b2a8c4d3e0012345602"],
+  "admins": ["5f1e9b2a8c4d3e0012345601"],
+  "createdAt": "2026-01-12T09:30:00.000Z",
+  "updatedAt": "2026-01-12T09:30:00.000Z"
+}
+```
 
-## Get available slots for your team
-To get all the slots when at least one member of your team is available, you can use the `/v2/slots` or `/v2/slots/days` endpoints as such:
+::: warning
+This request is a "create or update" keyed on `extid`: sending it again with the same `extid` updates the existing team instead of creating a second one, and the `members` and `admins` lists you send replace the existing ones. A user reference that matches nobody in your organization is silently dropped, so always compare the returned `members` and `admins` with what you sent.
+:::
+
+## Manage your team
+
+Oh! Someone new was just hired in the sales team. We have to add them to the team.
+
+There is a dedicated endpoint to add members to a team without resending the whole list. Let's make a `POST` request to `/v2/teams/5f1e9b2a8c4d3e0012345678/members`:
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fslots%253Fduration%253D30%2526team%253D5f47af4d2285550793c632c4%2526from%253D2020-09-01%2526to%253D2020-09-02%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C"
-  style="width: 100%; height: 294px; border:0; transform: scale(1); overflow:hidden;"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f1e9b2a8c4d3e0012345678%252Fmembers%27%2520%255C%250A--header%2520%27Authorization%253A%2520YOUR_API_KEY%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522members%2522%253A%2520%255B%250A%2520%2520%2520%2520%25225f1e9b2a8c4d3e0012345603%2522%250A%2520%2520%255D%250A%257D%27"
+  style="width: 100%; height: 388px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
 ```shell screen-hidden
-curl --request GET 'https://api.vyte.in/v2/slots?duration=30&team=5f47af4d2285550793c632c4&from=2020-09-01&to=2020-09-02' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx'
+curl --request POST 'https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e0012345678/members' \
+--header 'Authorization: YOUR_API_KEY' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "members": [
+    "5f1e9b2a8c4d3e0012345603"
+  ]
+}'
 ```
 
-We get in response a list of slots so you can let your user pick one.
+The answer is `200` with the team after the change. In this response, each entry of `members` and `admins` is expanded to an object describing the user:
+
+```json light-code
+{
+  "_id": "5f1e9b2a8c4d3e0012345678",
+  "name": "Sales",
+  "extid": "sales",
+  "organization": "5f1e9b2a8c4d3e0012340000",
+  "level_name": "department",
+  "tags": [],
+  "public": false,
+  "members": [
+    {
+      "_id": "5f1e9b2a8c4d3e0012345601",
+      "full_name": "John Doe",
+      "emails": ["john.doe@example.com"],
+      "calendars": { "google": true, "office365": false, "exchange": false, "icloud": false, "caldav": false, "zoho": false }
+    },
+    {
+      "_id": "5f1e9b2a8c4d3e0012345602",
+      "full_name": "John Smith",
+      "emails": ["john.smith@example.com"],
+      "calendars": { "google": false, "office365": true, "exchange": false, "icloud": false, "caldav": false, "zoho": false }
+    },
+    {
+      "_id": "5f1e9b2a8c4d3e0012345603",
+      "full_name": "Alex Martin",
+      "emails": ["alex.martin@example.com"],
+      "calendars": { "google": false, "office365": false, "exchange": false, "icloud": false, "caldav": false, "zoho": false }
+    }
+  ],
+  "admins": [
+    {
+      "_id": "5f1e9b2a8c4d3e0012345601",
+      "full_name": "John Doe",
+      "emails": ["john.doe@example.com"],
+      "calendars": { "google": true, "office365": false, "exchange": false, "icloud": false, "caldav": false, "zoho": false }
+    }
+  ],
+  "createdAt": "2026-01-12T09:30:00.000Z",
+  "updatedAt": "2026-02-03T14:05:12.000Z"
+}
+```
+
+And now our new Sales is part of the team.
+
+> To remove a user from the team, send a `DELETE` request to `/v2/teams/:team_id/members/:member_id`, where `member_id` is the `_id` of the user. You can also replace the whole `members` list with a `PUT` request to `/v2/teams/:team_id`. See the [Teams reference](/reference/teams/#endpoints) for all the endpoints, and the guide about [team admins](/guides/using-team-admins-for-notifications-and-event-management/) to keep managers informed of what happens in the team.
+
+## Get available slots for your team
+
+To get all the slots when at least one member of your team is available, you can use the `/v2/slots` or `/v2/slots/days` endpoints with the `team` query parameter:
+
+<iframe
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520GET%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fslots%253Fteam%253D5f1e9b2a8c4d3e0012345678%2526duration%253D30%2526from%253D2028-02-09%2526to%253D2028-02-10%2526timezone%253DEurope%252FParis%27%2520%255C%250A--header%2520%27Authorization%253A%2520YOUR_API_KEY%27"
+  style="width: 100%; height: 278px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
+</iframe>
+
+```shell screen-hidden
+curl --request GET 'https://api.vyte.in/v2/slots?team=5f1e9b2a8c4d3e0012345678&duration=30&from=2028-02-09&to=2028-02-10&timezone=Europe/Paris' \
+--header 'Authorization: YOUR_API_KEY'
+```
+
+We get in response a list of slots, so you can let your user pick one.
 
 ```jsonp light-code
 {
   "timezone": "Europe/Paris",
-  "from": "2020-09-01",
-  "to": "2020-09-02",
+  "from": "2028-02-09",
+  "to": "2028-02-10",
   "slots": [
     {
-      "start": {
-        "dateTime": "2020-09-01T02:00:00+02:00"
-      },
-      "end": {
-        "dateTime": "2020-09-01T02:30:00+02:00"
-      }
+      "start": { "dateTime": "2028-02-09T09:00:00+01:00" },
+      "end": { "dateTime": "2028-02-09T09:30:00+01:00" }
     },
     {
-      "start": {
-        "dateTime": "2020-09-01T02:30:00+02:00"
-      },
-      "end": {
-        "dateTime": "2020-09-01T03:00:00+02:00"
-      }
+      "start": { "dateTime": "2028-02-09T09:30:00+01:00" },
+      "end": { "dateTime": "2028-02-09T10:00:00+01:00" }
     },
     {
-      "start": {
-        "dateTime": "2020-09-01T03:00:00+02:00"
-      },
-      "end": {
-        "dateTime": "2020-09-01T03:30:00+02:00"
-      }
-    },
-    {
-      "start": {
-        "dateTime": "2020-09-01T03:30:00+02:00"
-      },
-      "end": {
-        "dateTime": "2020-09-01T04:00:00+02:00"
-      }
-    },
-    {
-      "start": {
-        "dateTime": "2020-09-01T04:00:00+02:00"
-      },
-      "end": {
-        "dateTime": "2020-09-01T04:30:00+02:00"
-      }
-    },
-    {
-      "start": {
-        "dateTime": "2020-09-01T04:30:00+02:00"
-      },
-      "end": {
-        "dateTime": "2020-09-01T05:00:00+02:00"
-      }
-    },
-    {
-      "start": {
-        "dateTime": "2020-09-01T09:00:00+02:00"
-      },
-      "end": {
-        "dateTime": "2020-09-01T09:30:00+02:00"
-      }
+      "start": { "dateTime": "2028-02-09T10:00:00+01:00" },
+      "end": { "dateTime": "2028-02-09T10:30:00+01:00" }
     },
     ...
   ]
 }
 ```
 
-
+> Add `showUsers=true` to the request to get, in each slot, a `users` array with the ids of the members who are free for that slot. Add `team_all_members=true` to only get the slots when all the members of the team are free at the same time. See the [Slots reference](/reference/slots/#targeting-modes).
 
 ## Create your first team event
 
+As we explained before, the API allows you to create an event and automatically assign it to a member of the team who is available on the requested date.
 
-As we explained before, the Team API allows you to create events and automatically assign the event to someone of the team who is available on the requested date.
+It works quite the same as a classic booking creation, with a `POST` request to `/v2/teams/:team_id/events`. The differences are:
 
-It works quite the same as a classic event creation. The only things to change is that you can't send several dates and you don't have to provide creator information (because he will be automatically chosen by the API).
+- you don't provide the creator (`created_by`): the member is chosen by the API;
+- `dates` must contain exactly one date, which can't be an all-day date;
+- `timezone` is required;
+- `vyteme` must be set to `true`, and the first element of `invitees` is the person making the booking.
 
-So, we'are ready to create our first team event :
+So, we are ready to create our first team event:
 
 <iframe
-  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--location%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f47af4d2285550793c632c4%252Fevents%27%2520%255C%250A--header%2520%27Authorization%253A%25202lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522title%2522%253A%2520%2522First%2520created%2520event%2522%252C%250A%2520%2520%2522dates%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522date%2522%253A%2520%25222020-09-01T09%253A00%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522end_date%2522%253A%2520%25222020-09-01T09%253A30%253A00%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522places%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Place%2520for%2520the%2520meeting.%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522timezone%2522%253A%2520%2522Europe%252FParis%2522%252C%250A%2520%2520%2522invitees%2522%253A%2520%255B%257B%250A%2520%2520%2520%2520%2522email%2522%253A%2520%2522john.doe%2540personmakingthebooking.com%2522%252C%250A%2520%2520%2520%2520%2522full_name%2522%253A%2520%2522John%2520Doe%2522%250A%2520%2520%257D%255D%250A%257D%27"
-  style="width: 100%; height: 650px; border:0; transform: scale(1); overflow:hidden;"
+  src="https://carbon.now.sh/embed?bg=rgba(74%2C144%2C226%2C1)&t=one-dark&wt=none&l=application%2Fx-sh&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=curl%2520--request%2520POST%2520%27https%253A%252F%252Fapi.vyte.in%252Fv2%252Fteams%252F5f1e9b2a8c4d3e0012345678%252Fevents%27%2520%255C%250A--header%2520%27Authorization%253A%2520YOUR_API_KEY%27%2520%255C%250A--header%2520%27Content-Type%253A%2520application%252Fjson%27%2520%255C%250A--data-raw%2520%27%257B%250A%2520%2520%2522vyteme%2522%253A%2520true%252C%250A%2520%2520%2522timezone%2522%253A%2520%2522Europe%252FParis%2522%252C%250A%2520%2520%2522dates%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522date%2522%253A%2520%25222028-02-09T09%253A00%253A00%252B01%253A00%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522end_date%2522%253A%2520%25222028-02-09T09%253A30%253A00%252B01%253A00%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522places%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522name%2522%253A%2520%2522Meeting%2520room%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522invitees%2522%253A%2520%255B%250A%2520%2520%2520%2520%257B%250A%2520%2520%2520%2520%2520%2520%2522email%2522%253A%2520%2522jane.doe%2540example.com%2522%252C%250A%2520%2520%2520%2520%2520%2520%2522full_name%2522%253A%2520%2522Jane%2520Doe%2522%250A%2520%2520%2520%2520%257D%250A%2520%2520%255D%252C%250A%2520%2520%2522confirmed%2522%253A%2520%257B%250A%2520%2520%2520%2520%2522flag%2522%253A%2520true%250A%2520%2520%257D%250A%257D%27"
+  style="width: 100%; height: 806px; border:0; transform: scale(1); overflow:hidden;"
   sandbox="allow-scripts allow-same-origin" class="mobile-hidden">
 </iframe>
 
-
-
-
 ```shell screen-hidden
-curl --location --request POST 'https://api.vyte.in/v2/teams/5f47af4d2285550793c632c4/events' \
---header 'Authorization: 2lnpjjrurrl49xja5oo0qujtl60embr7zppiphc5fcav4n7ycx' \
+curl --request POST 'https://api.vyte.in/v2/teams/5f1e9b2a8c4d3e0012345678/events' \
+--header 'Authorization: YOUR_API_KEY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "title": "First created event",
+  "vyteme": true,
+  "timezone": "Europe/Paris",
   "dates": [
     {
-      "date": "2020-09-01T09:00:00",
-      "end_date": "2020-09-01T10:00:00"
+      "date": "2028-02-09T09:00:00+01:00",
+      "end_date": "2028-02-09T09:30:00+01:00"
     }
   ],
   "places": [
     {
-      "name": "Place for the meeting."
+      "name": "Meeting room"
     }
   ],
-  "timezone": "Europe/Paris",
-  "invitees": [{
-    "email": "john.doe@personmakingthebooking.com",
-    "full_name": "John Doe"
-  }]
+  "invitees": [
+    {
+      "email": "jane.doe@example.com",
+      "full_name": "Jane Doe"
+    }
+  ],
+  "confirmed": {
+    "flag": true
+  }
 }'
 ```
 
-We get in response the event created and we can see that the creator was automatically chosen:
+The answer is `201` with the created event (shortened here), and we can see in `created_by` that the member was automatically chosen:
 
 ```json light-code
 {
+  "_id": "5f1e9b2a8c4d3e0012345800",
+  "title": "Meeting Jane Doe / Alex Martin",
+  "vyteme": true,
+  "api": true,
   "created_by": {
-    "user": "5f3feb7821046c3bb9327e6a",
-    "full_name": "John Doe",
-    "email": "john.doe@example.com"
+    "user": "5f1e9b2a8c4d3e0012345603",
+    "email": "alex.martin@example.com",
+    "full_name": "Alex Martin"
   },
   "confirmed": {
-    "flag": false,
-    "updated_at": null,
-    "multi": false
+    "flag": true,
+    "updated_at": "2028-02-01T09:12:44.000Z",
+    "date_id": "5f1e9b2a8c4d3e0012345801",
+    "place_id": "5f1e9b2a8c4d3e0012345802"
   },
-  "third_party": {
-    "group_ids": []
-  },
-  "ics_sequence": 0,
-  "version": 0,
-  "group_pro": false,
-  "identification_alternatives": [],
-  "_id": "5f47b6c4228555e2d6c63311",
-  "title": "Second created event",
   "dates": [
     {
-      "created_by": {
-        "user": "5f3feb7821046c3bb9327e6a"
-      },
-      "votes": {
-        "yes": [
-          {
-            "created_by": {
-              "user": "5f3feb7821046c3bb9327e6a"
-            },
-            "_id": "5f47b6c4228555e269c63315"
-          }
-        ],
-        "no": []
-      },
+      "_id": "5f1e9b2a8c4d3e0012345801",
+      "date": "2028-02-09T08:00:00.000Z",
+      "end_date": "2028-02-09T08:30:00.000Z",
       "all_day": false,
-      "confirmed": false,
-      "confirmed_invitees": [],
-      "_id": "5f47b6c42285550d40c63312",
-      "date": "2020-09-16T07:00:00.000Z",
-      "end_date": "2020-09-16T08:00:00.000Z",
-      "updatedAt": "2020-08-27T13:36:04.246Z",
-      "createdAt": "2020-08-27T13:36:04.246Z"
+      "confirmed": true
     }
   ],
   "places": [
+    { "_id": "5f1e9b2a8c4d3e0012345802", "name": "Meeting room", "source": "app" }
+  ],
+  "invitees": [
     {
-      "created_by": {
-        "user": "5f3feb7821046c3bb9327e6a"
-      },
-      "votes": {
-        "yes": [
-          {
-            "created_by": {
-              "user": "5f3feb7821046c3bb9327e6a"
-            },
-            "_id": "5f47b6c422855573b8c63316"
-          }
-        ],
-        "no": []
-      },
-      "source": "app",
-      "_id": "5f47b6c42285554c63c63313",
-      "name": "Place for the meeting.",
-      "updatedAt": "2020-08-27T13:36:04.246Z",
-      "createdAt": "2020-08-27T13:36:04.246Z"
+      "_id": "5f1e9b2a8c4d3e0012345803",
+      "user": "5f1e9b2a8c4d3e0012345620",
+      "email": "jane.doe@example.com",
+      "full_name": "Jane Doe"
+    },
+    {
+      "_id": "5f1e9b2a8c4d3e0012345804",
+      "user": "5f1e9b2a8c4d3e0012345603",
+      "email": "alex.martin@example.com",
+      "full_name": "Alex Martin"
     }
   ],
   "timezone": "Europe/Paris",
-  "invitees": [
-    {
-      "created_by": {
-        "user": "5f3feb7821046c3bb9327e6a"
-      },
-      "stats": {
-        "voted": {
-          "dates": true,
-          "places": true
-        }
-      },
-      "star": false,
-      "_id": "5f47b6c42285551c4fc63314",
-      "user": "5f3feb7821046c3bb9327e6a",
-      "email": "john.doe@example.com",
-      "su": true,
-      "full_name": "John Doe",
-      "timezone": "Europe/London",
-      "locale": "en"
-    }
-  ],
-  "messages": [],
-  "declines": [],
   "lang": "en",
-  "locale": "en",
-  "updatedAt": "2020-08-27T13:36:04.246Z",
-  "createdAt": "2020-08-27T13:36:04.246Z",
-  "invitees_length": 1,
-  "email": "reply-to-participants-to-second-created-event-dvumxzapx@vytein.mailgun.org",
-  "key_store": {
-    "_id": "5f47b6c42285554f44c63317",
-    "hash": {
-      "5f3feb7821046c3bb9327e6a": "msg0ls0oxjvtjtg3"
-    },
-    "updatedAt": "2020-08-27T13:36:04.252Z",
-    "createdAt": "2020-08-27T13:36:04.252Z",
-    "__v": 0
-  },
-  "links": null,
-  "__v": 0
+  "locale": "en"
 }
 ```
 
-And that's how you can use the API to automate appointment requests with teams.
+How is the member chosen? Every member of the team is checked for the requested slot, each against their own calendars, bookings and availability. Among the free members, the one who received the fewest bookings through this team in the 30 days around the slot is chosen. When several members are tied, the first one in the order of the team's `members` list is chosen.
+
+::: warning
+If no member of the team is free for the slot, nothing is created and the answer is `410` with the `dates` array you sent. Fetch fresh slots and let the person choose again.
+:::
+
+And that's how you can use the API to automate appointment requests with teams. The other ways to assign a team booking are described in the [Events reference](/reference/events/#book-a-team).
